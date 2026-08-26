@@ -138,7 +138,12 @@
       var raw = window.localStorage.getItem(STORAGE_KEY);
       if (!raw) return null;
       var parsed = JSON.parse(raw);
-      return (parsed && typeof parsed === 'object') ? parsed : null;
+      if (!parsed || typeof parsed !== 'object') return null;
+      for (var i = 0; i < Q_KEYS.length; i++) {
+        var key = Q_KEYS[i];
+        if (key in parsed && typeof parsed[key] !== 'string') return null;
+      }
+      return parsed;
     } catch (err) {
       return null;
     }
@@ -161,7 +166,7 @@
       ' · Budget: ' + answers.budget +
       ' · ' + bedsPart +
       ' · Move: ' + movePart +
-      " — sent from Sophia's site";
+      ' — sent from Sophia’s site';
   }
 
   function buildSparkHref(answers) {
@@ -202,6 +207,10 @@
     note.classList.remove('is-hidden');
     note.removeAttribute('hidden');
   }
+
+  /* Most recently built summary, kept so the CTA click handlers (added by
+     initCtaClipboard) can copy it at click time without rebuilding it. */
+  var currentSummary = '';
 
   /* Copy with navigator.clipboard, falling back to execCommand.
      The "copied" note is shown only when a copy actually succeeded. */
@@ -251,7 +260,8 @@
     var fieldsets = document.querySelectorAll('fieldset.starter-q');
     if (!fieldsets.length) {
       /* Still give the sticky bar / results whatever a previous visit stored. */
-      applyAnswers(readStored(), false);
+      applyAnswers(readStored());
+      initCtaClipboard();
       return;
     }
 
@@ -279,17 +289,18 @@
           markSelected(fieldset, btn);
           writeStored(answers);
           if (allAnswered(answers)) {
-            applyAnswers(answers, true);
+            applyAnswers(answers);
           }
         });
       });
     });
 
-    /* Hydration: if a previous visit finished the quiz, restore the results
-       (no clipboard write on load — browsers require a user gesture). */
+    /* Hydration: if a previous visit finished the quiz, restore the results. */
     if (allAnswered(answers)) {
-      applyAnswers(answers, false);
+      applyAnswers(answers);
     }
+
+    initCtaClipboard();
   }
 
   function markSelected(fieldset, chosen) {
@@ -310,11 +321,13 @@
   }
 
   /* Build the summary, reveal results, rewrite CTA hrefs, update sticky bar.
-     fromClick governs the clipboard write (needs a user gesture). */
-  function applyAnswers(answers, fromClick) {
+     Never copies to the clipboard here — that only happens from a CTA click
+     (see initCtaClipboard), so it always has a real user gesture behind it. */
+  function applyAnswers(answers) {
     if (!allAnswered(answers)) return;
 
     var summary = buildSummary(answers);
+    currentSummary = summary;
     var results = document.getElementById('quiz-results');
     var summaryEl = document.getElementById('quiz-summary');
     var smsCta = document.getElementById('quiz-cta-sms');
@@ -332,10 +345,23 @@
       results.classList.remove('is-hidden');
       results.removeAttribute('hidden');
     }
+  }
 
-    if (fromClick) {
-      copySummary(summary, results);
-    }
+  /* Copy the summary to the clipboard only when a visitor actively clicks
+     one of the three quiz CTAs — never automatically. Navigation is left
+     alone (no preventDefault): the copy just piggybacks on the click, and
+     the "Copied" note (via copySummary -> showCopyNote) only appears once
+     that click-triggered copy actually succeeds. */
+  function initCtaClipboard() {
+    var results = document.getElementById('quiz-results');
+    var ctaIds = ['quiz-cta-sms', 'quiz-cta-spark', 'quiz-cta-email'];
+    Array.prototype.forEach.call(ctaIds, function (id) {
+      var cta = document.getElementById(id);
+      if (!cta) return;
+      cta.addEventListener('click', function () {
+        if (currentSummary) copySummary(currentSummary, results);
+      });
+    });
   }
 
   /* ---------------------------------------------------------------- *

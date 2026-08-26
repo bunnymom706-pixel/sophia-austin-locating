@@ -1,9 +1,10 @@
 {
   "hero": {
     "file": "assets/site/sophia_hero.png",
-    "width": 470,
-    "height": 553,
-    "note": "True-cutout content (chest-up, 470x436) bottom-aligned on a transparent canvas padded to the contracted 540:635 aspect ratio (470x553, ratio 0.8499 vs 0.8504 - sub-pixel difference). Agent A's width=540 height=635 attrs remain valid; transparent headroom sits above the head, subject is flush with the bottom edge."
+    "width": 474,
+    "height": 618,
+    "source": "assets/sophia/sophia_balcony.jpg",
+    "note": "RE-CROPPED to fix amputated-looking crop (2026-08-26): the prior 470x553 asset cut Sophia's raised hand and bag off at the bottom frame edge and left a large transparent gap above her head. Re-sourced from sophia_balcony.jpg (fuller-body shot of the same pose, more vertical room below the bag) instead of sophia_headshot.jpg, whose native framing already sliced the bag at its bottom edge with no way to include it whole. New source crop (box 340,540-870,1220 in the original 1206x1599 photo) captures shoulders-up through the full raised arm/hand/bag gesture with clear margin on every side - elbow, hand, and bag are fully visible, nothing sliced; only the skirt hem is cut at the bottom, which is a natural fabric continuation, not a limb/hand/bag. Re-ran the verified rembg recipe (u2net_human_seg, post_process_mask=True, no alpha matting) on this crop, removed one small orange-foliage remnant in the arm/bag notch via dilated color masking (same fix as the original cutout needed), applied 1px alpha erosion + 0.6px feather, then trimmed the transparent canvas tight to the subject (3px padding) so the figure fills the hero panel with no dead space above the head. Verified at 2x zoom on #F5F3EF and #2E5E4E: alpha edges clean, no halo, nothing cut off at any edge."
   },
   "about": {
     "file": "assets/site/sophia_about.jpg",

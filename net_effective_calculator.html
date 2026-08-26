@@ -340,7 +340,7 @@
 
 <main class="calc-main">
     <h1>Is that move-in special actually a deal?</h1>
-    <p class="calc-intro">"Six weeks free" sounds great, but once the free weeks run out you pay the full advertised rent every month. Spread the savings across your whole lease and you get the <strong>net effective rent</strong> — the real average monthly cost. That is the number to compare apartments with.</p>
+    <p class="calc-intro">“Six weeks free” sounds great, but once the free weeks run out you pay the full advertised rent every month. Spread the savings across your whole lease and you get the <strong>net effective rent</strong> — the real average monthly cost. That is the number to compare apartments with.</p>
     <p class="calc-intro">Type in what the ad says and see the real math.</p>
 
     <div class="calc-card">
@@ -361,7 +361,7 @@
             </div>
 
             <div class="input-group">
-                <label for="specialType">The special they're offering</label>
+                <label for="specialType">The special they’re offering</label>
                 <select id="specialType">
                     <option value="weeks_4">4 weeks free (about 1 month)</option>
                     <option value="weeks_6">6 weeks free (about 1.5 months)</option>
@@ -387,7 +387,7 @@
             </div>
             <div class="metric-row">
                 <span class="metric-label">What the special saves you in total</span>
-                <span class="metric-val" id="dispConcession">-$1,707.69</span>
+                <span class="metric-val" id="dispConcession">$1,707.69 total</span>
             </div>
             <div class="metric-row">
                 <span class="metric-label">What you really pay, averaged per month</span>
@@ -398,7 +398,7 @@
 
         <div class="preview-area">
             <p class="preview-title">Want me to check it?</p>
-            <p class="preview-sub">Copy this summary and text it to me. I'll tell you if it's a fair deal — and whether another community nearby beats it.</p>
+            <p class="preview-sub">Copy this summary and text it to me. I’ll tell you if it’s a fair deal — and whether another community nearby beats it.</p>
             <div class="quote-box" id="quoteText">Loading...</div>
             <div class="quote-actions">
                 <button type="button" class="btn-copy" id="copyBtn" onclick="copyQuote()">Copy this summary</button>
@@ -409,7 +409,7 @@
 
     <section class="calc-explain">
         <h2>Why net effective rent matters</h2>
-        <p>Listings often advertise the discounted average to look cheaper than the lease you actually sign. Two apartments at "$1,700/mo" can cost very different amounts once you account for who is giving real weeks free and who is not.</p>
+        <p>Listings often advertise the discounted average to look cheaper than the lease you actually sign. Two apartments at “$1,700/mo” can cost very different amounts once you account for who is giving real weeks free and who is not.</p>
         <p>I do this comparison for renters every day, and my help is free — the apartment communities pay me a referral fee when you sign. If you want the current specials that actually pencil out in your budget, <a href="sms:5126761215">text me at (512) 676-1215</a> or <a href="https://sparkapt.com/inquiry/sophia-reddehase859">fill out my quick form</a>.</p>
     </section>
 </main>
@@ -489,18 +489,18 @@
 
         dispBase.innerText = `$${base.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}/mo`;
         dispConcession.innerText = totalDiscount > 0
-            ? `-$${totalDiscount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} total`
+            ? `$${totalDiscount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} total`
             : "$0";
         dispNet.innerText = `$${netEffective.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mo`;
 
         let formattedMsg = "";
         if (totalDiscount > 0) {
-            formattedMsg = `Hi Sophia! I'm looking at ${prop}.\n` +
+            formattedMsg = `Hi Sophia! I’m looking at ${prop}.\n` +
                 `Advertised rent: $${base.toLocaleString()}/mo, ${term}-month lease, special: ${specialLabel}.\n` +
                 `That works out to about $${Math.round(netEffective).toLocaleString()}/mo net effective (roughly $${Math.round(totalDiscount).toLocaleString()} total savings).\n` +
                 `Is that a fair deal, or can you find me something better?`;
         } else {
-            formattedMsg = `Hi Sophia! I'm looking at ${prop}.\n` +
+            formattedMsg = `Hi Sophia! I’m looking at ${prop}.\n` +
                 `Advertised rent: $${base.toLocaleString()}/mo on a ${term}-month lease, no special.\n` +
                 `Can you check if anything nearby beats it right now?`;
         }
@@ -529,8 +529,12 @@
             ta.style.left = '-9999px';
             document.body.appendChild(ta);
             ta.select();
-            const ok = document.execCommand('copy');
-            document.body.removeChild(ta);
+            let ok = false;
+            try {
+                ok = document.execCommand('copy');
+            } finally {
+                document.body.removeChild(ta);
+            }
             if (ok) showCopied();
         } catch (e) {
             /* Clipboard unavailable; the text stays selectable in the box. */
