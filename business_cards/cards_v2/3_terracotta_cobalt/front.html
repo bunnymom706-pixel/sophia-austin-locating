@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sophia Reddehase — Business Card Front — Sunset Terracotta &amp; Cobalt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    width:1125px; height:675px;
+    background:#C1502E;
+    overflow:hidden;
+  }
+  body { font-family:"Space Grotesk", sans-serif; }
+
+  .card {
+    position:relative;
+    width:1125px; height:675px;
+    background:#C1502E;
+    overflow:hidden;
+  }
+
+  /* deep terracotta panel anchoring the photo, right side */
+  .deep-panel {
+    position:absolute;
+    right:0; top:0;
+    width:430px; height:675px;
+    background:#9C3E22;
+  }
+
+  /* thin cream accent line — the signature editorial rule */
+  .accent-line {
+    position:absolute;
+    left:63px; top:300px;
+    width:520px; height:3px;
+    background:#F3E6D2;
+  }
+
+  .eyebrow {
+    position:absolute;
+    left:63px; top:58px;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:6px;
+    color:#F3E6D2;
+    text-transform:uppercase;
+  }
+
+  .name {
+    position:absolute;
+    left:60px; top:92px;
+    width:610px;
+    font-family:"Anton", "Archivo Black", sans-serif;
+    font-weight:400;
+    font-size:82px;
+    line-height:1.0;
+    letter-spacing:0.5px;
+    color:#1B2A6B;
+    text-transform:uppercase;
+  }
+
+  .title-block {
+    position:absolute;
+    left:63px; top:334px;
+    width:520px;
+  }
+  .title-main {
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    color:#F6ECDD;
+    text-transform:uppercase;
+  }
+  .title-sub {
+    margin-top:12px;
+    font-size:16px;
+    font-weight:500;
+    letter-spacing:1.5px;
+    color:#EBC9A6;
+    text-transform:uppercase;
+  }
+
+  .photo-frame {
+    position:absolute;
+    right:0; bottom:0;
+    width:430px;
+    height:560px;
+    background: radial-gradient(ellipse at 50% 85%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0) 60%);
+  }
+  .photo-wrap {
+    position:absolute;
+    right:40px; bottom:37.5px;
+    width:370px;
+    height:520px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+  }
+  .photo-wrap img {
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    object-position:bottom;
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));
+  }
+
+  .footer-rule {
+    position:absolute;
+    left:63px; bottom:78px;
+    width:520px; height:2px;
+    background:rgba(243,230,210,0.55);
+  }
+
+  .footer {
+    position:absolute;
+    left:63px; bottom:40px;
+    width:700px;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    color:#F6ECDD;
+  }
+  .footer .brand { color:#F6ECDD; }
+  .footer .sep { margin:0 10px; color:#EBC9A6; }
+  .footer .trec { color:#EBC9A6; font-weight:500; }
+
+  .corner-mark {
+    position:absolute;
+    right:37.5px; top:37.5px;
+    width:14px; height:14px;
+    border-top:3px solid #F6ECDD;
+    border-right:3px solid #F6ECDD;
+    opacity:0.9;
+  }
+
+  .monogram {
+    position:absolute;
+    left:52px; top:398px;
+    font-family:"Anton", "Archivo Black", sans-serif;
+    font-size:230px;
+    line-height:1;
+    color:#F3E6D2;
+    opacity:0.10;
+    z-index:0;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="deep-panel"></div>
+
+    <div class="monogram">S</div>
+
+    <div class="eyebrow">Austin, Texas</div>
+    <div class="name">Sophia&nbsp;Sky<br>Reddehase</div>
+
+    <div class="accent-line"></div>
+
+    <div class="title-block">
+      <div class="title-main">Austin VIP Apartment Locator</div>
+      <div class="title-sub">Luxury High-Rise &nbsp;&bull;&nbsp; Relocation &nbsp;&bull;&nbsp; Credit Solutions</div>
+    </div>
+
+    <div class="photo-frame"></div>
+    <div class="photo-wrap">
+      <img src="../../assets/v2/sophia_headshot_sticker.png" alt="">
+    </div>
+
+    <div class="footer-rule"></div>
+    <div class="footer">
+      <span class="brand">Brokered by Spirit Real Estate Group</span><span class="sep">|</span><span class="trec">TREC #831516</span>
+    </div>
+
+    <div class="corner-mark"></div>
+  </div>
+</body>
+</html>

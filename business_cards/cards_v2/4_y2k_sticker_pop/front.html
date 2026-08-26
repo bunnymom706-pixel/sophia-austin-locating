@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Y2K Sticker Pop — Front</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    width:1125px; height:675px;
+    overflow:hidden;
+    background:#E8123C;
+    font-family:'Fredoka', sans-serif;
+  }
+
+  .card {
+    position:relative;
+    width:1125px; height:675px;
+    box-sizing:border-box;
+    overflow:hidden;
+    background-color:#E8123C;
+    background-image:
+      conic-gradient(#FF8FB3 90deg, #E8123C 90deg 180deg, #FF8FB3 180deg 270deg, #E8123C 270deg);
+    background-size:75px 75px;
+  }
+
+  /* soft diagonal sheen overlay for glossy sticker feel */
+  .sheen {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 900px 400px at 15% -10%, rgba(255,255,255,0.30), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 105% 110%, rgba(120,0,25,0.28), transparent 55%);
+    pointer-events:none;
+  }
+
+  .safe {
+    position:absolute;
+    left:37.5px; top:37.5px; right:37.5px; bottom:37.5px;
+  }
+
+  /* ---------- decorative confetti / sparkle accents (small, low-crowd) ---------- */
+  .deco { position:absolute; pointer-events:none; line-height:1; user-select:none; }
+  .deco.spark1 { top:52px; left:60px; font-size:30px; transform:rotate(-12deg); filter:drop-shadow(0 2px 0 rgba(122,11,36,0.5)); }
+  .deco.spark2 { top:58px; right:60px; font-size:26px; transform:rotate(15deg); filter:drop-shadow(0 2px 0 rgba(122,11,36,0.5)); }
+  .deco.disco { bottom:170px; left:52px; font-size:34px; transform:rotate(-8deg); filter:drop-shadow(0 2px 0 rgba(122,11,36,0.5)); }
+  .deco.dot1 { width:12px; height:12px; border-radius:50%; background:#FFF6F0; top:120px; right:110px; box-shadow:0 2px 0 rgba(122,11,36,0.4); }
+  .deco.dot2 { width:10px; height:10px; border-radius:50%; background:#FFD9E6; bottom:120px; right:80px; box-shadow:0 2px 0 rgba(122,11,36,0.4); }
+  .deco.dot3 { width:14px; height:14px; border-radius:50%; background:#FFF6F0; bottom:250px; left:95px; box-shadow:0 2px 0 rgba(122,11,36,0.4); }
+
+  /* ---------- name banner ---------- */
+  .name-banner {
+    position:absolute;
+    top:36px; left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    background:#FFF6F0;
+    border:5px solid #7A0B24;
+    border-radius:22px;
+    padding:10px 32px 14px;
+    box-shadow:0 8px 0 rgba(122,11,36,0.55);
+    text-align:center;
+    z-index:5;
+  }
+  .name-banner h1 {
+    font-family:'Lilita One', cursive;
+    font-size:46px;
+    line-height:0.98;
+    letter-spacing:1px;
+    color:#FF3D81;
+    -webkit-text-stroke:3px #7A0B24;
+    text-shadow:3px 3px 0 #7A0B24;
+    white-space:nowrap;
+  }
+
+  /* ---------- photo ---------- */
+  .photo-wrap {
+    position:absolute;
+    top:190px; left:50%;
+    transform:translateX(-50%);
+    width:300px; height:300px;
+    z-index:3;
+    text-align:center;
+  }
+  .photo-wrap img {
+    max-width:300px; max-height:300px;
+    display:block;
+    margin:0 auto;
+    filter:drop-shadow(0 10px 0 rgba(122,11,36,0.35));
+  }
+
+  /* ---------- sticker badges (consistent shape/size/padding) ---------- */
+  .badge {
+    position:absolute;
+    display:flex; align-items:center; justify-content:center;
+    min-width:150px;
+    height:56px;
+    padding:0 20px;
+    background:#FFF6F0;
+    border:4px solid #7A0B24;
+    border-radius:28px;
+    box-shadow:0 6px 0 rgba(122,11,36,0.55);
+    font-family:'Fredoka', sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:#C40A3A;
+    text-align:center;
+    white-space:nowrap;
+    z-index:6;
+  }
+  .badge .ic { margin-right:7px; font-size:18px; }
+  .badge-trec   { top:208px; left:44px;  transform:rotate(-7deg); }
+  .badge-ig     { top:420px; left:44px;  transform:rotate(6deg); }
+  .badge-locale { top:208px; right:44px; transform:rotate(6deg); }
+
+  /* ---------- bottom info bar ---------- */
+  .info-bar {
+    position:absolute;
+    top:516px; left:50%;
+    transform:translateX(-50%);
+    width:760px;
+    background:#FFF6F0;
+    border:5px solid #7A0B24;
+    border-radius:24px;
+    padding:14px 24px 16px;
+    text-align:center;
+    box-shadow:0 8px 0 rgba(122,11,36,0.55);
+    z-index:5;
+  }
+  .info-bar .role {
+    font-family:'Fredoka', sans-serif;
+    font-weight:700;
+    font-size:25px;
+    color:#7A0B24;
+    letter-spacing:0.3px;
+  }
+  .info-bar .brokerage {
+    margin-top:2px;
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size:19px;
+    color:#C40A3A;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="sheen"></div>
+
+    <span class="deco spark1">✨</span>
+    <span class="deco spark2">⭐</span>
+    <span class="deco disco">🪩</span>
+    <div class="deco dot1"></div>
+    <div class="deco dot2"></div>
+    <div class="deco dot3"></div>
+
+    <div class="safe">
+      <div class="name-banner">
+        <h1>SOPHIA SKY<br>REDDEHASE</h1>
+      </div>
+
+      <div class="photo-wrap">
+        <img src="../../assets/v2/sophia_headshot_sticker.png" alt="Sophia Reddehase">
+      </div>
+
+      <div class="badge badge-trec"><span class="ic">🪪</span>TREC #831516</div>
+      <div class="badge badge-ig"><span class="ic">📸</span>@sophiasky.atx</div>
+      <div class="badge badge-locale"><span class="ic">💗</span>Austin, TX</div>
+
+      <div class="info-bar">
+        <div class="role">Texas Apartment Locator</div>
+        <div class="brokerage">Brokered by Spirit Real Estate Group</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

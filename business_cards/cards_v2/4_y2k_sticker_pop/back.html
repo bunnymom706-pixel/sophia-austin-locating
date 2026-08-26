@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Y2K Sticker Pop — Back</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    width:1125px; height:675px;
+    overflow:hidden;
+    background:#E8123C;
+    font-family:'Fredoka', sans-serif;
+  }
+
+  .card {
+    position:relative;
+    width:1125px; height:675px;
+    box-sizing:border-box;
+    overflow:hidden;
+    background-color:#E8123C;
+    background-image:
+      conic-gradient(#FF8FB3 90deg, #E8123C 90deg 180deg, #FF8FB3 180deg 270deg, #E8123C 270deg);
+    background-size:75px 75px;
+  }
+
+  .sheen {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 900px 400px at 90% -10%, rgba(255,255,255,0.30), transparent 60%),
+      radial-gradient(ellipse 700px 500px at -5% 110%, rgba(120,0,25,0.28), transparent 55%);
+    pointer-events:none;
+  }
+
+  .safe {
+    position:absolute;
+    left:37.5px; top:37.5px; right:37.5px; bottom:37.5px;
+  }
+
+  .deco { position:absolute; pointer-events:none; line-height:1; user-select:none; }
+  .deco.spark1 { top:48px; left:56px; font-size:28px; transform:rotate(-14deg); filter:drop-shadow(0 2px 0 rgba(122,11,36,0.5)); }
+  .deco.spark2 { top:48px; right:56px; font-size:28px; transform:rotate(14deg); filter:drop-shadow(0 2px 0 rgba(122,11,36,0.5)); }
+  .deco.heart { bottom:44px; left:60px; font-size:26px; transform:rotate(-8deg); filter:drop-shadow(0 2px 0 rgba(122,11,36,0.5)); }
+  .deco.star  { bottom:44px; right:60px; font-size:26px; transform:rotate(10deg); filter:drop-shadow(0 2px 0 rgba(122,11,36,0.5)); }
+  .deco.dot1 { width:12px; height:12px; border-radius:50%; background:#FFF6F0; top:150px; left:80px; box-shadow:0 2px 0 rgba(122,11,36,0.4); }
+  .deco.dot2 { width:10px; height:10px; border-radius:50%; background:#FFD9E6; top:180px; right:90px; box-shadow:0 2px 0 rgba(122,11,36,0.4); }
+
+  /* ---------- headline banner ---------- */
+  .headline-banner {
+    position:absolute;
+    top:36px; left:50%;
+    transform:translateX(-50%) rotate(-1.5deg);
+    background:#FFF6F0;
+    border:5px solid #7A0B24;
+    border-radius:22px;
+    padding:11px 30px;
+    box-shadow:0 8px 0 rgba(122,11,36,0.55);
+    text-align:center;
+    z-index:5;
+    width:700px;
+  }
+  .headline-banner h1 {
+    font-family:'Lilita One', cursive;
+    font-size:32px;
+    line-height:1.05;
+    letter-spacing:0.5px;
+    color:#FF3D81;
+    -webkit-text-stroke:2.5px #7A0B24;
+    text-shadow:2.5px 2.5px 0 #7A0B24;
+  }
+
+  /* ---------- QR frame ---------- */
+  .qr-frame {
+    position:absolute;
+    top:160px; left:50%;
+    transform:translateX(-50%);
+    width:250px; height:250px;
+    background:#FFF6F0;
+    border:8px solid #7A0B24;
+    border-radius:34px;
+    box-shadow:0 10px 0 rgba(122,11,36,0.55), inset 0 0 0 6px #FFC2D6;
+    display:flex; align-items:center; justify-content:center;
+    z-index:5;
+  }
+  .qr-frame img {
+    width:200px; height:200px;
+    display:block;
+  }
+  .qr-frame::before, .qr-frame::after {
+    content:"";
+    position:absolute;
+    width:20px; height:20px;
+    border-radius:50%;
+    background:#FF3D81;
+    border:4px solid #7A0B24;
+  }
+  .qr-frame::before { top:-12px; left:-12px; }
+  .qr-frame::after { bottom:-12px; right:-12px; }
+
+  /* ---------- call/text banner ---------- */
+  .call-banner {
+    position:absolute;
+    top:460px; left:50%;
+    transform:translateX(-50%) rotate(1deg);
+    background:#FFF6F0;
+    border:5px solid #7A0B24;
+    border-radius:22px;
+    padding:8px 30px 10px;
+    text-align:center;
+    box-shadow:0 8px 0 rgba(122,11,36,0.55);
+    z-index:5;
+  }
+  .call-banner .label {
+    font-family:'Fredoka', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:2px;
+    color:#C40A3A;
+  }
+  .call-banner .number {
+    font-family:'Lilita One', cursive;
+    font-size:28px;
+    color:#7A0B24;
+    letter-spacing:0.5px;
+  }
+
+  /* ---------- bottom pills: email + TREC ---------- */
+  .pill-row {
+    position:absolute;
+    top:562px; left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:16px;
+    z-index:5;
+  }
+  .pill {
+    display:flex; align-items:center; justify-content:center;
+    height:44px;
+    padding:0 18px;
+    background:#FFF6F0;
+    border:4px solid #7A0B24;
+    border-radius:22px;
+    box-shadow:0 5px 0 rgba(122,11,36,0.55);
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size:16px;
+    color:#7A0B24;
+    white-space:nowrap;
+  }
+  .pill.rot-l { transform:rotate(-3deg); }
+  .pill.rot-r { transform:rotate(3deg); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="sheen"></div>
+
+    <span class="deco spark1">✨</span>
+    <span class="deco spark2">⭐</span>
+    <span class="deco heart">💗</span>
+    <span class="deco star">✨</span>
+    <div class="deco dot1"></div>
+    <div class="deco dot2"></div>
+
+    <div class="safe">
+      <div class="headline-banner">
+        <h1>SCAN TO FIND YOUR<br>NEXT APARTMENT!</h1>
+      </div>
+
+      <div class="qr-frame">
+        <img src="../../assets/v2/qr_y2k.png" alt="Scan to find your next apartment">
+      </div>
+
+      <div class="call-banner">
+        <div class="label">CALL / TEXT</div>
+        <div class="number">(512) 676-1215</div>
+      </div>
+
+      <div class="pill-row">
+        <div class="pill rot-l">sophia.reddehase@spiritre.com</div>
+        <div class="pill rot-r">TREC #831516</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

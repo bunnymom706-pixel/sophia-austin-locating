@@ -1,3 +1,6 @@
 .system_generated/
 *.log
 *.tmp
+business_cards/export_tool/node_modules/
+business_cards/export_tool/smoke_test.png
+business_cards/export_tool/smoke.js

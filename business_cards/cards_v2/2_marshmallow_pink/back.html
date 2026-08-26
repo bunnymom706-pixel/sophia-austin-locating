@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Marshmallow Puff — Back</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #ffd7e8;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 10% 6%, #fff1f8 0%, rgba(255,241,248,0) 42%),
+      radial-gradient(circle at 92% 94%, #ffc2dd 0%, rgba(255,194,221,0) 45%),
+      linear-gradient(135deg, #ffe6f1 0%, #ffd2e6 48%, #ffbedb 100%);
+    font-family: 'Nunito', sans-serif;
+  }
+
+  .blob { position: absolute; border-radius: 50%; opacity: 0.5; }
+  .blob.b1 { width: 230px; height: 230px; top: -100px; left: -80px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe6f2 55%, rgba(255,230,242,0) 75%); }
+  .blob.b2 { width: 150px; height: 150px; bottom: -70px; left: 120px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffdcee 60%, rgba(255,220,238,0) 78%); opacity: 0.45; }
+
+  .sparkle { position: absolute; opacity: 0.9; filter: drop-shadow(0 1px 1px rgba(214,110,160,0.35)); }
+
+  .wave {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 46px;
+  }
+
+  .safe {
+    position: absolute;
+    top: 37.5px; left: 37.5px; right: 37.5px; bottom: 37.5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: 0.5px;
+    color: #a3164e;
+    text-align: center;
+    margin-top: 4px;
+  }
+  .subline {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #7a2048;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  .qr-puff {
+    position: relative;
+    width: 232px;
+    height: 232px;
+    margin-top: 14px;
+    background: #ffffff;
+    border-radius: 44% 56% 48% 52% / 50% 46% 54% 50%;
+    box-shadow: 0 10px 0 rgba(214,110,160,0.18), 0 14px 26px rgba(191,63,119,0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-puff::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border-radius: inherit;
+    border: 3px dashed #ffc7e0;
+  }
+  .qr-puff img {
+    position: relative;
+    z-index: 2;
+    width: 182px;
+    height: 182px;
+    object-fit: contain;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+
+  .contact-pills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+    width: 100%;
+  }
+  .pill-row { display: flex; gap: 11px; justify-content: center; }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #ffffff;
+    border: 2px solid #ffc2dd;
+    border-radius: 999px;
+    padding: 9px 20px;
+    box-shadow: 0 3px 0 rgba(214,110,160,0.22);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: #7a2048;
+    white-space: nowrap;
+  }
+  .pill .ico { font-size: 15px; line-height: 1; }
+  .pill.accent {
+    background: #ff5fa2;
+    border-color: #ff5fa2;
+    color: #ffffff;
+    box-shadow: 0 3px 0 #c2255c;
+  }
+
+  .compliance {
+    margin-top: auto;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13.5px;
+    color: #6b2140;
+    letter-spacing: 0.2px;
+    background: rgba(255,255,255,0.72);
+    border-radius: 16px;
+    padding: 8px 18px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+
+    <div class="sparkle" style="top:50px; left:120px;">
+      <svg width="16" height="16" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+    <div class="sparkle" style="top:600px; left:960px;">
+      <svg width="18" height="18" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+    <div class="sparkle" style="top:44px; left:1000px;">
+      <svg width="12" height="12" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+
+    <svg class="wave" viewBox="0 0 1125 46" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C 60,40 120,0 180,20 C 240,40 300,0 360,20 C 420,40 480,0 540,20 C 600,40 660,0 720,20 C 780,40 840,0 900,20 C 960,40 1020,0 1080,20 C 1105,26 1115,30 1125,30 L1125,46 L0,46 Z" fill="#ffffff" fill-opacity="0.55"/>
+    </svg>
+
+    <div class="safe">
+      <div class="headline">LET'S FIND YOUR VIBE</div>
+      <div class="subline">Scan to search</div>
+
+      <div class="qr-puff">
+        <img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code to sparkapt.com/sophia-reddehase">
+      </div>
+
+      <div class="contact-pills">
+        <div class="pill-row">
+          <div class="pill accent"><span class="ico">📞</span>Call/Text (512) 676-1215</div>
+        </div>
+        <div class="pill-row">
+          <div class="pill"><span class="ico">✉️</span>sophia.reddehase@spiritre.com</div>
+        </div>
+        <div class="pill-row">
+          <div class="pill"><span class="ico">📸</span>@sophiasky.atx</div>
+        </div>
+      </div>
+
+      <div class="compliance">TREC #831516 &nbsp;·&nbsp; Brokered by Spirit Real Estate Group</div>
+    </div>
+  </div>
+</body>
+</html>

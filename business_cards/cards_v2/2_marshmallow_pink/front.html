@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Marshmallow Puff — Front</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #ffd7e8;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 88% 8%, #fff1f8 0%, rgba(255,241,248,0) 40%),
+      radial-gradient(circle at 6% 96%, #ffc2dd 0%, rgba(255,194,221,0) 45%),
+      linear-gradient(135deg, #ffe6f1 0%, #ffd2e6 48%, #ffbedb 100%);
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* decorative blobs / bubbles, purely background, may bleed to edges */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.55;
+  }
+  .blob.b1 { width: 260px; height: 260px; top: -110px; right: -90px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe6f2 55%, rgba(255,230,242,0) 75%); }
+  .blob.b2 { width: 170px; height: 170px; bottom: -80px; right: 90px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffdcee 60%, rgba(255,220,238,0) 78%); opacity: 0.5; }
+  .blob.b3 { width: 120px; height: 120px; top: 40%; left: -60px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffdcee 60%, rgba(255,220,238,0) 78%); opacity: 0.45; }
+
+  /* sparkle accents */
+  .sparkle { position: absolute; color: #ffffff; opacity: 0.9; filter: drop-shadow(0 1px 1px rgba(214,110,160,0.35)); }
+  .sparkle svg { display: block; }
+
+  /* poolside wave footer strip, bleeds to bottom edge */
+  .wave {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 46px;
+  }
+
+  .safe {
+    position: absolute;
+    top: 37.5px; left: 37.5px; right: 37.5px; bottom: 37.5px;
+    display: grid;
+    grid-template-columns: 292px 1fr;
+    column-gap: 34px;
+    align-items: stretch;
+  }
+
+  /* ---- Photo column ---- */
+  .photo-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .photo-puff {
+    position: absolute;
+    width: 292px;
+    height: 320px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%;
+    box-shadow: 0 14px 0 rgba(214,110,160,0.18), 0 18px 30px rgba(191,63,119,0.22);
+  }
+  .photo-puff::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: inherit;
+    border: 3px dashed #ffc7e0;
+  }
+  .headshot {
+    position: relative;
+    z-index: 2;
+    max-width: 258px;
+    max-height: 286px;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ---- Content column ---- */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .name-panel {
+    background: rgba(255,255,255,0.72);
+    border-radius: 26px;
+    padding: 14px 22px 12px;
+    box-shadow: 0 3px 0 rgba(214,110,160,0.18);
+  }
+
+  .name {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1.02;
+    color: #a3164e;
+    letter-spacing: 0.2px;
+  }
+
+  .title {
+    margin-top: 6px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #6b2140;
+  }
+
+  .pills {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 4px;
+  }
+
+  .pill-row { display: flex; gap: 11px; }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #ffffff;
+    border: 2px solid #ffc2dd;
+    border-radius: 999px;
+    padding: 10px 18px;
+    box-shadow: 0 3px 0 rgba(214,110,160,0.22);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: #7a2048;
+    white-space: nowrap;
+  }
+  .pill .ico {
+    font-size: 16px;
+    line-height: 1;
+  }
+  .pill.wide { flex: 1; }
+  .pill.accent {
+    background: #ff5fa2;
+    border-color: #ff5fa2;
+    color: #ffffff;
+    box-shadow: 0 3px 0 #c2255c;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+
+    <div class="sparkle" style="top:52px; left:430px;">
+      <svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+    <div class="sparkle" style="top:150px; left:395px;">
+      <svg width="12" height="12" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+    <div class="sparkle" style="top:600px; left:1060px;">
+      <svg width="16" height="16" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+    <div class="sparkle" style="top:44px; left:1040px;">
+      <svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+
+    <svg class="wave" viewBox="0 0 1125 46" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,20 C 60,40 120,0 180,20 C 240,40 300,0 360,20 C 420,40 480,0 540,20 C 600,40 660,0 720,20 C 780,40 840,0 900,20 C 960,40 1020,0 1080,20 C 1105,26 1115,30 1125,30 L1125,46 L0,46 Z" fill="#ffffff" fill-opacity="0.55"/>
+    </svg>
+
+    <div class="safe">
+      <div class="photo-wrap">
+        <div class="photo-puff"></div>
+        <img class="headshot" src="../../assets/v2/sophia_headshot_sticker.png" alt="Sophia Sky Reddehase">
+      </div>
+
+      <div class="content">
+        <div class="name-panel">
+          <div class="name">SOPHIA SKY<br>REDDEHASE</div>
+          <div class="title">Texas Apartment Locator</div>
+        </div>
+
+        <div class="pills">
+          <div class="pill-row">
+            <div class="pill"><span class="ico">📍</span>AUSTIN, TX</div>
+            <div class="pill accent"><span class="ico">✨</span>100% FREE FOR YOU</div>
+          </div>
+          <div class="pill-row">
+            <div class="pill wide"><span class="ico">🏢</span>Spirit Real Estate Group</div>
+          </div>
+          <div class="pill-row">
+            <div class="pill"><span class="ico">🪪</span>TREC #831516</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

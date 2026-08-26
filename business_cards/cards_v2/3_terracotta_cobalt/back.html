@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sophia Reddehase — Business Card Back — Sunset Terracotta &amp; Cobalt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    width:1125px; height:675px;
+    background:#C1502E;
+    overflow:hidden;
+  }
+  body { font-family:"Space Grotesk", sans-serif; }
+
+  .card {
+    position:relative;
+    width:1125px; height:675px;
+    background:#C1502E;
+    overflow:hidden;
+  }
+
+  /* cream panel — visual echo of the front's photo panel, now holding the QR */
+  .cream-panel {
+    position:absolute;
+    right:0; top:0;
+    width:430px; height:675px;
+    background:#F3E6D2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .qr-box {
+    width:290px; height:290px;
+    background:#F3E6D2;
+    border:5px solid #1B2A6B;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .qr-box img {
+    width:264px; height:264px;
+    display:block;
+  }
+
+  .scan-caption {
+    margin-top:26px;
+    font-family:"Anton", "Archivo Black", sans-serif;
+    font-size:34px;
+    letter-spacing:1px;
+    color:#1B2A6B;
+    text-transform:uppercase;
+    text-align:center;
+    line-height:1.15;
+  }
+
+  .monogram {
+    position:absolute;
+    left:52px; top:60px;
+    font-family:"Anton", "Archivo Black", sans-serif;
+    font-size:230px;
+    line-height:1;
+    color:#F3E6D2;
+    opacity:0.10;
+    z-index:0;
+  }
+
+  .eyebrow {
+    position:absolute;
+    left:63px; top:58px;
+    font-size:16px;
+    font-weight:600;
+    letter-spacing:6px;
+    color:#F3E6D2;
+    text-transform:uppercase;
+  }
+
+  .headline {
+    position:absolute;
+    left:60px; top:88px;
+    width:560px;
+    font-family:"Anton", "Archivo Black", sans-serif;
+    font-weight:400;
+    font-size:70px;
+    line-height:1.0;
+    letter-spacing:0.5px;
+    color:#1B2A6B;
+    text-transform:uppercase;
+  }
+
+  .accent-line {
+    position:absolute;
+    left:63px; top:222px;
+    width:520px; height:3px;
+    background:#F3E6D2;
+  }
+
+  .contact-list {
+    position:absolute;
+    left:63px; top:264px;
+    width:560px;
+  }
+  .contact-item { margin-bottom:38px; }
+  .contact-item:last-child { margin-bottom:0; }
+  .contact-label {
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:4px;
+    color:#EBC9A6;
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .contact-value {
+    font-size:29px;
+    font-weight:700;
+    letter-spacing:0.3px;
+    color:#F6ECDD;
+  }
+
+  .footer-rule {
+    position:absolute;
+    left:63px; bottom:78px;
+    width:520px; height:2px;
+    background:rgba(243,230,210,0.55);
+  }
+
+  .footer {
+    position:absolute;
+    left:63px; bottom:40px;
+    width:700px;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    color:#F6ECDD;
+  }
+  .footer .sep { margin:0 10px; color:#EBC9A6; }
+  .footer .trec { color:#EBC9A6; font-weight:500; }
+
+  .corner-mark {
+    position:absolute;
+    left:37.5px; bottom:37.5px;
+    width:14px; height:14px;
+    border-bottom:3px solid #F6ECDD;
+    border-left:3px solid #F6ECDD;
+    opacity:0.9;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="monogram">S</div>
+
+    <div class="eyebrow">Let's Connect</div>
+    <div class="headline">Reach Me<br>Directly</div>
+
+    <div class="accent-line"></div>
+
+    <div class="contact-list">
+      <div class="contact-item">
+        <div class="contact-label">Direct Cell</div>
+        <div class="contact-value">(512) 676-1215</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <div class="contact-value">sophia.reddehase@spiritre.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">@sophiasky.atx</div>
+      </div>
+    </div>
+
+    <div class="footer-rule"></div>
+    <div class="footer">
+      Brokered by Spirit Real Estate Group<span class="sep">|</span><span class="trec">TREC #831516</span>
+    </div>
+
+    <div class="corner-mark"></div>
+
+    <div class="cream-panel">
+      <div class="qr-box">
+        <img src="../../assets/v2/qr_terracotta.png" alt="Scan to connect with Sophia Reddehase">
+      </div>
+      <div class="scan-caption">Scan to<br>Connect</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+  }
+  :root {
+    --cherry: #D91635;
+    --cherry-deep: #A80F27;
+    --pink: #FFB4C8;
+    --cream: #FFF8EE;
+    --ink: #3A0B14;
+  }
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    background: var(--cherry);
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+  }
+  .checker {
+    position: absolute;
+    top: -220px;
+    left: -220px;
+    width: 1565px;
+    height: 1115px;
+    background-image: repeating-conic-gradient(var(--cherry) 0% 25%, var(--pink) 0% 50%);
+    background-size: 72px 72px;
+    transform: rotate(-7deg);
+  }
+  .sticker {
+    position: absolute;
+    left: 90px;
+    bottom: 25px;
+    width: 340px;
+    height: auto;
+    transform: rotate(-4deg);
+    z-index: 2;
+  }
+  .panel {
+    position: absolute;
+    top: 87px;
+    right: 75px;
+    width: 545px;
+    height: 501px;
+    background: var(--cream);
+    border-radius: 34px;
+    box-shadow: 0 10px 0 rgba(168, 15, 39, 0.35);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 46px;
+  }
+  .name {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    color: var(--cherry-deep);
+    font-size: 60px;
+    line-height: 0.98;
+    letter-spacing: 0.5px;
+    margin: 0 0 16px 0;
+  }
+  .title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 26px;
+    letter-spacing: 0.5px;
+    margin: 0 0 18px 0;
+  }
+  .divider {
+    width: 100%;
+    height: 4px;
+    background-image: repeating-linear-gradient(90deg, var(--cherry) 0 16px, var(--pink) 16px 32px);
+    border-radius: 4px;
+    margin-bottom: 18px;
+  }
+  .meta {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 21px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .meta .trec {
+    color: var(--cherry-deep);
+    font-weight: 800;
+  }
+</style>
+
+<div class="card">
+  <div class="checker"></div>
+  <img class="sticker" src="../../assets/v2/sophia_headshot_sticker.png" alt="Sophia Sky Reddehase">
+  <div class="panel">
+    <p class="name">SOPHIA SKY<br>REDDEHASE</p>
+    <p class="title">Texas Apartment Locator</p>
+    <div class="divider"></div>
+    <p class="meta">
+      <span class="trec">TREC #831516</span><br>
+      Brokered by Spirit Real Estate Group
+    </p>
+  </div>
+</div>
