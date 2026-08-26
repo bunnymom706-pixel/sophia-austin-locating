@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "file": "assets/site/sophia_hero.png",
+    "width": 470,
+    "height": 553,
+    "note": "True-cutout content (chest-up, 470x436) bottom-aligned on a transparent canvas padded to the contracted 540:635 aspect ratio (470x553, ratio 0.8499 vs 0.8504 - sub-pixel difference). Agent A's width=540 height=635 attrs remain valid; transparent headroom sits above the head, subject is flush with the bottom edge."
+  },
+  "about": {
+    "file": "assets/site/sophia_about.jpg",
+    "width": 900,
+    "height": 1130,
+    "webp": "assets/site/sophia_about.webp",
+    "source": "assets/sophia/sophia_pool.jpg",
+    "note": "Framed photo (not a cutout): Sophia full-length at an apartment community pool, downtown Austin buildings behind."
+  },
+  "areas": [
+    {"slot": "area_1", "file": "assets/site/area_1.jpg", "webp": "assets/site/area_1.webp", "width": 800, "height": 600, "caption": "Downtown & Central Austin", "source": "assets/properties/78747_SE_Austin_photo_1.jpg", "subject": "living room with downtown Austin skyline through floor-to-ceiling windows"},
+    {"slot": "area_2", "file": "assets/site/area_2.jpg", "webp": "assets/site/area_2.webp", "width": 800, "height": 600, "caption": "The Domain & North Austin", "source": "assets/properties/Arden_At_Kohlers_Crossing_ardenB.jpg", "subject": "aerial courtyard pool wrapped by a modern mid-rise"},
+    {"slot": "area_3", "file": "assets/site/area_3.jpg", "webp": "assets/site/area_3.webp", "width": 800, "height": 600, "caption": "East Austin", "source": "assets/properties/Casa_Agave_Austin_casagaveA.jpg", "subject": "dusk pool courtyard at a modern low-rise (Casa Agave, East Austin)"},
+    {"slot": "area_4", "file": "assets/site/area_4.jpg", "webp": "assets/site/area_4.webp", "width": 800, "height": 600, "caption": "South Austin & South Congress", "source": "assets/properties/General_Austin_Properties_springsA.jpg", "subject": "three-story building exterior with lawn and cornhole boards"},
+    {"slot": "area_5", "file": "assets/site/area_5.jpg", "webp": "assets/site/area_5.webp", "width": 800, "height": 600, "caption": "Round Rock & Cedar Park", "source": "assets/properties/Alara_North_Burnet_photo_1.jpg", "subject": "suburban-style pool with townhome-look buildings"},
+    {"slot": "area_6", "file": "assets/site/area_6.jpg", "webp": "assets/site/area_6.webp", "width": 800, "height": 600, "caption": "Bee Cave & Southwest Austin", "source": "assets/properties/General_Austin_Properties_riverA.jpg", "subject": "bright pool with in-water loungers, live oak and limestone"}
+  ],
+  "og_card": {"file": "assets/og-card.jpg", "width": 1200, "height": 630},
+  "favicon": {"svg": "favicon.svg", "png32": "favicon-32.png", "apple": "apple-touch-icon.png"},
+  "eho": {"file": "assets/eho-logo.svg", "note": "fill uses currentColor"},
+  "cutout_quality": "PASS. Recipe: rembg u2net_human_seg, post_process_mask=True, no alpha matting, source sophia_headshot.jpg. Verified composited on #F5F3EF and #2E5E4E at 2x zoom: hair top and right edges clean (the warm rim on the hair crown is genuine backlighting, not background), no eaten limbs, hand and bag intact. One orange-foliage remnant in the sleeve/bag notch was removed by targeted color masking (dilated 2px), then 1px alpha erosion + 0.6px feather over the whole silhouette. isnet-general-use was tried and rejected (it deleted the bag and part of the torso).",
+  "deleted_count": 156,
+  "deleted_bytes": 84978380,
+  "deleted_detail": "148 non-chosen files in assets/properties (only 51 of 154 were unique by md5; the 6 chosen are md5-unique), 6 old cutout/outlined PNGs in assets/sophia (3 original jpgs kept), and the byte-identical orphan twins pinterest_modern_business_cards.html + all_business_cards_showcase.html."
+}

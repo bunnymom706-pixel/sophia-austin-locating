@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Equal Housing Opportunity">
+  <path fill="currentColor" d="M32 4 2 26h7v34h46V26h7L32 4zm0 7.6L49 24.1V54H15V24.1L32 11.6z"/>
+  <rect x="22" y="30" width="20" height="5" fill="currentColor"/>
+  <rect x="22" y="41" width="20" height="5" fill="currentColor"/>
+</svg>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bunnymom706-pixel.github.io/sophia-austin-locating/sitemap.xml

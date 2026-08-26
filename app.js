@@ -1,197 +1,361 @@
-/**
- * Sophia Sky Reddehase | Austin Luxury Apartment Locating
- * Interactive Application Engine & Spark CRM Integration
- * TREC License #831516 • Spirit Real Estate Group, LLC
+/*
+ * app.js — sophia-austin-locating
+ * One IIFE, no globals. Every module null-checks its DOM so a partial page
+ * never throws. The site works with JS disabled: all CTA links are valid
+ * plain hrefs before this file runs; we only enhance them.
  */
+(function () {
+  'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
-  initStickyHeader();
-  initFaqAccordion();
-  initVibeMatcher();
-  initVaultFilters();
-  initMobileNav();
-});
+  var PHONE = '5126761215';
+  var SPARK_URL = 'https://sparkapt.com/inquiry/sophia-reddehase859';
+  var EMAIL = 'Sophia.Reddehases@spiritre.com';
+  var STORAGE_KEY = 'sophia-search-starter-v1';
 
-/* ==========================================================================
-   1. Sticky Header Animation
-   ========================================================================== */
-function initStickyHeader() {
-  const header = document.querySelector('.site-header');
-  if (!header) return;
+  /* Question keys in DOM order of the fieldset.starter-q blocks. */
+  var Q_KEYS = ['area', 'budget', 'beds', 'move'];
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+  /* Short URL-safe values for the Spark query string. Unknown labels fall
+     back to a generic slug so a copy tweak by another agent can't break us. */
+  var SHORT_VALUES = {
+    area: {
+      'Downtown & Central Austin': 'downtown-central',
+      'The Domain & North Austin': 'domain-north',
+      'East Austin': 'east',
+      'South Austin & South Congress': 'south-soco',
+      'Round Rock & Cedar Park': 'roundrock-cedarpark',
+      'Bee Cave & Southwest Austin': 'beecave-sw',
+      'Not sure yet': 'unsure'
+    },
+    budget: {
+      'Under $1,300': 'under-1300',
+      '$1,300–1,700': '1300-1700',
+      '$1,700–2,200': '1700-2200',
+      '$2,200–3,000': '2200-3000',
+      '$3,000+': '3000-plus'
+    },
+    beds: {
+      'Studio': 'studio',
+      '1': '1',
+      '2': '2',
+      '3+': '3plus'
+    },
+    move: {
+      'ASAP': 'asap',
+      'Within 30 days': '30-days',
+      '1–2 months': '1-2-months',
+      '3+ months': '3-plus-months'
     }
-  });
-}
-
-/* ==========================================================================
-   2. Mobile Navigation Drawer
-   ========================================================================== */
-function initMobileNav() {
-  const toggleBtn = document.querySelector('.mobile-toggle');
-  const navLinks = document.querySelector('.nav-links');
-
-  if (toggleBtn && navLinks) {
-    toggleBtn.addEventListener('click', () => {
-      const isExpanded = navLinks.classList.toggle('mobile-open');
-      toggleBtn.innerHTML = isExpanded 
-        ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
-        : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-    });
-
-    // Close when clicking a link
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('mobile-open');
-        toggleBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-      });
-    });
-  }
-}
-
-/* ==========================================================================
-   3. Austin Photo Vault Category Filtering
-   ========================================================================== */
-function initVaultFilters() {
-  const filterBtns = document.querySelectorAll('.vault-btn');
-  const vaultItems = document.querySelectorAll('.vault-item');
-
-  if (!filterBtns.length || !vaultItems.length) return;
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterVal = btn.getAttribute('data-filter');
-
-      vaultItems.forEach(item => {
-        const cat = item.getAttribute('data-category');
-        if (filterVal === 'all' || cat === filterVal) {
-          item.style.display = 'block';
-          item.style.opacity = '1';
-        } else {
-          item.style.display = 'none';
-          item.style.opacity = '0';
-        }
-      });
-    });
-  });
-}
-
-/* ==========================================================================
-   4. Interactive "Match My Vibe" Quiz & Spark CRM Lead Bridge
-   ========================================================================== */
-function initVibeMatcher() {
-  const steps = document.querySelectorAll('.quiz-step-pane');
-  const indicators = document.querySelectorAll('.step-indicator');
-  const prevBtn = document.getElementById('quiz-prev-btn');
-  const nextBtn = document.getElementById('quiz-next-btn');
-
-  if (!steps.length) return;
-
-  let currentStep = 0;
-  const userPreferences = {
-    vibe: 'Downtown Skyline & High-Rise',
-    budget: '$1,800 - $2,400/mo',
-    layout: '1 Bedroom / 1 Bath',
-    timeline: 'Within 30 Days'
   };
 
-  // Option selection logic
-  document.querySelectorAll('.quiz-option-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const parent = btn.closest('.quiz-options-grid');
-      parent.querySelectorAll('.quiz-option-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const key = parent.getAttribute('data-key');
-      userPreferences[key] = btn.getAttribute('data-value');
-    });
-  });
+  function slugify(value) {
+    return String(value)
+      .toLowerCase()
+      .replace(/\$/g, '')
+      .replace(/,/g, '')
+      .replace(/\+/g, 'plus')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'na';
+  }
 
-  function updateQuizView() {
-    steps.forEach((step, idx) => {
-      step.classList.toggle('active', idx === currentStep);
-    });
+  function shortValue(key, label) {
+    var table = SHORT_VALUES[key];
+    if (table && Object.prototype.hasOwnProperty.call(table, label)) {
+      return table[label];
+    }
+    return slugify(label);
+  }
 
-    indicators.forEach((indicator, idx) => {
-      indicator.classList.remove('active', 'completed');
-      if (idx === currentStep) {
-        indicator.classList.add('active');
-      } else if (idx < currentStep) {
-        indicator.classList.add('completed');
+  /* ---------------------------------------------------------------- *
+   * 1. Sticky header shadow on scroll (passive listener)
+   * ---------------------------------------------------------------- */
+  function initHeaderShadow() {
+    var header = document.querySelector('header.site-header') ||
+      document.querySelector('.site-header');
+    if (!header) return;
+
+    var shadowed = false;
+    function update() {
+      var wantShadow = (window.pageYOffset || document.documentElement.scrollTop || 0) > 4;
+      if (wantShadow === shadowed) return;
+      shadowed = wantShadow;
+      if (wantShadow) {
+        header.classList.add('is-scrolled');
+        header.style.boxShadow = '0 1px 3px rgba(0,0,0,.08)';
+      } else {
+        header.classList.remove('is-scrolled');
+        header.style.boxShadow = '';
       }
-    });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
 
-    if (prevBtn) {
-      prevBtn.style.visibility = currentStep === 0 ? 'hidden' : 'visible';
+  /* ---------------------------------------------------------------- *
+   * 2. Mobile nav toggle (#nav-toggle, aria-expanded)
+   * ---------------------------------------------------------------- */
+  function initNavToggle() {
+    var toggle = document.getElementById('nav-toggle');
+    if (!toggle) return;
+    var header = toggle.closest('header') || document.querySelector('.site-header');
+    var nav = (header && header.querySelector('nav')) || document.querySelector('nav');
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (header) header.classList.toggle('nav-open', open);
+      if (nav) nav.classList.toggle('is-open', open);
     }
 
-    if (nextBtn) {
-      if (currentStep === steps.length - 1) {
-        nextBtn.textContent = 'View My Custom Apartment Matches';
-        nextBtn.classList.remove('btn-primary');
-        nextBtn.classList.add('btn-rose');
-      } else {
-        nextBtn.textContent = 'Continue';
-        nextBtn.classList.add('btn-primary');
-        nextBtn.classList.remove('btn-rose');
+    if (!toggle.hasAttribute('aria-expanded')) {
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    /* Close after choosing a nav link, and on Escape. */
+    if (nav) {
+      nav.addEventListener('click', function (e) {
+        var link = e.target && e.target.closest ? e.target.closest('a') : null;
+        if (link) setOpen(false);
+      });
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
       }
+    });
+  }
+
+  /* ---------------------------------------------------------------- *
+   * 3. Search starter (4 questions) + CTA rewriting + clipboard +
+   *    localStorage persistence
+   * ---------------------------------------------------------------- */
+
+  function readStored() {
+    try {
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      return (parsed && typeof parsed === 'object') ? parsed : null;
+    } catch (err) {
+      return null;
     }
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      if (currentStep < steps.length - 1) {
-        currentStep++;
-        updateQuizView();
-      } else {
-        // Final Step: Complete & Route to Spark Form
-        launchSparkFormWithLead(userPreferences);
+  function writeStored(answers) {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+    } catch (err) {
+      /* Storage unavailable (private mode, disabled) — feature still works. */
+    }
+  }
+
+  function buildSummary(answers) {
+    var bedsPart = answers.beds === 'Studio' ? 'Studio' : answers.beds + ' bed';
+    var movePart = answers.move === 'ASAP'
+      ? 'ASAP'
+      : answers.move.charAt(0).toLowerCase() + answers.move.slice(1);
+    return 'Area: ' + answers.area +
+      ' · Budget: ' + answers.budget +
+      ' · ' + bedsPart +
+      ' · Move: ' + movePart +
+      " — sent from Sophia's site";
+  }
+
+  function buildSparkHref(answers) {
+    return SPARK_URL +
+      '?ref=site' +
+      '&area=' + encodeURIComponent(shortValue('area', answers.area)) +
+      '&budget=' + encodeURIComponent(shortValue('budget', answers.budget)) +
+      '&beds=' + encodeURIComponent(shortValue('beds', answers.beds)) +
+      '&move=' + encodeURIComponent(shortValue('move', answers.move));
+  }
+
+  function buildSmsHref(summary) {
+    return 'sms:' + PHONE + '?&body=' + encodeURIComponent(summary);
+  }
+
+  function buildMailtoHref(summary) {
+    return 'mailto:' + EMAIL +
+      '?subject=' + encodeURIComponent('Apartment search') +
+      '&body=' + encodeURIComponent(summary);
+  }
+
+  function findCopyNote(results) {
+    if (!results) return null;
+    var note = results.querySelector('.copy-note, [data-copy-note]');
+    if (note) return note;
+    var candidates = results.querySelectorAll('p, span, small, div');
+    for (var i = 0; i < candidates.length; i++) {
+      if (/^copied\b/i.test((candidates[i].textContent || '').trim())) {
+        return candidates[i];
       }
+    }
+    return null;
+  }
+
+  function showCopyNote(results) {
+    var note = findCopyNote(results);
+    if (!note) return;
+    note.classList.remove('is-hidden');
+    note.removeAttribute('hidden');
+  }
+
+  /* Copy with navigator.clipboard, falling back to execCommand.
+     The "copied" note is shown only when a copy actually succeeded. */
+  function copySummary(summary, results) {
+    var copied = false;
+    try {
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        navigator.clipboard.writeText(summary).then(function () {
+          showCopyNote(results);
+        }).catch(function () {
+          if (copyViaExecCommand(summary)) showCopyNote(results);
+        });
+        return;
+      }
+    } catch (err) {
+      /* fall through to legacy path */
+    }
+    try {
+      copied = copyViaExecCommand(summary);
+    } catch (err) {
+      copied = false;
+    }
+    if (copied) showCopyNote(results);
+  }
+
+  function copyViaExecCommand(text) {
+    var ok = false;
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    try {
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      ok = document.execCommand('copy');
+    } catch (err) {
+      ok = false;
+    }
+    if (ta.parentNode) ta.parentNode.removeChild(ta);
+    return ok;
+  }
+
+  function initSearchStarter() {
+    var fieldsets = document.querySelectorAll('fieldset.starter-q');
+    if (!fieldsets.length) {
+      /* Still give the sticky bar / results whatever a previous visit stored. */
+      applyAnswers(readStored(), false);
+      return;
+    }
+
+    var answers = readStored() || {};
+
+    Array.prototype.forEach.call(fieldsets, function (fieldset, index) {
+      var key = fieldset.getAttribute('data-q') || Q_KEYS[index];
+      if (!key) return;
+      var options = fieldset.querySelectorAll('button.starter-opt');
+
+      Array.prototype.forEach.call(options, function (btn) {
+        /* Make sure a stray unset type never submits a form. */
+        if (!btn.getAttribute('type')) btn.setAttribute('type', 'button');
+        if (!btn.hasAttribute('aria-pressed')) btn.setAttribute('aria-pressed', 'false');
+
+        var label = (btn.getAttribute('data-value') || btn.textContent || '').trim();
+
+        /* Hydrate selection state from a previous visit. */
+        if (answers[key] && answers[key] === label) {
+          markSelected(fieldset, btn);
+        }
+
+        btn.addEventListener('click', function () {
+          answers[key] = label;
+          markSelected(fieldset, btn);
+          writeStored(answers);
+          if (allAnswered(answers)) {
+            applyAnswers(answers, true);
+          }
+        });
+      });
+    });
+
+    /* Hydration: if a previous visit finished the quiz, restore the results
+       (no clipboard write on load — browsers require a user gesture). */
+    if (allAnswered(answers)) {
+      applyAnswers(answers, false);
+    }
+  }
+
+  function markSelected(fieldset, chosen) {
+    var options = fieldset.querySelectorAll('button.starter-opt');
+    Array.prototype.forEach.call(options, function (btn) {
+      var selected = btn === chosen;
+      btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      btn.classList.toggle('is-selected', selected);
     });
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      if (currentStep > 0) {
-        currentStep--;
-        updateQuizView();
-      }
-    });
+  function allAnswered(answers) {
+    if (!answers) return false;
+    for (var i = 0; i < Q_KEYS.length; i++) {
+      if (!answers[Q_KEYS[i]]) return false;
+    }
+    return true;
   }
 
-  updateQuizView();
-}
+  /* Build the summary, reveal results, rewrite CTA hrefs, update sticky bar.
+     fromClick governs the clipboard write (needs a user gesture). */
+  function applyAnswers(answers, fromClick) {
+    if (!allAnswered(answers)) return;
 
-function launchSparkFormWithLead(prefs) {
-  const sparkUrl = 'https://sparkapt.com/inquiry/sophia-reddehase859';
-  // Redirect directly to official Spark VIP inquiry portal
-  window.open(sparkUrl, '_blank');
-}
+    var summary = buildSummary(answers);
+    var results = document.getElementById('quiz-results');
+    var summaryEl = document.getElementById('quiz-summary');
+    var smsCta = document.getElementById('quiz-cta-sms');
+    var sparkCta = document.getElementById('quiz-cta-spark');
+    var emailCta = document.getElementById('quiz-cta-email');
+    var stickySms = document.getElementById('sticky-sms');
 
-/* ==========================================================================
-   5. FAQ Accordion Logic
-   ========================================================================== */
-function initFaqAccordion() {
-  const faqItems = document.querySelectorAll('.faq-item');
+    if (summaryEl) summaryEl.textContent = summary;
+    if (smsCta) smsCta.setAttribute('href', buildSmsHref(summary));
+    if (sparkCta) sparkCta.setAttribute('href', buildSparkHref(answers));
+    if (emailCta) emailCta.setAttribute('href', buildMailtoHref(summary));
+    if (stickySms) stickySms.setAttribute('href', buildSmsHref(summary));
 
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    if (!question) return;
+    if (results) {
+      results.classList.remove('is-hidden');
+      results.removeAttribute('hidden');
+    }
 
-    question.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      // Close all others
-      faqItems.forEach(i => i.classList.remove('open'));
-      // Toggle current
-      if (!isOpen) {
-        item.classList.add('open');
-      }
-    });
-  });
-}
+    if (fromClick) {
+      copySummary(summary, results);
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
+   * 5. Footer year
+   * ---------------------------------------------------------------- */
+  function initYear() {
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  }
+
+  function init() {
+    initHeaderShadow();
+    initNavToggle();
+    initSearchStarter();
+    initYear();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

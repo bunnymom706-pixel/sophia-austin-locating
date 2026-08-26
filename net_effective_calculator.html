@@ -3,273 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Net-Effective Rent & Quote Generator | Sophia Reddehase</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <title>Is that move-in special actually a deal? — Net effective rent calculator | Sophia Reddehase</title>
+    <meta name="description" content="Free net effective rent calculator. See what '6 weeks free' really saves you per month over the whole lease, then text Sophia to check for a better deal in Austin.">
+    <link rel="canonical" href="https://bunnymom706-pixel.github.io/sophia-austin-locating/net_effective_calculator.html">
+    <meta property="og:title" content="Is that move-in special actually a deal?">
+    <meta property="og:description" content="Work out the real monthly cost behind any move-in special. Free tool from Sophia Reddehase, Austin apartment locator.">
+    <meta property="og:image" content="https://bunnymom706-pixel.github.io/sophia-austin-locating/assets/og-card.jpg">
+    <meta property="og:url" content="https://bunnymom706-pixel.github.io/sophia-austin-locating/net_effective_calculator.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#FDFDFB">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
+        /* Page-specific styles. Tokens re-declared so the page renders correctly standalone. */
         :root {
-            --bg-primary: #0b0c10;
-            --bg-card: rgba(26, 29, 36, 0.85);
-            --accent-gold: #e5b882;
-            --accent-champagne: #f3dfc1;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(229, 184, 130, 0.2);
-            --border-active: rgba(229, 184, 130, 0.5);
-            --radius-md: 14px;
-            --radius-lg: 20px;
+            --paper: #FDFDFB;
+            --surface: #F5F3EF;
+            --line: #E5E2DB;
+            --ink: #1C1B1A;
+            --ink-soft: #57534E;
+            --accent: #2E5E4E;
+            --accent-ink: #234A3E;
+            --accent-soft: #E8F0EC;
         }
 
-        * {
+        .calc-page {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        body {
-            background-color: var(--bg-primary);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(229, 184, 130, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(243, 223, 193, 0.08) 0px, transparent 50%);
-            color: var(--text-main);
-            min-height: 100vh;
+        .calc-page * { box-sizing: border-box; }
+
+        .calc-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .calc-header-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 14px 20px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 24px 16px;
+            justify-content: space-between;
+            gap: 16px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 860px;
-            background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 36px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+        .calc-brand {
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--ink);
+            text-decoration: none;
+            white-space: nowrap;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 20px;
-        }
-
-        .header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
+        .calc-page a.btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--accent-champagne);
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
+            text-decoration: none;
+            text-align: center;
         }
 
-        .header p {
-            font-size: 13px;
-            color: var(--text-muted);
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
+        .calc-page a.btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+
+        .calc-page a.btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--ink);
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
         }
 
-        .grid {
+        .calc-page a.btn-secondary:hover { background: var(--surface); }
+
+        .calc-main {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 20px 56px;
+        }
+
+        .calc-main h1 {
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            font-weight: 700;
+            font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+            line-height: 1.2;
+            margin: 0 0 14px;
+        }
+
+        .calc-intro {
+            color: var(--ink-soft);
+            font-size: 1.05rem;
+            max-width: 60ch;
+            margin: 0 0 8px;
+        }
+
+        .calc-intro strong { color: var(--ink); }
+
+        .calc-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 28px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+        }
+
+        .calc-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 24px;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
-        label {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--accent-gold);
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
         }
 
-        input, select {
-            background: rgba(15, 17, 21, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 12px 14px;
-            color: var(--text-main);
-            font-size: 15px;
-            font-weight: 500;
-            outline: none;
-            transition: all 0.2s ease;
+        .input-group .hint {
+            font-size: 0.8rem;
+            color: var(--ink-soft);
+            font-weight: 400;
         }
 
-        input:focus, select:focus {
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 0 3px rgba(229, 184, 130, 0.15);
+        .calc-page input,
+        .calc-page select {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 11px 12px;
+            color: var(--ink);
+            font-size: 1rem;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .calc-page input:focus,
+        .calc-page select:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 1px;
+            border-color: var(--accent);
         }
 
         .results-box {
-            background: rgba(11, 12, 16, 0.9);
-            border: 1px solid var(--border-active);
-            border-radius: var(--radius-md);
-            padding: 24px;
-            margin-top: 10px;
+            background: var(--accent-soft);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-top: 22px;
         }
 
         .metric-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            align-items: baseline;
+            gap: 12px;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(28, 27, 26, 0.08);
         }
 
-        .metric-row:last-child {
-            border-bottom: none;
-        }
+        .metric-row:last-child { border-bottom: none; }
 
-        .metric-label {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
+        .metric-label { font-size: 0.95rem; color: var(--ink-soft); }
 
         .metric-val {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap;
         }
 
         .metric-val.highlight {
-            font-size: 22px;
-            color: var(--accent-gold);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-ink);
         }
 
-        .preview-area {
-            margin-top: 24px;
+        .results-note {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin: 14px 0 0;
         }
+
+        .preview-area { margin-top: 26px; }
 
         .preview-title {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0 0 4px;
+        }
+
+        .preview-sub {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin: 0 0 10px;
         }
 
         .quote-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px dashed var(--border-color);
-            border-radius: var(--radius-md);
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
             padding: 16px;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #e2e8f0;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--ink);
             white-space: pre-wrap;
-            user-select: all;
+            overflow-wrap: break-word;
+        }
+
+        .quote-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap;
         }
 
         .btn-copy {
-            width: 100%;
-            margin-top: 14px;
-            background: linear-gradient(135deg, var(--accent-gold) 0%, #c49658 100%);
-            color: #0b0c10;
-            border: none;
-            border-radius: var(--radius-md);
-            padding: 14px;
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            padding: 11px 18px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(229, 184, 130, 0.3);
         }
 
-        .btn-copy:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(229, 184, 130, 0.45);
+        .btn-copy:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+
+        .btn-copy.copied { background: var(--accent-ink); border-color: var(--accent-ink); }
+
+        .calc-explain {
+            margin-top: 36px;
+            border-top: 1px solid var(--line);
+            padding-top: 26px;
         }
 
-        .footer-note {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 11px;
-            color: #64748b;
+        .calc-explain h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin: 0 0 10px;
+        }
+
+        .calc-explain p {
+            color: var(--ink-soft);
+            max-width: 62ch;
+            margin: 0 0 12px;
+        }
+
+        .calc-footer {
+            background: var(--surface);
+            border-top: 1px solid var(--line);
+            padding: 32px 20px 40px;
+        }
+
+        .compliance {
+            max-width: 1120px;
+            margin: 0 auto;
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            line-height: 1.7;
+        }
+
+        .compliance p { margin: 0 0 8px; }
+
+        .compliance a { color: var(--accent-ink); }
+
+        .eho-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0 8px;
+        }
+
+        .eho-mark { width: 22px; height: 22px; display: block; }
+
+        @media (max-width: 768px) {
+            .calc-grid { grid-template-columns: 1fr; }
+            .calc-main { padding: 28px 16px 44px; }
+            .calc-card { padding: 18px 16px; }
+            .quote-actions { flex-direction: column; }
+            .quote-actions .btn-copy,
+            .quote-actions a.btn-secondary { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .calc-header-inner { padding: 12px 16px; }
+            .calc-header-inner a.btn-primary { padding: 9px 12px; font-size: 0.85rem; }
+            .calc-brand { font-size: 1rem; }
+            .metric-val.highlight { font-size: 1.3rem; }
         }
     </style>
 </head>
-<body>
+<body class="calc-page">
 
-<div class="container">
-    <div class="header">
-        <h1>Net-Effective Rent & Quote Generator</h1>
-        <p>Sophia Reddehase | Spirit Real Estate Group (TREC #831516)</p>
+<header class="calc-header">
+    <div class="calc-header-inner">
+        <a class="calc-brand" href="index.html">Sophia Reddehase</a>
+        <a class="btn-primary" href="https://sparkapt.com/inquiry/sophia-reddehase859">Start my search</a>
+    </div>
+</header>
+
+<main class="calc-main">
+    <h1>Is that move-in special actually a deal?</h1>
+    <p class="calc-intro">"Six weeks free" sounds great, but once the free weeks run out you pay the full advertised rent every month. Spread the savings across your whole lease and you get the <strong>net effective rent</strong> — the real average monthly cost. That is the number to compare apartments with.</p>
+    <p class="calc-intro">Type in what the ad says and see the real math.</p>
+
+    <div class="calc-card">
+        <div class="calc-grid">
+            <div class="input-group">
+                <label for="propName">Apartment or community <span class="hint">(optional)</span></label>
+                <input type="text" id="propName" placeholder="e.g. the one you saw on Marketplace" value="">
+            </div>
+
+            <div class="input-group">
+                <label for="baseRent">Advertised rent ($ per month)</label>
+                <input type="number" id="baseRent" inputmode="numeric" min="0" placeholder="1850" value="1850">
+            </div>
+
+            <div class="input-group">
+                <label for="leaseTerm">Lease length (months)</label>
+                <input type="number" id="leaseTerm" inputmode="numeric" min="1" placeholder="12" value="12">
+            </div>
+
+            <div class="input-group">
+                <label for="specialType">The special they're offering</label>
+                <select id="specialType">
+                    <option value="weeks_4">4 weeks free (about 1 month)</option>
+                    <option value="weeks_6">6 weeks free (about 1.5 months)</option>
+                    <option value="weeks_8">8 weeks free (about 2 months)</option>
+                    <option value="weeks_2">2 weeks free (about half a month)</option>
+                    <option value="months_1">1 full month free</option>
+                    <option value="months_2">2 full months free</option>
+                    <option value="fixed_dollar">A flat dollar amount off</option>
+                    <option value="none">No special</option>
+                </select>
+            </div>
+
+            <div class="input-group" id="flatAmountGroup" style="display: none;">
+                <label for="flatAmount">Dollar amount off ($)</label>
+                <input type="number" id="flatAmount" inputmode="numeric" min="0" placeholder="1000" value="1000">
+            </div>
+        </div>
+
+        <div class="results-box" aria-live="polite">
+            <div class="metric-row">
+                <span class="metric-label">Advertised rent</span>
+                <span class="metric-val" id="dispBase">$1,850/mo</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">What the special saves you in total</span>
+                <span class="metric-val" id="dispConcession">-$1,707.69</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">What you really pay, averaged per month</span>
+                <span class="metric-val highlight" id="dispNet">$1,707.69/mo</span>
+            </div>
+        </div>
+        <p class="results-note">Heads up: after any free weeks are used, your actual monthly bill is the full advertised rent. Budget for that number, not the average.</p>
+
+        <div class="preview-area">
+            <p class="preview-title">Want me to check it?</p>
+            <p class="preview-sub">Copy this summary and text it to me. I'll tell you if it's a fair deal — and whether another community nearby beats it.</p>
+            <div class="quote-box" id="quoteText">Loading...</div>
+            <div class="quote-actions">
+                <button type="button" class="btn-copy" id="copyBtn" onclick="copyQuote()">Copy this summary</button>
+                <a class="btn-secondary" id="smsQuote" href="sms:5126761215">Text it to Sophia</a>
+            </div>
+        </div>
     </div>
 
-    <div class="grid">
-        <div class="input-group">
-            <label>Property Name / Unit</label>
-            <input type="text" id="propName" placeholder="e.g. The Ridge BH / B1 Plan" value="Luxury Property">
-        </div>
+    <section class="calc-explain">
+        <h2>Why net effective rent matters</h2>
+        <p>Listings often advertise the discounted average to look cheaper than the lease you actually sign. Two apartments at "$1,700/mo" can cost very different amounts once you account for who is giving real weeks free and who is not.</p>
+        <p>I do this comparison for renters every day, and my help is free — the apartment communities pay me a referral fee when you sign. If you want the current specials that actually pencil out in your budget, <a href="sms:5126761215">text me at (512) 676-1215</a> or <a href="https://sparkapt.com/inquiry/sophia-reddehase859">fill out my quick form</a>.</p>
+    </section>
+</main>
 
-        <div class="input-group">
-            <label>Market / Base Rent ($/mo)</label>
-            <input type="number" id="baseRent" placeholder="1850" value="1850">
+<footer class="calc-footer">
+    <div class="compliance">
+        <p>Sophia Reddehase, TREC License #831516. Sponsored by Spirit Real Estate Group, LLC, 1701 N Collins Blvd Ste 231, Richardson, TX 75080.</p>
+        <p><a href="https://www.trec.texas.gov/forms/consumer-protection-notice">TREC Consumer Protection Notice</a> · <a href="https://www.trec.texas.gov/forms/information-about-brokerage-services">Information About Brokerage Services</a></p>
+        <div class="eho-row">
+            <img class="eho-mark" src="assets/eho-logo.svg" alt="Equal Housing Opportunity logo" width="22" height="22">
+            <span>Equal Housing Opportunity</span>
         </div>
-
-        <div class="input-group">
-            <label>Lease Term (Months)</label>
-            <input type="number" id="leaseTerm" placeholder="12" value="12">
-        </div>
-
-        <div class="input-group">
-            <label>Upfront Concession / Special</label>
-            <select id="specialType">
-                <option value="weeks_4">4 Weeks Free (~1 Month)</option>
-                <option value="weeks_6">6 Weeks Free (~1.5 Months)</option>
-                <option value="weeks_8">8 Weeks Free (~2 Months)</option>
-                <option value="weeks_2">2 Weeks Free (~0.5 Month)</option>
-                <option value="months_1">1 Full Month Free</option>
-                <option value="months_2">2 Full Months Free</option>
-                <option value="fixed_dollar">Flat Dollar Discount ($ Off Total)</option>
-                <option value="none">No Concession</option>
-            </select>
-        </div>
-
-        <div class="input-group" id="flatAmountGroup" style="display: none;">
-            <label>Flat Dollar Amount ($)</label>
-            <input type="number" id="flatAmount" placeholder="1000" value="1000">
-        </div>
+        <p>Pricing and availability subject to change daily. All specials and effective rents subject to property terms and leasing approval. Equal Housing Opportunity.</p>
+        <p>&copy; <span id="year">2026</span> Sophia Reddehase</p>
     </div>
-
-    <div class="results-box">
-        <div class="metric-row">
-            <span class="metric-label">Base Market Rent</span>
-            <span class="metric-val" id="dispBase">$1,850/mo</span>
-        </div>
-        <div class="metric-row">
-            <span class="metric-label">Total Upfront Concession Value</span>
-            <span class="metric-val" id="dispConcession">-$1,707.69</span>
-        </div>
-        <div class="metric-row">
-            <span class="metric-label">Real Net-Effective Rate</span>
-            <span class="metric-val highlight" id="dispNet">$1,707.69/mo</span>
-        </div>
-    </div>
-
-    <div class="preview-area">
-        <div class="preview-title">Instant Client-Ready Message (Click Copy to Paste)</div>
-        <div class="quote-box" id="quoteText">Loading...</div>
-        <button class="btn-copy" id="copyBtn" onclick="copyQuote()">Copy Formatted Quote to Clipboard</button>
-    </div>
-
-    <div class="footer-note">
-        Quotes reflect live dynamic pricing and active management specials under Fair Housing compliance.
-    </div>
-</div>
+</footer>
 
 <script>
     const propNameEl = document.getElementById('propName');
@@ -284,9 +440,10 @@
     const dispNet = document.getElementById('dispNet');
     const quoteText = document.getElementById('quoteText');
     const copyBtn = document.getElementById('copyBtn');
+    const smsQuote = document.getElementById('smsQuote');
 
     function calculate() {
-        const prop = propNameEl.value.trim() || "Featured Community";
+        const prop = propNameEl.value.trim() || "an apartment I found";
         const base = parseFloat(baseRentEl.value) || 0;
         const term = parseInt(leaseTermEl.value) || 12;
         const specialType = specialTypeEl.value;
@@ -303,71 +460,98 @@
 
         if (specialType === 'weeks_4') {
             totalDiscount = (base * 12 / 52) * 4;
-            specialLabel = "4 Weeks Free upfront special";
+            specialLabel = "4 weeks free";
         } else if (specialType === 'weeks_6') {
             totalDiscount = (base * 12 / 52) * 6;
-            specialLabel = "6 Weeks Free upfront special";
+            specialLabel = "6 weeks free";
         } else if (specialType === 'weeks_8') {
             totalDiscount = (base * 12 / 52) * 8;
-            specialLabel = "8 Weeks Free upfront special";
+            specialLabel = "8 weeks free";
         } else if (specialType === 'weeks_2') {
             totalDiscount = (base * 12 / 52) * 2;
-            specialLabel = "2 Weeks Free upfront special";
+            specialLabel = "2 weeks free";
         } else if (specialType === 'months_1') {
             totalDiscount = base;
-            specialLabel = "1 Month Free upfront special";
+            specialLabel = "1 month free";
         } else if (specialType === 'months_2') {
             totalDiscount = base * 2;
-            specialLabel = "2 Months Free upfront special";
+            specialLabel = "2 months free";
         } else if (specialType === 'fixed_dollar') {
             totalDiscount = flat;
-            specialLabel = `$${flat.toLocaleString()} upfront concession`;
+            specialLabel = `$${flat.toLocaleString()} off`;
         } else {
             totalDiscount = 0;
-            specialLabel = "Standard pricing";
+            specialLabel = "no special";
         }
 
         const totalLeaseCost = Math.max(0, (base * term) - totalDiscount);
         const netEffective = term > 0 ? (totalLeaseCost / term) : base;
 
         dispBase.innerText = `$${base.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}/mo`;
-        dispConcession.innerText = totalDiscount > 0 
+        dispConcession.innerText = totalDiscount > 0
             ? `-$${totalDiscount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} total`
             : "$0";
         dispNet.innerText = `$${netEffective.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}/mo`;
 
         let formattedMsg = "";
         if (totalDiscount > 0) {
-            formattedMsg = `Here is the exact breakdown for ${prop}:\n\n` +
-                `- Base Lease Rate: $${base.toLocaleString()}/mo\n` +
-                `- Current Concession: ${specialLabel} (-$${Math.round(totalDiscount).toLocaleString()} total savings)\n` +
-                `- Real Net Effective Average: $${Math.round(netEffective).toLocaleString()}/mo over ${term} months\n\n` +
-                `Daily pricing and specials are tied directly to unit availability. Let me know if you would like me to lock this in or pull a custom video walkthrough!`;
+            formattedMsg = `Hi Sophia! I'm looking at ${prop}.\n` +
+                `Advertised rent: $${base.toLocaleString()}/mo, ${term}-month lease, special: ${specialLabel}.\n` +
+                `That works out to about $${Math.round(netEffective).toLocaleString()}/mo net effective (roughly $${Math.round(totalDiscount).toLocaleString()} total savings).\n` +
+                `Is that a fair deal, or can you find me something better?`;
         } else {
-            formattedMsg = `Here is the current rate for ${prop}:\n\n` +
-                `- Monthly Lease Rate: $${base.toLocaleString()}/mo (${term} month term)\n\n` +
-                `Let me know if you would like me to check floor plans or schedule a tour!`;
+            formattedMsg = `Hi Sophia! I'm looking at ${prop}.\n` +
+                `Advertised rent: $${base.toLocaleString()}/mo on a ${term}-month lease, no special.\n` +
+                `Can you check if anything nearby beats it right now?`;
         }
 
         quoteText.innerText = formattedMsg;
+        if (smsQuote) {
+            smsQuote.href = `sms:5126761215?&body=${encodeURIComponent(formattedMsg)}`;
+        }
+    }
+
+    function showCopied() {
+        copyBtn.innerText = "Copied";
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+            copyBtn.innerText = "Copy this summary";
+            copyBtn.classList.remove('copied');
+        }, 2000);
+    }
+
+    function fallbackCopy(text) {
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            const ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            if (ok) showCopied();
+        } catch (e) {
+            /* Clipboard unavailable; the text stays selectable in the box. */
+        }
     }
 
     function copyQuote() {
         const text = quoteText.innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            copyBtn.innerText = "✓ Copied to Clipboard!";
-            copyBtn.style.background = "#10b981";
-            setTimeout(() => {
-                copyBtn.innerText = "Copy Formatted Quote to Clipboard";
-                copyBtn.style.background = "linear-gradient(135deg, var(--accent-gold) 0%, #c49658 100%)";
-            }, 2000);
-        });
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(showCopied).catch(() => fallbackCopy(text));
+        } else {
+            fallbackCopy(text);
+        }
     }
 
     [propNameEl, baseRentEl, leaseTermEl, specialTypeEl, flatAmountEl].forEach(el => {
         el.addEventListener('input', calculate);
         el.addEventListener('change', calculate);
     });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
 
     calculate();
 </script>
