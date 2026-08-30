@@ -137,6 +137,45 @@
   .loop li.done .t{color:var(--dim);text-decoration:line-through}
   .loop li.done .why{opacity:.5}
 
+  /* ---------- the reps ---------- */
+  .reps{display:grid;grid-template-columns:repeat(auto-fit,minmax(98px,1fr));gap:9px}
+  .rep{
+    position:relative;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:12px;padding:12px 10px 11px;cursor:pointer;
+    transition:border-color .18s ease,background .18s ease;user-select:none;
+  }
+  .rep:hover{border-color:var(--gold-dim)}
+  .rep:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .rep[data-hit="1"]{border-color:rgba(16,185,129,.42);background:linear-gradient(180deg,var(--emerald-dim),var(--surface-2))}
+  .rep .k{
+    font-family:var(--disp);font-size:9.5px;font-weight:700;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--muted);line-height:1.4;min-height:27px;padding-right:16px;
+  }
+  .rep .n{
+    font-family:var(--disp);font-weight:800;font-size:28px;letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;margin-top:7px;line-height:1;
+  }
+  .rep[data-hit="1"] .n{color:var(--emerald)}
+  .rep .n small{font-size:12.5px;font-weight:600;color:var(--dim);letter-spacing:0}
+  .rep .minus{
+    position:absolute;top:5px;right:5px;width:22px;height:22px;border-radius:6px;
+    border:none;background:transparent;color:var(--dim);font-size:16px;line-height:1;
+    cursor:pointer;padding:0;
+  }
+  .rep .minus:hover{color:var(--rose);background:rgba(255,255,255,.06)}
+  .rep .minus:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+  .repbar{height:4px;background:var(--surface-2);border-radius:3px;overflow:hidden;margin-top:17px}
+  .repbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold));transition:width .35s ease}
+  .repfoot{
+    display:flex;justify-content:space-between;gap:12px;margin-top:9px;
+    font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums;
+  }
+  .repfoot .hit{color:var(--emerald);font-weight:700}
+  .last7{display:flex;gap:6px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line);align-items:center}
+  .last7 > span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;font-family:var(--disp);color:var(--dim);margin-right:6px;flex:none}
+  .last7 i{flex:1;height:20px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line)}
+  .last7 i[data-on="1"]{background:var(--gold);border-color:var(--gold-lt)}
+
   /* ---------- split calculator ---------- */
   .amt{display:flex;align-items:center;gap:10px;margin-bottom:18px}
   .amt label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
@@ -300,6 +339,21 @@
     <h2>The loop</h2>
     <p class="sub">Eight things, none longer than two minutes. The point isn't the tasks — it's that checking them all is the only scoreboard you have to hit today.</p>
     <div class="card"><ul class="loop" id="loop"></ul></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">The only part you control</div>
+    <h2>The reps</h2>
+    <p class="sub">Closings are a lagging number — you can do everything right this week and close nothing, which is why measuring yourself on them makes you feel like a fraud. Reps are a leading number. Tap to count. <em>Hitting the number is the win,</em> whether or not anyone signs.</p>
+    <div class="card">
+      <div class="reps" id="reps"></div>
+      <div class="repbar"><i id="repFill"></i></div>
+      <div class="repfoot">
+        <span id="repStatus">0 of 16 reps</span>
+        <span id="repDays">0 days hit</span>
+      </div>
+      <div class="last7" id="last7"><span>Last 7</span></div>
+    </div>
   </section>
 
   <section>
@@ -467,7 +521,7 @@
     {when:"Wake",  t:"16 oz of water and meds before you open your phone",  why:"Rehydrate and dose before the feed gets your first hour."},
     {when:"Wake",  t:"Read today's three out loud",                          why:"Saying them beats reading them. It sets the day's only scoreboard."},
     {when:"Out",   t:"Launch pad check — keys, lockbox card, tape measure",  why:"Leave calm instead of leaving frantic."},
-    {when:"Work",  t:"Three follow-ups, one line each in the CRM",           why:"This is where locating commissions actually come from."},
+    {when:"Work",  t:"One 45-minute block, timer on — hit today's number",   why:"Counted below. A finish line is what makes starting possible."},
     {when:"Work",  t:"Snap today's receipts into the Taxes album",           why:"Capture now, sort in January. Never the reverse."},
     {when:"Home",  t:"Clear one surface before you leave a room",            why:"No weekend deep-clean, ever again."},
     {when:"Night", t:"Write one thing you finished on the Done list",        why:"Proof of output, on the days it feels like there wasn't any."},
@@ -517,6 +571,92 @@
   }
   if(lastComplete && lastComplete !== today && lastComplete !== yest){ streak = 0; save("streak",0); }
   renderStreak();
+
+  /* ---------------- The reps ---------------- */
+  var REPS = [
+    {key:"follow", label:"Follow-ups",   target:10},
+    {key:"convo",  label:"New convos",   target:3},
+    {key:"tour",   label:"Tours booked", target:1},
+    {key:"ask",    label:"Review / referral ask", target:1},
+    {key:"post",   label:"Post published", target:1}
+  ];
+  var REP_TOTAL = REPS.reduce(function(a,r){ return a + r.target; }, 0);
+  document.getElementById("repStatus").textContent = "0 of " + REP_TOTAL + " reps";
+
+  var repsDay = load("repsDay", today);
+  var repCounts = load("reps", {});
+  var repHist = load("repHist", {});
+  if(repsDay !== today){ repCounts = {}; repsDay = today; save("reps", repCounts); save("repsDay", repsDay); }
+
+  var repsEl = document.getElementById("reps");
+  REPS.forEach(function(r){
+    var card = document.createElement("div");
+    card.className = "rep";
+    card.tabIndex = 0;
+    card.setAttribute("role","button");
+    card.innerHTML = '<div class="k"></div><div class="n">0 <small></small></div>'+
+                     '<button class="minus" type="button">&minus;</button>';
+    card.querySelector(".k").textContent = r.label;
+    card.querySelector("small").textContent = "/ " + r.target;
+    r.numEl = card.querySelector(".n");
+    r.cardEl = card;
+    function bump(d){
+      var v = (repCounts[r.key] || 0) + d;
+      repCounts[r.key] = v < 0 ? 0 : v;
+      save("reps", repCounts); save("repsDay", today);
+      renderReps();
+    }
+    card.addEventListener("click", function(e){
+      if(e.target.classList.contains("minus")) return;
+      bump(1);
+    });
+    card.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); bump(1); }
+    });
+    var minus = card.querySelector(".minus");
+    minus.addEventListener("click", function(e){ e.stopPropagation(); bump(-1); });
+    minus.setAttribute("aria-label", "Remove one " + r.label);
+    repsEl.appendChild(card);
+  });
+
+  var last7El = document.getElementById("last7");
+  var slots = [];
+  for(var d7 = 6; d7 >= 0; d7--){
+    var when = new Date(Date.now() - d7*864e5);
+    var slot = document.createElement("i");
+    slot.dataset.day = dayKey(when);
+    slot.title = when.toLocaleDateString("en-US",{weekday:"short"});
+    last7El.appendChild(slot);
+    slots.push(slot);
+  }
+
+  function renderReps(){
+    var done = 0, allHit = true;
+    REPS.forEach(function(r){
+      var v = repCounts[r.key] || 0;
+      done += Math.min(v, r.target);
+      var hit = v >= r.target;
+      if(!hit) allHit = false;
+      r.cardEl.dataset.hit = hit ? "1" : "0";
+      r.numEl.firstChild.nodeValue = v + " ";
+      r.cardEl.setAttribute("aria-label", r.label + ": " + v + " of " + r.target);
+    });
+    document.getElementById("repFill").style.width = Math.round(done / REP_TOTAL * 100) + "%";
+    var status = document.getElementById("repStatus");
+    if(allHit){
+      status.className = "hit";
+      status.textContent = "Number hit. Today counted.";
+      if(!repHist[today]){ repHist[today] = 1; save("repHist", repHist); }
+    } else {
+      status.className = "";
+      status.textContent = done + " of " + REP_TOTAL + " reps";
+      if(repHist[today]){ delete repHist[today]; save("repHist", repHist); }
+    }
+    var n = Object.keys(repHist).length;
+    document.getElementById("repDays").textContent = n + (n === 1 ? " day hit" : " days hit");
+    slots.forEach(function(sl){ sl.dataset.on = repHist[sl.dataset.day] ? "1" : "0"; });
+  }
+  renderReps();
 
   /* ---------------- The split ---------------- */
   var BUCKETS = [
