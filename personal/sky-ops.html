@@ -191,6 +191,22 @@
   .area[data-full="1"] .av{color:var(--emerald)}
   .area[data-zero="1"] .av{color:var(--dim)}
 
+  /* ---------- rotation ---------- */
+  .rot{list-style:none;margin:0;padding:0}
+  .rot li{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+  .rot li:last-child{border-bottom:none;padding-bottom:2px}
+  .rot .rt{flex:1;min-width:0;font-size:14px;line-height:1.35;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .rot .freq{font-size:11px;color:var(--dim);flex:none;font-variant-numeric:tabular-nums;text-align:right}
+  .rot .freq.late{color:var(--rose);font-weight:700}
+  .rotfoot{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-size:12.5px;color:var(--dim)}
+  .rotfoot b{color:var(--gold-lt)}
+  .allclear{
+    font-family:var(--serif);font-style:italic;font-size:17px;color:var(--emerald);
+    padding:8px 0 4px;
+  }
+  .chip[data-area="car"]{color:#fbbf24}
+  .chip[data-area="admin"]{color:#67e8f9}
+
   /* ---------- open loops ---------- */
   .loopadd{display:flex;gap:9px;margin-bottom:14px}
   .loopadd input{
@@ -424,6 +440,16 @@
     <p class="modehint" id="modehint"></p>
     <div class="areas" id="areasGrid"></div>
     <div class="card" id="day" style="margin-top:16px"></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Chosen for you — never by you</div>
+    <h2>Today's upkeep</h2>
+    <p class="sub">A hundred physical maintenance jobs on their own clocks. You don't pick, you don't schedule, you don't remember — the page works out what's due and shows you only that. <em>Everything here leaves visible evidence when it's done.</em></p>
+    <div class="card">
+      <ul class="rot" id="rot"></ul>
+      <div class="rotfoot" id="rotfoot"></div>
+    </div>
   </section>
 
   <section>
@@ -919,12 +945,185 @@
     });
     document.getElementById("modehint").textContent = TIER_HINT[t];
     renderDay();
+    if(rotEl) renderRot();
   }
   modeBtns.forEach(function(b){
     b.addEventListener("click", function(){ setTier(+b.dataset.tier); });
   });
 
   setTier(tier);
+
+  /* ---------------- Rotation: 100 maintenance jobs ---------------- */
+  var ROT = [
+    ["Empty the dishwasher","home",1],
+    ["Run the dishwasher","home",1],
+    ["Charge your phone to 100% before showings","work",1],
+    ["Put the tape measure and lockbox card back in the bag","work",1],
+    ["Move the tax slice on any commission that landed","money",1],
+    ["Put your walking shoes by the door","body",1],
+    ["Clear your phone notifications to zero","admin",1],
+    ["Take the kitchen trash out","home",2],
+    ["Spray the shower walls after your last shower","home",2],
+    ["Clear the nightstand down to bare wood","home",2],
+    ["Wash your water bottle with soap","body",2],
+    ["Refill the water pitcher and put it back in the fridge","body",2],
+    ["Add what you ran out of to the shared grocery list","people",2],
+    ["Put the mail somewhere he can actually see it","people",2],
+    ["Wipe the stovetop with a damp cloth","home",3],
+    ["Wipe the bathroom sink and faucet","home",3],
+    ["Wipe the toilet seat and rim","home",3],
+    ["Swap the hand towel for a clean one","home",3],
+    ["Start a load of laundry","home",3],
+    ["Move the laundry to the dryer","home",3],
+    ["Clean the dryer lint trap","home",3],
+    ["Fold one load and put it all the way in the drawer","home",3],
+    ["Wipe the coffee table","home",3],
+    ["Wipe your phone screen with a cloth","home",3],
+    ["Clear every cup, wrapper and paper out of the car","car",3],
+    ["Fill the gas tank — at half, not at empty","car",3],
+    ["Wash the pillowcases","home",4],
+    ["Swap the bath towel","home",5],
+    ["Water the plants","home",5],
+    ["Change the sheets","home",7],
+    ["Vacuum the bedroom floor","home",7],
+    ["Vacuum the main room","home",7],
+    ["Sweep the entryway","home",7],
+    ["Wipe the bathroom mirror","home",7],
+    ["Restock the toilet paper from the closet","home",7],
+    ["Clean the sink drain strainer","home",7],
+    ["Throw out anything in the fridge past its date","home",7],
+    ["Take the recycling out","home",7],
+    ["Back up your phone photos to the cloud","work",7],
+    ["Save the current concessions sheet from your top 5 properties","work",7],
+    ["Clear your work inbox to zero","work",7],
+    ["Pay something at the card","money",7],
+    ["Screenshot your balance into the Money album","money",7],
+    ["Update the debt board on this page","money",7],
+    ["Fill the weekly pill organiser","body",7],
+    ["Cook and portion protein for the week","body",7],
+    ["Wash and cut vegetables into containers","body",7],
+    ["Charge your step tracker","body",7],
+    ["Do the grocery run or place the order","people",7],
+    ["Send a photo to your mom","people",7],
+    ["Replace the kitchen sponge","home",14],
+    ["Wipe the inside of the microwave","home",14],
+    ["Wipe down the fridge shelf you use most","home",14],
+    ["Pull the hair out of the shower drain","home",14],
+    ["Wash the bath mat","home",14],
+    ["Wash your makeup brushes","home",14],
+    ["Take the donate bag out to the car","home",14],
+    ["Restock business cards in the car door pocket","car",14],
+    ["Wipe the dashboard and steering wheel","car",14],
+    ["Run the car through a wash","car",14],
+    ["Reply to every new Google review","work",14],
+    ["Restock the business cards in your bag","work",14],
+    ["Delete the screenshots you don't need","admin",14],
+    ["Empty your email trash and spam","admin",14],
+    ["Unsubscribe from 3 email lists","admin",14],
+    ["Clip your nails","body",14],
+    ["Pay your half into the shared bill account","people",14],
+    ["Descale the coffee maker","home",30],
+    ["Run a cleaning tablet through the empty dishwasher","home",30],
+    ["Replace any burnt-out bulb","home",30],
+    ["Clean the inside of the windshield","car",30],
+    ["Vacuum the driver's side floor mat","car",30],
+    ["Check the tire pressure","car",30],
+    ["Check the oil life percentage on the dash","car",30],
+    ["Restock the glovebox — napkins, charger, pens","car",30],
+    ["Update your Google Business profile photo or hours","work",30],
+    ["Export the CRM to a spreadsheet backup","work",30],
+    ["File the month's receipts into the Taxes folder","work",30],
+    ["Download and file the month's bank statement","money",30],
+    ["Reconcile the business account against your receipts","money",30],
+    ["Cancel one subscription","money",30],
+    ["Screenshot your credit score","money",30],
+    ["Refill the Adderall prescription — at 7 days left, not 0","body",30],
+    ["Reorder supplements at 10 days left","body",30],
+    ["Install the phone software update","admin",30],
+    ["Change one reused password","admin",30],
+    ["Buy the card or gift for the next birthday on the calendar","people",30],
+    ["Change the AC filter","home",60],
+    ["Refill the windshield washer fluid","car",60],
+    ["Book the next psychiatrist appointment before you leave the last one","body",60],
+    ["Book the oil change","car",90],
+    ["Check your TREC license status page","work",90],
+    ["Back up lease, insurance and license docs to a cloud folder","work",90],
+    ["Replace your toothbrush head","home",90],
+    ["Throw out expired makeup and medicine","home",90],
+    ["Test the smoke detector","home",180],
+    ["Request a credit limit increase","money",180],
+    ["Call and ask for an APR reduction","money",180],
+    ["Check the Texas unclaimed property site","money",180],
+    ["Book your annual physical","body",365]
+  ];
+
+  var rotDone = load("rotDone", {});
+  var rotEl = document.getElementById("rot");
+
+  function daysBetween(a, b){
+    var x = a.split("-"), y = b.split("-");
+    return Math.round((new Date(+y[0], +y[1]-1, +y[2]) - new Date(+x[0], +x[1]-1, +x[2])) / 864e5);
+  }
+
+  function lastDoneFor(i){
+    if(rotDone[i]) return rotDone[i];
+    var f = ROT[i][2];
+    var ago = f - (i % f);
+    return dayKey(new Date(Date.now() - ago * 864e5));
+  }
+
+  function renderRot(){
+    var due = [];
+    ROT.forEach(function(r, i){
+      var since = daysBetween(lastDoneFor(i), today);
+      if(since >= r[2]) due.push({i:i, over: since - r[2], since: since});
+    });
+    due.sort(function(a, b){ return b.over - a.over; });
+
+    var cap = tier === 1 ? 3 : (tier === 2 ? 8 : due.length);
+    var show = due.slice(0, cap);
+
+    rotEl.textContent = "";
+    if(!show.length){
+      var li = document.createElement("li");
+      li.innerHTML = '<span class="allclear">Nothing due. Every area is at its minimum.</span>';
+      rotEl.appendChild(li);
+    }
+    show.forEach(function(d){
+      var r = ROT[d.i];
+      var li = document.createElement("li");
+      var box = document.createElement("input");
+      box.type = "checkbox"; box.className = "tick";
+      box.setAttribute("aria-label", r[0]);
+      var txt = document.createElement("span"); txt.className = "rt";
+      var label = document.createElement("span"); label.textContent = r[0];
+      var chip = document.createElement("span");
+      chip.className = "chip"; chip.dataset.area = r[1]; chip.textContent = r[1];
+      txt.appendChild(label); txt.appendChild(chip);
+      var freq = document.createElement("span");
+      freq.className = "freq" + (d.over >= r[2] ? " late" : "");
+      freq.textContent = d.over === 0 ? "due" : d.over + "d late";
+      box.addEventListener("change", function(){
+        rotDone[d.i] = today; save("rotDone", rotDone); renderRot();
+      });
+      li.appendChild(box); li.appendChild(txt); li.appendChild(freq);
+      rotEl.appendChild(li);
+    });
+
+    var hidden = due.length - show.length;
+    var foot = document.getElementById("rotfoot");
+    if(!due.length){
+      foot.innerHTML = "All 100 jobs are inside their window. This is what on top of it actually looks like.";
+    } else {
+      var line = "<b>" + due.length + "</b> of 100 due today.";
+      if(hidden > 0){
+        line += " Showing the " + show.length + " most overdue — the other " + hidden +
+                " will keep until you switch tiers. Nothing is lost by leaving them.";
+      }
+      foot.innerHTML = line;
+    }
+  }
+  renderRot();
 
   /* ---------------- Open loops ---------------- */
   var loops = load("loops", []);
