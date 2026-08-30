@@ -256,10 +256,10 @@
   /* ---------- split calculator ---------- */
   .amt{display:flex;align-items:center;gap:10px;margin-bottom:18px}
   .amt label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
-  .amt .field{display:flex;align-items:center;flex:1;border-bottom:1px solid var(--gold-dim)}
+  .amt .field{display:flex;align-items:center;flex:1;min-width:0;border-bottom:1px solid var(--gold-dim)}
   .amt .field span{font-family:var(--disp);font-size:24px;color:var(--gold);padding-right:4px}
   .amt input{
-    flex:1;min-width:0;background:transparent;border:none;color:var(--gold-lt);
+    flex:1;min-width:0;width:100%;background:transparent;border:none;color:var(--gold-lt);
     font-family:var(--disp);font-weight:700;font-size:26px;padding:4px 0;
     font-variant-numeric:tabular-nums;
   }
@@ -408,20 +408,22 @@
   <section>
     <div class="eyebrow">Written last night</div>
     <h2>Today's three</h2>
-    <p class="sub">Three. Not a to-do list. If a fourth thing matters, it can be tomorrow's first.</p>
+    <p class="sub">One thing that builds competence, one thing you'll actually enjoy, one thing that moves money. Scheduling exactly this is behavioral activation, and in head-to-head trials it performs <em>on par with antidepressants.</em> Write them the night before, with a time.</p>
     <div class="card three" id="three"></div>
   </section>
 
   <section>
     <div class="eyebrow">Every one of these is daily</div>
     <h2>The day</h2>
-    <p class="sub">Nothing here is a project and nothing takes more than a few minutes. They're grouped by <em>when</em>, not by what — because the hard part was never the task, it was deciding when to do it.</p>
+    <p class="sub">A hundred single actions, grouped by <em>when</em> — because the hard part was never the task, it was deciding when. Each one is anchored to something you already do, and ordered so the strongest-evidence items come first in every group.</p>
     <div class="modes">
-      <button type="button" id="modeFull" aria-pressed="true">Full day</button>
-      <button type="button" id="modeMin" aria-pressed="false">Bare minimum</button>
+      <button type="button" data-tier="1" aria-pressed="false">Survival</button>
+      <button type="button" data-tier="2" aria-pressed="true">Standard</button>
+      <button type="button" data-tier="3" aria-pressed="false">Full 100</button>
     </div>
     <p class="modehint" id="modehint"></p>
-    <div class="card" id="day"></div>
+    <div class="areas" id="areasGrid"></div>
+    <div class="card" id="day" style="margin-top:16px"></div>
   </section>
 
   <section>
@@ -441,7 +443,7 @@
   <section>
     <div class="eyebrow">The only part you control</div>
     <h2>The reps</h2>
-    <p class="sub">Closings are a lagging number — you can do everything right this week and close nothing, which is why measuring yourself on them makes you feel like a fraud. Reps are a leading number. Tap to count. <em>Hitting the number is the win,</em> whether or not anyone signs. On a bad day the floor is <strong style="color:var(--gold-lt);font-weight:600">three follow-ups and nothing else</strong> — that still counts as a day you showed up.</p>
+    <p class="sub">Closings are a lagging number — you can do everything right this week and close nothing, which is why measuring yourself on them makes you feel like a fraud. Reps are a leading number. Tap to count. <em>Hitting the number is the win,</em> whether or not anyone signs. On a bad day the floor is <strong style="color:var(--gold-lt);font-weight:600">three follow-ups and nothing else</strong> — that still counts as a day you showed up. This set is reverse-engineered from roughly $2,000 a month: about 3 leases, 25 leads, 6–10 touches a business day.</p>
     <div class="card">
       <div class="reps" id="reps"></div>
       <div class="repbar"><i id="repFill"></i></div>
@@ -591,7 +593,7 @@
   if(threeDay !== today){ threeDone = [false,false,false]; threeDay = today; save("threeDone",threeDone); save("threeDay",threeDay); }
 
   var threeEl = document.getElementById("three");
-  var placeholders = ["The one that moves money","The one you've been avoiding","The small one you'll actually finish"];
+  var placeholders = ["Mastery — the one that proves you can","Pleasure — something you'll genuinely like","Money — the one that pays"];
   for(var i=0;i<3;i++){
     (function(idx){
       var row = document.createElement("div");
@@ -615,59 +617,144 @@
 
   /* ---------------- The day ---------------- */
   var DAY = [
-    {anchor:"Wake", cue:"Before you open your phone. Same order every morning.", items:[
-      {t:"16 oz of water and your meds", why:"Both before the feed. Dehydration on a stimulant reads as anxiety.", core:true},
-      {t:"Step outside for 10 minutes of daylight", why:"The single cheapest thing you can do for sleep and mood. Coffee on the balcony counts."},
-      {t:"Make the bed", why:"Your first completed thing, finished before 7am."},
-      {t:"Read today's three out loud", why:"Saying them beats reading them. This is the day's only scoreboard.", core:true},
-      {t:"Same breakfast, protein first", why:"One decision deleted permanently, and no 2pm crash to explain."},
-      {t:"10 squats while you brush", why:"Attached to something you already do twice a day. It adds up to thousands."}
+    {anchor:"Wake", cue:"One physical chain: get up, eat, dose, go outside. Three habits, one decision.", items:[
+      {t:"Feet on the floor at your fixed wake time", a:"body", tier:1, why:"Regularity beats duration. Regular sleepers had 38% lower depression risk than irregular ones — even when the irregular ones hit their hours."},
+      {t:"Eat something with 25–30g of protein", a:"body", tier:1, why:"Before the dose, not after. Appetite shuts down 30–60 minutes in and stays down 7–8 hours."},
+      {t:"Take your meds about 30 minutes after eating", a:"body", tier:1, why:"Same clock time daily. This is what ends the eat-nothing-all-day, eat-everything-at-night cycle."},
+      {t:"Go outside for 10 minutes", a:"mind", tier:1, why:"Overcast outdoors is ~10,000 lux. Indoors is 100–500. Clinical light protocols hit 41% remission vs 23%."},
+      {t:"Drink the water on your nightstand", a:"body", tier:2, why:"1.4% dehydration measurably worsens mood, fatigue and concentration in young women. Stimulants blunt thirst."},
+      {t:"Open the blinds", a:"mind", tier:2, why:"Free lux while the coffee brews."},
+      {t:"Say today's three out loud", a:"mind", tier:2, why:"Saying beats reading. It's the day's only scoreboard."},
+      {t:"Pull the duvet flat", a:"home", tier:3, why:"Your first finished thing, done before 7am."},
+      {t:"Wash your face", a:"body", tier:3, why:"Anchor. It's the cue the rest of the morning hangs off."},
+      {t:"Yesterday's clothes in the hamper, not the chair", a:"home", tier:3, why:"The chair is where a clean room goes to die."},
+      {t:"10 squats while you brush", a:"body", tier:3, why:"Stacked onto something you already do twice a day."},
+      {t:"No apps until the first four are done", a:"mind", tier:3, why:"The first hour is the only one you fully own."}
     ]},
+
     {anchor:"Out the door", cue:"One pass, same order, so you never leave frazzled.", items:[
-      {t:"Launch pad check — keys, lockbox card, tape measure, cards, charger", why:"One tray by the door. You stop losing ten minutes a day to searching.", core:true},
-      {t:"Snack and water bottle into the bag", why:"So 'I haven't eaten since 8am' stops being why the afternoon fell apart."},
-      {t:"Say today's calendar out loud, with the times", why:"Time blindness isn't fixed by trying harder. It's fixed by hearing the day once."}
+      {t:"Touch the launch pad — keys, lockbox card, tape measure, cards, charger", a:"work", tier:2, why:"One tray. The cue has to live in your path, never in your head."},
+      {t:"Read your calendar out loud, with the times", a:"work", tier:2, why:"Time blindness can't be trained away. It has to be externalised."},
+      {t:"Protein snack into the bag", a:"body", tier:2, why:"So 2pm stops being the reason the afternoon collapsed."},
+      {t:"Set a LEAVE NOW alarm 15 minutes early", a:"work", tier:3, why:"Label alarms with the verb, not the time. Time blindness fails at transitions."},
+      {t:"Water bottle filled, in the car door", a:"body", tier:3, why:"You'll drink what's within reach and nothing else."},
+      {t:"Phone in the bag, not in your hand", a:"mind", tier:3, why:"Friction beats intention, every time."}
     ]},
-    {anchor:"The money block", cue:"45 minutes, timer on, phone face down — before email, before the new job, before anything.", items:[
-      {t:"Hit the reps below", why:"This block is the business. Everything else is admin dressed up as work.", core:true},
-      {t:"Every new number into contacts with a one-line note, before you hang up", why:"Otherwise it's an unknown number in three weeks."},
-      {t:"Log where each new lead came from", why:"In 90 days you'll know which channel actually pays and can stop donating hours to the rest."}
+
+    {anchor:"First five minutes of work", cue:"Before email, before the new job, before anything.", items:[
+      {t:"Answer every new lead within 5 minutes", a:"work", tier:1, why:"5 minutes vs 30 is 100x the odds of contact and 21x of qualifying. The average agent takes 15+ hours. 78% go with whoever answers first."},
+      {t:"Text first, then call", a:"work", tier:2, why:"Texts get ~45% response vs 6% for email, read inside 90 seconds. 87% of people ignore unknown numbers."},
+      {t:"Set a 45-minute timer where you can see it", a:"work", tier:2, why:"A visible finish line is what makes starting possible."},
+      {t:"Phone face down, screen off", a:"work", tier:2, why:"Out of sight is functionally out of existence — use it deliberately."},
+      {t:"Open the CRM before you open email", a:"work", tier:2, why:"Email is other people's priorities. The CRM is yours."}
     ]},
-    {anchor:"In the car", cue:"You're already here. These cost you no extra time at all.", items:[
-      {t:"Voice-capture every task to Siri the second it exists", why:"Anything held in your head is costing you the capacity you need for the actual work.", core:true},
-      {t:"Photograph today's receipts into the Taxes album", why:"Capture now, sort in January. Never the reverse."},
-      {t:"Save each property's pricing and specials the day you tour it", why:"By month six you're faster than locators with five more years than you."},
-      {t:"Park at the far end and take the stairs", why:"Turns work you're already doing into thousands of steps."}
+
+    {anchor:"The reps", cue:"This block is the business. Everything else is admin dressed up as work.", items:[
+      {t:"Send 3 follow-ups — the floor, never zero", a:"work", tier:1, why:"On the worst day this alone keeps the business alive."},
+      {t:"Send 5 more follow-ups", a:"work", tier:2, why:"80% of sales close on touches 5 through 12. 92% of salespeople quit before touch 5. That gap is your whole edge."},
+      {t:"Touch 3 people from your database", a:"work", tier:2, why:"33 touches a year across 12 people is worth roughly 2 transactions. Most agents manage under 5 a year, total."},
+      {t:"One deliberate lead-generation action", a:"work", tier:2, why:"Year one is outreach-fed or it is nothing — new agents get a median 0% of business from past-client referrals."},
+      {t:"Set a next-action date on every open lead", a:"work", tier:2, why:"Untracked leads are the mechanical reason 62% of new agents earn under $10k."},
+      {t:"Add every new number to contacts with a one-line note", a:"work", tier:2, why:"Before you hang up, or it's an unknown number in three weeks."},
+      {t:"Ask one person to book a tour", a:"work", tier:2, why:"Tour-to-lease runs 35–50%. It's the only activity that reliably converts."},
+      {t:"Ask one mover-in for a Google review", a:"work", tier:2, why:"47% of people won't consider a business with under 20 reviews. That's about your first 8 months of closings."},
+      {t:"Ask that same person: know anyone else moving?", a:"work", tier:3, why:"One sentence, no extra effort, and referrals are the cheapest lead there is."},
+      {t:"One leasing-office contact — what are you paying this week?", a:"work", tier:3, why:"73% of Austin units are running concessions. Knowing which pay 100%+ beats any extra lead."},
+      {t:"Tag every new client's lease end date", a:"work", tier:3, why:"Touch them at month 10 — renters start searching 45–90 days out and owe 60-day notice."},
+      {t:"Post one searchable short video with a DM call to action", a:"work", tier:3, why:"3–5 a week is the threshold that produces leads in 30–60 days. Pretty tours without a CTA are vanity."}
     ]},
-    {anchor:"End of workday", cue:"Ten minutes. This is the one that stops your life feeling messy.", items:[
-      {t:"Sweep the open loops — close each one or give it a date", why:"Nothing gets to stay open silently. This is the whole reason you feel behind.", core:true},
-      {t:"Count your reps out loud", why:"'Eleven follow-ups, four conversations, one tour.' That sentence is what becomes self-esteem."},
-      {t:"Write the first single step of tomorrow's block", why:"So tomorrow never starts with a blank screen — that's the wall that costs you most."}
+
+    {anchor:"In the car", cue:"You're already here. These cost no extra time at all.", items:[
+      {t:"Say every task into Siri the second it exists", a:"mind", tier:1, why:"One capture point, and it has to be dumb. Systems die at capture, not at review."},
+      {t:"Call one person who knows you well", a:"people", tier:1, why:"Confiding in someone was the single strongest protective factor against depression out of 100+ screened."},
+      {t:"Photograph today's receipts into the Taxes album", a:"money", tier:2, why:"Capture now, sort in January. Never the reverse."},
+      {t:"Confirm the mileage app is running", a:"money", tier:3, why:"76¢ a mile for the back half of 2026. Five thousand miles is roughly $1,100 back in tax."},
+      {t:"Save the property's price and specials into your notes", a:"work", tier:3, why:"By month six you're faster than agents with five more years."},
+      {t:"Park in the farthest spot", a:"body", tier:3, why:"Free steps out of a drive you were making anyway."},
+      {t:"Take the stairs", a:"body", tier:3, why:"Same trick, same zero cost."},
+      {t:"Sit in the car 60 seconds before you walk in", a:"mind", tier:3, why:"Arrive settled instead of arriving scattered."}
     ]},
+
+    {anchor:"Midday", cue:"The window where the day usually gets away from you.", items:[
+      {t:"When the spiral starts, ask: what's the next physical step, in the next hour?", a:"mind", tier:2, why:"Concreteness training cut rumination and depression, still holding at 6 months. 'Why am I like this' makes it worse."},
+      {t:"Say the sentence you'd say to a friend", a:"mind", tier:2, why:"Self-compassion beats self-criticism (g≈0.66). Note: repeating affirmations makes low self-esteem worse — this is not that."},
+      {t:"Eat again before 2pm, protein first", a:"body", tier:2, why:"Protein and veg before carbs cuts the glucose spike by more than half."},
+      {t:"Finish one water bottle before 2pm", a:"body", tier:2, why:"The afternoon crash is often just this."},
+      {t:"Stand and walk 2 minutes every 45", a:"body", tier:3, why:"Raises self-perceived energy versus sitting through, and quietly feeds the step count."},
+      {t:"No nap", a:"body", tier:3, why:"Habitual daytime napping raises depression risk — one of only a few findings with causal-direction evidence."},
+      {t:"Check notifications once, then close them", a:"mind", tier:3, why:"Batching is the difference between using the phone and being used by it."}
+    ]},
+
+    {anchor:"End of workday — the sweep", cue:"Ten minutes. This is the one that stops your life feeling messy.", items:[
+      {t:"Open the open-loops list", a:"mind", tier:1, why:"Unfinished things occupy working memory until they're discharged. This is the discharge."},
+      {t:"Give every loop a close, or a when-and-where", a:"mind", tier:1, why:"Writing a concrete plan reduces the intrusive thought even before you do the task. The plan is the relief, not the doing."},
+      {t:"Say your rep count out loud", a:"mind", tier:2, why:"'Eleven follow-ups, four conversations, one tour.' That sentence is what becomes self-esteem."},
+      {t:"Write the first physical step of tomorrow's block", a:"work", tier:2, why:"Tomorrow never starts blank. That's the wall that costs you the most."},
+      {t:"Work texts to zero unread", a:"work", tier:3, why:"An unread badge is an open loop wearing a disguise."},
+      {t:"Close every browser tab", a:"mind", tier:3, why:"Same principle, different screen."},
+      {t:"Work bag in its one spot", a:"home", tier:3, why:"Tomorrow's launch pad, loaded tonight."}
+    ]},
+
+    {anchor:"The money minute", cue:"Sixty seconds, standing up. Not a budget — just eyes on it.", items:[
+      {t:"Read every transaction alert — don't just clear it", a:"money", tier:2, why:"Reading spend alerts cut next-day spending measurably and cumulatively — around a 10% cut in card debt over a year. A silenced alert is worth nothing."},
+      {t:"Open the bank app and look at the balance", a:"money", tier:2, why:"Sixty seconds of looking beats a month of bracing."},
+      {t:"If a commission landed, move the tax slice today", a:"money", tier:2, why:"Self-employment tax alone is 15.3%, before income tax. That slice was never yours."},
+      {t:"Log any 1099 expense the day it happens", a:"money", tier:2, why:"Deductions reconstructed in April are the ones you lose. Each $100 documented is roughly $30 saved."},
+      {t:"Move the debt slice the same day", a:"money", tier:3, why:"If it sits in checking overnight, it's already spent."},
+      {t:"Pay something at the card — weekly, not monthly", a:"money", tier:3, why:"Interest runs on the average daily balance. Four small payments beat one big one by $100–150 a year, and lower what reports at statement close."},
+      {t:"Unsubscribe from every retail email that arrived today", a:"money", tier:3, why:"In about two months your inbox stops being a storefront."},
+      {t:"Delete one saved card from one shopping app", a:"money", tier:3, why:"Friction where it actually counts."},
+      {t:"Cancel any free trial ending this week", a:"money", tier:3, why:"People underestimate their subscriptions by about $133 a month."}
+    ]},
+
+    {anchor:"Evening body", cue:"Non-restrictive on purpose. Dieting predicts weight gain in 3 of 4 prospective studies.", items:[
+      {t:"Walk 10 minutes", a:"body", tier:1, why:"Building toward ~7,000 steps: 22% lower depression risk and 47% lower mortality. The curve flattens there — 10,000 was a marketing number."},
+      {t:"Put your shoes on", a:"body", tier:2, why:"The shoes make the decision, not you."},
+      {t:"Eat dinner with protein in it", a:"body", tier:2, why:"Steadier, not less. That's the honest claim."},
+      {t:"One hard set of something, 6–12 reps", a:"body", tier:3, why:"Twice a week is the whole return — 30–60 minutes a week captures it. More is genuinely not better."},
+      {t:"Leftovers into a container for tomorrow", a:"body", tier:3, why:"Tomorrow's lunch decided tonight, while it's cheap."},
+      {t:"60-second stretch after your shower", a:"body", tier:3, why:"Stacked onto something you already do."},
+      {t:"A glass of water for the last coffee", a:"body", tier:3, why:"One-for-one, no counting."},
+      {t:"No alcohol on a weeknight", a:"body", tier:3, why:"Depression and drinking feed each other — the causal arrow runs both directions."}
+    ]},
+
     {anchor:"Home", cue:"Before you sit down. Once you sit down, it's over.", items:[
-      {t:"Empty the kitchen sink", why:"One rule. An empty sink makes the whole apartment read as clean.", core:true},
-      {t:"One item into the donate bag", why:"365 things gone in a year, with no cleaning day ever scheduled."},
-      {t:"Two-minute tidy together, timer on", why:"Side by side turns chores into a shared thing instead of a resentment ledger."},
-      {t:"Tell him one specific thing you appreciated", why:"365 deposits in the year it matters most."},
-      {t:"Ten-minute walk after dinner — shoes on before you decide", why:"The shoes make the decision, not you."}
+      {t:"Empty the kitchen sink", a:"home", tier:2, why:"One rule. An empty sink makes the whole apartment read as clean."},
+      {t:"Keys on the launch pad", a:"home", tier:2, why:"Tomorrow morning starts here."},
+      {t:"Hang up your coat", a:"home", tier:3, why:"Put things away instead of down. That's 90% of the mess."},
+      {t:"Wipe one counter", a:"home", tier:3, why:"One surface a day means no weekend deep-clean, ever."},
+      {t:"One item into the donate bag", a:"home", tier:3, why:"365 things gone, with no clearing day scheduled."},
+      {t:"Run the dishwasher if it's full", a:"home", tier:3, why:"Never a decision — just a rule about full."},
+      {t:"Carry something out every time you leave a room", a:"home", tier:3, why:"The apartment tidies itself in the background."},
+      {t:"Set out tomorrow's outfit", a:"home", tier:3, why:"One less decision before the meds have kicked in."}
     ]},
-    {anchor:"Money minute", cue:"Sixty seconds, standing up. Not a budget — just eyes on it.", items:[
-      {t:"Look at your checking balance", why:"Sixty seconds of looking beats a month of not knowing and bracing."},
-      {t:"Unsubscribe from every retail email that arrived today", why:"In about two months your inbox stops being a storefront."},
-      {t:"If a commission landed, run the split today", why:"If it sits in checking overnight, it's already spent."}
+
+    {anchor:"People", cue:"Self-esteem tracks how connected you feel, not how hard you think about yourself.", items:[
+      {t:"Tell him one specific thing you appreciated", a:"people", tier:2, why:"Specific, not general. 365 deposits in the year that matters most."},
+      {t:"Answer the one message you've been avoiding", a:"people", tier:2, why:"It's never as bad as the three days of dreading it."},
+      {t:"Ask him one question about his day and listen to the whole answer", a:"people", tier:3, why:"Reciprocal attention is the actual currency."},
+      {t:"Two-minute tidy together, timer on", a:"people", tier:3, why:"Side by side, so cleaning stops being a resentment ledger."},
+      {t:"Send one thank-you to someone who helped you", a:"people", tier:3, why:"Builds the network with zero friction."},
+      {t:"Text your check-in person today's count", a:"people", tier:3, why:"Progress monitoring works better when it's written down AND witnessed by someone."}
     ]},
-    {anchor:"Night", cue:"9:30 alarm. Everything here is decided while it's still cheap.", items:[
-      {t:"Screens down", why:"Tomorrow's energy is bought tonight.", core:true},
-      {t:"Write tomorrow's three", why:"Morning decision paralysis is solved the night before or not at all.", core:true},
-      {t:"Done list — write the count, not the vibe", why:"'I didn't do enough' is always false and always convincing. Numbers aren't."},
-      {t:"One page of a book", why:"The smallest possible unit, and it's what your phone would have taken."},
-      {t:"One sentence in the journal", why:"365 sentences is a record of a year you'd otherwise remember as nothing."},
-      {t:"60-second stretch after your shower", why:"Attached to something you already do. It's the door into actually moving."},
-      {t:"Phone on the charger across the room", why:"Tomorrow's alarm requires standing up, which beats the whole morning spiral."}
+
+    {anchor:"Night", cue:"Tomorrow is decided here, tonight, while it's still cheap.", items:[
+      {t:"Write tomorrow's one mastery thing and one pleasure thing, with a time", a:"mind", tier:1, why:"This is behavioral activation. g=0.85 — statistically indistinguishable from antidepressants and from full CBT."},
+      {t:"Set tomorrow's alarm for the same time as today", a:"mind", tier:1, why:"Everything upstream depends on this one. Same time, seven days."},
+      {t:"Write one if-then for the hardest one", a:"mind", tier:2, why:"'When I sit down with coffee, I open the CRM.' d=0.65 across 94 experiments — it moves starting off willpower and onto a cue."},
+      {t:"Social media closed for the day — appearance feeds first", a:"mind", tier:2, why:"A 30–60 min daily cap improved self-esteem and body image in 17–24 year olds within three weeks."},
+      {t:"Screens down when the 9:30 alarm goes off", a:"mind", tier:2, why:"Tomorrow's energy is bought tonight."},
+      {t:"Write today's finished count as a number, not a feeling", a:"mind", tier:2, why:"'I didn't do enough' is always available and always convincing. A number isn't."},
+      {t:"Plug the phone in across the room", a:"mind", tier:2, why:"Tomorrow's alarm requires standing up."},
+      {t:"Five minutes of cyclic sighing — double inhale through the nose, long slow exhale", a:"mind", tier:3, why:"Beat mindfulness meditation on daily mood in a head-to-head trial, and it's far easier to start."},
+      {t:"Screenshot any compliment into the Receipts album", a:"mind", tier:3, why:"Evidence you can scroll on the days the feeling argues with you."},
+      {t:"Read one page", a:"mind", tier:3, why:"The smallest possible unit, and it's what the phone would have taken."},
+      {t:"Refill the nightstand water bottle", a:"body", tier:3, why:"Tomorrow's first habit, pre-loaded."},
+      {t:"Write the one thing you're anxious about, then close the notebook", a:"mind", tier:3, why:"A container, not a cure — open journaling on its own has a weak evidence base."}
     ]}
   ];
 
-  var mode = load("mode", "full");
+  var tier = load("tier", 2);
   var dayDone = load("dayDone", []);
   var dayDay  = load("dayDay", today);
   if(dayDay !== today){ dayDone = []; dayDay = today; save("dayDone", dayDone); save("dayDay", dayDay); }
@@ -675,10 +762,11 @@
   var runHist = load("runHist", {});
 
   var dayEl = document.getElementById("day");
-  var mFull = document.getElementById("modeFull");
-  var mMin  = document.getElementById("modeMin");
+  var areasEl = document.getElementById("areasGrid");
+  var modeBtns = Array.prototype.slice.call(document.querySelectorAll(".modes button"));
+  var AREAS = ["money","work","body","mind","home","people"];
 
-  function visible(item){ return mode === "full" || item.core; }
+  function visible(item){ return item.tier <= tier; }
 
   function renderDay(){
     dayEl.textContent = "";
@@ -703,7 +791,11 @@
         box.checked = dayDone.indexOf(id) > -1;
         box.setAttribute("aria-label", item.t);
         var body = document.createElement("div"); body.className = "body";
-        var t = document.createElement("div"); t.className = "t"; t.textContent = item.t;
+        var t = document.createElement("div"); t.className = "t";
+        var label = document.createElement("span"); label.textContent = item.t;
+        var chip = document.createElement("span");
+        chip.className = "chip"; chip.dataset.area = item.a; chip.textContent = item.a;
+        t.appendChild(label); t.appendChild(chip);
         var why = document.createElement("div"); why.className = "why"; why.textContent = item.why;
         body.appendChild(t); body.appendChild(why);
         box.addEventListener("change", function(){
@@ -738,6 +830,7 @@
       wrap._count.className = "gcount" + (d === items.length ? " full" : "");
     });
 
+    renderAreas();
     document.getElementById("loopCount").textContent = done + "/" + shown;
     document.getElementById("streakBar").style.width = shown ? Math.round(done / shown * 100) + "%" : "0%";
 
@@ -784,19 +877,54 @@
     }
   }
 
-  function setMode(m){
-    mode = m; save("mode", mode);
-    mFull.setAttribute("aria-pressed", m === "full" ? "true" : "false");
-    mMin.setAttribute("aria-pressed", m === "min" ? "true" : "false");
-    document.getElementById("modehint").textContent = m === "full"
-      ? "Everything below is daily. None of it is longer than a few minutes."
-      : "Nine non-negotiables. Use this on the bad days — finishing the short list counts as a full day run, exactly like the long one.";
+  function renderAreas(){
+    var tallyByArea = {};
+    AREAS.forEach(function(a){ tallyByArea[a] = {done:0, total:0}; });
+    DAY.forEach(function(group, gi){
+      group.items.forEach(function(item, ii){
+        if(!visible(item)) return;
+        var rec = tallyByArea[item.a];
+        rec.total++;
+        if(dayDone.indexOf(gi + "." + ii) > -1) rec.done++;
+      });
+    });
+    if(!areasEl.children.length){
+      AREAS.forEach(function(a){
+        var d = document.createElement("div");
+        d.className = "area";
+        d.innerHTML = '<div class="an"></div><div class="av"></div>';
+        d.querySelector(".an").textContent = a;
+        areasEl.appendChild(d);
+      });
+    }
+    AREAS.forEach(function(a, idx){
+      var rec = tallyByArea[a], el = areasEl.children[idx];
+      el.querySelector(".av").textContent = rec.done + "/" + rec.total;
+      el.dataset.full = (rec.total && rec.done === rec.total) ? "1" : "0";
+      el.dataset.zero = rec.done === 0 ? "1" : "0";
+      el.setAttribute("aria-label", a + ": " + rec.done + " of " + rec.total + " done today");
+    });
+  }
+
+  var TIER_HINT = {
+    1: "Thirteen items, about 25 minutes. For the days you can barely move — and finishing these counts as a complete day run, exactly like the long version.",
+    2: "The daily core. Everything with real evidence behind it, nothing that needs a good day.",
+    3: "All 100. Use it to pull one or two extras into a normal day, not as a list to finish."
+  };
+
+  function setTier(t){
+    tier = t; save("tier", tier);
+    modeBtns.forEach(function(b){
+      b.setAttribute("aria-pressed", +b.dataset.tier === t ? "true" : "false");
+    });
+    document.getElementById("modehint").textContent = TIER_HINT[t];
     renderDay();
   }
-  mFull.addEventListener("click", function(){ setMode("full"); });
-  mMin.addEventListener("click", function(){ setMode("min"); });
+  modeBtns.forEach(function(b){
+    b.addEventListener("click", function(){ setTier(+b.dataset.tier); });
+  });
 
-  setMode(mode);
+  setTier(tier);
 
   /* ---------------- Open loops ---------------- */
   var loops = load("loops", []);
@@ -859,9 +987,10 @@
 
   /* ---------------- The reps ---------------- */
   var REPS = [
-    {key:"follow", label:"Follow-ups",   target:10},
-    {key:"convo",  label:"New convos",   target:3},
-    {key:"tour",   label:"Tours booked", target:1},
+    {key:"follow", label:"Follow-ups",     target:8},
+    {key:"data",   label:"Database touches", target:3},
+    {key:"gen",    label:"Lead-gen action", target:1},
+    {key:"tour",   label:"Tours booked",   target:1},
     {key:"ask",    label:"Review / referral ask", target:1},
     {key:"post",   label:"Post published", target:1}
   ];
