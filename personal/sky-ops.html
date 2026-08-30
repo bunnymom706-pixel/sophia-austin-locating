@@ -137,6 +137,51 @@
   .loop li.done .t{color:var(--dim);text-decoration:line-through}
   .loop li.done .why{opacity:.5}
 
+  /* ---------- mode toggle ---------- */
+  .modes{display:flex;gap:6px;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:4px;margin-bottom:14px}
+  .modes button{
+    flex:1;background:transparent;border:none;border-radius:8px;cursor:pointer;
+    font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--dim);padding:9px 6px;transition:background .18s ease,color .18s ease;
+  }
+  .modes button[aria-pressed="true"]{background:var(--gold);color:#07090d}
+  .modes button:focus-visible{outline:2px solid var(--gold-lt);outline-offset:2px}
+  .modehint{font-size:12.5px;color:var(--dim);margin:-6px 0 16px}
+
+  /* ---------- day groups ---------- */
+  .group + .group{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+  .ghead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px}
+  .ganchor{
+    font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gold);
+  }
+  .gcount{font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums;flex:none}
+  .gcount.full{color:var(--emerald);font-weight:700}
+  .gcue{font-size:12px;color:var(--dim);margin-bottom:10px}
+
+  /* ---------- open loops ---------- */
+  .loopadd{display:flex;gap:9px;margin-bottom:14px}
+  .loopadd input{
+    flex:1;min-width:0;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:10px;color:var(--text);font:inherit;font-size:14px;padding:10px 12px;
+  }
+  .loopadd input:focus{outline:none;border-color:var(--gold-dim)}
+  .loopadd button{
+    flex:none;background:var(--gold);border:none;border-radius:10px;color:#07090d;
+    font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;padding:0 16px;cursor:pointer;
+  }
+  .loopadd button:focus-visible{outline:2px solid var(--gold-lt);outline-offset:2px}
+  .openloops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+  .openloops li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .openloops li:last-child{border-bottom:none}
+  .openloops .txt{flex:1;min-width:0;font-size:14px;line-height:1.4;word-break:break-word}
+  .openloops .age{font-size:11px;color:var(--dim);flex:none;font-variant-numeric:tabular-nums}
+  .openloops .age.stale{color:var(--rose);font-weight:700}
+  .empty{color:var(--dim);font-size:13px;padding:6px 0 2px;font-style:italic;font-family:var(--serif);font-size:16px}
+  .sweepfoot{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-size:12.5px;color:var(--dim)}
+  .sweepfoot b{color:var(--emerald)}
+
   /* ---------- the reps ---------- */
   .reps{display:grid;grid-template-columns:repeat(auto-fit,minmax(98px,1fr));gap:9px}
   .rep{
@@ -323,7 +368,7 @@
       <b id="streakNum">0</b>
       <span id="streakLabel">day streak</span>
       <span class="bar"><i id="streakBar"></i></span>
-      <span id="loopCount" style="font-variant-numeric:tabular-nums">0/8</span>
+      <span id="loopCount" style="font-variant-numeric:tabular-nums">0/0</span>
     </div>
   </header>
 
@@ -335,16 +380,35 @@
   </section>
 
   <section>
-    <div class="eyebrow">Runs on autopilot</div>
-    <h2>The loop</h2>
-    <p class="sub">Eight things, none longer than two minutes. The point isn't the tasks — it's that checking them all is the only scoreboard you have to hit today.</p>
-    <div class="card"><ul class="loop" id="loop"></ul></div>
+    <div class="eyebrow">Every one of these is daily</div>
+    <h2>The day</h2>
+    <p class="sub">Nothing here is a project and nothing takes more than a few minutes. They're grouped by <em>when</em>, not by what — because the hard part was never the task, it was deciding when to do it.</p>
+    <div class="modes">
+      <button type="button" id="modeFull" aria-pressed="true">Full day</button>
+      <button type="button" id="modeMin" aria-pressed="false">Bare minimum</button>
+    </div>
+    <p class="modehint" id="modehint"></p>
+    <div class="card" id="day"></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">The thing that actually makes life feel messy</div>
+    <h2>Open loops</h2>
+    <p class="sub">Every unanswered text, unsent invoice and half-finished thing is a tab running in your head. Dump them here the second they exist. Then sweep this list once a day — close it, or give it a date. <em>Nothing stays open silently.</em></p>
+    <div class="card">
+      <div class="loopadd">
+        <input type="text" id="loopInput" placeholder="Text Marcus back about the Domain unit" aria-label="New open loop" autocomplete="off">
+        <button type="button" id="loopAdd">Add</button>
+      </div>
+      <ul class="openloops" id="openloops"></ul>
+      <div class="sweepfoot" id="sweepfoot"></div>
+    </div>
   </section>
 
   <section>
     <div class="eyebrow">The only part you control</div>
     <h2>The reps</h2>
-    <p class="sub">Closings are a lagging number — you can do everything right this week and close nothing, which is why measuring yourself on them makes you feel like a fraud. Reps are a leading number. Tap to count. <em>Hitting the number is the win,</em> whether or not anyone signs.</p>
+    <p class="sub">Closings are a lagging number — you can do everything right this week and close nothing, which is why measuring yourself on them makes you feel like a fraud. Reps are a leading number. Tap to count. <em>Hitting the number is the win,</em> whether or not anyone signs. On a bad day the floor is <strong style="color:var(--gold-lt);font-weight:600">three follow-ups and nothing else</strong> — that still counts as a day you showed up.</p>
     <div class="card">
       <div class="reps" id="reps"></div>
       <div class="repbar"><i id="repFill"></i></div>
@@ -516,61 +580,216 @@
     })(i);
   }
 
-  /* ---------------- The loop ---------------- */
-  var LOOP = [
-    {when:"Wake",  t:"16 oz of water and meds before you open your phone",  why:"Rehydrate and dose before the feed gets your first hour."},
-    {when:"Wake",  t:"Read today's three out loud",                          why:"Saying them beats reading them. It sets the day's only scoreboard."},
-    {when:"Out",   t:"Launch pad check — keys, lockbox card, tape measure",  why:"Leave calm instead of leaving frantic."},
-    {when:"Work",  t:"One 45-minute block, timer on — hit today's number",   why:"Counted below. A finish line is what makes starting possible."},
-    {when:"Work",  t:"Snap today's receipts into the Taxes album",           why:"Capture now, sort in January. Never the reverse."},
-    {when:"Home",  t:"Clear one surface before you leave a room",            why:"No weekend deep-clean, ever again."},
-    {when:"Night", t:"Write one thing you finished on the Done list",        why:"Proof of output, on the days it feels like there wasn't any."},
-    {when:"9:30",  t:"Wind-down alarm — screens down, three written for tomorrow", why:"Tomorrow's focus is decided tonight, while it's cheap."}
+  /* ---------------- The day ---------------- */
+  var DAY = [
+    {anchor:"Wake", cue:"Before you open your phone. Same order every morning.", items:[
+      {t:"16 oz of water and your meds", why:"Both before the feed. Dehydration on a stimulant reads as anxiety.", core:true},
+      {t:"Step outside for 10 minutes of daylight", why:"The single cheapest thing you can do for sleep and mood. Coffee on the balcony counts."},
+      {t:"Make the bed", why:"Your first completed thing, finished before 7am."},
+      {t:"Read today's three out loud", why:"Saying them beats reading them. This is the day's only scoreboard.", core:true},
+      {t:"Same breakfast, protein first", why:"One decision deleted permanently, and no 2pm crash to explain."},
+      {t:"10 squats while you brush", why:"Attached to something you already do twice a day. It adds up to thousands."}
+    ]},
+    {anchor:"Out the door", cue:"One pass, same order, so you never leave frazzled.", items:[
+      {t:"Launch pad check — keys, lockbox card, tape measure, cards, charger", why:"One tray by the door. You stop losing ten minutes a day to searching.", core:true},
+      {t:"Snack and water bottle into the bag", why:"So 'I haven't eaten since 8am' stops being why the afternoon fell apart."},
+      {t:"Say today's calendar out loud, with the times", why:"Time blindness isn't fixed by trying harder. It's fixed by hearing the day once."}
+    ]},
+    {anchor:"The money block", cue:"45 minutes, timer on, phone face down — before email, before the new job, before anything.", items:[
+      {t:"Hit the reps below", why:"This block is the business. Everything else is admin dressed up as work.", core:true},
+      {t:"Every new number into contacts with a one-line note, before you hang up", why:"Otherwise it's an unknown number in three weeks."},
+      {t:"Log where each new lead came from", why:"In 90 days you'll know which channel actually pays and can stop donating hours to the rest."}
+    ]},
+    {anchor:"In the car", cue:"You're already here. These cost you no extra time at all.", items:[
+      {t:"Voice-capture every task to Siri the second it exists", why:"Anything held in your head is costing you the capacity you need for the actual work.", core:true},
+      {t:"Photograph today's receipts into the Taxes album", why:"Capture now, sort in January. Never the reverse."},
+      {t:"Save each property's pricing and specials the day you tour it", why:"By month six you're faster than locators with five more years than you."},
+      {t:"Park at the far end and take the stairs", why:"Turns work you're already doing into thousands of steps."}
+    ]},
+    {anchor:"End of workday", cue:"Ten minutes. This is the one that stops your life feeling messy.", items:[
+      {t:"Sweep the open loops — close each one or give it a date", why:"Nothing gets to stay open silently. This is the whole reason you feel behind.", core:true},
+      {t:"Count your reps out loud", why:"'Eleven follow-ups, four conversations, one tour.' That sentence is what becomes self-esteem."},
+      {t:"Write the first single step of tomorrow's block", why:"So tomorrow never starts with a blank screen — that's the wall that costs you most."}
+    ]},
+    {anchor:"Home", cue:"Before you sit down. Once you sit down, it's over.", items:[
+      {t:"Empty the kitchen sink", why:"One rule. An empty sink makes the whole apartment read as clean.", core:true},
+      {t:"One item into the donate bag", why:"365 things gone in a year, with no cleaning day ever scheduled."},
+      {t:"Two-minute tidy together, timer on", why:"Side by side turns chores into a shared thing instead of a resentment ledger."},
+      {t:"Tell him one specific thing you appreciated", why:"365 deposits in the year it matters most."},
+      {t:"Ten-minute walk after dinner — shoes on before you decide", why:"The shoes make the decision, not you."}
+    ]},
+    {anchor:"Money minute", cue:"Sixty seconds, standing up. Not a budget — just eyes on it.", items:[
+      {t:"Look at your checking balance", why:"Sixty seconds of looking beats a month of not knowing and bracing."},
+      {t:"Unsubscribe from every retail email that arrived today", why:"In about two months your inbox stops being a storefront."},
+      {t:"If a commission landed, run the split today", why:"If it sits in checking overnight, it's already spent."}
+    ]},
+    {anchor:"Night", cue:"9:30 alarm. Everything here is decided while it's still cheap.", items:[
+      {t:"Screens down", why:"Tomorrow's energy is bought tonight.", core:true},
+      {t:"Write tomorrow's three", why:"Morning decision paralysis is solved the night before or not at all.", core:true},
+      {t:"Done list — write the count, not the vibe", why:"'I didn't do enough' is always false and always convincing. Numbers aren't."},
+      {t:"One page of a book", why:"The smallest possible unit, and it's what your phone would have taken."},
+      {t:"One sentence in the journal", why:"365 sentences is a record of a year you'd otherwise remember as nothing."},
+      {t:"60-second stretch after your shower", why:"Attached to something you already do. It's the door into actually moving."},
+      {t:"Phone on the charger across the room", why:"Tomorrow's alarm requires standing up, which beats the whole morning spiral."}
+    ]}
   ];
-  var loopDone = load("loopDone", []);
-  var loopDay  = load("loopDay", today);
-  if(loopDay !== today){ loopDone = []; loopDay = today; save("loopDone",loopDone); save("loopDay",loopDay); }
+
+  var mode = load("mode", "full");
+  var dayDone = load("dayDone", []);
+  var dayDay  = load("dayDay", today);
+  if(dayDay !== today){ dayDone = []; dayDay = today; save("dayDone", dayDone); save("dayDay", dayDay); }
 
   var streak = load("streak", 0);
   var lastComplete = load("lastComplete", "");
 
-  var loopEl = document.getElementById("loop");
-  LOOP.forEach(function(item, idx){
-    var li = document.createElement("li");
-    if(loopDone.indexOf(idx) > -1) li.className = "done";
-    var box = document.createElement("input");
-    box.type="checkbox"; box.className="tick"; box.checked = loopDone.indexOf(idx) > -1;
-    box.setAttribute("aria-label", item.t);
-    var body = document.createElement("div"); body.className="body";
-    var t = document.createElement("div"); t.className="t"; t.textContent=item.t;
-    var why = document.createElement("div"); why.className="why"; why.textContent=item.why;
-    body.appendChild(t); body.appendChild(why);
-    var when = document.createElement("div"); when.className="when"; when.textContent=item.when;
-    box.addEventListener("change",function(){
-      var at = loopDone.indexOf(idx);
-      if(box.checked && at === -1) loopDone.push(idx);
-      if(!box.checked && at > -1) loopDone.splice(at,1);
-      li.classList.toggle("done", box.checked);
-      save("loopDone", loopDone);
-      renderStreak();
-    });
-    li.appendChild(box); li.appendChild(body); li.appendChild(when);
-    loopEl.appendChild(li);
-  });
+  var dayEl = document.getElementById("day");
+  var mFull = document.getElementById("modeFull");
+  var mMin  = document.getElementById("modeMin");
 
-  function renderStreak(){
-    var n = loopDone.length;
-    document.getElementById("loopCount").textContent = n + "/" + LOOP.length;
-    if(n === LOOP.length && lastComplete !== today){
+  function visible(item){ return mode === "full" || item.core; }
+
+  function renderDay(){
+    dayEl.textContent = "";
+    DAY.forEach(function(group, gi){
+      var items = group.items.filter(visible);
+      if(!items.length) return;
+
+      var wrap = document.createElement("div"); wrap.className = "group";
+      var head = document.createElement("div"); head.className = "ghead";
+      var anchor = document.createElement("div"); anchor.className = "ganchor"; anchor.textContent = group.anchor;
+      var count = document.createElement("div"); count.className = "gcount";
+      head.appendChild(anchor); head.appendChild(count);
+      var cue = document.createElement("div"); cue.className = "gcue"; cue.textContent = group.cue;
+      var ul = document.createElement("ul"); ul.className = "loop";
+
+      items.forEach(function(item){
+        var id = gi + "." + group.items.indexOf(item);
+        var li = document.createElement("li");
+        if(dayDone.indexOf(id) > -1) li.className = "done";
+        var box = document.createElement("input");
+        box.type = "checkbox"; box.className = "tick";
+        box.checked = dayDone.indexOf(id) > -1;
+        box.setAttribute("aria-label", item.t);
+        var body = document.createElement("div"); body.className = "body";
+        var t = document.createElement("div"); t.className = "t"; t.textContent = item.t;
+        var why = document.createElement("div"); why.className = "why"; why.textContent = item.why;
+        body.appendChild(t); body.appendChild(why);
+        box.addEventListener("change", function(){
+          var at = dayDone.indexOf(id);
+          if(box.checked && at === -1) dayDone.push(id);
+          if(!box.checked && at > -1) dayDone.splice(at, 1);
+          li.classList.toggle("done", box.checked);
+          save("dayDone", dayDone);
+          tally();
+        });
+        li.appendChild(box); li.appendChild(body);
+        ul.appendChild(li);
+      });
+
+      wrap.appendChild(head); wrap.appendChild(cue); wrap.appendChild(ul);
+      wrap._count = count; wrap._gi = gi;
+      dayEl.appendChild(wrap);
+    });
+    tally();
+  }
+
+  function tally(){
+    var shown = 0, done = 0;
+    Array.prototype.forEach.call(dayEl.children, function(wrap){
+      var group = DAY[wrap._gi];
+      var items = group.items.filter(visible);
+      var d = items.filter(function(it){
+        return dayDone.indexOf(wrap._gi + "." + group.items.indexOf(it)) > -1;
+      }).length;
+      shown += items.length; done += d;
+      wrap._count.textContent = d + "/" + items.length;
+      wrap._count.className = "gcount" + (d === items.length ? " full" : "");
+    });
+
+    document.getElementById("loopCount").textContent = done + "/" + shown;
+    document.getElementById("streakBar").style.width = shown ? Math.round(done / shown * 100) + "%" : "0%";
+
+    if(shown && done === shown && lastComplete !== today){
       streak = (lastComplete === yest) ? streak + 1 : 1;
       lastComplete = today;
       save("streak", streak); save("lastComplete", lastComplete);
     }
     document.getElementById("streakNum").textContent = streak;
-    document.getElementById("streakBar").style.width = Math.round(n / LOOP.length * 100) + "%";
   }
-  if(lastComplete && lastComplete !== today && lastComplete !== yest){ streak = 0; save("streak",0); }
-  renderStreak();
+
+  function setMode(m){
+    mode = m; save("mode", mode);
+    mFull.setAttribute("aria-pressed", m === "full" ? "true" : "false");
+    mMin.setAttribute("aria-pressed", m === "min" ? "true" : "false");
+    document.getElementById("modehint").textContent = m === "full"
+      ? "Everything below is daily. None of it is longer than a few minutes."
+      : "Nine non-negotiables. Use this on the bad days — finishing the short list still counts as a full day, and still keeps your streak.";
+    renderDay();
+  }
+  mFull.addEventListener("click", function(){ setMode("full"); });
+  mMin.addEventListener("click", function(){ setMode("min"); });
+
+  if(lastComplete && lastComplete !== today && lastComplete !== yest){ streak = 0; save("streak", 0); }
+  setMode(mode);
+
+  /* ---------------- Open loops ---------------- */
+  var loops = load("loops", []);
+  var closed = load("closed", {});
+  var loopsEl = document.getElementById("openloops");
+  var loopInput = document.getElementById("loopInput");
+
+  function daysOld(k){
+    var a = k.split("-"), b = today.split("-");
+    var d1 = new Date(+a[0], +a[1]-1, +a[2]), d2 = new Date(+b[0], +b[1]-1, +b[2]);
+    return Math.round((d2 - d1) / 864e5);
+  }
+
+  function renderLoops(){
+    loopsEl.textContent = "";
+    if(!loops.length){
+      var p = document.createElement("li");
+      p.innerHTML = '<span class="empty">Nothing open. That is what on top of it feels like.</span>';
+      loopsEl.appendChild(p);
+    }
+    loops.forEach(function(L, idx){
+      var li = document.createElement("li");
+      var box = document.createElement("input");
+      box.type = "checkbox"; box.className = "tick";
+      box.setAttribute("aria-label", "Close: " + L.t);
+      var txt = document.createElement("span"); txt.className = "txt"; txt.textContent = L.t;
+      var age = document.createElement("span");
+      var n = daysOld(L.added);
+      age.className = "age" + (n >= 3 ? " stale" : "");
+      age.textContent = n === 0 ? "today" : n + "d";
+      box.addEventListener("change", function(){
+        loops.splice(idx, 1); save("loops", loops);
+        closed[today] = (closed[today] || 0) + 1; save("closed", closed);
+        renderLoops();
+      });
+      li.appendChild(box); li.appendChild(txt); li.appendChild(age);
+      loopsEl.appendChild(li);
+    });
+
+    var stale = loops.filter(function(L){ return daysOld(L.added) >= 3; }).length;
+    var foot = document.getElementById("sweepfoot");
+    var n = closed[today] || 0;
+    var line = "<b>" + n + "</b> closed today · " + loops.length + " still open.";
+    if(stale) line += " " + stale + (stale === 1 ? " has" : " have") + " been sitting three days or more — close " + (stale === 1 ? "it" : "one") + " now or delete " + (stale === 1 ? "it" : "them") + " on purpose. Both count.";
+    foot.innerHTML = line;
+  }
+
+  function addLoop(){
+    var v = loopInput.value.trim();
+    if(!v) return;
+    loops.push({t: v, added: today});
+    save("loops", loops);
+    loopInput.value = "";
+    renderLoops();
+    loopInput.focus();
+  }
+  document.getElementById("loopAdd").addEventListener("click", addLoop);
+  loopInput.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); addLoop(); } });
+  renderLoops();
 
   /* ---------------- The reps ---------------- */
   var REPS = [
@@ -734,7 +953,7 @@
       var del = document.createElement("button");
       del.type="button"; del.className="kill"; del.innerHTML="&times;"; del.setAttribute("aria-label","Remove card");
 
-      name.addEventListener("input",function(){ d.name=name.value; save("debts",debts); });
+      name.addEventListener("input",function(){ d.name=name.value; save("debts",debts); totals(); });
       bal.addEventListener("input",function(){ d.bal=bal.value; save("debts",debts); totals(); });
       bal.addEventListener("change",renderDebts);
       apr.addEventListener("input",function(){ d.apr=apr.value; save("debts",debts); totals(); });
