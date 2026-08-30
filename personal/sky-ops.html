@@ -65,6 +65,8 @@
   }
   .streak .bar{flex:1;height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden}
   .streak .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));width:0;transition:width .4s ease}
+  .runmeta{margin-top:9px;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+  .runmeta b{color:var(--gold-lt);font-weight:700}
 
   /* ---------- sections ---------- */
   section{margin-bottom:34px}
@@ -395,11 +397,12 @@
       <div class="datestamp" id="datestamp"></div>
     </div>
     <div class="streak">
-      <b id="streakNum">0</b>
-      <span id="streakLabel">day streak</span>
+      <b id="daysRun">0</b>
+      <span>days run</span>
       <span class="bar"><i id="streakBar"></i></span>
       <span id="loopCount" style="font-variant-numeric:tabular-nums">0/0</span>
     </div>
+    <div class="runmeta" id="runmeta"></div>
   </header>
 
   <section>
@@ -669,8 +672,7 @@
   var dayDay  = load("dayDay", today);
   if(dayDay !== today){ dayDone = []; dayDay = today; save("dayDone", dayDone); save("dayDay", dayDay); }
 
-  var streak = load("streak", 0);
-  var lastComplete = load("lastComplete", "");
+  var runHist = load("runHist", {});
 
   var dayEl = document.getElementById("day");
   var mFull = document.getElementById("modeFull");
@@ -739,12 +741,47 @@
     document.getElementById("loopCount").textContent = done + "/" + shown;
     document.getElementById("streakBar").style.width = shown ? Math.round(done / shown * 100) + "%" : "0%";
 
-    if(shown && done === shown && lastComplete !== today){
-      streak = (lastComplete === yest) ? streak + 1 : 1;
-      lastComplete = today;
-      save("streak", streak); save("lastComplete", lastComplete);
+    if(shown && done === shown){
+      if(!runHist[today]){ runHist[today] = 1; save("runHist", runHist); }
+    } else if(runHist[today]){
+      delete runHist[today]; save("runHist", runHist);
     }
-    document.getElementById("streakNum").textContent = streak;
+    renderRun();
+  }
+
+  function shift(k, n){
+    var a = k.split("-");
+    var d = new Date(+a[0], +a[1]-1, +a[2]);
+    d.setDate(d.getDate() + n);
+    return dayKey(d);
+  }
+
+  function renderRun(){
+    var total = Object.keys(runHist).length;
+    document.getElementById("daysRun").textContent = total;
+
+    var run = 0, cursor = runHist[today] ? today : yest;
+    while(runHist[cursor]){ run++; cursor = shift(cursor, -1); }
+
+    var restarts = 0;
+    Object.keys(runHist).forEach(function(k){
+      if(!runHist[shift(k, -1)]) restarts++;
+    });
+    if(restarts > 0) restarts -= 1;
+
+    var meta = document.getElementById("runmeta");
+    if(!total){
+      meta.innerHTML = "This number only ever goes up. Missing a day subtracts nothing.";
+    } else {
+      var line = "On a <b>" + run + "-day</b> run.";
+      if(restarts > 0){
+        line += " You've come back <b>" + restarts + "</b> time" + (restarts === 1 ? "" : "s") +
+                " after dropping off — that is the number that actually predicts how this goes.";
+      } else {
+        line += " If you drop off, coming back fast is the whole game — not never dropping off.";
+      }
+      meta.innerHTML = line;
+    }
   }
 
   function setMode(m){
@@ -753,13 +790,12 @@
     mMin.setAttribute("aria-pressed", m === "min" ? "true" : "false");
     document.getElementById("modehint").textContent = m === "full"
       ? "Everything below is daily. None of it is longer than a few minutes."
-      : "Nine non-negotiables. Use this on the bad days — finishing the short list still counts as a full day, and still keeps your streak.";
+      : "Nine non-negotiables. Use this on the bad days — finishing the short list counts as a full day run, exactly like the long one.";
     renderDay();
   }
   mFull.addEventListener("click", function(){ setMode("full"); });
   mMin.addEventListener("click", function(){ setMode("min"); });
 
-  if(lastComplete && lastComplete !== today && lastComplete !== yest){ streak = 0; save("streak", 0); }
   setMode(mode);
 
   /* ---------------- Open loops ---------------- */
