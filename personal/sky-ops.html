@@ -1,0 +1,675 @@
+<title>Sky Ops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap">
+<style>
+  :root{
+    --bg:#07090d;
+    --surface:#0e1118;
+    --surface-2:#141924;
+    --line:rgba(255,255,255,.09);
+    --line-str:rgba(255,255,255,.18);
+    --gold:#d4af37;
+    --gold-lt:#f5e2a3;
+    --gold-dim:rgba(212,175,55,.32);
+    --rose:#ff3366;
+    --rose-dim:rgba(255,51,102,.14);
+    --emerald:#10b981;
+    --emerald-dim:rgba(16,185,129,.14);
+    --text:#f4f7fb;
+    --muted:#94a3b8;
+    --dim:#5d6b7f;
+    --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --disp:'Syne','Plus Jakarta Sans',sans-serif;
+    --serif:'Cormorant Garamond',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 72px;
+  }
+  .wrap{max-width:660px;margin:0 auto;padding:0 18px}
+
+  /* ---------- header ---------- */
+  header{
+    padding:34px 0 22px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:26px;
+  }
+  .brandline{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  h1{
+    font-family:var(--disp);
+    font-weight:800;
+    font-size:clamp(28px,7vw,40px);
+    letter-spacing:-.02em;
+    margin:0;
+    text-wrap:balance;
+  }
+  h1 span{color:var(--gold)}
+  .datestamp{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--dim);font-weight:600;font-variant-numeric:tabular-nums;
+  }
+  .streak{
+    margin-top:16px;display:flex;align-items:center;gap:11px;
+    font-size:13px;color:var(--muted);
+  }
+  .streak b{
+    font-family:var(--disp);font-size:20px;color:var(--gold-lt);
+    font-variant-numeric:tabular-nums;
+  }
+  .streak .bar{flex:1;height:3px;background:var(--surface-2);border-radius:2px;overflow:hidden}
+  .streak .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));width:0;transition:width .4s ease}
+
+  /* ---------- sections ---------- */
+  section{margin-bottom:34px}
+  .eyebrow{
+    font-family:var(--disp);font-weight:700;font-size:11px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+    display:flex;align-items:center;gap:12px;margin-bottom:6px;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+  h2{
+    font-family:var(--disp);font-weight:700;font-size:21px;
+    letter-spacing:-.01em;margin:0 0 4px;
+  }
+  .sub{color:var(--muted);font-size:13.5px;margin:0 0 16px;max-width:56ch}
+  .sub em{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-lt)}
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+  }
+
+  /* ---------- today's three ---------- */
+  .three{display:flex;flex-direction:column;gap:10px}
+  .three .row{display:flex;align-items:center;gap:12px}
+  .rank{
+    font-family:var(--disp);font-weight:800;font-size:13px;color:var(--dim);
+    width:16px;flex:none;font-variant-numeric:tabular-nums;
+  }
+  .three input[type=text]{
+    flex:1;min-width:0;background:transparent;border:none;
+    border-bottom:1px solid var(--line);
+    color:var(--text);font:inherit;font-size:15px;padding:7px 2px;
+  }
+  .three input[type=text]::placeholder{color:var(--dim)}
+  .three input[type=text]:focus{outline:none;border-bottom-color:var(--gold)}
+  .three .row.done input[type=text]{color:var(--dim);text-decoration:line-through}
+
+  /* ---------- checkbox ---------- */
+  .tick{
+    appearance:none;-webkit-appearance:none;flex:none;
+    width:21px;height:21px;border-radius:7px;
+    border:1.5px solid var(--line-str);background:var(--surface-2);
+    cursor:pointer;position:relative;transition:background .18s ease,border-color .18s ease;
+  }
+  .tick:hover{border-color:var(--gold-dim)}
+  .tick:checked{background:var(--emerald);border-color:var(--emerald)}
+  .tick:checked::after{
+    content:"";position:absolute;left:7px;top:3px;width:5px;height:10px;
+    border:solid #07090d;border-width:0 2px 2px 0;transform:rotate(42deg);
+  }
+  .tick:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  /* ---------- the loop ---------- */
+  .loop{list-style:none;margin:0;padding:0}
+  .loop li{
+    display:flex;gap:13px;align-items:flex-start;
+    padding:13px 0;border-bottom:1px solid var(--line);
+  }
+  .loop li:last-child{border-bottom:none;padding-bottom:2px}
+  .loop .body{flex:1;min-width:0}
+  .loop .t{font-weight:600;font-size:14.5px;line-height:1.35}
+  .loop .why{color:var(--dim);font-size:12.5px;margin-top:3px}
+  .loop .when{
+    font-family:var(--disp);font-size:10px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--gold);opacity:.75;flex:none;
+    padding-top:4px;width:52px;text-align:right;
+  }
+  .loop li.done .t{color:var(--dim);text-decoration:line-through}
+  .loop li.done .why{opacity:.5}
+
+  /* ---------- split calculator ---------- */
+  .amt{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .amt label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+  .amt .field{display:flex;align-items:center;flex:1;border-bottom:1px solid var(--gold-dim)}
+  .amt .field span{font-family:var(--disp);font-size:24px;color:var(--gold);padding-right:4px}
+  .amt input{
+    flex:1;min-width:0;background:transparent;border:none;color:var(--gold-lt);
+    font-family:var(--disp);font-weight:700;font-size:26px;padding:4px 0;
+    font-variant-numeric:tabular-nums;
+  }
+  .amt input:focus{outline:none}
+  .buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px}
+  .bucket{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:12px;
+    padding:13px 14px;position:relative;overflow:hidden;
+  }
+  .bucket::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tone,var(--gold))}
+  .bucket .k{
+    font-family:var(--disp);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--tone,var(--gold));
+  }
+  .bucket .v{
+    font-family:var(--disp);font-weight:800;font-size:23px;margin-top:3px;
+    font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+  }
+  .bucket .pct{display:flex;align-items:center;gap:5px;margin-top:5px}
+  .bucket .pct input{
+    width:38px;background:transparent;border:none;border-bottom:1px dotted var(--line-str);
+    color:var(--muted);font:inherit;font-size:12px;text-align:right;
+    font-variant-numeric:tabular-nums;padding:1px 2px;
+  }
+  .bucket .pct input:focus{outline:none;border-bottom-color:var(--gold);color:var(--gold-lt)}
+  .bucket .pct em{font-style:normal;color:var(--dim);font-size:12px}
+  .splitnote{margin-top:12px;font-size:12.5px;color:var(--dim)}
+  .splitnote.warn{color:var(--rose)}
+
+  /* ---------- debt board ---------- */
+  .debt-head,.debt-row{
+    display:grid;grid-template-columns:1fr 96px 62px 28px;gap:8px;align-items:center;
+  }
+  .debt-head{
+    font-family:var(--disp);font-size:10px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--dim);padding-bottom:8px;border-bottom:1px solid var(--line);
+  }
+  .debt-head span:nth-child(2),.debt-head span:nth-child(3){text-align:right}
+  .debt-row{padding:9px 0;border-bottom:1px solid var(--line)}
+  .debt-row input{
+    background:transparent;border:none;color:var(--text);font:inherit;font-size:14px;
+    padding:5px 4px;border-radius:6px;min-width:0;width:100%;
+  }
+  .debt-row input:focus{outline:none;background:var(--surface-2)}
+  .debt-row input.num{text-align:right;font-variant-numeric:tabular-nums}
+  .debt-row.target{background:linear-gradient(90deg,var(--rose-dim),transparent);border-radius:8px}
+  .debt-row.target input:first-child{font-weight:700;color:#fff}
+  .kill{
+    background:none;border:none;color:var(--dim);cursor:pointer;font-size:17px;
+    line-height:1;padding:4px;border-radius:6px;
+  }
+  .kill:hover{color:var(--rose)}
+  .kill:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+  .addrow{
+    margin-top:12px;background:transparent;border:1px dashed var(--line-str);
+    color:var(--muted);font:inherit;font-size:13px;font-weight:600;
+    padding:9px 14px;border-radius:10px;cursor:pointer;width:100%;
+  }
+  .addrow:hover{border-color:var(--gold-dim);color:var(--gold-lt)}
+  .totals{
+    display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;padding-top:15px;
+    border-top:1px solid var(--line);
+  }
+  .stat .k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:700;font-family:var(--disp)}
+  .stat .v{font-family:var(--disp);font-weight:800;font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-top:2px}
+  .stat .v.rose{color:var(--rose)}
+  .verdict{
+    margin-top:15px;padding:13px 15px;border-radius:12px;
+    background:var(--rose-dim);border:1px solid rgba(255,51,102,.25);
+    font-size:13.5px;line-height:1.5;
+  }
+  .verdict b{color:#fff}
+
+  /* ---------- 90 day board ---------- */
+  .grid90{display:grid;grid-template-columns:repeat(13,1fr);gap:6px;margin-bottom:12px}
+  .grid90 button{
+    aspect-ratio:1;border-radius:5px;border:1px solid var(--line);
+    background:var(--surface-2);cursor:pointer;padding:0;transition:background .18s ease;
+  }
+  .grid90 button[data-on="1"]{background:var(--gold);border-color:var(--gold-lt)}
+  .grid90 button:focus-visible{outline:2px solid var(--gold-lt);outline-offset:2px}
+  .legend{display:flex;justify-content:space-between;font-size:11.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+
+  /* ---------- menu ---------- */
+  .menu-group{margin-bottom:22px}
+  .menu-group:last-child{margin-bottom:0}
+  .mg-title{
+    font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.06em;
+    margin-bottom:3px;
+  }
+  .mg-note{font-size:12.5px;color:var(--dim);margin:0 0 11px}
+  .menu-group ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .menu-group li{
+    display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.5;
+    color:var(--muted);
+  }
+  .menu-group li::before{
+    content:"";flex:none;width:5px;height:5px;border-radius:50%;
+    background:var(--gold-dim);margin-top:8px;
+  }
+  .menu-group li b{color:var(--text);font-weight:600}
+
+  /* ---------- closing ---------- */
+  .closing{
+    border:1px solid var(--gold-dim);border-radius:16px;padding:22px;
+    background:linear-gradient(160deg,rgba(212,175,55,.06),transparent 60%);
+  }
+  .closing p{margin:0 0 12px;font-size:14px;color:var(--muted);line-height:1.62}
+  .closing p:last-child{margin-bottom:0}
+  .closing .pull{
+    font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.4;
+    color:var(--gold-lt);margin-bottom:14px;
+  }
+  footer{
+    margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:11.5px;color:var(--dim);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .reset{background:none;border:none;color:var(--dim);font:inherit;font-size:11.5px;cursor:pointer;text-decoration:underline}
+  .reset:hover{color:var(--rose)}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+  @media (max-width:430px){
+    .loop .when{display:none}
+    .debt-head,.debt-row{grid-template-columns:1fr 84px 52px 26px}
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="brandline">
+      <h1>Sky <span>Ops</span></h1>
+      <div class="datestamp" id="datestamp"></div>
+    </div>
+    <div class="streak">
+      <b id="streakNum">0</b>
+      <span id="streakLabel">day streak</span>
+      <span class="bar"><i id="streakBar"></i></span>
+      <span id="loopCount" style="font-variant-numeric:tabular-nums">0/8</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">Written last night</div>
+    <h2>Today's three</h2>
+    <p class="sub">Three. Not a to-do list. If a fourth thing matters, it can be tomorrow's first.</p>
+    <div class="card three" id="three"></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Runs on autopilot</div>
+    <h2>The loop</h2>
+    <p class="sub">Eight things, none longer than two minutes. The point isn't the tasks — it's that checking them all is the only scoreboard you have to hit today.</p>
+    <div class="card"><ul class="loop" id="loop"></ul></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">The moment a commission lands</div>
+    <h2>The split</h2>
+    <p class="sub">Type the check amount. Move the money the same day, before it becomes "available balance." As a 1099, the tax slice was never yours.</p>
+    <div class="card">
+      <div class="amt">
+        <label for="commission">Commission</label>
+        <span class="field"><span>$</span><input id="commission" type="text" inputmode="decimal" placeholder="0" autocomplete="off"></span>
+      </div>
+      <div class="buckets" id="buckets"></div>
+      <div class="splitnote" id="splitnote"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">One number, not a feeling</div>
+    <h2>The board</h2>
+    <p class="sub">Every card, every balance. The smallest balance is highlighted — that's the one you kill first, because closing a card gives your brain the hit that keeps this going.</p>
+    <div class="card">
+      <div class="debt-head"><span>Card</span><span>Balance</span><span>APR %</span><span></span></div>
+      <div id="debtRows"></div>
+      <button class="addrow" id="addDebt" type="button">+ Add a card</button>
+      <div class="totals">
+        <div class="stat"><div class="k">Total owed</div><div class="v" id="totalOwed">$0</div></div>
+        <div class="stat"><div class="k">Interest / month</div><div class="v rose" id="monthlyInterest">$0</div></div>
+        <div class="stat"><div class="k">Interest / year</div><div class="v rose" id="yearlyInterest">$0</div></div>
+      </div>
+      <div class="verdict" id="verdict">Add your cards above and this will tell you which one to attack.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">13 weeks, not 365 days</div>
+    <h2>The board you can actually see</h2>
+    <p class="sub">A year is too far away to feel. Fill a square for every week you ran the loop at least five days. Thirteen squares is one quarter — a horizon your brain will still care about in March.</p>
+    <div class="card">
+      <div class="grid90" id="grid90"></div>
+      <div class="legend"><span id="weeksFilled">0 of 13 weeks</span><span>≈ one quarter</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Pick three. Leave the rest.</div>
+    <h2>The menu</h2>
+    <p class="sub">This is a menu, <em>not an assignment.</em> Twenty-five habits is why you feel behind. Three is why you'll feel ahead.</p>
+
+    <div class="card">
+      <div class="menu-group">
+        <div class="mg-title">For the ADHD, specifically</div>
+        <p class="mg-note">These aren't discipline fixes. They're workarounds for a brain that runs on interest and urgency instead of importance.</p>
+        <ul>
+          <li><b>Build a launch pad by the door.</b> One tray: keys, lockbox code card, tape measure, business cards, phone charger. You stop losing eleven minutes a day to searching, and you stop starting every showing already flustered.</li>
+          <li><b>Set a two-minute timer and give yourself permission to quit when it rings.</b> Initiation is the wall, not effort. You will almost never quit at two minutes — but you have to genuinely be allowed to.</li>
+          <li><b>Put "leave the house" in your calendar 15 minutes before you actually need to leave.</b> Time blindness isn't fixable by trying harder. It's fixable by lying to your calendar.</li>
+          <li><b>Body-double the boring stuff.</b> FaceTime a friend on mute while you do follow-ups or expense receipts. The presence of another person is a stimulant your brain accepts.</li>
+          <li><b>Put your hardest money task inside your Adderall peak, not your admin.</b> Prospecting calls and follow-ups go in the good hours. Laundry and email do not deserve your best neurochemistry.</li>
+          <li><b>Add novelty on purpose.</b> New coffee shop, new playlist, new route to a showing. Boredom is a symptom for you, not a character flaw — treating it as a scheduling input works better than white-knuckling through it.</li>
+          <li><b>Keep one doom box.</b> One bin for everything that has no home. Ten minutes on Sunday, no guilt. This alone ends most of the "my space is chaos" spiral.</li>
+        </ul>
+      </div>
+
+      <div class="menu-group">
+        <div class="mg-title">For the credit card debt</div>
+        <p class="mg-note">Paying off a 26% card is a guaranteed 26% return. Nothing in your investment account will ever beat it.</p>
+        <ul>
+          <li><b>Call each card and ask for a lower APR.</b> Say: "I've been a customer since [year], I'm carrying a balance, and I'd like to request an APR reduction." Ten minutes, and roughly a third of the time it works.</li>
+          <li><b>Delete the card numbers from Apple Pay, Safari autofill, and every saved checkout.</b> Not willpower — friction. You'll rediscover you didn't want most of it.</li>
+          <li><b>Keep only a $1,000 buffer, then send everything else at the debt.</b> Saving at 4% while borrowing at 26% is paying for the privilege of feeling safe.</li>
+          <li><b>Check whether you qualify for a 0% balance transfer card</b> — and if you do, put the payoff deadline in your calendar the same hour you open it. That card is a countdown, not a break.</li>
+          <li><b>Draw the payoff, don't just track it.</b> Same 100-square grid, but each square is $100 of debt erased. Coloring in destruction feels better than coloring in accumulation.</li>
+        </ul>
+      </div>
+
+      <div class="menu-group">
+        <div class="mg-title">For running 1099 + a new W-2 at the same time</div>
+        <p class="mg-note">This combination is where 22-year-olds get destroyed in April. It's also where you have an unfair advantage most locators don't know about.</p>
+        <ul>
+          <li><b>Open a second checking account today and route every commission into it.</b> Business in, business out. This single move is the difference between an hour of tax prep and a lost weekend.</li>
+          <li><b>Use your new job's W-4 to cover your 1099 taxes.</b> Line 4(c) lets you request extra withholding from each paycheck. Set it high enough to cover the locating income and you may never write a quarterly estimated check at all. Ask your new employer's HR to help you set it — it takes one form.</li>
+          <li><b>If you'd rather pay quarterly: Apr 15, Jun 15, Sep 15, Jan 15.</b> Four calendar events, set to repeat, right now.</li>
+          <li><b>Turn on automatic mileage tracking.</b> You drive Austin all day. At roughly 70¢ a mile, a normal locating week is a meaningful deduction you are currently throwing away.</li>
+          <li><b>Snap every receipt into one photo album called "Taxes."</b> No sorting, no naming. Sorting is a January problem; capturing is a today problem.</li>
+          <li><b>End each workday with a five-minute pipeline touch.</b> Three follow-ups, one line each in your CRM. Commissions come almost entirely from the second and third contact, and that is exactly where an ADHD brain drops the thread.</li>
+        </ul>
+      </div>
+
+      <div class="menu-group">
+        <div class="mg-title">For living with him now</div>
+        <p class="mg-note">Money fights are almost never about money. They're about being surprised.</p>
+        <ul>
+          <li><b>Put a 20-minute money date on the calendar, same time weekly.</b> Bills, what's coming, what's tight. Scheduling it means it never has to happen mid-argument at 11pm.</li>
+          <li><b>Decide the split once, in writing.</b> Straight 50/50, or proportional to income. Either is fine. Undefined is what kills people. Yours is variable commission income — proportional usually protects you in slow months.</li>
+          <li><b>Keep money that neither of you has to explain.</b> A set amount each, no justification required. This one thing prevents most cohabiting-couple resentment.</li>
+          <li><b>Tell him the debt number out loud.</b> Not for permission. Because carrying it silently in a shared apartment is heavier than carrying it alone.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Read this on the bad days</div>
+    <h2>When it feels pointless</h2>
+    <div class="closing">
+      <p class="pull">The problem isn't that you're not hitting goals. It's that you set them 365 days away and then asked your brain to care today.</p>
+      <p>You're 22, holding down a new job and a commission business, in a new apartment, with debt you're actively facing instead of ignoring. That is not someone who's failing. That's someone with no feedback loop — you're doing the work and getting no signal back, and a brain that runs on dopamine reads "no signal" as "pointless."</p>
+      <p>So shrink the horizon until the signal is visible. Thirteen weeks. Eight checkboxes. One square. That's the entire strategy — everything above is just plumbing for it.</p>
+      <p>One honest note: if the flat, nothing-matters feeling shows up even on days you do hit your three, that's worth mentioning to whoever prescribes your Adderall. Stimulants can flatten mood, and "life feels boring and pointless" is real clinical information, not a personality trait you're stuck with. Say it in those words at your next appointment.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span>Everything here saves in this browser only. Nothing leaves your phone.</span>
+    <button class="reset" id="resetAll" type="button">Erase all data</button>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var K = "skyops.";
+  function load(k, fb){ try{ var v = localStorage.getItem(K+k); return v===null?fb:JSON.parse(v); }catch(e){ return fb; } }
+  function save(k, v){ try{ localStorage.setItem(K+k, JSON.stringify(v)); }catch(e){} }
+  function dayKey(d){ d=d||new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function money(n){ return "$"+Math.round(n).toLocaleString("en-US"); }
+
+  var today = dayKey();
+  var yest  = dayKey(new Date(Date.now()-864e5));
+
+  document.getElementById("datestamp").textContent =
+    new Date().toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"});
+
+  /* ---------------- Today's three ---------------- */
+  var threeText = load("threeText", ["","",""]);
+  var threeDone = load("threeDone", [false,false,false]);
+  var threeDay  = load("threeDay", today);
+  if(threeDay !== today){ threeDone = [false,false,false]; threeDay = today; save("threeDone",threeDone); save("threeDay",threeDay); }
+
+  var threeEl = document.getElementById("three");
+  var placeholders = ["The one that moves money","The one you've been avoiding","The small one you'll actually finish"];
+  for(var i=0;i<3;i++){
+    (function(idx){
+      var row = document.createElement("div");
+      row.className = "row" + (threeDone[idx] ? " done" : "");
+      var rank = document.createElement("span"); rank.className="rank"; rank.textContent = String(idx+1);
+      var box = document.createElement("input");
+      box.type="checkbox"; box.className="tick"; box.checked=!!threeDone[idx];
+      box.setAttribute("aria-label","Finished task "+(idx+1));
+      var txt = document.createElement("input");
+      txt.type="text"; txt.value=threeText[idx]||""; txt.placeholder=placeholders[idx];
+      txt.setAttribute("aria-label","Task "+(idx+1));
+      box.addEventListener("change",function(){
+        threeDone[idx]=box.checked; save("threeDone",threeDone);
+        row.classList.toggle("done",box.checked);
+      });
+      txt.addEventListener("input",function(){ threeText[idx]=txt.value; save("threeText",threeText); save("threeDay",today); });
+      row.appendChild(rank); row.appendChild(box); row.appendChild(txt);
+      threeEl.appendChild(row);
+    })(i);
+  }
+
+  /* ---------------- The loop ---------------- */
+  var LOOP = [
+    {when:"Wake",  t:"16 oz of water and meds before you open your phone",  why:"Rehydrate and dose before the feed gets your first hour."},
+    {when:"Wake",  t:"Read today's three out loud",                          why:"Saying them beats reading them. It sets the day's only scoreboard."},
+    {when:"Out",   t:"Launch pad check — keys, lockbox card, tape measure",  why:"Leave calm instead of leaving frantic."},
+    {when:"Work",  t:"Three follow-ups, one line each in the CRM",           why:"This is where locating commissions actually come from."},
+    {when:"Work",  t:"Snap today's receipts into the Taxes album",           why:"Capture now, sort in January. Never the reverse."},
+    {when:"Home",  t:"Clear one surface before you leave a room",            why:"No weekend deep-clean, ever again."},
+    {when:"Night", t:"Write one thing you finished on the Done list",        why:"Proof of output, on the days it feels like there wasn't any."},
+    {when:"9:30",  t:"Wind-down alarm — screens down, three written for tomorrow", why:"Tomorrow's focus is decided tonight, while it's cheap."}
+  ];
+  var loopDone = load("loopDone", []);
+  var loopDay  = load("loopDay", today);
+  if(loopDay !== today){ loopDone = []; loopDay = today; save("loopDone",loopDone); save("loopDay",loopDay); }
+
+  var streak = load("streak", 0);
+  var lastComplete = load("lastComplete", "");
+
+  var loopEl = document.getElementById("loop");
+  LOOP.forEach(function(item, idx){
+    var li = document.createElement("li");
+    if(loopDone.indexOf(idx) > -1) li.className = "done";
+    var box = document.createElement("input");
+    box.type="checkbox"; box.className="tick"; box.checked = loopDone.indexOf(idx) > -1;
+    box.setAttribute("aria-label", item.t);
+    var body = document.createElement("div"); body.className="body";
+    var t = document.createElement("div"); t.className="t"; t.textContent=item.t;
+    var why = document.createElement("div"); why.className="why"; why.textContent=item.why;
+    body.appendChild(t); body.appendChild(why);
+    var when = document.createElement("div"); when.className="when"; when.textContent=item.when;
+    box.addEventListener("change",function(){
+      var at = loopDone.indexOf(idx);
+      if(box.checked && at === -1) loopDone.push(idx);
+      if(!box.checked && at > -1) loopDone.splice(at,1);
+      li.classList.toggle("done", box.checked);
+      save("loopDone", loopDone);
+      renderStreak();
+    });
+    li.appendChild(box); li.appendChild(body); li.appendChild(when);
+    loopEl.appendChild(li);
+  });
+
+  function renderStreak(){
+    var n = loopDone.length;
+    document.getElementById("loopCount").textContent = n + "/" + LOOP.length;
+    if(n === LOOP.length && lastComplete !== today){
+      streak = (lastComplete === yest) ? streak + 1 : 1;
+      lastComplete = today;
+      save("streak", streak); save("lastComplete", lastComplete);
+    }
+    document.getElementById("streakNum").textContent = streak;
+    document.getElementById("streakBar").style.width = Math.round(n / LOOP.length * 100) + "%";
+  }
+  if(lastComplete && lastComplete !== today && lastComplete !== yest){ streak = 0; save("streak",0); }
+  renderStreak();
+
+  /* ---------------- The split ---------------- */
+  var BUCKETS = [
+    {k:"Taxes",  key:"tax",    tone:"#ff3366", def:30, note:"Never yours. Move it first."},
+    {k:"Debt",   key:"debt",   tone:"#d4af37", def:30, note:"Straight to the highlighted card."},
+    {k:"Buffer", key:"buffer", tone:"#10b981", def:15, note:"Until you hit $1,000, then reroute to debt."},
+    {k:"Life",   key:"life",   tone:"#94a3b8", def:25, note:"Guilt-free, because the rest is handled."}
+  ];
+  var pcts = load("pcts", {});
+  var bucketsEl = document.getElementById("buckets");
+  var amtInput = document.getElementById("commission");
+  amtInput.value = load("lastAmt","");
+
+  BUCKETS.forEach(function(b){
+    var d = document.createElement("div");
+    d.className="bucket"; d.style.setProperty("--tone", b.tone);
+    d.innerHTML = '<div class="k"></div><div class="v">$0</div>'+
+                  '<div class="pct"><input type="text" inputmode="numeric" aria-label="'+b.k+' percent"><em>% of the check</em></div>';
+    d.querySelector(".k").textContent = b.k;
+    var pi = d.querySelector(".pct input");
+    pi.value = (pcts[b.key] === undefined ? b.def : pcts[b.key]);
+    pi.addEventListener("input", function(){
+      pcts[b.key] = parseFloat(pi.value) || 0; save("pcts", pcts); renderSplit();
+    });
+    b.el = d.querySelector(".v");
+    bucketsEl.appendChild(d);
+  });
+
+  function renderSplit(){
+    var amt = parseFloat(String(amtInput.value).replace(/[^0-9.]/g,"")) || 0;
+    var sum = 0;
+    BUCKETS.forEach(function(b){
+      var p = (pcts[b.key] === undefined ? b.def : pcts[b.key]);
+      sum += p;
+      b.el.textContent = money(amt * p / 100);
+    });
+    var note = document.getElementById("splitnote");
+    if(Math.round(sum) !== 100){
+      note.className = "splitnote warn";
+      note.textContent = "Your percentages add up to " + Math.round(sum) + "%. Get them to 100 or the math is lying to you.";
+    } else {
+      note.className = "splitnote";
+      note.textContent = amt > 0
+        ? "Move all four the day the check clears. If it sits in checking overnight, it's already spent."
+        : "Taxes first — as a 1099 nobody is withholding for you, so that slice was never really income.";
+    }
+  }
+  amtInput.addEventListener("input", function(){ save("lastAmt", amtInput.value); renderSplit(); });
+  renderSplit();
+
+  /* ---------------- The board ---------------- */
+  var debts = load("debts", [{name:"",bal:"",apr:""}]);
+  var rowsEl = document.getElementById("debtRows");
+
+  function renderDebts(){
+    rowsEl.textContent = "";
+    var parsed = debts.map(function(d,i){
+      return {i:i, bal: parseFloat(String(d.bal).replace(/[^0-9.]/g,""))||0, apr: parseFloat(d.apr)||0};
+    });
+    var live = parsed.filter(function(p){ return p.bal > 0; });
+    var target = null;
+    if(live.length){
+      target = live.reduce(function(a,b){ return b.bal < a.bal ? b : a; });
+    }
+
+    debts.forEach(function(d, i){
+      var row = document.createElement("div");
+      row.className = "debt-row" + (target && target.i === i ? " target" : "");
+      var name = document.createElement("input");
+      name.type="text"; name.value=d.name; name.placeholder="Chase Freedom"; name.setAttribute("aria-label","Card name");
+      var bal = document.createElement("input");
+      bal.type="text"; bal.className="num"; bal.inputMode="decimal"; bal.value=d.bal; bal.placeholder="$0"; bal.setAttribute("aria-label","Balance");
+      var apr = document.createElement("input");
+      apr.type="text"; apr.className="num"; apr.inputMode="decimal"; apr.value=d.apr; apr.placeholder="24.9"; apr.setAttribute("aria-label","APR");
+      var del = document.createElement("button");
+      del.type="button"; del.className="kill"; del.innerHTML="&times;"; del.setAttribute("aria-label","Remove card");
+
+      name.addEventListener("input",function(){ d.name=name.value; save("debts",debts); });
+      bal.addEventListener("input",function(){ d.bal=bal.value; save("debts",debts); totals(); });
+      bal.addEventListener("change",renderDebts);
+      apr.addEventListener("input",function(){ d.apr=apr.value; save("debts",debts); totals(); });
+      del.addEventListener("click",function(){
+        debts.splice(i,1);
+        if(!debts.length) debts.push({name:"",bal:"",apr:""});
+        save("debts",debts); renderDebts();
+      });
+
+      row.appendChild(name); row.appendChild(bal); row.appendChild(apr); row.appendChild(del);
+      rowsEl.appendChild(row);
+    });
+    totals();
+  }
+
+  function totals(){
+    var owed = 0, interest = 0, smallest = null, priciest = null;
+    debts.forEach(function(d){
+      var b = parseFloat(String(d.bal).replace(/[^0-9.]/g,""))||0;
+      var a = parseFloat(d.apr)||0;
+      if(b <= 0) return;
+      owed += b; interest += b * (a/100) / 12;
+      if(!smallest || b < smallest.b) smallest = {n:d.name||"that card", b:b};
+      if(!priciest || a > priciest.a) priciest = {n:d.name||"one of them", a:a};
+    });
+    document.getElementById("totalOwed").textContent = money(owed);
+    document.getElementById("monthlyInterest").textContent = money(interest);
+    document.getElementById("yearlyInterest").textContent = money(interest*12);
+    var v = document.getElementById("verdict");
+    if(owed <= 0){
+      v.innerHTML = "Add your cards above and this will tell you which one to attack.";
+    } else {
+      var line = "Minimums on everything. Every extra dollar — and 30% of every commission — goes to <b>" + smallest.n + "</b> at " + money(smallest.b) + ", because closing an account is a feeling you can actually use.";
+      if(priciest && priciest.a > 0){
+        line += " Your most expensive card is <b>" + priciest.n + "</b> at " + priciest.a + "%. You are paying " + money(interest) + " a month to keep this arrangement.";
+      }
+      v.innerHTML = line;
+    }
+  }
+  document.getElementById("addDebt").addEventListener("click",function(){
+    debts.push({name:"",bal:"",apr:""}); save("debts",debts); renderDebts();
+  });
+  renderDebts();
+
+  /* ---------------- 13 weeks ---------------- */
+  var weeks = load("weeks", []);
+  var gridEl = document.getElementById("grid90");
+  for(var w=0; w<13; w++){
+    (function(idx){
+      var b = document.createElement("button");
+      b.type="button";
+      b.dataset.on = weeks.indexOf(idx) > -1 ? "1" : "0";
+      b.title = "Week " + (idx+1);
+      b.setAttribute("aria-label","Week "+(idx+1)+(weeks.indexOf(idx)>-1?", complete":", not yet"));
+      b.addEventListener("click",function(){
+        var at = weeks.indexOf(idx);
+        if(at > -1){ weeks.splice(at,1); b.dataset.on="0"; }
+        else { weeks.push(idx); b.dataset.on="1"; }
+        save("weeks",weeks); renderWeeks();
+      });
+      gridEl.appendChild(b);
+    })(w);
+  }
+  function renderWeeks(){
+    document.getElementById("weeksFilled").textContent = weeks.length + " of 13 weeks";
+  }
+  renderWeeks();
+
+  /* ---------------- reset ---------------- */
+  document.getElementById("resetAll").addEventListener("click",function(){
+    if(!confirm("Erase everything saved on this page? This can't be undone.")) return;
+    try{
+      Object.keys(localStorage).forEach(function(k){ if(k.indexOf(K)===0) localStorage.removeItem(k); });
+    }catch(e){}
+    location.reload();
+  });
+})();
+</script>
