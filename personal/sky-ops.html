@@ -159,6 +159,36 @@
   .gcount.full{color:var(--emerald);font-weight:700}
   .gcue{font-size:12px;color:var(--dim);margin-bottom:10px}
 
+  /* ---------- area chips & coverage ---------- */
+  .chip{
+    font-family:var(--disp);font-size:8.5px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;padding:2px 6px;border-radius:5px;flex:none;
+    border:1px solid currentColor;opacity:.75;
+  }
+  .chip[data-area="money"]{color:#d4af37}
+  .chip[data-area="work"]{color:#7dd3fc}
+  .chip[data-area="body"]{color:#10b981}
+  .chip[data-area="mind"]{color:#c4b5fd}
+  .chip[data-area="home"]{color:#94a3b8}
+  .chip[data-area="people"]{color:#fda4af}
+  .loop .t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px;margin-top:6px}
+  .area{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
+    padding:10px 11px;
+  }
+  .area .an{
+    font-family:var(--disp);font-size:9px;font-weight:700;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--dim);
+  }
+  .area .av{
+    font-family:var(--disp);font-weight:800;font-size:17px;margin-top:3px;
+    font-variant-numeric:tabular-nums;
+  }
+  .area[data-full="1"]{border-color:rgba(16,185,129,.4)}
+  .area[data-full="1"] .av{color:var(--emerald)}
+  .area[data-zero="1"] .av{color:var(--dim)}
+
   /* ---------- open loops ---------- */
   .loopadd{display:flex;gap:9px;margin-bottom:14px}
   .loopadd input{
