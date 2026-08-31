@@ -138,6 +138,18 @@
   td.plan-name{color:var(--text);font-weight:700;font-family:'Playfair Display',serif;font-size:16px}
   td.rate{color:var(--champagne);font-weight:700}
 
+  /* fee transparency note */
+  .fee-note{
+    margin-top:22px;border:1px solid var(--line);border-left:2px solid var(--gold);
+    border-radius:var(--r-md);padding:24px 26px;background:rgba(229,184,130,.04);
+  }
+  .fee-note h3{
+    font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:800;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;
+  }
+  .fee-note p{font-size:14.5px;color:var(--muted);max-width:78ch}
+  .fee-note strong{color:var(--champagne);font-weight:700}
+
   /* amenities */
   .amen-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
   .amen-block h3{
@@ -251,40 +263,40 @@
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Liberty Hill &middot; Santa Rita Ranch</span>
-        <h1>Caso Santa Rita Ranch<br><em>a house, leased like an apartment</em></h1>
+        <h1>The 3-bedroom house<br><em>for less than an Austin 2-bed</em></h1>
         <p class="hero-sub">
-          Brand-new three and four bedroom <strong>detached rental homes</strong> inside the
-          Santa Rita Ranch master plan &mdash; private fenced yards, attached garages,
-          quartz kitchens, and full resort amenities. No shared walls. No HOA dues.
-          No mortgage, no down payment, no property tax.
+          Caso Santa Rita Ranch&rsquo;s entry home: <strong>3 bed, 2 bath, 1,382 square feet</strong>
+          of brand-new detached house &mdash; private fenced yard, attached garage,
+          quartz kitchen, washer and dryer in the unit. No shared walls, no HOA dues,
+          no down payment, no property tax.
         </p>
         <div class="spec-row">
-          <span class="spec">3 &amp; 4 Bedrooms</span>
-          <span class="spec">1,382 &ndash; 1,873 Sq Ft</span>
+          <span class="spec">3 Bed / 2 Bath</span>
+          <span class="spec">1,382 Sq Ft</span>
           <span class="spec">Attached Garage</span>
-          <span class="spec">Private Yard</span>
-          <span class="spec">Washer &amp; Dryer Included</span>
+          <span class="spec">Fenced Yard</span>
+          <span class="spec">W/D Included</span>
         </div>
       </div>
 
       <aside class="price-panel">
-        <span class="panel-tag" id="tagSpecial">12 Weeks Free</span>
-        <div class="net-figure num" id="heroNet">from $1,692<small>/mo</small></div>
+        <span class="panel-tag" id="tagSpecial">10 Weeks Free</span>
+        <div class="net-figure num" id="heroNet">$1,776<small>/mo</small></div>
         <div class="net-caption">
           True net-effective average on a <span id="heroTerm">12</span>-month lease
         </div>
         <div class="ledger">
           <div class="ledger-row">
-            <span>Base rate, starting from</span>
-            <span class="num" id="heroBase">from $2,199/mo</span>
+            <span>Published base rate</span>
+            <span class="num" id="heroBase">$2,199/mo</span>
           </div>
           <div class="ledger-row credit">
             <span id="heroConcLabel">Concession credit</span>
-            <span class="num" id="heroConc">&minus;$6,090</span>
+            <span class="num" id="heroConc">&minus;$5,075</span>
           </div>
           <div class="ledger-row">
             <span>Your real monthly average</span>
-            <span class="num" id="heroNet2">$1,692</span>
+            <span class="num" id="heroNet2">$1,776</span>
           </div>
         </div>
       </aside>
@@ -307,10 +319,10 @@
     <div class="case-grid">
       <article class="case">
         <span class="k">Square footage</span>
-        <h3>Up to 1,873 sq ft</h3>
+        <h3>1,382 sq ft, three bedrooms</h3>
         <p>
-          Roughly double a comparable Austin two-bedroom apartment, with a dedicated room
-          left over for a home office or guest suite.
+          Well beyond a comparable Austin two-bedroom apartment, with a full third bedroom
+          left over for a home office or guests.
         </p>
       </article>
       <article class="case">
@@ -335,16 +347,16 @@
 
 <div class="shell"><div class="rule"></div></div>
 
-<!-- ===================== FLOOR PLANS ===================== -->
+<!-- ===================== THE HOME ===================== -->
 <section>
   <div class="shell">
     <div class="sec-head">
-      <span class="eyebrow">Availability</span>
-      <h2>Homes and rates</h2>
+      <span class="eyebrow">The entry home</span>
+      <h2>3 bed, 2 bath, 1,382 square feet</h2>
       <p>
-        Rates move daily with the property's revenue-management system. These are current
-        starting points &mdash; I pull live availability and the exact concession on your
-        target move-in date.
+        This is the least expensive home at Caso &mdash; and the one that moves fastest.
+        Only a handful of homes are available at any given time, so the rate below is a
+        starting point, not a promise. I pull the live number the day you ask.
       </p>
     </div>
 
@@ -353,18 +365,32 @@
         <table>
           <thead>
             <tr>
-              <th scope="col">Home</th>
-              <th scope="col">Beds / Baths</th>
-              <th scope="col">Approx. Sq Ft</th>
-              <th scope="col">Starting Base</th>
-              <th scope="col">Net Effective</th>
+              <th scope="col">What you get</th>
+              <th scope="col">Detail</th>
             </tr>
           </thead>
-          <tbody id="planBody">
-            <!-- rendered from CONFIG -->
+          <tbody>
+            <tr><td class="plan-name">Layout</td><td>Open-concept living and dining, kitchen adjacent to the dining area with generous counter space</td></tr>
+            <tr><td class="plan-name">Primary suite</td><td>En-suite bathroom and walk-in closet</td></tr>
+            <tr><td class="plan-name">Bedrooms 2 &amp; 3</td><td>Both full-size with closets, sharing a second full bathroom</td></tr>
+            <tr><td class="plan-name">Laundry</td><td>Dedicated utility room, full-size washer and dryer included</td></tr>
+            <tr><td class="plan-name">Outdoor</td><td>Private patio off the living room and a fenced yard</td></tr>
+            <tr><td class="plan-name">Parking</td><td>Attached garage with direct access into the home</td></tr>
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="fee-note">
+      <h3>What the listing sites leave out</h3>
+      <p>
+        Published rates at Caso carry roughly <strong>$105/month in required fees</strong> on top of
+        or bundled into the advertised number, depending on which site you are reading, plus
+        utilities. Aggregator sites also cache expired specials for months &mdash; the concessions
+        still posted publicly for this community include offers that expired in 2025. Before you
+        apply anywhere, I confirm the base rate, the fee stack, and the concession that is
+        actually loaded in the system today, and I send you the all-in monthly number.
+      </p>
     </div>
   </div>
 </section>
@@ -428,7 +454,7 @@
       <div class="calc-grid">
         <div class="field">
           <label for="cName">Home / Plan</label>
-          <input type="text" id="cName" value="Caso Santa Rita Ranch">
+          <input type="text" id="cName" value="Caso SRR | 3 Bed / 2 Bath, 1,382 sq ft">
         </div>
         <div class="field">
           <label for="cBase">Base Rent ($/mo)</label>
@@ -441,8 +467,8 @@
         <div class="field">
           <label for="cSpecial">Current Concession</label>
           <select id="cSpecial">
+            <option value="10" selected>10 Weeks Free</option>
             <option value="12">12 Weeks Free</option>
-            <option value="10">10 Weeks Free</option>
             <option value="8">8 Weeks Free</option>
             <option value="6">6 Weeks Free</option>
             <option value="4">4 Weeks Free</option>
@@ -458,14 +484,14 @@
             <span>Base lease rate</span><span class="num" id="oBase">$2,199/mo</span>
           </div>
           <div class="ledger-row credit">
-            <span>Total concession value</span><span class="num" id="oConc">&minus;$6,090</span>
+            <span>Total concession value</span><span class="num" id="oConc">&minus;$5,075</span>
           </div>
           <div class="ledger-row">
-            <span>Total cost of lease</span><span class="num" id="oTotal">$20,298</span>
+            <span>Total cost of lease</span><span class="num" id="oTotal">$21,313</span>
           </div>
           <div class="ledger-row">
             <span style="color:var(--champagne);font-weight:700">Real net-effective rate</span>
-            <span class="num" id="oNet" style="color:var(--gold);font-size:18px">$1,692/mo</span>
+            <span class="num" id="oNet" style="color:var(--gold);font-size:18px">$1,776/mo</span>
           </div>
         </div>
       </div>
@@ -523,15 +549,28 @@
       <a href="https://www.trec.texas.gov/forms/consumer-protection-notice" target="_blank" rel="noopener noreferrer" style="color:var(--muted)">TREC Consumer Protection Notice</a> &middot;
       <a href="https://www.trec.texas.gov/forms/information-about-brokerage-services" target="_blank" rel="noopener noreferrer" style="color:var(--muted)">TREC Information About Brokerage Services</a>.
       <br><br>
-      Caso Santa Rita Ranch is located at 320 Mira Mesa Drive, Liberty Hill, TX 78642 and is
-      owned and operated by third parties (managed by Avenue5 Residential). Sophia Reddehase and
-      Spirit Real Estate Group, LLC do not own or manage this community.
-      <strong>All pricing, concessions, square footage, floor plans, and availability are
-      estimates subject to change daily by property management and must be verified directly
-      with the community prior to application or lease signing.</strong>
-      Net-effective figures are calculated by amortizing the stated concession across the full
-      lease term and are illustrative only; they are not an offer, a quote, or a guaranteed rate.
-      Concessions apply to select homes and lease terms and may require qualification.
+      Caso Santa Rita Ranch is located at 320 Mira Mesa Drive, Liberty Hill, TX 78642
+      (Williamson County) and is owned and operated by third parties, managed by Avenue5
+      Residential. Sophia Reddehase and Spirit Real Estate Group, LLC do not own or manage
+      this community and do not set its rates, fees, or concessions.
+      <strong>All pricing, concessions, square footage, floor plans, fees, and availability
+      are estimates drawn from publicly published listing data, are subject to change daily
+      by property management, and must be verified directly with the community prior to
+      application or lease signing.</strong>
+      The advertised base rate of $2,199/month is the lowest rate published across public
+      listing sources; other sources publish starting rates from $2,199 to $2,299, and
+      three-bedroom homes have been listed as high as $2,485. Published rates are associated
+      with approximately $105/month in required fees, and additional charges for utilities,
+      trash, water, package service, and amenities may apply; deposits vary by applicant.
+      Concession offers currently published for this community range from &ldquo;up to 10
+      weeks free&rdquo; to &ldquo;up to 12 weeks free&rdquo; on select homes with restrictions,
+      and some third-party listings still display expired offers &mdash; the figure shown here
+      uses the more conservative 10 weeks. Net-effective figures are calculated by amortizing
+      the stated concession across the full lease term and are illustrative only; they are not
+      an offer, a quote, or a guaranteed rate, and they do not include fees, deposits, or
+      utilities. Concessions apply to select homes and lease terms and may require qualification.
+      Breed restrictions apply to dogs at this community; service animals and assistance animals
+      are not subject to breed restrictions and are accommodated in accordance with applicable law.
       Locator services are provided at no cost to the renter; compensation is paid by the
       property from its marketing budget. Locators provide independent representation under
       Texas Real Estate Commission guidelines. We do business in accordance with the Federal
@@ -546,15 +585,12 @@
    LIVE FIGURES — update these two blocks when pricing changes.
    ------------------------------------------------------------- */
 var CONFIG = {
-  weeksFree: 12,                        // current advertised concession, in weeks
-  specialLabel: "Up to 12 Weeks Free",  // "select homes" language kept in the ad copy
+  // ---- LIVE FIGURES — update after confirming with the leasing office ----
+  weeksFree: 10,                    // conservative: sources show "up to 10" and "up to 12" weeks
+  specialLabel: "10 Weeks Free",
   defaultTerm: 12,
-  startingBase: 2199,                   // lowest published starting rate
-  // Only published, verifiable figures. Per-home rates are pulled live, not guessed.
-  plans: [
-    { name: "Three Bedroom", bb: "3 Bed / 2 Bath",    sqft: "from 1,382", base: 2199 },
-    { name: "Four Bedroom",  bb: "4 Bed / 2.5+ Bath", sqft: "up to 1,873", base: null }
-  ]
+  base: 2199,                       // lowest published rate, 3 bed / 2 bath, 1,382 sq ft
+  planName: "Caso SRR | 3 Bed / 2 Bath, 1,382 sq ft"
 };
 
 function usd(n){
@@ -568,38 +604,14 @@ function netEffective(base, term, weeks){
 
 /* ---- hero panel ---- */
 (function renderHero(){
-  var base = CONFIG.startingBase;
-  var r = netEffective(base, CONFIG.defaultTerm, CONFIG.weeksFree);
+  var r = netEffective(CONFIG.base, CONFIG.defaultTerm, CONFIG.weeksFree);
   document.getElementById("tagSpecial").textContent = CONFIG.specialLabel;
-  document.getElementById("heroBase").textContent = "from " + usd(base) + "/mo";
+  document.getElementById("heroBase").textContent = usd(CONFIG.base) + "/mo";
   document.getElementById("heroConcLabel").textContent = CONFIG.specialLabel + ", select homes";
   document.getElementById("heroConc").innerHTML = "&minus;" + usd(r.discount);
-  document.getElementById("heroNet").innerHTML = "from " + usd(r.net) + "<small>/mo</small>";
+  document.getElementById("heroNet").innerHTML = usd(r.net) + "<small>/mo</small>";
   document.getElementById("heroNet2").textContent = usd(r.net);
   document.getElementById("heroTerm").textContent = CONFIG.defaultTerm;
-})();
-
-/* ---- floor plan table ---- */
-(function renderPlans(){
-  var body = document.getElementById("planBody");
-  body.innerHTML = CONFIG.plans.map(function(p){
-    var baseCell, netCell;
-    if (p.base){
-      var r = netEffective(p.base, CONFIG.defaultTerm, CONFIG.weeksFree);
-      baseCell = "from " + usd(p.base) + "/mo";
-      netCell  = "from " + usd(r.net) + "/mo";
-    } else {
-      baseCell = "Live rate on request";
-      netCell  = "Quoted same day";
-    }
-    return "<tr>" +
-      '<td class="plan-name">' + p.name + "</td>" +
-      "<td>" + p.bb + "</td>" +
-      '<td class="num">' + p.sqft + " sq ft</td>" +
-      '<td class="num">' + baseCell + "</td>" +
-      '<td class="rate num">' + netCell + "</td>" +
-    "</tr>";
-  }).join("");
 })();
 
 /* ---- calculator ---- */
