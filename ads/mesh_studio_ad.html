@@ -1,0 +1,480 @@
+<title>Mesh Studio Drop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap">
+<style>
+  :root{
+    --ink:#07090d;
+    --surface:#0e1118;
+    --surface-2:#141926;
+    --line:rgba(255,255,255,.10);
+    --line-strong:rgba(255,255,255,.18);
+    --gold:#d4af37;
+    --gold-lt:#f5e2a3;
+    --gold-dk:#a8841d;
+    --rose:#ff3366;
+    --rose-dim:rgba(255,51,102,.14);
+    --ivory:#f8fafc;
+    --muted:#94a3b8;
+    --dim:#64748b;
+    --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --disp:'Syne','Plus Jakarta Sans',sans-serif;
+    --serif:'Cormorant Garamond',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(212,175,55,.06) 0%, transparent 42%),
+      radial-gradient(circle at 88% 72%, rgba(255,51,102,.05) 0%, transparent 45%),
+      var(--ink);
+    color:var(--ivory);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--gold-lt)}
+  .wrap{max-width:1240px;margin:0 auto;padding:48px 24px 96px}
+
+  /* ---------- kit header ---------- */
+  .kit-head{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:44px}
+  .eyebrow{
+    font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 12px
+  }
+  .kit-head h1{
+    font-family:var(--disp);font-weight:800;font-size:clamp(30px,5vw,50px);
+    line-height:1.04;letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance;color:var(--ivory)
+  }
+  .kit-head p{margin:0;max-width:62ch;color:var(--muted);font-size:15px}
+  .kit-head .verify{
+    margin-top:20px;display:flex;gap:10px;align-items:flex-start;
+    background:var(--rose-dim);border:1px solid rgba(255,51,102,.34);
+    border-radius:10px;padding:12px 15px;max-width:70ch
+  }
+  .kit-head .verify strong{color:#ff8fab;font-weight:700}
+  .kit-head .verify span{font-size:13.5px;color:#e2c7cf;line-height:1.55}
+
+  /* ---------- section scaffolding ---------- */
+  .sec{margin-top:60px}
+  .sec-label{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:22px;
+    border-bottom:1px solid var(--line);padding-bottom:10px
+  }
+  .sec-label h2{
+    font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.01em;margin:0;color:var(--ivory)
+  }
+  .sec-label .dims{
+    font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--dim);font-variant-numeric:tabular-nums
+  }
+
+  /* ---------- ad scaling stage ---------- */
+  .stage{width:100%;overflow:hidden}
+  .stage-inner{transform-origin:top left}
+
+  /* ---------- shared ad type ---------- */
+  .ad{
+    position:relative;overflow:hidden;color:var(--ivory);
+    background:
+      radial-gradient(circle at 78% 14%, rgba(212,175,55,.10) 0%, transparent 46%),
+      radial-gradient(circle at 8% 88%, rgba(255,51,102,.09) 0%, transparent 44%),
+      linear-gradient(168deg,#0b0e15 0%,#07090d 58%,#0a0d14 100%);
+    font-family:var(--sans);
+  }
+  .ad .hair{position:absolute;background:linear-gradient(90deg,transparent,var(--gold-dk),transparent);height:1px;opacity:.55}
+  .ad-eyebrow{
+    font-size:19px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)
+  }
+  .ad-price{
+    font-family:var(--disp);font-weight:800;line-height:.82;letter-spacing:-.045em;
+    color:var(--ivory);font-variant-numeric:tabular-nums
+  }
+  .ad-from{
+    font-family:var(--sans);font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--rose)
+  }
+  .ad-mo{font-family:var(--sans);font-weight:600;color:var(--muted);letter-spacing:-.01em}
+  .ad-name{font-family:var(--disp);font-weight:700;letter-spacing:-.015em;color:var(--ivory)}
+  .ad-serif{font-family:var(--serif);font-style:italic;color:var(--gold-lt)}
+  .spec{display:flex;flex-direction:column;gap:0}
+  .spec-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid rgba(255,255,255,.09)}
+  .spec-k{font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  .spec-v{font-weight:700;color:var(--ivory);text-align:right;font-variant-numeric:tabular-nums}
+  .amen{display:flex;flex-wrap:wrap}
+  .amen li{
+    list-style:none;font-weight:500;color:#cbd5e1;position:relative
+  }
+  .amen li::before{content:"◆";color:var(--gold-dk);margin-right:.5em;font-size:.68em;vertical-align:.15em}
+  .ad-cta{
+    display:inline-flex;align-items:center;background:var(--rose);color:#fff;
+    font-weight:800;letter-spacing:.02em
+  }
+  .ad-foot{border-top:1px solid rgba(212,175,55,.34);color:var(--dim);font-weight:500}
+  .ad-foot b{color:var(--gold-lt);font-weight:700}
+  .ad-fine{color:#4d5768;font-weight:400}
+
+  /* ===== SQUARE 1080x1080 ===== */
+  #sq{width:1080px;height:1080px;display:grid;grid-template-columns:392px 1fr}
+  #sq .rail{
+    border-right:1px solid rgba(212,175,55,.30);
+    padding:74px 44px 64px 74px;display:flex;flex-direction:column;
+    background:linear-gradient(180deg,rgba(255,255,255,.022),transparent)
+  }
+  #sq .rail .ad-eyebrow{font-size:16px;letter-spacing:.28em;line-height:1.5}
+  #sq .rail .ad-name{font-size:47px;line-height:1.02;margin:26px 0 8px}
+  #sq .rail .sub{font-size:19px;color:var(--muted);font-weight:500;margin:0 0 40px}
+  #sq .spec-row{padding:15px 0}
+  #sq .spec-k{font-size:12px}
+  #sq .spec-v{font-size:17px}
+  #sq .rail .ad-serif{font-size:27px;line-height:1.3;margin-top:auto;padding-top:36px}
+  #sq .field{padding:74px 74px 64px 62px;display:flex;flex-direction:column}
+  #sq .ad-from{font-size:20px;margin-bottom:22px;display:block}
+  #sq .priceline{display:flex;align-items:flex-end;gap:18px}
+  #sq .ad-price{font-size:258px}
+  #sq .ad-mo{font-size:40px;padding-bottom:26px}
+  #sq .kicker{font-size:27px;color:#cbd5e1;font-weight:500;margin:30px 0 0;max-width:22ch;line-height:1.42}
+  #sq .kicker b{color:var(--ivory);font-weight:800}
+  #sq .amen{gap:12px 26px;margin:42px 0 0;padding:0;max-width:520px}
+  #sq .amen li{font-size:18px}
+  #sq .field .ad-cta{margin-top:auto;font-size:24px;padding:20px 34px;border-radius:6px;align-self:flex-start}
+  #sq .ad-foot{margin-top:34px;padding-top:20px;font-size:14.5px;line-height:1.65}
+  #sq .ad-fine{font-size:12.5px;margin-top:7px;display:block}
+
+  /* ===== STORY 1080x1920 ===== */
+  #st{width:1080px;height:1920px;display:flex;flex-direction:column;padding:130px 86px 96px}
+  #st .ad-eyebrow{font-size:22px}
+  #st .ad-name{font-size:74px;line-height:1.02;margin:30px 0 10px}
+  #st .sub{font-size:26px;color:var(--muted);font-weight:500;margin:0}
+  #st .band{margin:76px 0 0;padding:56px 0;border-top:1px solid rgba(212,175,55,.34);border-bottom:1px solid rgba(212,175,55,.34)}
+  #st .ad-from{font-size:24px;margin-bottom:26px;display:block}
+  #st .priceline{display:flex;align-items:flex-end;gap:22px}
+  #st .ad-price{font-size:312px}
+  #st .ad-mo{font-size:50px;padding-bottom:34px}
+  #st .kicker{font-size:38px;color:#cbd5e1;font-weight:500;line-height:1.38;margin:64px 0 0;max-width:19ch}
+  #st .kicker b{color:var(--ivory);font-weight:800}
+  #st .spec{margin-top:56px}
+  #st .spec-row{padding:22px 0}
+  #st .spec-k{font-size:16px}
+  #st .spec-v{font-size:24px}
+  #st .amen{gap:16px 34px;margin:52px 0 0;padding:0}
+  #st .amen li{font-size:25px}
+  #st .ad-cta{margin-top:auto;font-size:33px;padding:28px 46px;border-radius:8px;align-self:flex-start}
+  #st .ad-foot{margin-top:44px;padding-top:26px;font-size:19px;line-height:1.6}
+  #st .ad-fine{font-size:16px;margin-top:10px;display:block}
+
+  /* ---------- copy blocks ---------- */
+  .copy-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  .card{
+    background:linear-gradient(180deg,var(--surface-2),var(--surface));
+    border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;overflow:hidden
+  }
+  .card-head{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)
+  }
+  .card-head h3{
+    margin:0;font-size:12px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--gold)
+  }
+  .btn{
+    font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink);background:var(--gold-lt);border:0;border-radius:999px;padding:7px 15px;cursor:pointer;
+    transition:background .2s ease,transform .12s ease
+  }
+  .btn:hover{background:#fff}
+  .btn:active{transform:translateY(1px)}
+  .btn:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+  .btn.done{background:#10b981;color:#04120c}
+  .card pre{
+    margin:0;padding:20px;font-family:var(--sans);font-size:14px;line-height:1.68;
+    color:#dbe3ee;white-space:pre-wrap;word-wrap:break-word;overflow-x:auto;flex:1
+  }
+
+  /* ---------- facts table ---------- */
+  .facts{width:100%;border-collapse:collapse;font-size:14.5px}
+  .facts th,.facts td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  .facts th{
+    width:200px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);white-space:nowrap
+  }
+  .facts td{color:#dbe3ee;font-variant-numeric:tabular-nums}
+  .facts tr:last-child th,.facts tr:last-child td{border-bottom:0}
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+  .src{margin-top:14px;font-size:13px;color:var(--dim);line-height:1.7}
+  .src a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+  .src a:hover{color:var(--gold-lt)}
+
+  .howto{
+    margin-top:16px;font-size:14px;color:var(--muted);line-height:1.75;padding-left:20px
+  }
+  .howto li{margin-bottom:7px}
+  .howto b{color:var(--ivory);font-weight:600}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="kit-head">
+    <p class="eyebrow">Ad Kit · East Riverside · Austin, TX</p>
+    <h1>Mesh Apartments — cheapest studio on the board</h1>
+    <p>Two finished ad frames plus paste-ready caption copy for the $669 studio at Mesh Apartments. Screenshot either frame at full size to export, or drop a real Mesh photo behind the price field before you post.</p>
+    <div class="verify">
+      <strong>Verify first</strong>
+      <span>Pricing below was pulled from public listing aggregators on <b>Aug 31, 2026</b>, not from the property's leasing system. Confirm the live number, unit count and any concession with RPM Living at <b>737-264-7221</b> before this goes out — the ads say "from" and carry a subject-to-change line, but a stale price is still your name on it.</span>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="sec-label">
+      <h2>Square post</h2>
+      <span class="dims">1080 × 1080 · Instagram feed, Facebook</span>
+    </div>
+    <div class="stage" data-w="1080" data-h="1080">
+      <div class="stage-inner">
+        <div class="ad" id="sq">
+          <div class="rail">
+            <span class="ad-eyebrow">East Riverside<br>Austin, TX</span>
+            <h2 class="ad-name">Mesh<br>Apartments</h2>
+            <p class="sub">2101 Elmont Drive, 78741</p>
+            <div class="spec">
+              <div class="spec-row"><span class="spec-k">Layout</span><span class="spec-v">Studio</span></div>
+              <div class="spec-row"><span class="spec-k">Size</span><span class="spec-v">250 sq ft</span></div>
+              <div class="spec-row"><span class="spec-k">Floor plan</span><span class="spec-v">E1</span></div>
+              <div class="spec-row"><span class="spec-k">Available</span><span class="spec-v">3 units</span></div>
+              <div class="spec-row"><span class="spec-k">To downtown</span><span class="spec-v">~10 min</span></div>
+            </div>
+            <p class="ad-serif">The cheapest front<br>door in Austin.</p>
+          </div>
+          <div class="field">
+            <span class="ad-from">Studios from</span>
+            <div class="priceline">
+              <span class="ad-price">$669</span>
+              <span class="ad-mo">/mo</span>
+            </div>
+            <p class="kicker">A real Austin address for <b>under seven hundred</b> — renovated, walkable, and going fast.</p>
+            <ul class="amen">
+              <li>Resort-style pool</li>
+              <li>24-hr fitness</li>
+              <li>Granite kitchens</li>
+              <li>Dog park</li>
+              <li>EV chargers</li>
+              <li>Walk to Emo's &amp; Buzz Mill</li>
+            </ul>
+            <span class="ad-cta">DM "MESH" — I'll send what's open today</span>
+            <div class="ad-foot">
+              <b>Sophia Sky Reddehase</b> · Austin Apartment Locator · (512) 676-1215<br>
+              My service is 100% free to you — the community pays my fee.
+              <span class="ad-fine">TREC #831516 · Sponsoring Broker: Spirit Real Estate Group, LLC · Prices, availability and specials subject to change.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">
+      <h2>Story / Reel cover</h2>
+      <span class="dims">1080 × 1920 · IG Story, TikTok, FB Story</span>
+    </div>
+    <div class="stage" data-w="1080" data-h="1920">
+      <div class="stage-inner">
+        <div class="ad" id="st">
+          <span class="ad-eyebrow">East Riverside · Austin</span>
+          <h2 class="ad-name">Mesh<br>Apartments</h2>
+          <p class="sub">2101 Elmont Drive, Austin, TX 78741</p>
+          <div class="band">
+            <span class="ad-from">Studios from</span>
+            <div class="priceline">
+              <span class="ad-price">$669</span>
+              <span class="ad-mo">/mo</span>
+            </div>
+          </div>
+          <p class="kicker">Yes, <b>in Austin.</b> 250 sq ft, renovated, three left.</p>
+          <div class="spec">
+            <div class="spec-row"><span class="spec-k">Floor plan</span><span class="spec-v">E1 · Studio · 250 sq ft</span></div>
+            <div class="spec-row"><span class="spec-k">Available now</span><span class="spec-v">3 units</span></div>
+            <div class="spec-row"><span class="spec-k">Across the street</span><span class="spec-v">Emo's &amp; Buzz Mill</span></div>
+          </div>
+          <ul class="amen">
+            <li>Resort-style pool</li>
+            <li>24-hr fitness center</li>
+            <li>Granite kitchens</li>
+            <li>Faux-wood floors</li>
+            <li>Dog park</li>
+            <li>Grills &amp; picnic area</li>
+            <li>EV chargers</li>
+            <li>Pet friendly</li>
+          </ul>
+          <span class="ad-cta">Swipe up / DM "MESH"</span>
+          <div class="ad-foot">
+            <b>Sophia Sky Reddehase</b> · Austin Apartment Locator · (512) 676-1215<br>
+            100% free to you — the community pays my locator fee.
+            <span class="ad-fine">TREC #831516 · Sponsoring Broker: Spirit Real Estate Group, LLC · Prices, availability and specials subject to change without notice.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">
+      <h2>Caption copy</h2>
+      <span class="dims">Tap copy · paste as-is</span>
+    </div>
+    <div class="copy-grid">
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Instagram / Facebook post</h3>
+          <button class="btn" type="button" data-copy="ig">Copy</button>
+        </div>
+        <pre id="ig">$669. Studio. Austin. Not a typo.
+
+Mesh Apartments in East Riverside has studios starting at $669/mo — 250 sq ft, renovated, and only 3 left on the board as of today.
+
+What comes with it:
+◆ Granite kitchen + faux-wood floors
+◆ Resort-style pool and 24-hr fitness center
+◆ Dog park, grills, picnic area, EV chargers
+◆ Emo's and Buzz Mill literally across the street
+◆ About 10 minutes to downtown
+
+I'm a licensed Austin apartment locator and my service is 100% free to you — the community pays my fee, so your price is the same or better than going in alone. I'll pull today's real availability, send you the floor plan, and set the tour.
+
+Comment or DM "MESH" and I'll send what's open right now.
+
+Sophia Sky Reddehase · Austin Apartment Locator
+(512) 676-1215 · TREC #831516 · Spirit Real Estate Group, LLC
+Prices, availability and specials subject to change.
+
+#austinapartments #eastriverside #atxrentals #austintx #apartmenthunting #austinapartmentlocator #cheaprentaustin #studioapartment #movingtoaustin</pre>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Facebook group / Marketplace</h3>
+          <button class="btn" type="button" data-copy="fb">Copy</button>
+        </div>
+        <pre id="fb">Cheapest studio I can find in Austin right now — $669/mo at Mesh Apartments (2101 Elmont Dr, East Riverside, 78741).
+
+It's the E1 floor plan: 250 sq ft studio, renovated, granite counters, faux-wood floors. Three units showing available. Community has a resort-style pool, 24-hour gym, dog park, grills and EV chargers, and it's pet friendly. Emo's and Buzz Mill are across the street and downtown is about a 10-minute drive.
+
+If you're on a tight budget or moving here sight-unseen, this is the number to beat.
+
+I'm a licensed Texas agent and Austin apartment locator. My help is free to you — apartment communities pay my locator commission, so you never pay more for using me. I'll verify today's pricing and availability, send video, and book the tour.
+
+Message me "MESH" and I'll send you the current list.
+
+Sophia Sky Reddehase
+(512) 676-1215 · Sophia.Reddehases@spiritre.com
+TREC #831516 · Sponsoring Broker: Spirit Real Estate Group, LLC
+Pricing and availability subject to change — I confirm every number with the property before you apply.</pre>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>SMS / DM blast</h3>
+          <button class="btn" type="button" data-copy="sms">Copy</button>
+        </div>
+        <pre id="sms">Hey! Flagging one for you — Mesh Apartments in East Riverside has studios from $669/mo right now (250 sq ft, renovated, 3 left). Pool, gym, dog park, EV chargers, walk to Emo's, ~10 min to downtown.
+
+Cheapest studio on my board today. Want me to check what's actually open and set a tour? Costs you nothing — the property pays me.
+
+— Sophia, Austin apartment locator, (512) 676-1215
+TREC #831516 · Spirit Real Estate Group, LLC</pre>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h3>Story text overlay</h3>
+          <button class="btn" type="button" data-copy="story">Copy</button>
+        </div>
+        <pre id="story">$669 STUDIO. IN AUSTIN.
+
+Mesh Apartments · East Riverside
+250 sq ft · renovated · 3 left
+
+Pool 🏊 Gym 🏋️ Dog park 🐕 EV chargers ⚡
+Across from Emo's
+
+DM "MESH" — I'll send what's open today.
+Free service. I'm licensed. I do the work.</pre>
+      </article>
+
+    </div>
+
+    <ul class="howto">
+      <li><b>Export the frames:</b> screenshot each ad at full size, or open this page and use your browser's element-screenshot tool on the ad container — they're built at exact 1080 × 1080 and 1080 × 1920 pixel dimensions.</li>
+      <li><b>Add a photo:</b> if you have a real Mesh exterior or unit shot, drop it behind the price field at low opacity. Don't substitute another property's photo.</li>
+      <li><b>Swap the price:</b> if leasing quotes a different number, update it in both frames and in all four caption blocks before posting.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="sec-label">
+      <h2>Listing facts used</h2>
+      <span class="dims">Pulled Aug 31, 2026</span>
+    </div>
+    <div class="tbl-scroll">
+      <table class="facts">
+        <tbody>
+          <tr><th>Property</th><td>Mesh Apartments (Mesh III building)</td></tr>
+          <tr><th>Address</th><td>2101 Elmont Drive, Austin, TX 78741 — East Riverside</td></tr>
+          <tr><th>Cheapest studio</th><td>E1 · 250 sq ft · from $669/mo</td></tr>
+          <tr><th>Units available</th><td>3 on the E1 plan; a 434 sq ft studio also showed 1 available</td></tr>
+          <tr><th>Other studio quote</th><td>Some aggregators list studios from $729 — confirm which plan that is</td></tr>
+          <tr><th>Management</th><td>RPM Living · 737-264-7221</td></tr>
+          <tr><th>Unit features</th><td>Faux-wood flooring, granite counters, walk-in closets; W/D and patio/balcony in select units</td></tr>
+          <tr><th>Community</th><td>Resort-style pool, fitness center, dog park, grills &amp; picnic area, EV chargers, pet friendly</td></tr>
+          <tr><th>Not claimed</th><td>No move-in special or concession is advertised in these frames — none was verified</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Sources: <a href="https://www.apartments.com/mesh-apartments-austin-tx/t0zzfe9/" target="_blank" rel="noopener noreferrer">Apartments.com</a> · <a href="https://www.rentcafe.com/apartments/tx/austin/mesh-properties/default.aspx" target="_blank" rel="noopener noreferrer">RentCafe</a> · <a href="https://www.meshapartments.com/floorplans" target="_blank" rel="noopener noreferrer">meshapartments.com floor plans</a> · <a href="https://www.apartmentguide.com/apartments/Texas/Austin/Mesh/100028591/" target="_blank" rel="noopener noreferrer">ApartmentGuide</a></p>
+  </section>
+
+</div>
+
+<script>
+  // Scale each fixed-dimension ad frame to the available width.
+  function fitStages(){
+    document.querySelectorAll('.stage').forEach(function(stage){
+      var w = parseFloat(stage.dataset.w), h = parseFloat(stage.dataset.h);
+      var scale = Math.min(1, stage.clientWidth / w);
+      var inner = stage.querySelector('.stage-inner');
+      inner.style.transform = 'scale(' + scale + ')';
+      stage.style.height = (h * scale) + 'px';
+    });
+  }
+  window.addEventListener('resize', fitStages);
+  window.addEventListener('load', fitStages);
+  fitStages();
+
+  document.querySelectorAll('.btn[data-copy]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = document.getElementById(btn.dataset.copy).innerText;
+      var mark = function(){
+        btn.textContent = 'Copied';
+        btn.classList.add('done');
+        setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(mark, function(){ fallback(text, mark); });
+      } else {
+        fallback(text, mark);
+      }
+    });
+  });
+
+  function fallback(text, done){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+</script>
