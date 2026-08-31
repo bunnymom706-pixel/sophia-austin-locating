@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Santa Rita Ranch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0c10;
+    --ink-2:#12141a;
+    --card:rgba(22,25,32,.82);
+    --card-solid:#161920;
+    --line:rgba(229,184,130,.20);
+    --line-strong:rgba(229,184,130,.46);
+    --gold:#e5b882;
+    --champagne:#f3dfc1;
+    --sage:#8fa088;
+    --text:#f4f6f8;
+    --muted:#9aa3af;
+    --muted-2:#6f7885;
+    --r-sm:10px; --r-md:14px; --r-lg:22px;
+    --shell:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .shell{width:100%;max-width:var(--shell);margin:0 auto;padding:0 22px}
+  .eyebrow{
+    font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);
+  }
+  h1,h2,h3{font-family:'Playfair Display',Georgia,'Times New Roman',serif;font-weight:600;text-wrap:balance;line-height:1.12}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  #ridge{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 12% 8%, rgba(229,184,130,.16) 0%, transparent 55%),
+      linear-gradient(180deg, rgba(11,12,16,.30) 0%, rgba(11,12,16,.86) 72%, var(--ink) 100%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:2;padding:74px 0 60px}
+  .locator-strip{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    font-weight:700;margin-bottom:38px;
+  }
+  .locator-strip b{color:var(--champagne);font-weight:800;letter-spacing:.16em}
+  .dot{width:3px;height:3px;border-radius:50%;background:var(--line-strong);flex:none}
+
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:end}
+  h1{font-size:clamp(38px,6.4vw,68px);letter-spacing:-.01em;margin:14px 0 0}
+  h1 em{font-style:italic;color:var(--champagne)}
+  .hero-sub{margin-top:18px;color:var(--muted);font-size:17px;max-width:52ch}
+  .hero-sub strong{color:var(--text);font-weight:600}
+
+  .spec-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .spec{
+    border:1px solid var(--line);border-radius:100px;padding:7px 15px;
+    font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--champagne);
+    background:rgba(229,184,130,.05);
+  }
+
+  /* price panel */
+  .price-panel{
+    background:var(--card);
+    backdrop-filter:blur(16px);
+    border:1px solid var(--line-strong);
+    border-radius:var(--r-lg);
+    padding:26px 26px 22px;
+    box-shadow:0 30px 60px -24px rgba(0,0,0,.85);
+  }
+  .panel-tag{
+    font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink);background:var(--gold);border-radius:100px;padding:5px 12px;display:inline-block;
+  }
+  .net-figure{
+    font-family:'Playfair Display',Georgia,serif;
+    font-size:clamp(44px,7vw,60px);color:var(--gold);line-height:1;margin:16px 0 2px;
+    letter-spacing:-.02em;
+  }
+  .net-figure small{font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:var(--muted);letter-spacing:0}
+  .net-caption{font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+  .ledger{margin-top:20px;border-top:1px solid rgba(255,255,255,.07);padding-top:6px}
+  .ledger-row{
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px;
+  }
+  .ledger-row:last-child{border-bottom:none}
+  .ledger-row span:first-child{color:var(--muted)}
+  .ledger-row span:last-child{font-weight:700}
+  .ledger-row.credit span:last-child{color:var(--sage)}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:64px 0}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+  .sec-head{max-width:60ch;margin-bottom:34px}
+  .sec-head h2{font-size:clamp(26px,3.6vw,36px);margin-top:10px}
+  .sec-head p{color:var(--muted);margin-top:12px;font-size:16px}
+
+  /* the house case */
+  .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .case{
+    border:1px solid var(--line);border-radius:var(--r-md);padding:24px 22px;
+    background:linear-gradient(180deg,rgba(255,255,255,.022),transparent);
+  }
+  .case h3{font-size:19px;color:var(--champagne);margin-bottom:9px}
+  .case p{font-size:14.5px;color:var(--muted)}
+  .case .k{
+    font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);
+    display:block;margin-bottom:14px;letter-spacing:.02em;
+  }
+
+  /* floor plans */
+  .plans{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+  .plan-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:560px}
+  th,td{text-align:left;padding:15px 20px;font-size:14.5px}
+  th{
+    font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);background:rgba(229,184,130,.06);border-bottom:1px solid var(--line);
+  }
+  td{border-bottom:1px solid rgba(255,255,255,.05);color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  td.plan-name{color:var(--text);font-weight:700;font-family:'Playfair Display',serif;font-size:16px}
+  td.rate{color:var(--champagne);font-weight:700}
+
+  /* amenities */
+  .amen-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  .amen-block h3{
+    font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;
+  }
+  .amen-list{list-style:none;display:grid;gap:0}
+  .amen-list li{
+    padding:11px 0 11px 20px;border-bottom:1px solid rgba(255,255,255,.05);
+    font-size:14.5px;color:var(--muted);position:relative;
+  }
+  .amen-list li::before{
+    content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--line-strong);
+  }
+  .amen-list li:last-child{border-bottom:none}
+
+  /* calculator */
+  .calc{
+    border:1px solid var(--line-strong);border-radius:var(--r-lg);
+    background:var(--card-solid);padding:30px;
+  }
+  .calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+  .field{display:flex;flex-direction:column;gap:8px}
+  label{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  input,select{
+    background:rgba(11,12,16,.85);border:1px solid var(--line);border-radius:var(--r-sm);
+    padding:12px 13px;color:var(--text);font:600 15px 'Plus Jakarta Sans',sans-serif;outline:none;
+    transition:border-color .18s ease,box-shadow .18s ease;
+  }
+  input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(229,184,130,.16)}
+  input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{
+    outline:2px solid var(--gold);outline-offset:3px;
+  }
+  .calc-out{
+    margin-top:24px;padding:20px;border-radius:var(--r-md);
+    border:1px solid var(--line);background:rgba(11,12,16,.6);
+  }
+  .quote{
+    margin-top:18px;padding:18px;border:1px dashed var(--line);border-radius:var(--r-md);
+    background:rgba(0,0,0,.35);white-space:pre-wrap;font-size:14px;line-height:1.62;
+    color:#e6e9ee;user-select:all;
+  }
+  .btn{
+    display:inline-block;border:none;cursor:pointer;text-decoration:none;text-align:center;
+    font:800 14px 'Plus Jakarta Sans',sans-serif;letter-spacing:.03em;border-radius:var(--r-sm);
+    padding:14px 26px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  }
+  .btn-gold{
+    background:linear-gradient(135deg,var(--gold),#c99a5c);color:var(--ink);
+    box-shadow:0 8px 22px -8px rgba(229,184,130,.55);
+  }
+  .btn-gold:hover{transform:translateY(-1px);box-shadow:0 12px 28px -8px rgba(229,184,130,.7)}
+  .btn-ghost{background:transparent;color:var(--champagne);border:1px solid var(--line-strong)}
+  .btn-ghost:hover{background:rgba(229,184,130,.08)}
+  .btn-full{width:100%;margin-top:14px}
+
+  /* CTA */
+  .cta{
+    border:1px solid var(--line-strong);border-radius:var(--r-lg);padding:44px 38px;
+    background:
+      radial-gradient(90% 140% at 100% 0%, rgba(229,184,130,.12), transparent 60%),
+      var(--card-solid);
+  }
+  .cta h2{font-size:clamp(26px,3.6vw,34px);max-width:20ch}
+  .cta p{color:var(--muted);margin-top:14px;max-width:56ch;font-size:15.5px}
+  .cta-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .contact-line{
+    margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);
+    display:flex;flex-wrap:wrap;gap:10px 22px;font-size:13.5px;color:var(--muted);
+  }
+  .contact-line a{color:var(--champagne);text-decoration:none;border-bottom:1px solid var(--line)}
+  .contact-line a:hover{color:var(--gold)}
+
+  /* footer / compliance */
+  footer{border-top:1px solid var(--line);padding:34px 0 46px;margin-top:20px}
+  .compliance{font-size:11.5px;line-height:1.75;color:var(--muted-2);max-width:88ch}
+  .compliance strong{color:var(--muted);font-weight:700}
+  .eho{
+    display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;
+  }
+  .eho svg{flex:none}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:34px}
+    .case-grid{grid-template-columns:1fr}
+    .amen-grid{grid-template-columns:1fr;gap:30px}
+    .hero-inner{padding:52px 0 44px}
+    section{padding:50px 0}
+    .cta{padding:32px 24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <canvas id="ridge" aria-hidden="true"></canvas>
+  <div class="shell hero-inner">
+
+    <div class="locator-strip">
+      <b>Sophia Reddehase</b><span class="dot"></span>
+      <span>Licensed Austin Apartment Locator</span><span class="dot"></span>
+      <span>TREC #831516</span><span class="dot"></span>
+      <span>Free to You</span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Liberty Hill &middot; Santa Rita Ranch</span>
+        <h1>Caso Santa Rita Ranch<br><em>a house, leased like an apartment</em></h1>
+        <p class="hero-sub">
+          Brand-new three and four bedroom <strong>detached rental homes</strong> inside the
+          Santa Rita Ranch master plan &mdash; private fenced yards, attached garages,
+          quartz kitchens, and full resort amenities. No shared walls. No HOA dues.
+          No mortgage, no down payment, no property tax.
+        </p>
+        <div class="spec-row">
+          <span class="spec">3 &amp; 4 Bedrooms</span>
+          <span class="spec">1,382 &ndash; 1,873 Sq Ft</span>
+          <span class="spec">Attached Garage</span>
+          <span class="spec">Private Yard</span>
+          <span class="spec">Washer &amp; Dryer Included</span>
+        </div>
+      </div>
+
+      <aside class="price-panel">
+        <span class="panel-tag" id="tagSpecial">12 Weeks Free</span>
+        <div class="net-figure num" id="heroNet">from $1,692<small>/mo</small></div>
+        <div class="net-caption">
+          True net-effective average on a <span id="heroTerm">12</span>-month lease
+        </div>
+        <div class="ledger">
+          <div class="ledger-row">
+            <span>Base rate, starting from</span>
+            <span class="num" id="heroBase">from $2,199/mo</span>
+          </div>
+          <div class="ledger-row credit">
+            <span id="heroConcLabel">Concession credit</span>
+            <span class="num" id="heroConc">&minus;$6,090</span>
+          </div>
+          <div class="ledger-row">
+            <span>Your real monthly average</span>
+            <span class="num" id="heroNet2">$1,692</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== THE CASE ===================== -->
+<section>
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">Why this one is different</span>
+      <h2>You are not renting a unit. You are renting a house.</h2>
+      <p>
+        Caso is a build-for-rent neighborhood &mdash; 168 standalone homes on real lots,
+        professionally managed by Avenue5 Residential, leased on standard 12-month terms.
+      </p>
+    </div>
+
+    <div class="case-grid">
+      <article class="case">
+        <span class="k">Square footage</span>
+        <h3>Up to 1,873 sq ft</h3>
+        <p>
+          Roughly double a comparable Austin two-bedroom apartment, with a dedicated room
+          left over for a home office or guest suite.
+        </p>
+      </article>
+      <article class="case">
+        <span class="k">The yard &amp; garage</span>
+        <h3>Fenced, private, yours</h3>
+        <p>
+          Your own fenced back yard for dogs, plus an attached garage you park in and store
+          in &mdash; not a shared deck and a parking hunt.
+        </p>
+      </article>
+      <article class="case">
+        <span class="k">Cost of ownership</span>
+        <h3>None of it</h3>
+        <p>
+          No down payment, no property tax, no HOA dues, no roof or HVAC bill. Maintenance
+          is a phone call, and the lease ends when you want it to.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="shell"><div class="rule"></div></div>
+
+<!-- ===================== FLOOR PLANS ===================== -->
+<section>
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">Availability</span>
+      <h2>Homes and rates</h2>
+      <p>
+        Rates move daily with the property's revenue-management system. These are current
+        starting points &mdash; I pull live availability and the exact concession on your
+        target move-in date.
+      </p>
+    </div>
+
+    <div class="plans">
+      <div class="plan-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Home</th>
+              <th scope="col">Beds / Baths</th>
+              <th scope="col">Approx. Sq Ft</th>
+              <th scope="col">Starting Base</th>
+              <th scope="col">Net Effective</th>
+            </tr>
+          </thead>
+          <tbody id="planBody">
+            <!-- rendered from CONFIG -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="shell"><div class="rule"></div></div>
+
+<!-- ===================== AMENITIES ===================== -->
+<section>
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">The package</span>
+      <h2>Inside the home, and outside the door</h2>
+    </div>
+
+    <div class="amen-grid">
+      <div class="amen-block">
+        <h3>In every home</h3>
+        <ul class="amen-list">
+          <li>Quartz countertops and designer cabinetry</li>
+          <li>Stainless steel appliance package</li>
+          <li>Wood-style flooring in main living areas</li>
+          <li>Full-size washer and dryer included</li>
+          <li>Walk-in closets and walk-in showers</li>
+          <li>Private patio and fenced yard</li>
+          <li>Attached garage with direct home access</li>
+          <li>High-speed internet ready</li>
+        </ul>
+      </div>
+      <div class="amen-block">
+        <h3>Santa Rita Ranch amenities</h3>
+        <ul class="amen-list">
+          <li>Two resort swimming pools</li>
+          <li>Water park and splash features</li>
+          <li>State-of-the-art fitness center</li>
+          <li>Community clubhouse</li>
+          <li>Pickleball and sand volleyball</li>
+          <li>Dedicated dog park</li>
+          <li>Playground, picnic areas, and grills</li>
+          <li>Miles of hiking and biking trails</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="shell"><div class="rule"></div></div>
+
+<!-- ===================== NET EFFECTIVE CALCULATOR ===================== -->
+<section>
+  <div class="shell">
+    <div class="sec-head">
+      <span class="eyebrow">Run the real number</span>
+      <h2>Net effective, not the sticker price</h2>
+      <p>
+        A concession spread across the lease is the only rent number that matters. Change
+        the base rate, term, or special below and the quote rewrites itself.
+      </p>
+    </div>
+
+    <div class="calc">
+      <div class="calc-grid">
+        <div class="field">
+          <label for="cName">Home / Plan</label>
+          <input type="text" id="cName" value="Caso Santa Rita Ranch">
+        </div>
+        <div class="field">
+          <label for="cBase">Base Rent ($/mo)</label>
+          <input type="number" id="cBase" value="2199" min="0" step="1">
+        </div>
+        <div class="field">
+          <label for="cTerm">Lease Term (months)</label>
+          <input type="number" id="cTerm" value="12" min="1" step="1">
+        </div>
+        <div class="field">
+          <label for="cSpecial">Current Concession</label>
+          <select id="cSpecial">
+            <option value="12">12 Weeks Free</option>
+            <option value="10">10 Weeks Free</option>
+            <option value="8">8 Weeks Free</option>
+            <option value="6">6 Weeks Free</option>
+            <option value="4">4 Weeks Free</option>
+            <option value="2">2 Weeks Free</option>
+            <option value="0">No Concession</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-out">
+        <div class="ledger">
+          <div class="ledger-row">
+            <span>Base lease rate</span><span class="num" id="oBase">$2,199/mo</span>
+          </div>
+          <div class="ledger-row credit">
+            <span>Total concession value</span><span class="num" id="oConc">&minus;$6,090</span>
+          </div>
+          <div class="ledger-row">
+            <span>Total cost of lease</span><span class="num" id="oTotal">$20,298</span>
+          </div>
+          <div class="ledger-row">
+            <span style="color:var(--champagne);font-weight:700">Real net-effective rate</span>
+            <span class="num" id="oNet" style="color:var(--gold);font-size:18px">$1,692/mo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote" id="quoteBox">Loading&hellip;</div>
+      <button class="btn btn-gold btn-full" id="copyBtn" type="button">Copy Client-Ready Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section>
+  <div class="shell">
+    <div class="cta">
+      <span class="eyebrow">Next step</span>
+      <h2>I will pull live pricing on Caso today.</h2>
+      <p>
+        Send me your move-in window and bedroom count. You get exact available homes,
+        the concession that is actually posted right now, a 4K video walkthrough if you
+        cannot get to Liberty Hill, and side-by-side net-effective comparisons against
+        every competing build-for-rent community in the corridor.
+      </p>
+      <p style="color:var(--champagne);margin-top:14px">
+        My service costs you nothing &mdash; the property pays my fee from its marketing
+        budget, and your rate is identical or better than going direct.
+      </p>
+
+      <div class="cta-actions">
+        <a class="btn btn-gold" href="https://sparkapt.com/inquiry/sophia-reddehase859" target="_blank" rel="noopener noreferrer">Get My Caso Availability List</a>
+        <a class="btn btn-ghost" href="tel:+15126761215">Call or Text (512) 676-1215</a>
+      </div>
+
+      <div class="contact-line">
+        <span>Sophia Reddehase, Licensed Texas Real Estate Agent</span>
+        <span><a href="mailto:Sophia.Reddehases@spiritre.com">Sophia.Reddehases@spiritre.com</a></span>
+        <span>Spirit Real Estate Group, LLC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMPLIANCE ===================== -->
+<footer>
+  <div class="shell">
+    <div class="eho" aria-label="Equal Housing Opportunity">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>
+      </svg>
+      Equal Housing Opportunity
+    </div>
+    <p class="compliance">
+      <strong>Sophia Reddehase</strong> is a licensed Texas real estate sales agent,
+      TREC License #831516, sponsored by <strong>Spirit Real Estate Group, LLC</strong>.
+      Direct: (512) 676-1215 &middot; Sophia.Reddehases@spiritre.com &middot;
+      <a href="https://www.trec.texas.gov/forms/consumer-protection-notice" target="_blank" rel="noopener noreferrer" style="color:var(--muted)">TREC Consumer Protection Notice</a> &middot;
+      <a href="https://www.trec.texas.gov/forms/information-about-brokerage-services" target="_blank" rel="noopener noreferrer" style="color:var(--muted)">TREC Information About Brokerage Services</a>.
+      <br><br>
+      Caso Santa Rita Ranch is located at 320 Mira Mesa Drive, Liberty Hill, TX 78642 and is
+      owned and operated by third parties (managed by Avenue5 Residential). Sophia Reddehase and
+      Spirit Real Estate Group, LLC do not own or manage this community.
+      <strong>All pricing, concessions, square footage, floor plans, and availability are
+      estimates subject to change daily by property management and must be verified directly
+      with the community prior to application or lease signing.</strong>
+      Net-effective figures are calculated by amortizing the stated concession across the full
+      lease term and are illustrative only; they are not an offer, a quote, or a guaranteed rate.
+      Concessions apply to select homes and lease terms and may require qualification.
+      Locator services are provided at no cost to the renter; compensation is paid by the
+      property from its marketing budget. Locators provide independent representation under
+      Texas Real Estate Commission guidelines. We do business in accordance with the Federal
+      Fair Housing Act and do not discriminate on the basis of race, color, religion, sex,
+      handicap, familial status, or national origin.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* -------------------------------------------------------------
+   LIVE FIGURES — update these two blocks when pricing changes.
+   ------------------------------------------------------------- */
+var CONFIG = {
+  weeksFree: 12,                        // current advertised concession, in weeks
+  specialLabel: "Up to 12 Weeks Free",  // "select homes" language kept in the ad copy
+  defaultTerm: 12,
+  startingBase: 2199,                   // lowest published starting rate
+  // Only published, verifiable figures. Per-home rates are pulled live, not guessed.
+  plans: [
+    { name: "Three Bedroom", bb: "3 Bed / 2 Bath",    sqft: "from 1,382", base: 2199 },
+    { name: "Four Bedroom",  bb: "4 Bed / 2.5+ Bath", sqft: "up to 1,873", base: null }
+  ]
+};
+
+function usd(n){
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+function netEffective(base, term, weeks){
+  var discount = (base * 12 / 52) * weeks;      // same math as the VIP quote generator
+  var total = Math.max(0, (base * term) - discount);
+  return { discount: discount, total: total, net: term > 0 ? total / term : base };
+}
+
+/* ---- hero panel ---- */
+(function renderHero(){
+  var base = CONFIG.startingBase;
+  var r = netEffective(base, CONFIG.defaultTerm, CONFIG.weeksFree);
+  document.getElementById("tagSpecial").textContent = CONFIG.specialLabel;
+  document.getElementById("heroBase").textContent = "from " + usd(base) + "/mo";
+  document.getElementById("heroConcLabel").textContent = CONFIG.specialLabel + ", select homes";
+  document.getElementById("heroConc").innerHTML = "&minus;" + usd(r.discount);
+  document.getElementById("heroNet").innerHTML = "from " + usd(r.net) + "<small>/mo</small>";
+  document.getElementById("heroNet2").textContent = usd(r.net);
+  document.getElementById("heroTerm").textContent = CONFIG.defaultTerm;
+})();
+
+/* ---- floor plan table ---- */
+(function renderPlans(){
+  var body = document.getElementById("planBody");
+  body.innerHTML = CONFIG.plans.map(function(p){
+    var baseCell, netCell;
+    if (p.base){
+      var r = netEffective(p.base, CONFIG.defaultTerm, CONFIG.weeksFree);
+      baseCell = "from " + usd(p.base) + "/mo";
+      netCell  = "from " + usd(r.net) + "/mo";
+    } else {
+      baseCell = "Live rate on request";
+      netCell  = "Quoted same day";
+    }
+    return "<tr>" +
+      '<td class="plan-name">' + p.name + "</td>" +
+      "<td>" + p.bb + "</td>" +
+      '<td class="num">' + p.sqft + " sq ft</td>" +
+      '<td class="num">' + baseCell + "</td>" +
+      '<td class="rate num">' + netCell + "</td>" +
+    "</tr>";
+  }).join("");
+})();
+
+/* ---- calculator ---- */
+var cName = document.getElementById("cName"),
+    cBase = document.getElementById("cBase"),
+    cTerm = document.getElementById("cTerm"),
+    cSpecial = document.getElementById("cSpecial"),
+    quoteBox = document.getElementById("quoteBox"),
+    copyBtn = document.getElementById("copyBtn");
+
+function calc(){
+  var name = cName.value.trim() || "Caso Santa Rita Ranch";
+  var base = parseFloat(cBase.value) || 0;
+  var term = parseInt(cTerm.value, 10) || 12;
+  var weeks = parseFloat(cSpecial.value) || 0;
+  var r = netEffective(base, term, weeks);
+
+  document.getElementById("oBase").textContent = usd(base) + "/mo";
+  document.getElementById("oConc").innerHTML = weeks > 0 ? "&minus;" + usd(r.discount) : "$0";
+  document.getElementById("oTotal").textContent = usd(r.total);
+  document.getElementById("oNet").textContent = usd(r.net) + "/mo";
+
+  var msg;
+  if (weeks > 0){
+    msg = "Here is the real breakdown on " + name + ":\n\n" +
+      "• Base lease rate: " + usd(base) + "/mo\n" +
+      "• Current special: " + weeks + " weeks free (" + usd(r.discount) + " total savings)\n" +
+      "• True net-effective average: " + usd(r.net) + "/mo over " + term + " months\n\n" +
+      "Pricing and concessions change daily with availability. Say the word and I will lock " +
+      "this in or send you a video walkthrough.\n\n" +
+      "— Sophia Reddehase | Licensed TX Locator | (512) 676-1215";
+  } else {
+    msg = "Here is the current rate on " + name + ":\n\n" +
+      "• Monthly lease rate: " + usd(base) + "/mo on a " + term + "-month term\n\n" +
+      "Let me know if you want floor plans or a tour scheduled.\n\n" +
+      "— Sophia Reddehase | Licensed TX Locator | (512) 676-1215";
+  }
+  quoteBox.textContent = msg;
+}
+
+[cName, cBase, cTerm, cSpecial].forEach(function(el){
+  el.addEventListener("input", calc);
+  el.addEventListener("change", calc);
+});
+
+copyBtn.addEventListener("click", function(){
+  var text = quoteBox.textContent;
+  var done = function(){
+    copyBtn.textContent = "✓ Copied";
+    setTimeout(function(){ copyBtn.textContent = "Copy Client-Ready Quote"; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, done);
+  } else { done(); }
+});
+
+calc();
+
+/* ---- hero backdrop: Hill Country ridgelines ---- */
+(function ridge(){
+  var c = document.getElementById("ridge");
+  if(!c) return;
+  var ctx = c.getContext("2d");
+  function draw(){
+    var w = c.offsetWidth, h = c.offsetHeight, dpr = window.devicePixelRatio || 1;
+    c.width = w * dpr; c.height = h * dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+
+    var sky = ctx.createLinearGradient(0,0,0,h);
+    sky.addColorStop(0,"#14171e");
+    sky.addColorStop(1,"#0b0c10");
+    ctx.fillStyle = sky; ctx.fillRect(0,0,w,h);
+
+    var bands = [
+      { y:.52, amp:26, col:"rgba(229,184,130,.055)" },
+      { y:.64, amp:34, col:"rgba(143,160,136,.055)" },
+      { y:.76, amp:22, col:"rgba(229,184,130,.045)" },
+      { y:.88, amp:16, col:"rgba(11,12,16,.9)"      }
+    ];
+    bands.forEach(function(b,i){
+      ctx.beginPath();
+      ctx.moveTo(0,h);
+      var baseY = h * b.y, step = Math.max(6, w/140), seed = i*3.1;
+      for (var x=0; x<=w; x+=step){
+        var t = x/w * Math.PI * 2;
+        var y = baseY
+              + Math.sin(t*1.6 + seed) * b.amp
+              + Math.sin(t*3.7 + seed*1.9) * (b.amp*.38)
+              + Math.sin(t*7.1 + seed*.7) * (b.amp*.16);
+        ctx.lineTo(x,y);
+      }
+      ctx.lineTo(w,h); ctx.closePath();
+      ctx.fillStyle = b.col; ctx.fill();
+    });
+  }
+  draw();
+  var t; window.addEventListener("resize", function(){
+    clearTimeout(t); t = setTimeout(draw, 140);
+  });
+})();
+</script>
+
+</body>
+</html>
