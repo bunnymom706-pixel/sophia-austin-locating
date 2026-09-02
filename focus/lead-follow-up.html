@@ -1,0 +1,458 @@
+<title>Lead Follow-Up Block</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #07090d;
+    --surface: #0e1118;
+    --surface-2: #151a24;
+    --line: rgba(255,255,255,0.09);
+    --line-strong: rgba(255,255,255,0.18);
+    --gold: #d4af37;
+    --gold-light: #f5e2a3;
+    --gold-dim: rgba(212,175,55,0.16);
+    --ink: #f8fafc;
+    --ink-muted: #9aa5b8;
+    --ink-dim: #667389;
+    --good: #10b981;
+    --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 28px 20px 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.05;
+    margin: 4px 0 0;
+    text-wrap: balance;
+  }
+  .date { color: var(--ink-dim); font-size: 13px; white-space: nowrap; }
+
+  .stage {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .stage.active { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold-dim), 0 12px 40px rgba(0,0,0,0.45); }
+  .stage.done { opacity: 0.62; }
+  .stage-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .stage-title { font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 0; }
+  .stage-mark {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-dim); font-weight: 600;
+  }
+  .stage.done .stage-mark { color: var(--good); }
+  .hint { color: var(--ink-muted); font-size: 14px; margin: 0; max-width: 46ch; }
+
+  /* Eye drill */
+  .drill {
+    position: relative;
+    height: 220px;
+    border-radius: 10px;
+    background: radial-gradient(circle at 50% 50%, #0b0e15 0%, var(--bg) 70%);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+  .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--gold-light);
+    box-shadow: 0 0 18px rgba(245,226,163,0.55);
+    transition: transform 1.2s ease, opacity 1.2s ease;
+  }
+  .ring {
+    position: absolute; inset: 0; margin: auto;
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.35);
+    opacity: 0;
+    transition: transform 6s ease-out, opacity 1.2s ease;
+  }
+  .drill.wide .dot { transform: scale(0.35); opacity: 0.35; }
+  .drill.wide .ring { opacity: 1; transform: scale(9); }
+  .corner {
+    position: absolute; width: 8px; height: 8px;
+    border: 1px solid rgba(245,226,163,0.0);
+    transition: border-color 1.5s ease;
+  }
+  .corner.tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+  .corner.tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+  .corner.bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+  .corner.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+  .drill.wide .corner { border-color: rgba(245,226,163,0.7); }
+  .drill-label {
+    position: absolute; left: 0; right: 0; bottom: 12px;
+    text-align: center; font-size: 13px; color: var(--ink-muted);
+    padding: 0 12px;
+  }
+  .drill-time {
+    position: absolute; top: 10px; right: 14px;
+    font-size: 13px; color: var(--ink-dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Leads */
+  .leads { display: flex; flex-direction: column; gap: 8px; }
+  .lead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+  }
+  .lead input {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+    min-width: 0;
+  }
+  .lead input::placeholder { color: var(--ink-dim); }
+  .lead input:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
+  .status { display: flex; gap: 4px; }
+  .status button {
+    font: inherit; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-muted);
+    cursor: pointer;
+  }
+  .status button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .status button.on { background: var(--good); border-color: var(--good); color: #06251b; }
+  .lead.sent input { color: var(--ink-muted); }
+  .lead.booked input { text-decoration: line-through; text-decoration-color: var(--gold); }
+
+  .script {
+    background: var(--surface-2);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 12px;
+  }
+  .script label { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); font-weight: 600; margin-bottom: 6px; }
+  .script textarea {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.4;
+    resize: vertical;
+    min-height: 74px;
+    padding: 0;
+  }
+  .script textarea:focus { outline: none; }
+  .script-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 6px; }
+  .script-row small { color: var(--ink-dim); font-size: 12px; }
+
+  /* Timer */
+  .big {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    margin: 6px 0 0;
+  }
+  .bar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--gold); transition: width 1s linear; }
+  .phone {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--ink-muted); font-size: 14px;
+    padding: 10px 12px;
+    border: 1px dashed var(--line-strong);
+    border-radius: 8px;
+  }
+  .phone b { color: var(--gold-light); font-weight: 600; }
+  .focus-line {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--gold-light);
+    text-align: center;
+    margin: 0;
+  }
+
+  /* Buttons */
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    font: inherit; font-weight: 600; font-size: 14px;
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .btn.primary { background: var(--gold); border-color: var(--gold); color: #1a1405; }
+  .btn.quiet { color: var(--ink-muted); border-color: transparent; padding-left: 8px; padding-right: 8px; }
+  .btn:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+  .btn[disabled] { opacity: 0.45; cursor: default; }
+
+  details {
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    color: var(--ink-muted);
+    font-size: 14px;
+  }
+  summary { cursor: pointer; color: var(--ink); font-weight: 600; font-size: 14px; }
+  details p { margin: 8px 0 0; max-width: 60ch; }
+  details a { color: var(--gold-light); }
+  .tally { font-size: 13px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot, .ring, .corner, .bar i { transition: none; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Sophia · Austin Locating</div>
+      <h1>Lead Follow-Up Block</h1>
+    </div>
+    <div class="date" id="today"></div>
+  </header>
+
+  <!-- Stage 1: eyes -->
+  <section class="stage active" id="s1">
+    <div class="stage-head">
+      <h2 class="stage-title">Settle your eyes</h2>
+      <span class="stage-mark" id="m1">60 seconds</span>
+    </div>
+    <p class="hint">Hold the dot. Blink as little as feels fine. When it fades, let your gaze go wide and notice the corners of the screen and the room around it.</p>
+    <div class="drill" id="drill">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <span class="ring"></span>
+      <span class="dot"></span>
+      <span class="drill-time" id="drillTime">1:00</span>
+      <span class="drill-label" id="drillLabel">Press start, then hold the dot.</span>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="startDrill">Start</button>
+      <button class="btn quiet" id="skipDrill">Skip today</button>
+    </div>
+  </section>
+
+  <!-- Stage 2: who -->
+  <section class="stage" id="s2">
+    <div class="stage-head">
+      <h2 class="stage-title">Who hears from you today</h2>
+      <span class="stage-mark" id="m2">Up to five</span>
+    </div>
+    <p class="hint">Names only. Tap the pill when the message is out. Tap again when they book a tour.</p>
+    <div class="leads" id="leads"></div>
+    <div class="script">
+      <label for="scriptText">Your text, ready to paste</label>
+      <textarea id="scriptText" spellcheck="false"></textarea>
+      <div class="script-row">
+        <small>Edit it once. It stays on this device.</small>
+        <button class="btn quiet" id="copyScript">Copy</button>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="startWork">Start the block</button>
+    </div>
+  </section>
+
+  <!-- Stage 3: block -->
+  <section class="stage" id="s3">
+    <div class="stage-head">
+      <h2 class="stage-title">The block</h2>
+      <span class="stage-mark" id="m3">25 minutes</span>
+    </div>
+    <p class="focus-line" id="focusLine">Send the messages. Nothing else lives in this window.</p>
+    <p class="big" id="clock">25:00</p>
+    <div class="bar"><i id="barFill"></i></div>
+    <div class="phone">📵 <span>Phone in <b>another room</b>, or face down and silent until the clock hits zero.</span></div>
+    <div class="row">
+      <button class="btn primary" id="toggleBlock" disabled>Begin</button>
+      <button class="btn" id="len25">25</button>
+      <button class="btn" id="len50">50</button>
+      <span class="tally" id="tally"></span>
+    </div>
+  </section>
+
+  <details>
+    <summary>Why the page is built this way</summary>
+    <p>Holding your eyes on one point trains the same brain circuit that holds mental focus. Letting the gaze go wide afterward reduces "attentional blinks," the small lapses where you miss the next thing right in front of you. Writing down five names before the clock starts settles which brain network is in charge, so the task network runs the block instead of the wandering default network. The phone rule is the one habit the research ties most directly to attention loss.</p>
+    <p>Source: Huberman Lab Essentials, <a href="https://www.hubermanlab.com/episode/essentials-adhd-how-anyone-can-improve-their-focus" target="_blank" rel="noopener">ADHD &amp; How Anyone Can Improve Their Focus</a>, chapters at 22:26, 26:28 and the closing smartphone section.</p>
+  </details>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var todayKey = new Date().toISOString().slice(0, 10);
+  $('today').textContent = new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' });
+
+  var store = { get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+                set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+
+  /* ---------- Stage 1: eye drill ---------- */
+  var drillLeft = 60, drillTimer = null;
+  var drill = $('drill'), drillTime = $('drillTime'), drillLabel = $('drillLabel');
+  function fmt(s) { var m = Math.floor(s / 60), r = s % 60; return m + ':' + (r < 10 ? '0' : '') + r; }
+  function finishStage(n) {
+    var s = $('s' + n); s.classList.remove('active'); s.classList.add('done');
+    var next = $('s' + (n + 1)); if (next) { next.classList.add('active'); next.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+  $('startDrill').addEventListener('click', function () {
+    if (drillTimer) return;
+    this.disabled = true;
+    drillLabel.textContent = 'Hold the dot. Soft, steady.';
+    drillTimer = setInterval(function () {
+      drillLeft--;
+      drillTime.textContent = fmt(drillLeft);
+      if (drillLeft === 30) { drill.classList.add('wide'); drillLabel.textContent = 'Now go wide. See the corners and the room.'; }
+      if (drillLeft <= 0) {
+        clearInterval(drillTimer);
+        $('m1').textContent = 'Done';
+        drillLabel.textContent = 'Eyes settled.';
+        finishStage(1);
+      }
+    }, 1000);
+  });
+  $('skipDrill').addEventListener('click', function () {
+    if (drillTimer) clearInterval(drillTimer);
+    $('m1').textContent = 'Skipped';
+    finishStage(1);
+  });
+
+  /* ---------- Stage 2: leads ---------- */
+  var leadsEl = $('leads');
+  var saved = store.get('leads:' + todayKey, null);
+  var leads = saved || [
+    { name: 'Example: Maya, 1BR Domain, moves Oct 1', st: 0 },
+    { name: 'Example: Chris + Dana, 2BR downtown, dog', st: 0 },
+    { name: '', st: 0 }, { name: '', st: 0 }, { name: '', st: 0 }
+  ];
+  var STATES = ['Not yet', 'Sent', 'Booked'];
+  function saveLeads() { store.set('leads:' + todayKey, leads); updateTally(); }
+  function renderLeads() {
+    leadsEl.innerHTML = '';
+    leads.forEach(function (l, i) {
+      var row = document.createElement('div');
+      row.className = 'lead' + (l.st === 1 ? ' sent' : l.st === 2 ? ' booked' : '');
+      var inp = document.createElement('input');
+      inp.type = 'text'; inp.placeholder = 'Name, what they want, move date'; inp.value = l.name;
+      inp.setAttribute('aria-label', 'Lead ' + (i + 1));
+      inp.addEventListener('input', function () { leads[i].name = inp.value; saveLeads(); });
+      var st = document.createElement('div'); st.className = 'status';
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = STATES[l.st]; b.className = l.st ? 'on' : '';
+      b.setAttribute('aria-label', 'Status for lead ' + (i + 1) + ': ' + STATES[l.st]);
+      b.addEventListener('click', function () { leads[i].st = (leads[i].st + 1) % 3; saveLeads(); renderLeads(); });
+      st.appendChild(b);
+      row.appendChild(inp); row.appendChild(st);
+      leadsEl.appendChild(row);
+    });
+  }
+  function updateTally() {
+    var named = leads.filter(function (l) { return l.name.trim(); }).length;
+    var sent = leads.filter(function (l) { return l.st >= 1 && l.name.trim(); }).length;
+    var booked = leads.filter(function (l) { return l.st === 2 && l.name.trim(); }).length;
+    $('tally').textContent = named ? sent + ' of ' + named + ' sent · ' + booked + ' booked' : '';
+  }
+  renderLeads(); updateTally();
+
+  var defaultScript = "Hi [name], it's Sophia with Spirit Real Estate. I pulled three places that fit your budget and move date. Want the list now, or should I set up tours this week?";
+  var scriptText = $('scriptText');
+  scriptText.value = store.get('script', defaultScript);
+  scriptText.addEventListener('input', function () { store.set('script', scriptText.value); });
+  $('copyScript').addEventListener('click', function () {
+    var btn = this;
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(scriptText.value).then(done, function () { scriptText.select(); }); }
+    else { scriptText.select(); try { document.execCommand('copy'); done(); } catch (e) {} }
+  });
+
+  $('startWork').addEventListener('click', function () {
+    $('m2').textContent = 'Set';
+    finishStage(2);
+    $('toggleBlock').disabled = false;
+  });
+
+  /* ---------- Stage 3: block ---------- */
+  var total = 25 * 60, left = total, running = false, blockTimer = null;
+  var clock = $('clock'), bar = $('barFill'), toggle = $('toggleBlock');
+  function paint() { clock.textContent = fmt(left); bar.style.width = ((total - left) / total * 100) + '%'; }
+  function setLen(min) {
+    if (running) return;
+    total = min * 60; left = total; $('m3').textContent = min + ' minutes'; paint();
+    $('len25').classList.toggle('primary', min === 25);
+    $('len50').classList.toggle('primary', min === 50);
+  }
+  $('len25').addEventListener('click', function () { setLen(25); });
+  $('len50').addEventListener('click', function () { setLen(50); });
+  setLen(25);
+
+  function stop() { running = false; clearInterval(blockTimer); toggle.textContent = left === total ? 'Begin' : 'Resume'; }
+  function finish() {
+    stop();
+    $('m3').textContent = 'Done';
+    $('focusLine').textContent = 'Block done. Tick the pills, then another block or close the tab.';
+    toggle.textContent = 'Another block';
+    left = total; bar.style.width = '100%';
+    try { if (navigator.vibrate) navigator.vibrate([120, 60, 120]); } catch (e) {}
+    document.title = 'Done · Lead Follow-Up Block';
+  }
+  toggle.addEventListener('click', function () {
+    if (running) { stop(); return; }
+    if (left === total) { bar.style.width = '0%'; $('focusLine').textContent = 'Send the messages. Nothing else lives in this window.'; }
+    running = true; toggle.textContent = 'Pause';
+    blockTimer = setInterval(function () {
+      left--; paint();
+      document.title = fmt(left) + ' · Lead Follow-Up Block';
+      if (left <= 0) finish();
+    }, 1000);
+  });
+})();
+</script>
