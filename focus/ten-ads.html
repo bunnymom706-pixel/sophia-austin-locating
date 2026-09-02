@@ -2,392 +2,158 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
 <style>
   :root {
-    --bg: #07090d;
-    --surface: #0e1118;
-    --surface-2: #151a24;
-    --line: rgba(255,255,255,0.09);
-    --line-strong: rgba(255,255,255,0.18);
-    --gold: #d4af37;
-    --gold-light: #f5e2a3;
-    --gold-dim: rgba(212,175,55,0.16);
-    --ink: #f8fafc;
-    --ink-muted: #9aa5b8;
-    --ink-dim: #667389;
-    --good: #10b981;
+    --bg: #07090d; --surface: #0e1118; --surface-2: #151a24;
+    --line: rgba(255,255,255,0.10); --line-strong: rgba(255,255,255,0.2);
+    --gold: #d4af37; --gold-light: #f5e2a3;
+    --ink: #f8fafc; --ink-muted: #9aa5b8; --ink-dim: #667389; --good: #10b981;
     --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
     --sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color-scheme: dark;
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: var(--sans); font-size: 16px; line-height: 1.55;
-    -webkit-font-smoothing: antialiased; min-height: 100vh;
-  }
-  .wrap { max-width: 600px; margin: 0 auto; padding: 28px 20px 56px; display: flex; flex-direction: column; gap: 18px; }
-  header { display: flex; flex-direction: column; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
-  .head-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-  h1 { font-family: var(--serif); font-weight: 500; font-size: 34px; line-height: 1.05; margin: 4px 0 0; text-wrap: balance; }
-  .clock { font-size: 13px; color: var(--ink-dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .clock b { color: var(--ink-muted); font-weight: 600; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 24px 18px 48px; display: flex; flex-direction: column; gap: 16px; }
 
-  /* progress: ten slots */
+  .top { display: flex; flex-direction: column; gap: 10px; }
+  .top-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: 30px; line-height: 1; margin: 0; }
+  .count { font-size: 14px; color: var(--ink-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .count b { color: var(--gold-light); font-weight: 700; }
   .slots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
-  .slot { height: 6px; border-radius: 3px; background: var(--line); position: relative; }
+  .slot { height: 7px; border-radius: 4px; background: var(--line); }
   .slot.done { background: var(--good); }
   .slot.now { background: var(--gold); }
-  .slot-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
 
-  .stage { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 14px; }
-  .stage.active { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold-dim), 0 12px 40px rgba(0,0,0,0.45); }
-  .stage[hidden] { display: none; }
-  .stage-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-  .stage-title { font-family: var(--serif); font-size: 22px; font-weight: 600; margin: 0; }
-  .stage-mark { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); font-weight: 600; }
-  .hint { color: var(--ink-muted); font-size: 14px; margin: 0; max-width: 48ch; }
-
-  /* Eye drill */
-  .drill { position: relative; height: 200px; border-radius: 10px; background: radial-gradient(circle at 50% 50%, #0b0e15 0%, var(--bg) 70%); border: 1px solid var(--line); overflow: hidden; display: grid; place-items: center; }
-  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 18px rgba(245,226,163,0.55); transition: transform 1.2s ease, opacity 1.2s ease; }
-  .ring { position: absolute; inset: 0; margin: auto; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(212,175,55,0.35); opacity: 0; transition: transform 6s ease-out, opacity 1.2s ease; }
-  .drill.wide .dot { transform: scale(0.35); opacity: 0.35; }
-  .drill.wide .ring { opacity: 1; transform: scale(9); }
-  .corner { position: absolute; width: 8px; height: 8px; border: 1px solid rgba(245,226,163,0); transition: border-color 1.5s ease; }
-  .corner.tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
-  .corner.tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
-  .corner.bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
-  .corner.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
-  .drill.wide .corner { border-color: rgba(245,226,163,0.7); }
-  .drill-label { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font-size: 13px; color: var(--ink-muted); padding: 0 12px; }
-  .drill-time { position: absolute; top: 10px; right: 14px; font-size: 13px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
-
-  /* The ad */
-  .ad-num { font-family: var(--serif); font-size: 52px; line-height: 1; font-weight: 500; color: var(--gold-light); font-variant-numeric: tabular-nums; }
-  .ad-num small { font-size: 20px; color: var(--ink-dim); font-family: var(--sans); font-weight: 500; margin-left: 6px; }
-  textarea.ad {
-    width: 100%; min-height: 190px; resize: vertical;
-    background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px;
-    color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; padding: 14px;
-  }
-  textarea.ad::placeholder { color: var(--ink-dim); }
-  textarea.ad:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
-  .ad-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
-
-  /* Lesson */
-  .lesson { border-left: 2px solid var(--gold); padding: 6px 0 6px 14px; }
-  .lesson .k { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
-  .lesson p { font-family: var(--serif); font-size: 20px; line-height: 1.35; margin: 0; max-width: 52ch; }
-
-  .phone { display: flex; align-items: center; gap: 10px; color: var(--ink-muted); font-size: 14px; padding: 10px 12px; border: 1px dashed var(--line-strong); border-radius: 8px; }
-  .phone b { color: var(--gold-light); font-weight: 600; }
-
-  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .btn { font: inherit; font-weight: 600; font-size: 14px; padding: 11px 18px; border-radius: 999px; border: 1px solid var(--line-strong); background: transparent; color: var(--ink); cursor: pointer; }
-  .btn.primary { background: var(--gold); border-color: var(--gold); color: #1a1405; }
-  .btn.quiet { color: var(--ink-muted); border-color: transparent; padding-left: 8px; padding-right: 8px; }
+  .card { background: var(--surface); border: 1px solid var(--gold); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.45); }
+  .adnum { font-family: var(--serif); font-size: 46px; line-height: 1; color: var(--gold-light); font-variant-numeric: tabular-nums; }
+  .adnum small { font-family: var(--sans); font-size: 16px; color: var(--ink-dim); margin-left: 8px; }
+  textarea { width: 100%; min-height: 200px; resize: vertical; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.5; padding: 14px; }
+  textarea::placeholder { color: var(--ink-dim); }
+  textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
+  .btn { font: inherit; font-weight: 700; font-size: 16px; padding: 14px 20px; border-radius: 999px; border: 1px solid var(--gold); background: var(--gold); color: #1a1405; cursor: pointer; width: 100%; }
   .btn:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
-  .btn[disabled] { opacity: 0.45; cursor: default; }
+  .btn.quiet { background: transparent; border-color: var(--line-strong); color: var(--ink-muted); font-weight: 600; width: auto; padding: 10px 14px; font-size: 14px; }
+  .warn { color: var(--gold-light); font-size: 14px; margin: 0; min-height: 1.2em; }
 
-  /* Finish */
-  .done-list { display: flex; flex-direction: column; gap: 10px; }
-  .done-ad { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 14px; white-space: pre-wrap; }
-  .done-ad .n { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600; display: block; margin-bottom: 4px; }
-  .lessons-all { display: flex; flex-direction: column; gap: 12px; }
+  .lesson { border-left: 2px solid var(--gold); padding: 4px 0 4px 14px; }
+  .lesson .k { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+  .lesson p { font-family: var(--serif); font-size: 21px; line-height: 1.35; margin: 0; }
 
-  details { border-top: 1px solid var(--line); padding-top: 12px; color: var(--ink-muted); font-size: 14px; }
-  summary { cursor: pointer; color: var(--ink); font-weight: 600; font-size: 14px; }
-  details p { margin: 8px 0 0; max-width: 60ch; }
-  details a { color: var(--gold-light); }
+  .tip { color: var(--ink-muted); font-size: 14px; margin: 0; padding: 10px 12px; border: 1px dashed var(--line-strong); border-radius: 8px; }
+  .tip b { color: var(--gold-light); font-weight: 600; }
 
-  @media (prefers-reduced-motion: reduce) { .dot, .ring, .corner { transition: none; } }
+  .done-ad { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; white-space: pre-wrap; }
+  .done-ad .n { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+  .list { display: flex; flex-direction: column; gap: 10px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  [hidden] { display: none !important; }
 </style>
 
 <div class="wrap">
-  <header>
-    <div class="head-row">
-      <div>
-        <div class="eyebrow">Sophia · Austin Locating</div>
-        <h1>Ten Ads Block</h1>
-      </div>
-      <div class="clock">On task <b id="elapsed">0:00</b></div>
+  <div class="top">
+    <div class="top-row">
+      <h1>Ten Ads</h1>
+      <div class="count"><b id="doneCount">0</b> of 10 done</div>
     </div>
-    <div>
-      <div class="slots" id="slots"></div>
-      <div class="slot-label"><span id="progressText">0 of 10 written</span><span id="startedText"></span></div>
-    </div>
-  </header>
+    <div class="slots" id="slots"></div>
+  </div>
 
-  <!-- Stage 1: eyes -->
-  <section class="stage active" id="s1">
-    <div class="stage-head">
-      <h2 class="stage-title">Settle your eyes</h2>
-      <span class="stage-mark" id="m1">60 seconds</span>
-    </div>
-    <p class="hint">Hold the dot. Blink as little as feels fine. When it fades, let your gaze go wide and notice the corners of the screen and the room.</p>
-    <div class="drill" id="drill">
-      <span class="corner tl"></span><span class="corner tr"></span>
-      <span class="corner bl"></span><span class="corner br"></span>
-      <span class="ring"></span>
-      <span class="dot"></span>
-      <span class="drill-time" id="drillTime">1:00</span>
-      <span class="drill-label" id="drillLabel">Press start, then hold the dot.</span>
-    </div>
-    <div class="phone">📵 <span>Phone in <b>another room</b> until ad ten is done. Everything you need is on this page.</span></div>
-    <div class="row">
-      <button class="btn primary" id="startDrill">Start</button>
-      <button class="btn quiet" id="skipDrill">Skip, go to the ads</button>
-    </div>
-  </section>
-
-  <!-- Stage 2: one ad at a time -->
-  <section class="stage" id="s2" hidden>
-    <div class="stage-head">
-      <div class="ad-num"><span id="adNum">1</span><small>of 10</small></div>
-      <span class="stage-mark" id="adTimer">0:00 on this ad</span>
-    </div>
-    <textarea class="ad" id="adText" placeholder="Write or paste this ad here. Only this ad exists right now."></textarea>
-    <div class="ad-meta"><span id="wordCount">0 words</span><span>Saved on this device as you type</span></div>
-    <div class="lesson" id="lessonBox" hidden>
-      <div class="k" id="lessonK">What focus is · 1 of 10</div>
+  <div class="card" id="work">
+    <div class="adnum">Ad <span id="adNum">1</span><small>of 10</small></div>
+    <div class="lesson" id="lesson" hidden>
+      <div class="k" id="lessonK"></div>
       <p id="lessonP"></p>
     </div>
-    <div class="row">
-      <button class="btn primary" id="doneAd">Ad done</button>
-      <button class="btn" id="nextAd" hidden>Next ad</button>
-      <button class="btn quiet" id="prevAd">Back one</button>
-    </div>
-  </section>
+    <textarea id="adText" placeholder="Write this ad here. Only this one exists right now."></textarea>
+    <p class="warn" id="warn"></p>
+    <button class="btn" id="doneBtn" type="button">Done. Next ad.</button>
+    <p class="tip">Mind drifting? <b>Stare at one word on the screen for five seconds</b>, then keep typing. Eyes and focus share a circuit.</p>
+  </div>
 
-  <!-- Reset (after ad 5) -->
-  <section class="stage" id="s4" hidden>
-    <div class="stage-head">
-      <h2 class="stage-title">Halfway. Ninety seconds wide.</h2>
-      <span class="stage-mark" id="m4">Optional</span>
+  <div class="card" id="finish" hidden>
+    <div class="adnum">10<small>of 10. Done.</small></div>
+    <div class="lesson">
+      <div class="k">What focus is · 10 of 10</div>
+      <p id="lastLesson"></p>
     </div>
-    <p class="hint">Look past the screen. Let your eyes take in the whole room without landing on anything. This drops the number of attentional blinks for the next five ads.</p>
-    <div class="drill wide" id="drill2">
-      <span class="corner tl"></span><span class="corner tr"></span>
-      <span class="corner bl"></span><span class="corner br"></span>
-      <span class="ring"></span>
-      <span class="dot"></span>
-      <span class="drill-time" id="drill2Time">1:30</span>
-      <span class="drill-label" id="drill2Label">Wide gaze. Nothing to do.</span>
-    </div>
-    <div class="row">
-      <button class="btn primary" id="startReset">Start</button>
-      <button class="btn quiet" id="skipReset">Skip, keep going</button>
-    </div>
-  </section>
+    <button class="btn" id="copyBtn" type="button">Copy all ten</button>
+    <div class="list" id="list"></div>
+    <div class="row"><button class="btn quiet" id="resetBtn" type="button">Clear and start a new set</button></div>
+  </div>
 
-  <!-- Finish -->
-  <section class="stage" id="s3" hidden>
-    <div class="stage-head">
-      <h2 class="stage-title">Ten of ten.</h2>
-      <span class="stage-mark" id="m3">Done</span>
-    </div>
-    <p class="hint" id="finishLine"></p>
-    <div class="row">
-      <button class="btn primary" id="copyAll">Copy all ten</button>
-      <button class="btn quiet" id="resetAll">Start a new set</button>
-    </div>
-    <div class="done-list" id="doneList"></div>
-    <details open>
-      <summary>What focus is, all ten lines</summary>
-      <div class="lessons-all" id="lessonsAll"></div>
-    </details>
-  </section>
-
-  <details>
-    <summary>Why the page is built this way</summary>
-    <p>One ad on screen at a time because working memory in ADHD holds about one thing. A progress line because finishing releases dopamine, and dopamine is what keeps the task network in charge. An eye drill at the start because the eyes and attention share a circuit. A wide-gaze reset at halfway because panoramic vision reduces attentional blinks. The phone rule because heavy phone use is the habit the research ties most directly to attention loss.</p>
-    <p>Source: Huberman Lab Essentials, <a href="https://www.hubermanlab.com/episode/essentials-adhd-how-anyone-can-improve-their-focus" target="_blank" rel="noopener">ADHD &amp; How Anyone Can Improve Their Focus</a>.</p>
-  </details>
+  <p class="tip">📵 Phone in <b>another room</b> until ad ten. Heavy phone use is the habit research ties most directly to attention loss.</p>
 </div>
 
 <script>
 (function () {
-  var $ = function (id) { return document.getElementById(id); };
-  var store = {
-    get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
-    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
-    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
-  };
-  function fmt(s) { s = Math.max(0, Math.round(s)); var m = Math.floor(s / 60), r = s % 60; return m + ':' + (r < 10 ? '0' : '') + r; }
-
+  function $(id) { return document.getElementById(id); }
   var LESSONS = [
-    "Focus is not a personality trait. It is a brain state: one network runs the task and the other, the wandering one, goes quiet. Writing that first ad is what switched it on.",
-    "Dopamine is the conductor. It tells the task network to play and the default network to rest. Finishing something small releases it, which is why ad two came easier than ad one.",
-    "Attention has blinks. Right after you land a target, attention shuts off for a beat. The urge to go re-read ad one is a blink. Let it pass and it does.",
-    "Your eyes and your focus share a circuit. When the mind drifts, hold your eyes on one word on the screen for a few seconds, then keep writing. That is the whole trick.",
-    "Halfway. Low dopamine makes time feel slow, so \"this is taking forever\" shows up right about now. Check the clock at the top. It is telling the truth; the feeling is not.",
-    "A wide gaze resets attention. A minute of panoramic vision measurably reduces attentional blinks. That is what the reset before this ad was for, whether you took it or skipped it.",
-    "Hyperfocus is real, and it is the ADHD strength. Attention locks when the task is concrete. \"Write ad seven\" is concrete. \"Do marketing\" never was.",
-    "Working memory in ADHD holds about one thing. That is why this page shows one ad. The finished ones are saved and out of sight, not lost, so nothing has to be held in your head.",
-    "The phone is the biggest measured drag on attention: over about two hours a day in adults produces ADHD-like symptoms. Every block you run with it out of reach trains the opposite.",
-    "Focus is trained, not found. One 17-minute session of quiet attention reduced attentional blinks in a study, with lasting effect. Look at the clock. You just trained for longer than that on one task."
+    "Focus is not a personality trait. It is a brain state: one network runs the task and the wandering one goes quiet. Writing ad one is what switched it on.",
+    "Dopamine is the conductor. It tells the task network to play and the wandering network to rest. Finishing something small releases it, which is why ad two came easier.",
+    "Attention has blinks. Right after you land a target, it shuts off for a beat. The urge to go re-read ad one is a blink. Let it pass.",
+    "Your eyes and your focus share a circuit. When the mind drifts, hold your eyes on one word for five seconds, then keep writing.",
+    "Halfway. Low dopamine makes time feel slow, so \"this is taking forever\" shows up about now. That is the feeling, not the clock.",
+    "A wide gaze resets attention. Look past the screen at the whole room for thirty seconds. It measurably reduces attentional blinks.",
+    "Hyperfocus is the ADHD strength. Attention locks when the task is concrete. \"Write ad seven\" is concrete. \"Do marketing\" never was.",
+    "Working memory in ADHD holds about one thing. That is why this page shows one ad. The finished ones are saved, not lost.",
+    "The phone is the biggest measured drag on attention: over about two hours a day in adults produces ADHD-like symptoms. This block trained the opposite.",
+    "Focus is trained, not found. One 17-minute sitting of steady attention reduced attentional blinks in a study, with lasting effect. You just did that, on real work."
   ];
 
-  /* ---------- state ---------- */
-  var ads = store.get('tenads:ads', null) || ['', '', '', '', '', '', '', '', '', ''];
-  var done = store.get('tenads:done', null) || [false, false, false, false, false, false, false, false, false, false];
-  var adSeconds = store.get('tenads:adsec', null) || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  var current = store.get('tenads:current', 0);
-  var startedAt = store.get('tenads:started', null);
-  var resetShown = store.get('tenads:reset', false);
-  var totalSeconds = store.get('tenads:total', 0);
-  var resumed = ads.some(function (a) { return a.trim(); }) || done.some(Boolean);
+  var ads, done;
+  try { ads = JSON.parse(localStorage.getItem('tenads.ads') || 'null'); done = JSON.parse(localStorage.getItem('tenads.done') || 'null'); } catch (e) {}
+  if (!ads || ads.length !== 10) ads = ['', '', '', '', '', '', '', '', '', ''];
+  if (!done || done.length !== 10) done = [false, false, false, false, false, false, false, false, false, false];
+  var cur = done.indexOf(false);
+  function save() { try { localStorage.setItem('tenads.ads', JSON.stringify(ads)); localStorage.setItem('tenads.done', JSON.stringify(done)); } catch (e) {} }
 
-  function persist() {
-    store.set('tenads:ads', ads); store.set('tenads:done', done); store.set('tenads:adsec', adSeconds);
-    store.set('tenads:current', current); store.set('tenads:started', startedAt);
-    store.set('tenads:reset', resetShown); store.set('tenads:total', totalSeconds);
+  var ta = $('adText');
+  function render() {
+    var n = 0, html = '';
+    for (var i = 0; i < 10; i++) { if (done[i]) n++; html += '<span class="slot' + (done[i] ? ' done' : (i === cur ? ' now' : '')) + '"></span>'; }
+    $('slots').innerHTML = html;
+    $('doneCount').textContent = n;
+    if (cur < 0) { finish(); return; }
+    $('adNum').textContent = cur + 1;
+    ta.value = ads[cur];
+    $('warn').textContent = '';
+    if (cur > 0) { $('lesson').hidden = false; $('lessonK').textContent = 'What focus is · ' + cur + ' of 10'; $('lessonP').textContent = LESSONS[cur - 1]; }
+    else { $('lesson').hidden = true; }
+    document.title = 'Ad ' + (cur + 1) + ' of 10 · Ten Ads Block';
   }
-
-  /* ---------- progress ---------- */
-  var slotsEl = $('slots');
-  function renderSlots() {
-    slotsEl.innerHTML = '';
-    var n = 0;
-    for (var i = 0; i < 10; i++) {
-      var s = document.createElement('span');
-      s.className = 'slot' + (done[i] ? ' done' : (i === current && inAds ? ' now' : ''));
-      s.title = 'Ad ' + (i + 1) + (done[i] ? ', done' : '');
-      slotsEl.appendChild(s);
-      if (done[i]) n++;
-    }
-    $('progressText').textContent = n + ' of 10 written';
-    $('startedText').textContent = startedAt ? 'Started ' + new Date(startedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : '';
-    return n;
-  }
-
-  /* ---------- clocks ---------- */
-  var inAds = false, tick = null;
-  function startClock() {
-    if (tick) return;
-    if (!startedAt) { startedAt = Date.now(); persist(); }
-    tick = setInterval(function () {
-      totalSeconds++;
-      if (inAds && !done[current]) adSeconds[current]++;
-      $('elapsed').textContent = fmt(totalSeconds);
-      if (inAds) $('adTimer').textContent = fmt(adSeconds[current]) + ' on this ad';
-      if (totalSeconds % 10 === 0) persist();
-      document.title = fmt(totalSeconds) + ' · Ten Ads Block';
-    }, 1000);
-  }
-  $('elapsed').textContent = fmt(totalSeconds);
-
-  /* ---------- stage helpers ---------- */
-  function show(id) {
-    ['s1', 's2', 's3', 's4'].forEach(function (s) { var el = $(s); el.hidden = (s !== id); el.classList.toggle('active', s === id); });
-    $(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  /* ---------- Stage 1: eye drill ---------- */
-  var drillLeft = 60, drillTimer = null;
-  $('startDrill').addEventListener('click', function () {
-    if (drillTimer) return;
-    this.disabled = true; startClock();
-    $('drillLabel').textContent = 'Hold the dot. Soft, steady.';
-    drillTimer = setInterval(function () {
-      drillLeft--; $('drillTime').textContent = fmt(drillLeft);
-      if (drillLeft === 30) { $('drill').classList.add('wide'); $('drillLabel').textContent = 'Now go wide. See the corners and the room.'; }
-      if (drillLeft <= 0) { clearInterval(drillTimer); $('m1').textContent = 'Done'; enterAds(); }
-    }, 1000);
+  ta.addEventListener('input', function () { ads[cur] = ta.value; save(); });
+  $('doneBtn').addEventListener('click', function () {
+    if (!ta.value.trim()) { $('warn').textContent = 'One line is enough, but the box cannot be empty.'; ta.focus(); return; }
+    ads[cur] = ta.value; done[cur] = true; save();
+    cur = done.indexOf(false);
+    render();
+    if (cur >= 0) { ta.focus(); window.scrollTo(0, 0); }
   });
-  $('skipDrill').addEventListener('click', function () { if (drillTimer) clearInterval(drillTimer); $('m1').textContent = 'Skipped'; enterAds(); });
 
-  /* ---------- Stage 2: ads ---------- */
-  var adText = $('adText'), lessonBox = $('lessonBox');
-  function words(t) { var m = t.trim().match(/\S+/g); return m ? m.length : 0; }
-  function enterAds() {
-    inAds = true; startClock();
-    if (done.every(Boolean)) { finish(); return; }
-    if (done[current]) current = done.indexOf(false);
-    show('s2'); loadAd();
-  }
-  function loadAd() {
-    $('adNum').textContent = current + 1;
-    adText.value = ads[current];
-    $('wordCount').textContent = words(ads[current]) + ' words';
-    $('adTimer').textContent = fmt(adSeconds[current]) + ' on this ad';
-    var isDone = done[current];
-    lessonBox.hidden = !isDone;
-    if (isDone) { $('lessonK').textContent = 'What focus is · ' + (current + 1) + ' of 10'; $('lessonP').textContent = LESSONS[current]; }
-    $('doneAd').hidden = isDone; $('nextAd').hidden = !isDone;
-    $('prevAd').disabled = current === 0;
-    renderSlots(); persist();
-    if (!isDone) adText.focus();
-  }
-  adText.addEventListener('input', function () {
-    ads[current] = adText.value; $('wordCount').textContent = words(adText.value) + ' words';
-    if (done[current] && !adText.value.trim()) { done[current] = false; loadAd(); }
-    persist();
-  });
-  $('doneAd').addEventListener('click', function () {
-    if (!adText.value.trim()) { adText.focus(); adText.placeholder = 'Something has to be here first. One line counts.'; return; }
-    done[current] = true; persist(); loadAd();
-    try { if (navigator.vibrate) navigator.vibrate(60); } catch (e) {}
-  });
-  $('nextAd').addEventListener('click', function () {
-    if (done.every(Boolean)) { finish(); return; }
-    if (current === 4 && !resetShown) { resetShown = true; persist(); show('s4'); return; }
-    current = done.indexOf(false, current + 1); if (current < 0) current = done.indexOf(false);
-    loadAd();
-  });
-  $('prevAd').addEventListener('click', function () { if (current > 0) { current--; loadAd(); } });
-
-  /* ---------- Stage 4: halfway reset ---------- */
-  var resetLeft = 90, resetTimer = null;
-  function leaveReset() { if (resetTimer) clearInterval(resetTimer); current = done.indexOf(false); show('s2'); loadAd(); }
-  $('startReset').addEventListener('click', function () {
-    if (resetTimer) return; this.disabled = true;
-    resetTimer = setInterval(function () {
-      resetLeft--; $('drill2Time').textContent = fmt(resetLeft);
-      if (resetLeft <= 0) { $('m4').textContent = 'Done'; leaveReset(); }
-    }, 1000);
-  });
-  $('skipReset').addEventListener('click', leaveReset);
-
-  /* ---------- Finish ---------- */
   function finish() {
-    inAds = false; renderSlots(); persist();
-    $('finishLine').textContent = 'Ten ads, one sitting, ' + fmt(totalSeconds) + ' on task. Copy them out, then close this tab.';
-    var list = $('doneList'); list.innerHTML = '';
-    ads.forEach(function (a, i) {
+    $('work').hidden = true; $('finish').hidden = false;
+    $('lastLesson').textContent = LESSONS[9];
+    var list = $('list'); list.innerHTML = '';
+    for (var i = 0; i < 10; i++) {
       var d = document.createElement('div'); d.className = 'done-ad';
       var n = document.createElement('span'); n.className = 'n'; n.textContent = 'Ad ' + (i + 1);
-      d.appendChild(n); d.appendChild(document.createTextNode(a.trim()));
-      list.appendChild(d);
-    });
-    var la = $('lessonsAll'); la.innerHTML = '';
-    LESSONS.forEach(function (l, i) {
-      var box = document.createElement('div'); box.className = 'lesson';
-      var k = document.createElement('div'); k.className = 'k'; k.textContent = (i + 1) + ' of 10';
-      var p = document.createElement('p'); p.textContent = l;
-      box.appendChild(k); box.appendChild(p); la.appendChild(box);
-    });
-    show('s3');
+      d.appendChild(n); d.appendChild(document.createTextNode(ads[i].trim())); list.appendChild(d);
+    }
     document.title = 'Done · Ten Ads Block';
   }
-  $('copyAll').addEventListener('click', function () {
-    var btn = this;
-    var text = ads.map(function (a, i) { return 'Ad ' + (i + 1) + '\n' + a.trim(); }).join('\n\n---\n\n');
-    var ok = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy all ten'; }, 1400); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, function () {});
-    else { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); ok(); } catch (e) {} document.body.removeChild(ta); }
+  $('copyBtn').addEventListener('click', function () {
+    var btn = this, text = '';
+    for (var i = 0; i < 10; i++) text += 'Ad ' + (i + 1) + '\n' + ads[i].trim() + (i < 9 ? '\n\n---\n\n' : '');
+    var ok = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy all ten'; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(ok, function () { fallback(); }); } else { fallback(); }
+    function fallback() { var t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) {} document.body.removeChild(t); }
   });
-  $('resetAll').addEventListener('click', function () {
-    if (!confirm('Clear all ten ads and start a new set? Copy them first if you have not.')) return;
-    ['ads', 'done', 'adsec', 'current', 'started', 'reset', 'total'].forEach(function (k) { store.del('tenads:' + k); });
-    location.reload();
+  $('resetBtn').addEventListener('click', function () {
+    if (!confirm('Clear all ten ads? Copy them first if you have not.')) return;
+    ads = ['', '', '', '', '', '', '', '', '', '']; done = [false, false, false, false, false, false, false, false, false, false]; cur = 0; save();
+    $('finish').hidden = true; $('work').hidden = false; render(); ta.focus();
   });
 
-  /* ---------- boot ---------- */
-  renderSlots();
-  if (resumed) {
-    if (done.every(Boolean)) { inAds = true; finish(); }
-    else { $('m1').textContent = 'Picked up where you left off'; $('skipDrill').textContent = 'Back to the ads'; }
-  }
+  render();
 })();
 </script>
