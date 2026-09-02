@@ -1,8 +1,8 @@
 <title>Ten Ads Block</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
 <style>
   :root {
-    --bg: #07090d; --surface: #0e1118; --surface-2: #151a24;
+    --bg: #07090d; --surface: #0e1118;
     --line: rgba(255,255,255,0.10); --line-strong: rgba(255,255,255,0.2);
     --gold: #d4af37; --gold-light: #f5e2a3;
     --ink: #f8fafc; --ink-muted: #9aa5b8; --ink-dim: #667389; --good: #10b981;
@@ -12,40 +12,32 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; }
-  .wrap { max-width: 560px; margin: 0 auto; padding: 24px 18px 48px; display: flex; flex-direction: column; gap: 16px; }
+  .wrap { max-width: 480px; margin: 0 auto; min-height: 100vh; padding: 28px 20px 40px; display: flex; flex-direction: column; gap: 22px; justify-content: center; }
 
   .top { display: flex; flex-direction: column; gap: 10px; }
   .top-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-  h1 { font-family: var(--serif); font-weight: 500; font-size: 30px; line-height: 1; margin: 0; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: 26px; line-height: 1; margin: 0; color: var(--ink-muted); }
   .count { font-size: 14px; color: var(--ink-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .count b { color: var(--gold-light); font-weight: 700; }
   .slots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
-  .slot { height: 7px; border-radius: 4px; background: var(--line); }
+  .slot { height: 8px; border-radius: 4px; background: var(--line); }
   .slot.done { background: var(--good); }
   .slot.now { background: var(--gold); }
 
-  .card { background: var(--surface); border: 1px solid var(--gold); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.45); }
-  .adnum { font-family: var(--serif); font-size: 46px; line-height: 1; color: var(--gold-light); font-variant-numeric: tabular-nums; }
-  .adnum small { font-family: var(--sans); font-size: 16px; color: var(--ink-dim); margin-left: 8px; }
-  textarea { width: 100%; min-height: 200px; resize: vertical; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.5; padding: 14px; }
-  textarea::placeholder { color: var(--ink-dim); }
-  textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; border-color: transparent; }
-  .btn { font: inherit; font-weight: 700; font-size: 16px; padding: 14px 20px; border-radius: 999px; border: 1px solid var(--gold); background: var(--gold); color: #1a1405; cursor: pointer; width: 100%; }
+  .card { text-align: center; display: flex; flex-direction: column; gap: 18px; align-items: center; }
+  .label { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .num { font-family: var(--serif); font-size: 168px; line-height: 0.9; color: var(--gold-light); font-variant-numeric: tabular-nums; font-weight: 500; }
+  .sub { color: var(--ink-muted); font-size: 16px; margin: 0; }
+  .btn { font: inherit; font-weight: 700; font-size: 18px; padding: 18px 28px; border-radius: 999px; border: 1px solid var(--gold); background: var(--gold); color: #1a1405; cursor: pointer; width: 100%; max-width: 360px; }
   .btn:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 2px; }
-  .btn.quiet { background: transparent; border-color: var(--line-strong); color: var(--ink-muted); font-weight: 600; width: auto; padding: 10px 14px; font-size: 14px; }
-  .warn { color: var(--gold-light); font-size: 14px; margin: 0; min-height: 1.2em; }
+  .btn.quiet { background: transparent; border-color: var(--line-strong); color: var(--ink-muted); font-weight: 600; width: auto; padding: 10px 16px; font-size: 14px; }
 
-  .lesson { border-left: 2px solid var(--gold); padding: 4px 0 4px 14px; }
-  .lesson .k { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
-  .lesson p { font-family: var(--serif); font-size: 21px; line-height: 1.35; margin: 0; }
+  .lesson { border-top: 1px solid var(--line); padding-top: 18px; text-align: left; }
+  .lesson .k { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+  .lesson p { font-family: var(--serif); font-size: 22px; line-height: 1.35; margin: 0; }
 
-  .tip { color: var(--ink-muted); font-size: 14px; margin: 0; padding: 10px 12px; border: 1px dashed var(--line-strong); border-radius: 8px; }
-  .tip b { color: var(--gold-light); font-weight: 600; }
-
-  .done-ad { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; white-space: pre-wrap; }
-  .done-ad .n { display: block; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
-  .list { display: flex; flex-direction: column; gap: 10px; }
-  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .tip { color: var(--ink-dim); font-size: 13px; margin: 0; text-align: center; }
+  .tip b { color: var(--ink-muted); font-weight: 600; }
   [hidden] { display: none !important; }
 </style>
 
@@ -59,101 +51,65 @@
   </div>
 
   <div class="card" id="work">
-    <div class="adnum">Ad <span id="adNum">1</span><small>of 10</small></div>
-    <div class="lesson" id="lesson" hidden>
-      <div class="k" id="lessonK"></div>
-      <p id="lessonP"></p>
-    </div>
-    <textarea id="adText" placeholder="Write this ad here. Only this one exists right now."></textarea>
-    <p class="warn" id="warn"></p>
-    <button class="btn" id="doneBtn" type="button">Done. Next ad.</button>
-    <p class="tip">Mind drifting? <b>Stare at one word on the screen for five seconds</b>, then keep typing. Eyes and focus share a circuit.</p>
+    <div class="label">Make this one</div>
+    <div class="num" id="adNum">1</div>
+    <p class="sub">Go build it. Come back and tap when it is posted or saved.</p>
+    <button class="btn" id="doneBtn" type="button">Ad done</button>
   </div>
 
   <div class="card" id="finish" hidden>
-    <div class="adnum">10<small>of 10. Done.</small></div>
-    <div class="lesson">
-      <div class="k">What focus is · 10 of 10</div>
-      <p id="lastLesson"></p>
-    </div>
-    <button class="btn" id="copyBtn" type="button">Copy all ten</button>
-    <div class="list" id="list"></div>
-    <div class="row"><button class="btn quiet" id="resetBtn" type="button">Clear and start a new set</button></div>
+    <div class="label">All ten</div>
+    <div class="num">10</div>
+    <p class="sub">Done. One sitting. Close this tab.</p>
+    <button class="btn quiet" id="resetBtn" type="button">Start a new set of ten</button>
   </div>
 
-  <p class="tip">📵 Phone in <b>another room</b> until ad ten. Heavy phone use is the habit research ties most directly to attention loss.</p>
+  <div class="lesson" id="lesson" hidden>
+    <div class="k" id="lessonK"></div>
+    <p id="lessonP"></p>
+  </div>
+
+  <p class="tip">Drifting? <b>Stare at one point for five seconds</b>, then go back to the ad. Phone stays in another room.</p>
 </div>
 
 <script>
 (function () {
   function $(id) { return document.getElementById(id); }
   var LESSONS = [
-    "Focus is not a personality trait. It is a brain state: one network runs the task and the wandering one goes quiet. Writing ad one is what switched it on.",
+    "Focus is not a personality trait. It is a brain state: one network runs the task and the wandering one goes quiet. Making ad one is what switched it on.",
     "Dopamine is the conductor. It tells the task network to play and the wandering network to rest. Finishing something small releases it, which is why ad two came easier.",
-    "Attention has blinks. Right after you land a target, it shuts off for a beat. The urge to go re-read ad one is a blink. Let it pass.",
-    "Your eyes and your focus share a circuit. When the mind drifts, hold your eyes on one word for five seconds, then keep writing.",
+    "Attention has blinks. Right after you land a target, it shuts off for a beat. The urge to go check ad one again is a blink. Let it pass.",
+    "Your eyes and your focus share a circuit. When the mind drifts, hold your eyes on one point for five seconds, then go back to the ad.",
     "Halfway. Low dopamine makes time feel slow, so \"this is taking forever\" shows up about now. That is the feeling, not the clock.",
     "A wide gaze resets attention. Look past the screen at the whole room for thirty seconds. It measurably reduces attentional blinks.",
-    "Hyperfocus is the ADHD strength. Attention locks when the task is concrete. \"Write ad seven\" is concrete. \"Do marketing\" never was.",
-    "Working memory in ADHD holds about one thing. That is why this page shows one ad. The finished ones are saved, not lost.",
+    "Hyperfocus is the ADHD strength. Attention locks when the task is concrete. \"Make ad seven\" is concrete. \"Do marketing\" never was.",
+    "Working memory in ADHD holds about one thing. That is why this page shows one number. The finished ones are counted, not carried in your head.",
     "The phone is the biggest measured drag on attention: over about two hours a day in adults produces ADHD-like symptoms. This block trained the opposite.",
     "Focus is trained, not found. One 17-minute sitting of steady attention reduced attentional blinks in a study, with lasting effect. You just did that, on real work."
   ];
 
-  var ads, done;
-  try { ads = JSON.parse(localStorage.getItem('tenads.ads') || 'null'); done = JSON.parse(localStorage.getItem('tenads.done') || 'null'); } catch (e) {}
-  if (!ads || ads.length !== 10) ads = ['', '', '', '', '', '', '', '', '', ''];
-  if (!done || done.length !== 10) done = [false, false, false, false, false, false, false, false, false, false];
-  var cur = done.indexOf(false);
-  function save() { try { localStorage.setItem('tenads.ads', JSON.stringify(ads)); localStorage.setItem('tenads.done', JSON.stringify(done)); } catch (e) {} }
+  var n = 0;
+  try { n = parseInt(localStorage.getItem('tenads.n') || '0', 10) || 0; } catch (e) {}
+  if (n < 0 || n > 10) n = 0;
+  function save() { try { localStorage.setItem('tenads.n', String(n)); } catch (e) {} }
 
-  var ta = $('adText');
   function render() {
-    var n = 0, html = '';
-    for (var i = 0; i < 10; i++) { if (done[i]) n++; html += '<span class="slot' + (done[i] ? ' done' : (i === cur ? ' now' : '')) + '"></span>'; }
+    var html = '';
+    for (var i = 0; i < 10; i++) html += '<span class="slot' + (i < n ? ' done' : (i === n ? ' now' : '')) + '"></span>';
     $('slots').innerHTML = html;
     $('doneCount').textContent = n;
-    if (cur < 0) { finish(); return; }
-    $('adNum').textContent = cur + 1;
-    ta.value = ads[cur];
-    $('warn').textContent = '';
-    if (cur > 0) { $('lesson').hidden = false; $('lessonK').textContent = 'What focus is · ' + cur + ' of 10'; $('lessonP').textContent = LESSONS[cur - 1]; }
+    var finished = n >= 10;
+    $('work').hidden = finished; $('finish').hidden = !finished;
+    if (!finished) $('adNum').textContent = n + 1;
+    if (n > 0) { $('lesson').hidden = false; $('lessonK').textContent = 'What focus is · ' + n + ' of 10'; $('lessonP').textContent = LESSONS[n - 1]; }
     else { $('lesson').hidden = true; }
-    document.title = 'Ad ' + (cur + 1) + ' of 10 · Ten Ads Block';
+    document.title = finished ? 'Done · Ten Ads Block' : 'Ad ' + (n + 1) + ' of 10 · Ten Ads Block';
   }
-  ta.addEventListener('input', function () { ads[cur] = ta.value; save(); });
   $('doneBtn').addEventListener('click', function () {
-    if (!ta.value.trim()) { $('warn').textContent = 'One line is enough, but the box cannot be empty.'; ta.focus(); return; }
-    ads[cur] = ta.value; done[cur] = true; save();
-    cur = done.indexOf(false);
-    render();
-    if (cur >= 0) { ta.focus(); window.scrollTo(0, 0); }
+    n++; save(); render();
+    try { if (navigator.vibrate) navigator.vibrate(50); } catch (e) {}
   });
-
-  function finish() {
-    $('work').hidden = true; $('finish').hidden = false;
-    $('lastLesson').textContent = LESSONS[9];
-    var list = $('list'); list.innerHTML = '';
-    for (var i = 0; i < 10; i++) {
-      var d = document.createElement('div'); d.className = 'done-ad';
-      var n = document.createElement('span'); n.className = 'n'; n.textContent = 'Ad ' + (i + 1);
-      d.appendChild(n); d.appendChild(document.createTextNode(ads[i].trim())); list.appendChild(d);
-    }
-    document.title = 'Done · Ten Ads Block';
-  }
-  $('copyBtn').addEventListener('click', function () {
-    var btn = this, text = '';
-    for (var i = 0; i < 10; i++) text += 'Ad ' + (i + 1) + '\n' + ads[i].trim() + (i < 9 ? '\n\n---\n\n' : '');
-    var ok = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy all ten'; }, 1500); };
-    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(ok, function () { fallback(); }); } else { fallback(); }
-    function fallback() { var t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) {} document.body.removeChild(t); }
-  });
-  $('resetBtn').addEventListener('click', function () {
-    if (!confirm('Clear all ten ads? Copy them first if you have not.')) return;
-    ads = ['', '', '', '', '', '', '', '', '', '']; done = [false, false, false, false, false, false, false, false, false, false]; cur = 0; save();
-    $('finish').hidden = true; $('work').hidden = false; render(); ta.focus();
-  });
-
+  $('resetBtn').addEventListener('click', function () { n = 0; save(); render(); });
   render();
 })();
 </script>
