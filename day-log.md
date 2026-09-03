@@ -20,3 +20,4 @@
 | ~8:45 | All 20 research agents hit a temporary server error; relaunched in batches of 5. |
 | ~9:05 | Asked for experiments to be fully dynamic (pick any number, any order) rather than a fixed list, and to be able to name a task and get a matched experiment list. |
 | ~9:30 | All 20 agents finished. Built **Field Notes** (dynamic experiment lab, 16 starter cards + custom cards, timer, before/after rating, results log) and **The Dossier** (full compiled research on Huberman, Dispenza, Proctor, Cardone with evidence checks). |
+| ~9:40 | Starting a 15-min apartment-locating work session as an experiment ("Agitation Census"): 3×5-min rounds, tick every agitation spike; round 1 baseline, round 2 + physiological sigh, round 3 + say "there it is" + sigh + widen gaze. Pre/post 1–10 rating and Breathe HRV. Prediction written before starting. Result: (to fill in) |
