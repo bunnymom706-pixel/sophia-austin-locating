@@ -34,3 +34,4 @@
 | Day | Groups posted | Messages in | Lists sent | Tours | Leases |
 |---|---|---|---|---|---|
 | Sept 3 | | | | | |
+| ~11:05 | Final exercise: **The Burn**. 10 squats, 6-min timer, 1 min setup, 5 min posting to groups with focus so intense it hurts (discomfort = plasticity signal). Eyes closed 5 exhales after. Counts only if uncomfortable. Result: (to fill in) |
