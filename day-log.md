@@ -16,3 +16,4 @@
 | 8:21 | Deleted 2 unused items off the to-do list. |
 | 8:21 | Checked off "made my bed" — done right when she woke up. |
 | ~8:26 | Launched 20 parallel research agents: Huberman (sleep/light, focus/dopamine, body/nutrition, daily routine+catalog), Dispenza (meditation, books, daily routine, evidence, mental rehearsal), Proctor (paradigms/goal card, daily routine/books, money mindset, evidence), Cardone (10X/routine, sales, money/real estate, evidence), plus N=1 self-experiment design (body, mind) and a measurement framework using iPhone/Apple Watch. |
+| 8:35 | Finished 15 minutes of morning sunlight outside (started ~8:16). |
