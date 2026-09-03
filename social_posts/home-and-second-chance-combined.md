@@ -1,4 +1,4 @@
-🏠🛁🪞🛋️🛏️ One Place Locators
+🏠🛁🪞🛋️🛏️ Spirit Real Estate
 
 It is actually so amazing to help my clients find a new space that feels like home to them 🥹 I get SO emotional when I think about how I get to help people find their new HOME!!
 
@@ -17,6 +17,6 @@ My service is free to you. The property pays me, not you. I am never going to pr
 If that is you, or you know someone quietly stressing about it right now, send me a message. I would be honored to help 🌃🌆
 
 Sophia Sky Reddehase | Licensed Real Estate Agent, TREC #831516 ✩
-Licensed APT Locator + Real Estate Agent | Proud agent: ONE PLACE LOCATORS
+Licensed APT Locator + Real Estate Agent | Proud agent: SPIRIT REAL ESTATE
 
 Pricing and availability subject to change daily. All specials and effective rents subject to property terms and leasing approval.
