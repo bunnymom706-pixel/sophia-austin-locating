@@ -11,3 +11,4 @@
 | 8:16 | Outside in the sun with the prepped smoothie. Plan: 10–15 min of morning light, no sunglasses, no scrolling. |
 | 8:16 | Asked for a running log of the day and deep research on Andrew Huberman's videos. Research started. |
 | ~8:30 | (planned) Come inside, pick 3 new things to implement today. |
+| ~8:25 | Asked for ways to build focus in very small chunks. Plan given: 5-min focus reps ×3 today, 30–60s visual fixation + 2 physiological sighs before each, say "starting"/"done" out loud, phone in another room, scale 5→10→25 min over the week. |
