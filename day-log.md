@@ -32,3 +32,4 @@
 
 Note: Sophia steers. She names the exact task; the exercise is built around it. No counts or scores unless she asks.
 | ~11:05 | Final exercise: **The Burn**. 10 squats, 6-min timer, 1 min setup, 5 min posting to groups with focus so intense it hurts (discomfort = plasticity signal). Eyes closed 5 exhales after. Counts only if uncomfortable. **Result:** 2 min prep, 3–4 min work (Claude drafting took over so she switched to other work and stayed focused), not agitated, 1 min deep breathing. Verdict: worked. Rep streak today: 2. |
+| 10:11 | Admin block set up: 1 min stretch in bed, 2 min text therapist two insurance questions, 5 min BCBS portal to find what's needed, then call the IV nutrition doctor's office about payments, then eyes closed 5 exhales. Noted: this kind of task feels pointless and is hard to focus on. Result: (to fill in) |
