@@ -48,3 +48,4 @@ Note: Sophia steers. She names the exact task; the exercise is built around it. 
 | ~11:55–12:25 | **Workout done:** 30 min going up and down the stairs with the 8 lb weighted vest, unpacking the car into the new apartment (just moved in). Workout and unpacking in one. |
 | ~1:00 | IV clinic (pay). Then babysitting. |
 | afternoon | At babysitting: 5-min check of the whole to-do list and how to implement new things. Will report back. |
+| afternoon | 5-min to-do list check done. Then sent a message to a client. |
