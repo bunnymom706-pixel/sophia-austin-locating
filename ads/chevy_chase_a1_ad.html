@@ -1,0 +1,322 @@
+<title>Chevy Chase A1 Special</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap');
+
+  :root {
+    --bg: #07090d;
+    --bg-surface: #0e1118;
+    --bg-card: rgba(17, 21, 30, 0.9);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-gold: rgba(212, 175, 55, 0.38);
+    --gold: #d4af37;
+    --gold-light: #f5e2a3;
+    --gold-dark: #a8841d;
+    --gold-glow: rgba(212, 175, 55, 0.22);
+    --emerald: #10b981;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --dim: #64748b;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --display: 'Syne', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(at 15% 0%, rgba(212, 175, 55, 0.14) 0, transparent 45%),
+      radial-gradient(at 100% 100%, rgba(245, 226, 163, 0.06) 0, transparent 50%);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.55;
+    min-height: 100vh;
+    padding: 32px 16px 56px;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; display: grid; gap: 28px; }
+
+  /* ---------- The ad card ---------- */
+  .ad {
+    background: var(--bg-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 24px;
+    padding: 40px 36px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px var(--gold-glow);
+    position: relative;
+    overflow: hidden;
+  }
+  .ad::before {
+    content: "";
+    position: absolute; inset: 0 0 auto 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), var(--gold), transparent);
+  }
+
+  .eyebrow {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+
+  .property { margin-top: 22px; }
+  .property h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 7vw, 58px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    background: linear-gradient(135deg, #ffffff 15%, var(--gold-light) 65%, var(--gold) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .property .where { margin-top: 10px; color: var(--muted); font-size: 15px; }
+
+  .price-row {
+    margin-top: 30px;
+    display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: end;
+  }
+  .price-row .lead { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--muted); }
+  .price {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(64px, 12vw, 96px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+  }
+  .price sup { font-size: 0.42em; vertical-align: top; top: 0.4em; position: relative; color: var(--gold-light); font-weight: 600; }
+  .price small { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; margin-left: 6px; }
+  .unit-tag {
+    text-align: right;
+    font-family: var(--display); font-weight: 800; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light);
+  }
+  .unit-tag span { display: block; color: var(--dim); font-family: var(--sans); font-weight: 500; letter-spacing: 0; text-transform: none; font-size: 13px; margin-top: 4px; }
+
+  .special {
+    margin-top: 28px;
+    border: 1px solid var(--border-gold);
+    background: linear-gradient(135deg, rgba(212,175,55,0.16), rgba(212,175,55,0.04));
+    border-radius: 16px;
+    padding: 18px 22px;
+    display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center;
+  }
+  .special .big {
+    font-family: var(--serif); font-weight: 700; font-size: 44px; line-height: 1; color: var(--gold-light);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .special .big em { font-style: normal; font-size: 18px; display: block; font-family: var(--display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-top: 2px; }
+  .special p { font-size: 14px; color: var(--text); }
+  .special p b { color: var(--gold-light); font-weight: 700; }
+  .special p span { display: block; color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+
+  .facts {
+    margin-top: 26px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+  }
+  .fact { padding: 16px 12px; border-right: 1px solid var(--border-subtle); }
+  .fact:last-child { border-right: 0; }
+  .fact b { display: block; font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+  .fact span { display: block; margin-top: 6px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); font-weight: 600; }
+
+  .amen { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 12.5px; font-weight: 600; color: var(--gold-light);
+    border: 1px solid var(--border-gold); border-radius: 9999px; padding: 6px 12px;
+    background: rgba(212,175,55,0.06);
+  }
+
+  .pitch { margin-top: 24px; font-size: 15.5px; color: var(--muted); max-width: 62ch; }
+  .pitch b { color: var(--text); font-weight: 600; }
+
+  .cta {
+    margin-top: 28px;
+    display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center;
+    padding-top: 22px; border-top: 1px solid var(--border-subtle);
+  }
+  .cta .who b { display: block; font-family: var(--serif); font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.1; }
+  .cta .who span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .cta .who span.free { color: var(--emerald); font-weight: 600; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 800; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #0b0c10; text-decoration: none;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    padding: 15px 22px; border-radius: 9999px;
+    box-shadow: 0 8px 24px var(--gold-glow);
+  }
+  .btn:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+  .cta .phone { text-align: right; font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .cta .phone a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
+
+  .legal { margin-top: 20px; font-size: 10.5px; line-height: 1.5; color: var(--dim); }
+  .legal a { color: var(--dim); }
+
+  /* ---------- Captions & notes (below the ad) ---------- */
+  .aside { display: grid; gap: 18px; }
+  .aside h2 { font-family: var(--display); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .caption {
+    background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 18px 20px;
+  }
+  .caption h3 { font-family: var(--sans); font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+  .caption pre {
+    font-family: var(--sans); font-size: 14px; white-space: pre-wrap; color: var(--text); line-height: 1.6;
+  }
+  .notes { background: transparent; border: 1px dashed var(--border-subtle); border-radius: 16px; padding: 18px 20px; }
+  .notes h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .notes ul { padding-left: 18px; color: var(--muted); font-size: 14px; display: grid; gap: 6px; }
+  .notes li b { color: var(--text); font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .ad { padding: 30px 22px 26px; border-radius: 18px; }
+    .price-row, .cta { grid-template-columns: 1fr; }
+    .unit-tag, .cta .phone { text-align: left; }
+    .facts { grid-template-columns: repeat(2, 1fr); }
+    .fact:nth-child(2) { border-right: 0; }
+    .fact:nth-child(-n+2) { border-bottom: 1px solid var(--border-subtle); }
+    .special { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .eyebrow .dot { animation: pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: 0.45; } }
+  }
+</style>
+
+<div class="page">
+
+  <section class="ad" aria-label="Chevy Chase A1 apartment ad">
+    <div class="eyebrow"><span class="dot"></span> Live Special · North Austin · 78752</div>
+
+    <div class="property">
+      <h1>Chevy Chase Apartments</h1>
+      <div class="where">7581 Chevy Chase Dr · Cameron Rd at US-183 · minutes to Highland, The Domain &amp; UT</div>
+    </div>
+
+    <div class="price-row">
+      <div>
+        <div class="lead">Cheapest home on the property right now</div>
+        <div class="price"><sup>$</sup>731<small>/mo</small></div>
+      </div>
+      <div class="unit-tag">A1 · 1 Bed / 1 Bath<span>603 sq ft · private balcony · available now</span></div>
+    </div>
+
+    <div class="special">
+      <div class="big">8 WKS<em>Free</em></div>
+      <p><b>Look &amp; Lease today:</b> up to 8 weeks free <b>plus waived app &amp; admin fees</b> on select homes.
+        <span>Limited time. Exclusions apply. Net-effective on the A1 works out near $618/mo on a 12-month lease.</span></p>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>2</b><span>Pools</span></div>
+      <div class="fact"><b>2</b><span>Tennis courts</span></div>
+      <div class="fact"><b>15</b><span>Min to Domain</span></div>
+      <div class="fact"><b>0 lb</b><span>Pet weight limit</span></div>
+    </div>
+
+    <div class="amen">
+      <span class="chip">Gated community</span>
+      <span class="chip">Fitness center</span>
+      <span class="chip">Social lounge</span>
+      <span class="chip">Walk-in closet</span>
+      <span class="chip">Vaulted ceilings*</span>
+      <span class="chip">Fireplace*</span>
+      <span class="chip">Vinyl plank*</span>
+      <span class="chip">Grills &amp; picnic areas</span>
+      <span class="chip">Free WiFi zones</span>
+      <span class="chip">2 pets welcome</span>
+    </div>
+
+    <p class="pitch">
+      A <b>603 sq ft one-bedroom in Austin under $750</b> is rare in 2026. Add 8 weeks free and this is the lowest
+      net-effective one-bed I can currently quote inside the city limits. Highland Station is 1.7 miles away, and I-35 and 183
+      put downtown, the Domain and campus all within about 15 minutes.
+    </p>
+
+    <div class="cta">
+      <div class="who">
+        <b>Sophia Reddehase</b>
+        <span>Licensed Texas Real Estate Agent · TREC #831516 · Spirit Real Estate Group, LLC</span>
+        <span class="free">100% free locating. The property pays me, never you.</span>
+      </div>
+      <div>
+        <a class="btn" href="https://sparkapt.com/inquiry/sophia-reddehase859" target="_blank" rel="noopener noreferrer">Lock in this unit</a>
+        <div class="phone">Call or text <a href="tel:5126761215">(512) 676-1215</a></div>
+      </div>
+    </div>
+
+    <p class="legal">
+      Pricing, availability and specials pulled 9/3/2026 from public listings for Chevy Chase Apartments (Austin, 78752) and change daily.
+      Rent on the A1 ranges by floor and lease term. *Select homes only. Pet fees: $150 deposit, $350 one-time fee, $25/mo per pet, 2 pets max.
+      Write "Sophia Reddehase / Spirit Real Estate Group" as your referral on the guest card and application.
+      <a href="https://www.trec.texas.gov/forms/consumer-protection-notice" target="_blank" rel="noopener noreferrer">TREC Consumer Protection Notice</a> ·
+      <a href="https://www.trec.texas.gov/forms/information-about-brokerage-services" target="_blank" rel="noopener noreferrer">Information About Brokerage Services</a>
+    </p>
+  </section>
+
+  <section class="aside">
+    <h2>Copy-paste captions</h2>
+
+    <div class="caption">
+      <h3>Instagram / Facebook</h3>
+      <pre>🚨 Cheapest 1-bed I can find in Austin right now 🚨
+
+Chevy Chase Apartments (North Austin, 78752, NOT Chevy Chase Downs)
+A1 · 1 bed / 1 bath · 603 sq ft · private balcony
+From $731/mo 😳
+
+Look &amp; Lease special: up to 8 WEEKS FREE + waived app &amp; admin fees on select homes. That nets out around $618/mo on a 12-month lease.
+
+2 pools · 2 tennis courts · gated · fitness center · pets welcome with no weight limit
+15 min to the Domain, UT and downtown. Highland Station 1.7 mi.
+
+My locating service is 100% free. DM me "CHEVY" and I'll send you the unit list + set up your tour.
+
+Sophia Reddehase · Spirit Real Estate Group, LLC · TREC #831516
+📞 (512) 676-1215
+
+#AustinApartments #NorthAustin #AustinTX #ApartmentLocator #MoveInSpecial #CheapRentAustin #78752 #UTAustin #TheDomain</pre>
+    </div>
+
+    <div class="caption">
+      <h3>TikTok / Reels (voiceover script)</h3>
+      <pre>POV: you thought a one-bedroom in Austin under $750 didn't exist anymore.
+
+Chevy Chase Apartments in North Austin. Not Chevy Chase Downs, the one off Cameron and 183.
+
+The A1 is 603 square feet, one bed one bath, a real balcony, and it starts at $731 a month.
+
+And right now they're doing look and lease, up to 8 weeks free plus waived app and admin fees. Do the math, that's around $618 a month net effective.
+
+Two pools, two tennis courts, gated, and your dog is welcome with no weight limit.
+
+I'm a licensed locator and I'm free. Comment CHEVY and I'll send you the units before they go.</pre>
+    </div>
+
+    <div class="caption">
+      <h3>Text / DM blast</h3>
+      <pre>Hey! Cheapest 1-bed I've got today: Chevy Chase Apts (North Austin, 78752). A1, 603 sq ft, from $731 + up to 8 wks free &amp; waived fees on select homes. Nets out ~$618/mo. Gated, 2 pools, pets ok. Want me to hold a tour this week? – Sophia, Spirit RE Group, TREC #831516</pre>
+    </div>
+
+    <h2>Before you post: what I verified</h2>
+    <div class="notes">
+      <h3>Research notes, 9/3/2026</h3>
+      <ul>
+        <li><b>Correct property:</b> Chevy Chase Apartments, 7581 Chevy Chase Dr, Austin TX 78752. Chevy Chase Downs is a different community at 2504 Huntwick Dr, 78741, and was excluded.</li>
+        <li><b>Cheapest unit:</b> A1, 1 bed / 1 bath, 603 sq ft. Listing sites show the A1 from $731 to $933 depending on floor and term, with 3 units available now. One site shows a higher $960 start, so confirm the $731 unit with the office before quoting a specific apartment number.</li>
+        <li><b>Special:</b> official site and listing feeds show "Look &amp; Lease Today To Receive 8 Weeks Free + Waived App &amp; Admin Fees," limited time, exclusions apply. Some feeds still show the older "1 Month Free" wording.</li>
+        <li><b>Net effective:</b> $731 × 12 = $8,772, less 8 weeks ($731 × 8 ÷ 4.33 ≈ $1,350) = $7,422 ÷ 12 ≈ $618/mo.</li>
+        <li><b>Property facts:</b> built 1972, 320 units, 3 stories. Managed by RPM Living per most feeds; one feed lists Olympus Property. Office (737) 409-1258, alt. tracking line 903-321-4410.</li>
+        <li><b>Pets:</b> 2 max, no weight limit, $150 refundable deposit, $350 one-time fee, $25/mo per pet.</li>
+        <li><b>Location scores:</b> Walk Score 43, Transit Score 49, Highland Station 1.7 mi, ABIA 16.3 mi.</li>
+        <li><b>Reputation caveat:</b> 48 reviews on ApartmentRatings mention management responsiveness, maintenance and pest complaints. Set expectations with clients that this is a 1972 value property, not a luxury build.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
