@@ -32,4 +32,8 @@
 
 Note: Sophia steers. She names the exact task; the exercise is built around it. No counts or scores unless she asks.
 | ~11:05 | Final exercise: **The Burn**. 10 squats, 6-min timer, 1 min setup, 5 min posting to groups with focus so intense it hurts (discomfort = plasticity signal). Eyes closed 5 exhales after. Counts only if uncomfortable. **Result:** 2 min prep, 3–4 min work (Claude drafting took over so she switched to other work and stayed focused), not agitated, 1 min deep breathing. Verdict: worked. Rep streak today: 2. |
-| 10:11 | Admin block set up: 1 min stretch in bed, 2 min text therapist two insurance questions, 5 min BCBS portal to find what's needed, then call the IV nutrition doctor's office about payments, then eyes closed 5 exhales. Noted: this kind of task feels pointless and is hard to focus on. Result: (to fill in) |
+| 10:11 | Admin block set up: 1 min stretch in bed, 2 min text therapist two insurance questions, 5 min BCBS portal to find what's needed, then call the IV nutrition doctor's office about payments, then eyes closed 5 exhales. Noted: this kind of task feels pointless and is hard to focus on. **Result:** all done — therapist texted, BCBS portal checked, doctor's office called. |
+| ~10:40 | Stepped on the scale: heaviest she has been. Period due any day (water weight likely adding 2–5 lb). Goal set: bring body weight down before December, slowly and carefully. |
+| ~10:45 | Booked IV appointment: **B-Lean** (weight-loss IV) at Ender Family Medicine, ~1:15 pm today. Another health IV booked for tomorrow. |
+| ~10:50 | Lower-calorie pizza in the oven. Walking the green area at the apartment with Shelby (dog), weighted vest on, 10–20 min. Thinking about going to the gym. |
+| ~11:00 | Next block when back inside: whole Mason jar of water, put both IV appointments on calendar, log all food from yesterday and today (list first, calories only if time). |
