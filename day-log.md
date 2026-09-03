@@ -30,8 +30,5 @@
 | ~10:40 | Reframed: the focus rep is the container; the leap is the revenue action inside it. Every rep now carries one of four actions: new renter outreach, follow-ups with quiet leads, posting where renters look, or contacting a property/leasing office. Target: ~5 contacts per rep. Record: which action, how many. |
 | ~10:50 | Chose next rep: **Group Blast**. Write one service post (free-to-renter locator, budget/area/move-in date, "message me 'list'") and publish it to as many Austin housing groups as possible in 15 min. Hypothesis: 8+ groups brings 1+ inbound message in 48 hrs. Record: number of groups. Result: (to fill in) |
 
-## Career scoreboard
-| Day | Groups posted | Messages in | Lists sent | Tours | Leases |
-|---|---|---|---|---|---|
-| Sept 3 | | | | | |
-| ~11:05 | Final exercise: **The Burn**. 10 squats, 6-min timer, 1 min setup, 5 min posting to groups with focus so intense it hurts (discomfort = plasticity signal). Eyes closed 5 exhales after. Counts only if uncomfortable. **Result:** 2 min prep, 3–4 min work (Claude drafting took over so she switched to other work and stayed focused), not agitated, 1 min deep breathing. Verdict: worked. Rep streak today: 2. Group count pending. |
+Note: Sophia steers. She names the exact task; the exercise is built around it. No counts or scores unless she asks.
+| ~11:05 | Final exercise: **The Burn**. 10 squats, 6-min timer, 1 min setup, 5 min posting to groups with focus so intense it hurts (discomfort = plasticity signal). Eyes closed 5 exhales after. Counts only if uncomfortable. **Result:** 2 min prep, 3–4 min work (Claude drafting took over so she switched to other work and stayed focused), not agitated, 1 min deep breathing. Verdict: worked. Rep streak today: 2. |
