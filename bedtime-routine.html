@@ -1,0 +1,441 @@
+<title>Lights Out</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+  :root{
+    --ground:#15172B; --panel:#20233F; --panel-2:#292D4F; --line:#3A3F6A;
+    --ink:#F3ECDC; --ink-dim:#B5B1C9; --ink-faint:#7E7A9A;
+    --lamp:#FFB75A; --lamp-deep:#E0902E; --sleep:#6C8CE0; --sleep-deep:#3E55A6;
+    --over:#F08A7A;
+    --display:'Young Serif', Georgia, 'Times New Roman', serif;
+    --body:'Nunito', 'Segoe UI', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{background:var(--ground)}
+  body{margin:0;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+  button{font:inherit;color:inherit;cursor:pointer}
+  button:focus-visible,input:focus-visible{outline:2px solid var(--lamp);outline-offset:2px}
+  .app{max-width:780px;margin:0 auto;padding:0 16px 48px}
+
+  /* ---------- sky + building ---------- */
+  .sky{position:relative;margin:0 -16px;padding:34px 24px 0;overflow:hidden;
+       background:radial-gradient(120% 90% at 50% 100%,#2A2E55 0%,#191C36 45%,#101226 100%)}
+  .stars{position:absolute;inset:0;pointer-events:none}
+  .star{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--ink);opacity:.55;
+        animation:twinkle 3.6s ease-in-out infinite}
+  .star.new{animation:pop .7s cubic-bezier(.2,1.6,.4,1) forwards, twinkle 3.6s ease-in-out .7s infinite}
+  @keyframes twinkle{0%,100%{opacity:.35}50%{opacity:.9}}
+  @keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+  .moon{position:absolute;right:38px;top:26px;width:54px;height:54px;border-radius:50%;
+        background:#F3ECDC;box-shadow:0 0 34px 8px rgba(243,236,220,.18);
+        transform:translateY(120px);opacity:0;transition:transform 1.6s cubic-bezier(.2,.8,.2,1),opacity 1.2s}
+  .moon::after{content:"";position:absolute;left:-14px;top:-8px;width:50px;height:50px;border-radius:50%;background:#191C36;
+               transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+  .sky.asleep .moon{transform:translateY(0);opacity:1}
+  .sky.asleep .moon::after{transform:translateX(-30px)}
+  .head{position:relative;z-index:1}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);font-weight:700;margin:0 0 6px}
+  h1{font-family:var(--display);font-weight:400;font-size:clamp(34px,7vw,50px);line-height:1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+  .tag{margin:8px 0 0;color:var(--ink-dim);max-width:34ch}
+  .building{display:block;width:100%;height:auto;margin-top:16px;position:relative;z-index:1}
+  .win{fill:var(--lamp);transition:fill 1.2s ease,opacity 1.2s ease}
+  .win.dark{fill:#2A3159}
+  .win-label{font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.06em;fill:var(--ink-faint);text-transform:uppercase}
+
+  /* ---------- status ---------- */
+  .status{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;
+          padding:16px 0 8px;border-bottom:1px solid var(--line)}
+  .status .big{font-family:var(--display);font-size:22px;line-height:1.1}
+  .status .small{color:var(--ink-dim);font-size:14px;margin-top:3px}
+  .stat{text-align:right}
+  .stat b{display:block;font-size:20px;font-variant-numeric:tabular-nums;color:var(--lamp)}
+  .stat.sleep b{color:var(--sleep)}
+  .stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+  .bar{height:6px;background:var(--panel);border-radius:99px;overflow:hidden;margin:14px 0 0}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sleep-deep),var(--sleep));transition:width .8s cubic-bezier(.2,.8,.2,1)}
+
+  /* ---------- focus panel ---------- */
+  .focus{margin:18px 0 0;padding:22px 20px 20px;border-radius:22px;background:var(--panel);
+         border:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+         box-shadow:0 20px 60px -30px rgba(0,0,0,.8)}
+  .ring{position:relative;width:150px;height:150px}
+  .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .ring circle{fill:none;stroke-width:9;stroke-linecap:round}
+  .ring .track{stroke:var(--panel-2)}
+  .ring .fill{stroke:var(--lamp);stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .4s}
+  .focus.over .ring .fill{stroke:var(--over)}
+  .clock{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+  .clock b{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.01em;line-height:1}
+  .clock small{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;margin-top:6px}
+  .focus.over .clock b{color:var(--over)}
+  .focus h2{font-family:var(--display);font-weight:400;font-size:24px;margin:0 0 4px;line-height:1.15;text-wrap:balance}
+  .focus .room{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--lamp);font-weight:700}
+  .focus p{margin:6px 0 0;color:var(--ink-dim);font-size:15px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .btn{border:1px solid var(--line);background:var(--panel-2);border-radius:14px;padding:11px 18px;font-weight:700;
+       transition:transform .12s,background .2s}
+  .btn:active{transform:scale(.97)}
+  .btn.primary{background:var(--lamp);border-color:var(--lamp);color:#2A1A05;padding:13px 26px;font-size:17px}
+  .btn.primary:hover{background:#FFC677}
+  .btn.ghost{background:transparent}
+  .note{width:100%;margin-top:12px;background:var(--ground);border:1px solid var(--line);color:var(--ink);
+        border-radius:12px;padding:10px 12px;font:inherit}
+  .note::placeholder{color:var(--ink-faint)}
+
+  /* ---------- rooms + tiles ---------- */
+  .rooms{margin-top:24px;display:grid;gap:22px}
+  .roomhead{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 10px}
+  .roomhead h3{font-family:var(--display);font-weight:400;font-size:19px;margin:0}
+  .roomhead span{font-size:12px;color:var(--ink-faint);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+  .tile{position:relative;text-align:left;border-radius:18px;padding:16px 16px 14px;border:1px solid var(--line);
+        background:var(--panel);display:grid;gap:8px;min-height:104px;
+        transition:transform .15s,border-color .2s,background .4s,opacity .3s}
+  .tile:hover{transform:translateY(-2px);border-color:#565C90}
+  .tile .lamp{width:12px;height:12px;border-radius:50%;background:var(--lamp);box-shadow:0 0 12px 2px rgba(255,183,90,.55);
+              position:absolute;top:16px;right:16px;transition:background .5s,box-shadow .5s}
+  .tile .name{font-weight:700;font-size:15.5px;line-height:1.3;padding-right:22px}
+  .tile .meta{display:flex;justify-content:space-between;align-items:center;color:var(--ink-dim);font-size:13px}
+  .tile .mins{font-variant-numeric:tabular-nums;font-weight:700}
+  .tile .next{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lamp);font-weight:800}
+  .tile.done{background:linear-gradient(160deg,#1E2650,#181C3A);border-color:#334074;opacity:.85}
+  .tile.done .lamp{background:var(--sleep);box-shadow:0 0 10px 1px rgba(108,140,224,.4)}
+  .tile.done .name{color:var(--ink-dim);text-decoration:line-through;text-decoration-color:#4A5590}
+  .tile.done .mins{color:var(--sleep)}
+  .tile.zzz::before{content:"z z z";position:absolute;right:14px;bottom:10px;font-family:var(--display);color:var(--sleep);
+                    font-size:14px;letter-spacing:.2em;animation:drift 1.8s ease-out forwards}
+  @keyframes drift{0%{opacity:0;transform:translateY(6px)}30%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
+  .app.busy .tile:not(.active){opacity:.45;pointer-events:none}
+  .tile.active{border-color:var(--lamp);box-shadow:0 0 0 3px rgba(255,183,90,.25)}
+  .edit{background:none;border:0;color:var(--ink-faint);font-size:12px;padding:2px 6px;border-radius:8px;margin-left:6px}
+  .edit:hover{color:var(--ink);background:var(--panel-2)}
+
+  /* ---------- footer ---------- */
+  .foot{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;color:var(--ink-faint);font-size:13px}
+  .foot .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btn.small{padding:8px 14px;font-size:13px}
+  .goodnight{margin-top:18px;padding:26px 24px;border-radius:22px;text-align:center;border:1px solid #334074;
+             background:linear-gradient(160deg,#1E2650,#15172B)}
+  .goodnight h2{font-family:var(--display);font-weight:400;font-size:32px;margin:0 0 6px}
+  .goodnight p{margin:0;color:var(--ink-dim)}
+  #fx{position:fixed;inset:0;pointer-events:none;z-index:9}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#1B1633;
+         padding:10px 18px;border-radius:99px;font-weight:800;opacity:0;transition:.35s;z-index:10;pointer-events:none;white-space:nowrap}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  @media (max-width:520px){
+    .focus{grid-template-columns:1fr;justify-items:center;text-align:center}
+    .actions{justify-content:center}
+    .status{grid-template-columns:1fr auto}
+    .stat.sleep{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+
+<div class="app" id="app">
+  <header class="sky" id="sky">
+    <div class="stars" id="stars"></div>
+    <div class="moon"></div>
+    <div class="head">
+      <p class="eyebrow">Sophia's bedtime routine</p>
+      <h1>Lights Out</h1>
+      <p class="tag">Every chore is a lit window. Finish one and that room goes to sleep. Pick any order, one at a time.</p>
+    </div>
+    <svg class="building" viewBox="0 0 740 150" aria-hidden="true">
+      <rect x="0" y="40" width="740" height="110" rx="6" fill="#0E1022"/>
+      <rect x="0" y="146" width="740" height="4" fill="#0A0B18"/>
+      <g id="windows"></g>
+    </svg>
+  </header>
+
+  <section class="status">
+    <div>
+      <div class="big" id="headline">The whole place is still awake</div>
+      <div class="small" id="subline"></div>
+    </div>
+    <div class="stat"><b id="pts">0</b><span>stars</span></div>
+    <div class="stat sleep"><b id="streak">0</b><span>nights</span></div>
+  </section>
+  <div class="bar"><i id="barfill"></i></div>
+
+  <section class="focus" id="focus" hidden>
+    <div class="ring">
+      <svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="44"/><circle class="fill" id="ringfill" cx="50" cy="50" r="44" pathLength="1"/></svg>
+      <div class="clock"><b id="clock">0:00</b><small id="clocklabel">left</small></div>
+    </div>
+    <div>
+      <div class="room" id="froom"></div>
+      <h2 id="fname"></h2>
+      <p id="fhint"></p>
+      <input class="note" id="fnote" placeholder="Note (what he asked for, etc.)" hidden>
+      <div class="actions">
+        <button class="btn primary" id="doneBtn">Done, lights off</button>
+        <button class="btn" id="pauseBtn">Pause</button>
+        <button class="btn ghost" id="backBtn">Not now</button>
+      </div>
+    </div>
+  </section>
+
+  <div id="goodnight" hidden></div>
+  <main class="rooms" id="rooms"></main>
+
+  <footer class="foot">
+    <div id="tip">Tip: the glowing "next up" tag is a suggested order. Ignore it whenever you like.</div>
+    <div class="btns">
+      <button class="btn small" id="soundBtn">Sound: on</button>
+      <button class="btn small" id="hintBtn">Hints: on</button>
+      <button class="btn small" id="resetBtn">New night</button>
+    </div>
+  </footer>
+</div>
+<canvas id="fx"></canvas>
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const ROOMS = [
+    {id:'laundry', name:'Laundry'},
+    {id:'kitchen', name:'Kitchen'},
+    {id:'living',  name:'Whole apartment'},
+    {id:'desk',    name:'Workspace'},
+    {id:'bath',    name:'Bathroom'},
+    {id:'bed',     name:'Bedroom'},
+  ];
+  // Suggested order = the order of this list. Dryer first so it runs while you work;
+  // ask early so the answer is ready; fridge before cooking so there is room; food before tidy;
+  // tidy before vacuum so floors are clear; end at the bed so you finish where you sleep.
+  const TASKS = [
+    {id:'dryer',   room:'laundry', name:'Move the wet clothes into the dryer', mins:2,  hint:'Do this first. It runs on its own while you do everything else.'},
+    {id:'ask',     room:'kitchen', name:'Ask him what he wants for tomorrow', mins:1,  hint:'Just the question. Write the answer in the note so it is waiting for you.', note:true},
+    {id:'fridge',  room:'kitchen', name:'Clear out the fridge', mins:4,  hint:'Toss the old stuff and make room before you cook anything.'},
+    {id:'dishes',  room:'kitchen', name:'Dishes: put up the clean, load the dirty', mins:5, hint:'Empty first, then load. Counters clear for cooking.'},
+    {id:'food',    room:'kitchen', name:'Make his food for tomorrow', mins:10, hint:'Ten minutes, hard stop. Good enough beats perfect at night.', note:true},
+    {id:'smoothie',room:'kitchen', name:'Prep the morning smoothie', mins:10, hint:'Bag or jar it so tomorrow is pour-and-blend.'},
+    {id:'tidy',    room:'living',  name:'Ten-minute tidy of the whole place', mins:10, hint:'Grab a basket, walk every room, put things where they live.'},
+    {id:'vacuum',  room:'living',  name:'Vacuum the whole apartment', mins:10, hint:'Floors are clear now, so this is a straight run.'},
+    {id:'desk',    room:'desk',    name:'Plug in laptop, organize desk and iPad', mins:5, hint:'Charging, closed, squared away for the morning.'},
+    {id:'bath',    room:'bath',    name:'Tidy the bathroom and set out contacts', mins:4, hint:'Wipe, straighten, contacts by the sink.'},
+    {id:'bed',     room:'bed',     name:'Organize your side of the bed', mins:3, hint:'Last one. Nightstand, charger, water. Then lights out.'},
+  ];
+  const KEY = 'lightsout.v1';
+  const today = () => new Date().toISOString().slice(0,10);
+
+  const def = () => ({ night: today(), done:{}, notes:{}, mins:{}, pts:0, streak:0, lastNight:null, sound:true, hints:true, celebrated:false });
+  let S = def();
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) { const s = JSON.parse(raw); S = {...def(), ...s};
+      if (S.night !== today()) { S.night = today(); S.done = {}; S.notes = {}; S.celebrated = false; }
+    }
+  } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+  const minsOf = t => S.mins[t.id] ?? t.mins;
+
+  // ---------- sky ----------
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 26; i++) addStar(false);
+  function addStar(fresh) {
+    const s = document.createElement('i'); s.className = 'star' + (fresh ? ' new' : '');
+    s.style.left = (Math.random()*100)+'%'; s.style.top = (Math.random()*55)+'%';
+    s.style.animationDelay = (Math.random()*3)+'s';
+    if (fresh) { s.style.width = s.style.height = '5px'; s.style.background = '#FFD98A'; }
+    starsEl.appendChild(s);
+  }
+
+  // ---------- building ----------
+  const winG = document.getElementById('windows');
+  const wins = {};
+  (function draw() {
+    const n = ROOMS.length, w = 740 / n;
+    ROOMS.forEach((r, i) => {
+      const x = i * w + w/2 - 34;
+      const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.innerHTML = `<rect class="win" x="${x}" y="58" width="68" height="54" rx="4"/>
+        <rect x="${x+32}" y="58" width="4" height="54" fill="#0E1022"/>
+        <rect x="${x}" y="83" width="68" height="4" fill="#0E1022"/>
+        <text class="win-label" x="${x+34}" y="132" text-anchor="middle">${r.name}</text>`;
+      winG.appendChild(g); wins[r.id] = g.querySelector('.win');
+    });
+  })();
+
+  // ---------- render ----------
+  const roomsEl = document.getElementById('rooms');
+  function nextUp() { return S.hints ? TASKS.find(t => !S.done[t.id]) : null; }
+  function render() {
+    const nu = nextUp();
+    roomsEl.innerHTML = '';
+    ROOMS.forEach(r => {
+      const ts = TASKS.filter(t => t.room === r.id);
+      const d = ts.filter(t => S.done[t.id]).length;
+      const sec = document.createElement('section');
+      sec.innerHTML = `<div class="roomhead"><h3>${r.name}</h3><span>${d === ts.length ? 'asleep' : d + ' of ' + ts.length + ' done'}</span></div><div class="tiles"></div>`;
+      const grid = sec.querySelector('.tiles');
+      ts.forEach(t => {
+        const b = document.createElement('button');
+        b.className = 'tile' + (S.done[t.id] ? ' done' : '') + (active && active.id === t.id ? ' active' : '');
+        b.dataset.id = t.id;
+        const dn = S.done[t.id];
+        b.innerHTML = `<span class="lamp"></span><span class="name">${t.name}</span>
+          <span class="meta"><span><span class="mins">${dn ? fmt(dn.elapsed) + ' · ' + (dn.early ? 'beat the clock' : 'took a bit longer') : minsOf(t) + ' min'}</span><span class="editslot"></span></span>
+          ${nu && nu.id === t.id ? '<span class="next">next up</span>' : ''}</span>
+          ${S.notes[t.id] ? `<span class="meta" style="color:var(--ink-faint)">“${escapeHtml(S.notes[t.id])}”</span>` : ''}`;
+        if (!dn) {
+          const e = document.createElement('span'); e.className = 'edit'; e.textContent = 'edit time'; e.setAttribute('role','button');
+          e.onclick = ev => { ev.stopPropagation(); const v = prompt('Minutes for "' + t.name + '"', minsOf(t)); const m = parseFloat(v); if (m > 0) { S.mins[t.id] = m; save(); render(); } };
+          b.querySelector('.editslot').appendChild(e);
+        }
+        b.onclick = () => dn ? undo(t) : start(t);
+        grid.appendChild(b);
+      });
+      sec.style.opacity = d === ts.length ? .8 : 1;
+      roomsEl.appendChild(sec);
+      // window brightness
+      const frac = d / ts.length;
+      const win = wins[r.id];
+      win.classList.toggle('dark', frac === 1);
+      win.style.opacity = frac === 1 ? 1 : (1 - frac * 0.55);
+    });
+    // status
+    const doneN = Object.keys(S.done).length, total = TASKS.length;
+    const left = TASKS.filter(t => !S.done[t.id]).reduce((a,t) => a + minsOf(t), 0);
+    const head = document.getElementById('headline');
+    head.textContent = doneN === 0 ? 'The whole place is still awake' : doneN === total ? 'The apartment is asleep' : `${doneN} of ${total} lights out`;
+    document.getElementById('subline').textContent = doneN === total ? `Goodnight. ${S.streak} night${S.streak === 1 ? '' : 's'} in a row.` : `About ${Math.round(left)} min left if you keep pace`;
+    document.getElementById('pts').textContent = S.pts;
+    document.getElementById('streak').textContent = S.streak;
+    document.getElementById('barfill').style.width = (doneN / total * 100) + '%';
+    document.getElementById('soundBtn').textContent = 'Sound: ' + (S.sound ? 'on' : 'off');
+    document.getElementById('hintBtn').textContent = 'Hints: ' + (S.hints ? 'on' : 'off');
+    document.getElementById('sky').classList.toggle('asleep', doneN === total);
+    const gn = document.getElementById('goodnight');
+    gn.hidden = doneN !== total;
+    if (doneN === total) {
+      const tot = Object.values(S.done).reduce((a,d) => a + d.elapsed, 0);
+      gn.innerHTML = `<div class="goodnight"><h2>Goodnight, Sophia.</h2><p>Every window is dark. ${fmt(tot)} of chores, ${S.pts} stars tonight. Tomorrow is already set up.</p></div>`;
+    }
+  }
+  const escapeHtml = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const fmt = sec => { sec = Math.round(sec); return Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0'); };
+
+  // ---------- timer ----------
+  let active = null, startAt = 0, pausedAcc = 0, pausedAt = null, tick = null;
+  const focus = document.getElementById('focus');
+  const app = document.getElementById('app');
+  function start(t) {
+    if (active) return;
+    active = t; startAt = Date.now(); pausedAcc = 0; pausedAt = null;
+    document.getElementById('froom').textContent = ROOMS.find(r => r.id === t.room).name;
+    document.getElementById('fname').textContent = t.name;
+    document.getElementById('fhint').textContent = t.hint;
+    const note = document.getElementById('fnote'); note.hidden = !t.note; note.value = S.notes[t.id] || (t.id === 'food' ? S.notes.ask || '' : '');
+    focus.hidden = false; focus.classList.remove('over');
+    document.getElementById('pauseBtn').textContent = 'Pause';
+    app.classList.add('busy');
+    render();
+    focus.scrollIntoView({behavior:'smooth', block:'center'});
+    tick = setInterval(update, 250); update();
+  }
+  function elapsed() { return (Date.now() - startAt - pausedAcc - (pausedAt ? Date.now() - pausedAt : 0)) / 1000; }
+  function update() {
+    if (!active) return;
+    const total = minsOf(active) * 60, e = elapsed(), rem = total - e;
+    const over = rem < 0;
+    focus.classList.toggle('over', over);
+    document.getElementById('clock').textContent = fmt(Math.abs(rem));
+    document.getElementById('clocklabel').textContent = over ? 'over, still counts' : 'left';
+    document.getElementById('ringfill').style.strokeDashoffset = over ? 0 : (1 - rem / total);
+    if (over && !focus.dataset.warned) { focus.dataset.warned = '1'; toast('Time is up. Wrap it and hit Done, no guilt.'); }
+  }
+  document.getElementById('pauseBtn').onclick = () => {
+    if (!active) return;
+    if (pausedAt) { pausedAcc += Date.now() - pausedAt; pausedAt = null; document.getElementById('pauseBtn').textContent = 'Pause'; }
+    else { pausedAt = Date.now(); document.getElementById('pauseBtn').textContent = 'Resume'; }
+  };
+  document.getElementById('backBtn').onclick = () => stop(false);
+  document.getElementById('doneBtn').onclick = () => stop(true);
+  document.getElementById('fnote').oninput = ev => { if (active) { S.notes[active.id] = ev.target.value; save(); } };
+
+  function stop(done) {
+    if (!active) return;
+    clearInterval(tick);
+    const t = active, e = elapsed(), early = e <= minsOf(t) * 60;
+    active = null; focus.hidden = true; delete focus.dataset.warned; app.classList.remove('busy');
+    if (done) {
+      S.done[t.id] = { elapsed: e, early };
+      const gained = 10 + (early ? 5 : 0);
+      S.pts += gained;
+      addStar(true);
+      chime(early ? 2 : 1);
+      burst();
+      if (navigator.vibrate) navigator.vibrate(early ? [30, 40, 60] : 40);
+      toast(early ? `+${gained} stars · beat the clock by ${fmt(minsOf(t)*60 - e)}` : `+${gained} stars · lights off`);
+      const allDone = TASKS.every(x => S.done[x.id]);
+      if (allDone && !S.celebrated) {
+        S.celebrated = true;
+        S.streak = (S.lastNight && daysBetween(S.lastNight, today()) === 1) ? S.streak + 1 : 1;
+        S.lastNight = today();
+        setTimeout(() => { burst(); burst(); chime(3); }, 500);
+      }
+      save(); render();
+      const tile = roomsEl.querySelector(`[data-id="${t.id}"]`); if (tile) tile.classList.add('zzz');
+    } else render();
+  }
+  function undo(t) {
+    if (!confirm('Turn this light back on? (marks it not done)')) return;
+    S.pts -= 10 + (S.done[t.id].early ? 5 : 0); delete S.done[t.id]; save(); render();
+  }
+  const daysBetween = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5);
+
+  // ---------- feedback ----------
+  const toastEl = document.getElementById('toast'); let toastT;
+  function toast(msg) { toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 2600); }
+
+  let AC;
+  function chime(kind) {
+    if (!S.sound) return;
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+      const notes = kind === 3 ? [523, 659, 784, 1047] : kind === 2 ? [659, 988] : [587];
+      notes.forEach((f, i) => {
+        const o = AC.createOscillator(), g = AC.createGain();
+        o.type = 'sine'; o.frequency.value = f;
+        const t0 = AC.currentTime + i * 0.16;
+        g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(0.18, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.9);
+        o.connect(g).connect(AC.destination); o.start(t0); o.stop(t0 + 1);
+      });
+    } catch (e) {}
+  }
+
+  const cv = document.getElementById('fx'), cx = cv.getContext('2d'); let parts = [], raf;
+  function burst() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    cv.width = innerWidth; cv.height = innerHeight;
+    const ox = innerWidth / 2, oy = Math.min(innerHeight * 0.45, 380);
+    for (let i = 0; i < 60; i++) {
+      const a = Math.random() * Math.PI * 2, v = 3 + Math.random() * 7;
+      parts.push({ x: ox, y: oy, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 3, life: 1, c: Math.random() < .6 ? '#FFD98A' : '#8FA7F0', r: 2 + Math.random() * 3 });
+    }
+    cancelAnimationFrame(raf); frame();
+  }
+  function frame() {
+    cx.clearRect(0, 0, cv.width, cv.height);
+    parts = parts.filter(p => p.life > 0);
+    parts.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.18; p.vx *= .98; p.life -= 0.016;
+      cx.globalAlpha = Math.max(p.life, 0); cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 7); cx.fill(); });
+    cx.globalAlpha = 1;
+    if (parts.length) raf = requestAnimationFrame(frame);
+  }
+
+  // ---------- footer ----------
+  document.getElementById('soundBtn').onclick = () => { S.sound = !S.sound; save(); render(); if (S.sound) chime(1); };
+  document.getElementById('hintBtn').onclick = () => { S.hints = !S.hints; save(); render(); };
+  document.getElementById('resetBtn').onclick = () => {
+    if (!confirm('Start a fresh night? Tonight\'s checkmarks clear; your stars, streak and edited times stay.')) return;
+    if (active) stop(false);
+    S.done = {}; S.notes = {}; S.celebrated = false; S.night = today(); save(); render();
+  };
+
+  render();
+})();
+</script>
