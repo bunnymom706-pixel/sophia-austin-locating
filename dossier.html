@@ -1,0 +1,274 @@
+<title>The Dossier</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#EEF1EA; --card:#F8F9F4; --card-line:#CBD4C4; --ink:#1E2A22; --ink-dim:#55604F; --ink-faint:#8A9483;
+  --body-c:#1E7F72; --body-c-bg:#DCEEEA; --mind-c:#6E4FA0; --mind-c-bg:#E9E2F3;
+  --mindset-c:#B8781E; --mindset-c-bg:#F3E6D0; --action-c:#B3402E; --action-c-bg:#F3DCD6;
+  --good:#2E8B5D; --bad:#B3402E; --warn:#B8781E;
+  --display:'Fraunces', Georgia, serif; --mono:'IBM Plex Mono', ui-monospace, monospace; --sans:'IBM Plex Sans', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#161B16; --card:#1F251F; --card-line:#33402F; --ink:#E9EDE3; --ink-dim:#AAB3A2; --ink-faint:#6E786A;
+    --body-c:#4FC4B2; --body-c-bg:#1C3630; --mind-c:#B79AE6; --mind-c-bg:#332A47; --mindset-c:#E3A54E; --mindset-c-bg:#3D3020;
+    --action-c:#E27862; --action-c-bg:#402420; --good:#5FC98B; --bad:#E27862; --warn:#E3A54E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#161B16; --card:#1F251F; --card-line:#33402F; --ink:#E9EDE3; --ink-dim:#AAB3A2; --ink-faint:#6E786A;
+  --body-c:#4FC4B2; --body-c-bg:#1C3630; --mind-c:#B79AE6; --mind-c-bg:#332A47; --mindset-c:#E3A54E; --mindset-c-bg:#3D3020;
+  --action-c:#E27862; --action-c-bg:#402420; --good:#5FC98B; --bad:#E27862; --warn:#E3A54E;
+}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--body-c)}
+.wrap{max-width:760px;margin:0 auto;padding:36px 20px 80px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 8px}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(32px,6vw,46px);margin:0 0 10px;text-wrap:balance}
+.tagline{margin:0 0 22px;color:var(--ink-dim);max-width:58ch}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.toc a{border:1px solid var(--card-line);border-radius:99px;padding:7px 14px;font-size:13px;font-weight:600;text-decoration:none;color:var(--ink)}
+.toc a b{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px}
+.toc a.hub b{background:var(--body-c)}.toc a.dis b{background:var(--mind-c)}.toc a.pro b{background:var(--mindset-c)}.toc a.car b{background:var(--action-c)}
+
+section.person{margin-top:56px;padding-top:6px;border-top:4px solid var(--card-line)}
+section.person.hub{border-top-color:var(--body-c)}
+section.person.dis{border-top-color:var(--mind-c)}
+section.person.pro{border-top-color:var(--mindset-c)}
+section.person.car{border-top-color:var(--action-c)}
+.who{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin:18px 0 2px}
+.hub .who{color:var(--body-c)}.dis .who{color:var(--mind-c)}.pro .who{color:var(--mindset-c)}.car .who{color:var(--action-c)}
+h2{font-family:var(--display);font-weight:600;font-size:30px;margin:0 0 6px;text-wrap:balance}
+.role{color:var(--ink-dim);margin:0 0 18px;font-size:15px}
+
+.quicktake{border-radius:14px;padding:16px 18px;margin:0 0 22px;font-size:14.5px;line-height:1.6}
+.hub .quicktake{background:var(--body-c-bg)}.dis .quicktake{background:var(--mind-c-bg)}.pro .quicktake{background:var(--mindset-c-bg)}.car .quicktake{background:var(--action-c-bg)}
+.quicktake b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px}
+
+h3{font-family:var(--display);font-weight:600;font-size:19px;margin:26px 0 10px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--card-line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.techlist{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.techlist li{padding-left:18px;position:relative;font-size:14.5px}
+.techlist li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--ink-faint)}
+.techlist b{font-weight:600}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;background:var(--card);border:1px solid var(--card-line);border-radius:5px;padding:1px 5px}
+
+.evidence{border:1px solid var(--card-line);background:var(--card);border-radius:14px;padding:16px 18px;margin-top:18px}
+.evidence h4{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 8px;color:var(--ink-faint)}
+.evidence p{font-size:14px;margin:0 0 10px}
+.evidence p:last-child{margin-bottom:0}
+.flag{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px;border-radius:8px;padding:2px 8px;margin-right:6px}
+.flag.bad{background:var(--action-c-bg);color:var(--bad)}
+.flag.warn{background:var(--mindset-c-bg);color:var(--warn)}
+.flag.ok{background:var(--body-c-bg);color:var(--good)}
+
+details{margin-top:14px;border:1px solid var(--card-line);border-radius:12px;background:var(--card);padding:2px 16px}
+summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px}
+details[open] summary{border-bottom:1px solid var(--card-line);margin-bottom:12px}
+details .techlist{padding-bottom:14px}
+
+.closing{margin-top:56px;padding:22px;border-radius:16px;background:var(--card);border:1px solid var(--card-line);font-size:14.5px}
+.closing h3{margin-top:0}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Sophia's research library</p>
+  <h1>The Dossier</h1>
+  <p class="tagline">Everything gathered on the four people behind the day's experiments: what each one actually teaches, in enough detail to run it, and what independent evidence says about whether it holds up.</p>
+
+  <nav class="toc">
+    <a class="hub" href="#huberman"><b></b>Andrew Huberman</a>
+    <a class="dis" href="#dispenza"><b></b>Joe Dispenza</a>
+    <a class="pro" href="#proctor"><b></b>Bob Proctor</a>
+    <a class="car" href="#cardone"><b></b>Grant Cardone</a>
+  </nav>
+
+  <section class="person hub" id="huberman">
+    <p class="who">Body · Neuroscience</p>
+    <h2>Andrew Huberman</h2>
+    <p class="role">Stanford neuroscientist, host of the Huberman Lab podcast — protocols for sleep, light, focus, exercise, and stress.</p>
+    <div class="quicktake"><b>Quick take</b>A credentialed, published neuroscientist whose mechanisms are generally sound — but several episodes stretch small or preliminary studies into confident daily protocols, and long-running sponsors (AG1, LMNT, Momentous) sit uncomfortably close to what gets recommended as "the science."</div>
+
+    <h3>His daily routine</h3>
+    <table>
+      <tr><th>When</th><th>What</th><th>Why</th></tr>
+      <tr><td>On waking</td><td>Water + electrolytes (LMNT)</td><td>Rehydrate before anything else; supports alertness better than water alone</td></tr>
+      <tr><td>0–30 min</td><td>Outside, direct sunlight, no sunglasses, ~<span class="num">10 min</span></td><td>Anchors the circadian clock via a correctly-timed cortisol pulse</td></tr>
+      <tr><td>First 90–120 min</td><td>No caffeine</td><td>Lets adenosine clear naturally; skipping this is blamed for the afternoon crash</td></tr>
+      <tr><td>+90 min, fasted</td><td>First 90-min deep-work block</td><td>Rides the first ultradian focus cycle of the day</td></tr>
+      <tr><td>Midday</td><td>First meal, lower-carb (meat, eggs, vegetables)</td><td>Keeps daytime insulin/alertness stable</td></tr>
+      <tr><td>Late morning–early afternoon</td><td>Resistance training or a run</td><td>Body-temperature and hormone rhythms favor this window</td></tr>
+      <tr><td>~4:30pm</td><td>NSDR / yoga nidra, <span class="num">10–30 min</span></td><td>Resets sympathetic arousal without caffeine or a nap</td></tr>
+      <tr><td>~7pm</td><td>Dinner shifts to starchy carbs + protein</td><td>Carb-driven insulin raises tryptophan uptake, supporting serotonin/melatonin</td></tr>
+      <tr><td>8–9pm</td><td>Dim the house, cut blue light/screens</td><td>Protects the evening melatonin rise</td></tr>
+      <tr><td>30–60 min before bed</td><td>Magnesium threonate <span class="num">~145mg</span> + L-theanine <span class="num">100–400mg</span> + apigenin <span class="num">~50mg</span></td><td>Sleep depth, mental "chatter," mild sedation, respectively</td></tr>
+      <tr><td>Bedtime</td><td>Cool room (<span class="num">65–68°F</span>), goes to bed only when sleepy, wake time held fixed</td><td>Core body temperature must drop to initiate/maintain sleep</td></tr>
+    </table>
+
+    <h3>Core techniques worth trying</h3>
+    <ul class="techlist">
+      <li><b>Sleep toolkit numbers</b> — morning light <span class="num">5 min</span> clear day, <span class="num">10 min</span> cloudy, <span class="num">20–30 min</span> overcast, within the first hour of waking, on at least 80% of days (double it the next day if you miss). Caffeine <span class="num">1–3 mg per kg</span> of body weight per dose, none after about 2–3pm. Hot bath or sauna in the evening capped at <span class="num">20–30 min</span> drops core temperature 1–3°F afterward and helps sleep onset. Bedroom at least 3°F cooler than daytime. Dim red light under <span class="num">10 lux</span> is fine at night; total pitch-black is not required.</li>
+      <li><b>Temperature minimum</b> — your daily low point sits roughly <span class="num">90 min–2 hr</span> before your usual wake time. Light, exercise, or food in the 4–6 hours after it shifts your clock earlier; in the 4–6 hours before it, later. That's the whole basis of his jet lag and shift-work advice.</li>
+      <li><b>Physiological sigh</b> — double inhale through the nose, one long exhale through the mouth, <span class="num">1–3x</span>. Fastest real-time way to calm down; heart rate drop takes ~20–30 seconds.</li>
+      <li><b>Cold exposure</b> — <span class="num">45–55°F</span>, <span class="num">1–5 min</span>, <span class="num">2–4x/week</span>, ~11 total minutes weekly. Raises dopamine roughly 2.5x, and it stays elevated afterward rather than crashing.</li>
+      <li><b>90-minute ultradian work blocks</b> — expect a 5–10 minute ramp-up, cap at 2–3 blocks/day. A 60-second fixed-gaze warm-up beforehand is said to pull mental focus in faster.</li>
+      <li><b>NSDR (non-sleep deep rest)</b> — <span class="num">10–30 min</span>, hard cap <span class="num">90 min</span>. Used after learning to lock it in, midafternoon to reset, or at 3am to get back to sleep.</li>
+      <li><b>Sauna</b> — <span class="num">5–20 min</span> at <span class="num">176–212°F</span>, roughly <span class="num">1hr/week</span> split into 2–3 sessions for general health; 4–7x/week is the dose linked to lower cardiovascular mortality in the Finnish cohort data he cites.</li>
+      <li><b>17-minute interoception meditation</b> — one session measurably reduced "attentional blink" (missed rapid stimuli) even in a single sitting, across ages.</li>
+      <li><b>Fasting window</b> — <span class="num">7–9 hours</span> eating window is the practical sweet spot he cites, not an extreme 4–6 hour window.</li>
+      <li><b>Stress toolkit</b> — exhale-emphasized breathing to calm, inhale-emphasized to energize; weekly "stress inoculation" (cold or hard exercise while deliberately widening your visual gaze to stay calm under real physiological load).</li>
+    </ul>
+
+    <div class="evidence">
+      <h4>Evidence check</h4>
+      <p><span class="flag ok">Credentialed</span>Huberman is an active, published Stanford neuroscientist — the mechanism explanations are broadly accurate.</p>
+      <p><span class="flag warn">Overreach flagged</span>Science journalists (Slate, and immunologist Andrea Love) have criticized specific episodes — notably one on immune health — for leaning on very small or non-causal studies to support confident, sellable advice, in segments that doubled as supplement pitches.</p>
+      <p><span class="flag warn">Sponsorship</span>AG1, LMNT, and Momentous have sponsored the show since near its start, and Huberman has personal/financial ties to some supplement makers — not proof any specific claim was bought, but a real conflict worth weighing.</p>
+    </div>
+
+    <details>
+      <summary>More protocol detail (dopamine, learning, hormones, supplements)</summary>
+      <ul class="techlist">
+        <li><b>Dopamine</b> — don't stack multiple dopamine hits onto one activity (music + caffeine + scrolling during a workout depletes the pool faster); vary reward unpredictably rather than on a fixed schedule; avoid routine pre-task stimulants before study, since a big pre-task spike lowers post-task learning.</li>
+        <li><b>Learning a skill</b> — maximize reps early (errors, not correct reps, open the plasticity window); sit quietly 1–10+ min right after training, no phone, while the brain replays the sequence backward; visualization alone (<span class="num">15 min/day, 5x/week, 12 weeks</span>) produced real but smaller gains than physical practice.</li>
+        <li><b>Fitness template</b> — alternate monthly between a strength block (<span class="num">4–8 reps</span>, 3–4 sets, 2–4 min rest) and a hypertrophy block (<span class="num">8–15 reps</span>, 2–3 sets, ~90 sec rest); Zone 2 cardio <span class="num">180–220 min/week</span>; VO2max intervals roughly weekly.</li>
+        <li><b>Hormones</b> — resistance training in the <span class="num">1–8 rep</span> range raises testosterone for up to 48 hours; endurance work past ~75 minutes tends to lower it via cortisol; morning light exposure supports the same dopamine-linked pathway.</li>
+        <li><b>Personal supplement habits (less independently confirmed)</b> — AG1, fish oil, vitamin D3+K2, magnesium, creatine <span class="num">~5g/day</span> are commonly cited as part of his stack; exact doses vary by source.</li>
+        <li><b>Skin</b> — mineral sunscreen (zinc oxide, up to 25%) preferred over chemical filters; hydrolyzed collagen <span class="num">15–30g/day</span> plus vitamin C; reduce alcohol; daily fermented foods for gut-skin links.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="person dis" id="dispenza">
+    <p class="who">Mind · Meditation</p>
+    <h2>Joe Dispenza</h2>
+    <p class="role">Chiropractor turned meditation teacher — mental rehearsal, heart coherence, and "changing your energy" to install a new identity.</p>
+    <div class="quicktake"><b>Quick take</b>Not a neuroscientist or physicist, despite the framing — the "quantum field" and consciousness-affects-random-number-generators claims are pseudoscience with no mainstream backing. But strip the cosmology out and the actual practices (breathwork, meditation, gratitude, mental rehearsal) are ordinary, reasonably well-evidenced mind-body tools. Never treat this as a substitute for medical care — there's a documented case of it discouraging chemotherapy.</div>
+
+    <h3>His routine, and the one he prescribes beginners</h3>
+    <ul class="techlist">
+      <li><b>His stated ideal window</b> is <span class="num">3–5am</span>, though this is the window he teaches more confidently than a confirmed personal habit. Structure: meditate <span class="num">45–60 min</span> → move the body → learn something new.</li>
+      <li><b>Retreats</b> alternate 90-minute meditation blocks with 90-minute lectures, totaling <span class="num">4–5 hours</span> of meditation a day across a week.</li>
+      <li><b>For a beginner:</b> start with <span class="num">15–20 min</span> guided sessions, repeat the same one daily until it feels rote, then switch. Expect the first few days to be a genuine struggle — that's normal, not failure. Give it at least <span class="num">30 days</span> before judging results. Doing it with an accountability partner is his own suggestion.</li>
+    </ul>
+
+    <h3>Core techniques worth trying</h3>
+    <ul class="techlist">
+      <li><b>Heart coherence breathing</b> — hand on chest, inhale <span class="num">~5 sec</span>, exhale <span class="num">~5 sec</span> (about 6 breaths/minute), while holding a real felt emotion of gratitude or love. Start around <span class="num">10 min</span>; a 1–2 minute version works as a quick reset.</li>
+      <li><b>Elevated emotion rehearsal</b> — sit with a real memory of gratitude or joy for <span class="num">5–10 min</span>, several times a day, to change your state going into something before it happens.</li>
+      <li><b>The 4-step change loop</b> — notice the automatic thought/reaction → interrupt it before it fires → mentally rehearse the new response with real feeling → repeat until it's automatic.</li>
+      <li><b>Old-self / new-self journaling</b> — one list of specific thoughts/behaviors you no longer choose, one list of the specific ones you're installing instead. Review both regularly, don't write once and forget.</li>
+      <li><b>Blessing of the energy centers</b> — move attention up through 8 points on the body (base of spine to ~16 inches above the head), pairing each with gratitude or love, then lie down at least 15 minutes afterward. Full practice runs about an hour.</li>
+      <li><b>Space between thoughts</b> — instead of thinking about your day, rest attention in pure spatial awareness (the space around your body, the room, beyond it) to quiet the analytical mind.</li>
+    </ul>
+
+    <div class="evidence">
+      <h4>Evidence check</h4>
+      <p><span class="flag bad">Not a neuroscientist</span>Dispenza holds a Doctor of Chiropractic degree; investigative reporting found no support for the "PhD" title used by the unaccredited Quantum University where he also teaches.</p>
+      <p><span class="flag bad">Pseudoscience flagged</span>A 2025 study on his own retreat (published with him as a co-author, and while he's employed by the company that sells the retreat) had no control group and used self-selected, paying attendees already primed by a week of ritual — it can't isolate meditation from expectation or the retreat experience itself. A separate study claims group meditation measurably influenced random-number generators worldwide — this revives a parapsychology research line (the Global Consciousness Project) that was never accepted by mainstream science and was shut down at Princeton in 2007.</p>
+      <p><span class="flag bad">Real-world harm documented</span>Journalists have reported a case where a cancer patient's family considered skipping chemotherapy under the influence of his mind-over-matter framing; he continued treatment and died at 45.</p>
+      <p><span class="flag ok">What still holds up</span>Meditation, HRV-linked breathing, gratitude practice, and mental rehearsal all have independent, mainstream support as generic wellness tools — just not the causal story he wraps around them.</p>
+    </div>
+
+    <details>
+      <summary>More detail (pineal breath, walking meditation, mental rehearsal)</summary>
+      <ul class="techlist">
+        <li><b>Pineal gland breath</b> — slow inhale through the nose while contracting the pelvic floor and drawing that contraction up the spine; hold at the crown ~5–10 sec; release; repeat for 5–10 minutes as a pre-meditation warm-up.</li>
+        <li><b>Walking meditation ("changing boxes")</b> — stand still, eyes closed, build the coherent-breathing + elevated-emotion state and set an intention; then open your eyes, fix on a distant horizon point, and walk while carrying that feeling into the body.</li>
+        <li><b>The "river of change"</b> — he frames the discomfort of leaving an old identity as expected and even valuable, not a sign to stop; the antidote is returning to the elevated-emotion practice rather than reverting.</li>
+        <li><b>Books</b> — <i>Breaking the Habit of Being Yourself</i> lays out the thought→feeling→"state of being" loop; <i>You Are the Placebo</i> extends it into belief/expectation; <i>Becoming Supernatural</i> adds the energy-center and heart-coherence material; <i>Evolve Your Brain</i> is the earliest neuroscience-framing book.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="person pro" id="proctor">
+    <p class="who">Mindset · Goals</p>
+    <h2>Bob Proctor</h2>
+    <p class="role">Self-help teacher (1934–2022), protégé of Earl Nightingale, featured in <i>The Secret</i> — paradigms, goal cards, and self-image.</p>
+    <div class="quicktake"><b>Quick take</b>No formal credentials — a high-school dropout who found <i>Think and Grow Rich</i> at 26 and built a career teaching it. The written-goal and self-image material genuinely overlaps with real psychology. The "Law of Attraction/Vibration" as literal physics, and the claim that disease can't exist in an emotionally healthy body, are pseudoscience. More seriously: Proctor was a paid promoter for two companies (Vemma, iMarketsLive) that the FTC later shut down as illegal pyramid schemes, and his own paid certification program runs $18,000–$32,000.</div>
+
+    <h3>His daily routine</h3>
+    <ul class="techlist">
+      <li><b>Morning:</b> write a gratitude list of 10 things, first thing. Read <i>Think and Grow Rich</i> — he did this daily for roughly 55 years. Read the goal card aloud. A ~2-minute visualization ("see it, feel it, expect it"). A short guidance meditation. Mentally "send love" to three people who irritate him.</li>
+      <li><b>Evening:</b> decide the one goal-moving task for tomorrow. A 10-minute reflection — what went well, what to improve. Affirmations right before sleep.</li>
+    </ul>
+
+    <h3>Core techniques worth trying</h3>
+    <ul class="techlist">
+      <li><b>The goal card</b> — on an index card, write "I am so happy and grateful now that ___," completing it in present tense as if already true. Carry it always; read it aloud at minimum on waking and before sleep, more through the day if you can.</li>
+      <li><b>A-B-C goals</b> — A: you already know how. B: a believable stretch. C: excites and scares you, with no visible "how." Proctor's instruction is to deliberately choose a C goal, because only that size forces real growth.</li>
+      <li><b>The Terror Barrier</b> — the wall of fear that shows up specifically when you commit to a C goal. His advice: name it for what it is, act while still scared rather than waiting for the fear to pass, and expect it to recur at every new level.</li>
+      <li><b>Paradigm change</b> — write the opposite of the unwanted pattern in present tense, then repeat it daily with real, manufactured emotion (not flat recitation) for a sustained stretch — commonly cited around 30 days.</li>
+      <li><b>Self-image</b> (borrowed from Maxwell Maltz's <i>Psycho-Cybernetics</i>) — your results snap back to match your internal self-concept even after external change. The fix is to write and rehearse a new self-image statement, not just try harder at the behavior.</li>
+    </ul>
+
+    <div class="evidence">
+      <h4>Evidence check</h4>
+      <p><span class="flag ok">Real psychology underneath</span>Locke &amp; Latham's goal-setting theory — one of the most replicated findings in psychology — genuinely supports writing specific, difficult, present-tense goals over vague ones. The self-image work echoes Bandura's self-efficacy research.</p>
+      <p><span class="flag bad">Pseudoscience flagged</span>The "Law of Vibration" as a literal causal mechanism, and the claim that disease "cannot live in a body in a healthy emotional state," are not supported by physics or medicine — the second claim risks discouraging real treatment.</p>
+      <p><span class="flag bad">Pyramid-scheme ties</span>Proctor was a paid business partner/promoter for Vemma and iMarketsLive (later IM Academy) — both later shut down by the FTC as illegal pyramid schemes. His own Proctor Gallagher Institute sells a "Thinking Into Results" program ($3,500–$13,000) and a consultant certification ($18,000–$32,000+) with a resale structure critics describe as MLM-adjacent.</p>
+      <p><span class="flag warn">Bottom line</span>The free teaching (goal cards, self-image, repetition) is worth using. Any paid certification tier is a real financial risk, separate from whether the underlying ideas are sound.</p>
+    </div>
+
+    <details>
+      <summary>More detail (stick-person diagram, six mental faculties)</summary>
+      <ul class="techlist">
+        <li><b>The stick-person diagram</b> — a head split into conscious mind (~5%, can accept or reject an idea) over subconscious mind (accepts and stores whatever is repeated with feeling, then runs it automatically), driving a body that produces behavior and results. The point: to change results, change what you feed the subconscious, not just try harder.</li>
+        <li><b>Six mental faculties</b> — imagination, intuition, will, memory, reason, perception, taught as trainable one at a time (his "Magic in Your Mind" program addresses one per week).</li>
+        <li><b>Decision</b> — a real decision is unconditional ("this is my decision," not "I'll try") and made without yet knowing the "how." Expect internal resistance as the old self-image defending itself, not a sign to stop.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="person car" id="cardone">
+    <p class="who">Action · Sales &amp; Money</p>
+    <h2>Grant Cardone</h2>
+    <p class="role">Sales trainer and real-estate syndicator — the 10X Rule, massive action, and aggressive follow-up.</p>
+    <div class="quicktake"><b>Quick take</b>Not a licensed financial advisor. The sales and follow-up material is the most independently backed part of his teaching — the goal-setting philosophy underneath 10X is a real, evidence-supported idea dressed up in a rhetorical multiplier. His real-estate return claims are a different story: an active federal class action alleges he kept marketing 15%+ returns on his funds after the SEC flagged the basis for that number, with a jury trial set for March 2027. Treat any of his specific investment numbers as unverified until you check the actual filing.</div>
+
+    <h3>His daily routine</h3>
+    <ul class="techlist">
+      <li>Wakes around <span class="num">6am</span>, described as "beating the sun up." Writes goals by hand immediately on waking.</li>
+      <li>Morning workout; long workdays, commonly cited around <span class="num">12 hours</span>.</li>
+      <li>Writes the same goals again by hand before sleep — the stated purpose is priming the subconscious at the two highest-leverage windows of the day.</li>
+      <li>Runs his calendar in <span class="num">15-minute</span> blocks, each tied to a specific target — an empty calendar slot is treated as a warning sign, not free time.</li>
+    </ul>
+
+    <h3>Core techniques worth trying</h3>
+    <ul class="techlist">
+      <li><b>Write goals twice a day</b> — by hand, once on waking, once before sleep, kept visible. He explicitly says to write them more often than twice if it helps.</li>
+      <li><b>The 10X Rule</b> — set the goal at 10 times what feels realistic, and multiply your planned action to match. His "Four Degrees of Action": do nothing → retreat → normal action → massive action. Only massive action, in his framework, reliably produces outsized results.</li>
+      <li><b>Agree first</b> — when someone objects, agree with them completely before reframing ("You're right to want to think it over — and that's exactly why...") rather than arguing. He calls this the most-violated rule in selling.</li>
+      <li><b>The follow-up cadence</b> — his cited statistic: roughly 80% of sales happen between the 5th and 12th contact, while most people quit after one or two. His prescription: about 12 touches spread across 6 months, varying the channel each time, always proposing the next specific date before ending contact.</li>
+      <li><b>Massive-action quota</b> — take your honest current daily outreach number and multiply it by 10 as this week's target, in a protected daily time block.</li>
+    </ul>
+
+    <div class="evidence">
+      <h4>Evidence check</h4>
+      <p><span class="flag ok">Backed by data</span>The follow-up persistence statistics are genuinely supported by independent sales research — this is arguably his most defensible, least-hyped claim.</p>
+      <p><span class="flag bad">Active litigation</span><i>Pino v. Cardone Capital</i> — a federal class action alleging his social-media marketing (15%+ annual returns, "$100K turns into $500/month") misled investors after the SEC had already required those projections removed from one fund's official offering circular in 2018. The case was revived on appeal, certified as a class action in March 2026, with trial set for March 2027 — unresolved as of now.</p>
+      <p><span class="flag warn">Net worth claims</span>His publicly stated net worth ($1.3–2.6B) appears to conflate money he manages for investors (~$4B in assets under management) with his own personal wealth; independent estimates put his actual net worth closer to $600–750M. He does not appear on Forbes' or Bloomberg's billionaire indexes.</p>
+      <p><span class="flag warn">10X as rhetoric, not research</span>No study establishes that a literal 10x multiplier outperforms other multipliers — it's a branding device layered on top of the real, well-supported idea that specific, ambitious goals beat vague ones.</p>
+    </div>
+
+    <details>
+      <summary>More detail (money rules, closes, business model)</summary>
+      <ul class="techlist">
+        <li><b>40/40/20 rule</b> — 40% of gross income to taxes, 40% to savings/investment, live on the remaining 20%, far more aggressive than a standard 50/30/20 budget.</li>
+        <li><b>Good debt vs. bad debt</b> — debt used to buy cash-flowing assets (like investment real estate, targeted around 65% loan-to-value) is "good"; consumer debt is "bad." He explicitly rejects Dave Ramsey's zero-debt philosophy as, in his words, "middle-class thinking."</li>
+        <li><b>Never buy a primary home, never use a 401(k)</b> — both genuinely contrarian, debated positions, not mainstream financial consensus; he has also promoted rolling 401(k) funds into his own real-estate deals, which independent analysts have called self-serving since it forfeits any employer match.</li>
+        <li><b>Sales closes</b> — the alternative-of-choice close (never a yes/no question, always a choice between two "yes" outcomes), the minor-point close (build a chain of small agreements), and the take-away close (signal the deal might not still be available).</li>
+        <li><b>Scientology</b> — Cardone is a longtime, publicly acknowledged member and donor (reportedly $18M+ over 20 years). Worth knowing as context for the absolutist, no-excuses tone of his content, separate from whether any individual piece of advice is sound.</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="closing">
+    <h3>Using this with Field Notes</h3>
+    <p>Every technique above with a real duration attached can become a queued card in <a href="https://claude.ai/code/artifact/66566a88-fe1d-42e8-88b5-21031d512b9f">Field Notes</a> — filter, add it, run it, and log what actually happened. And any time you're about to do something specific, just say what it is and I'll pull a matched shortlist straight from this page.</p>
+  </div>
+</div>

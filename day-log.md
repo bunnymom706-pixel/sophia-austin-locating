@@ -17,3 +17,6 @@
 | 8:21 | Checked off "made my bed" — done right when she woke up. |
 | ~8:26 | Launched 20 parallel research agents: Huberman (sleep/light, focus/dopamine, body/nutrition, daily routine+catalog), Dispenza (meditation, books, daily routine, evidence, mental rehearsal), Proctor (paradigms/goal card, daily routine/books, money mindset, evidence), Cardone (10X/routine, sales, money/real estate, evidence), plus N=1 self-experiment design (body, mind) and a measurement framework using iPhone/Apple Watch. |
 | 8:35 | Finished 15 minutes of morning sunlight outside (started ~8:16). |
+| ~8:45 | All 20 research agents hit a temporary server error; relaunched in batches of 5. |
+| ~9:05 | Asked for experiments to be fully dynamic (pick any number, any order) rather than a fixed list, and to be able to name a task and get a matched experiment list. |
+| ~9:30 | All 20 agents finished. Built **Field Notes** (dynamic experiment lab, 16 starter cards + custom cards, timer, before/after rating, results log) and **The Dossier** (full compiled research on Huberman, Dispenza, Proctor, Cardone with evidence checks). |

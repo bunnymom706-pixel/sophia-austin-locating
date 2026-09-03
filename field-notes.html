@@ -1,0 +1,385 @@
+<title>Field Notes</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#EEF1EA; --card:#F8F9F4; --card-line:#CBD4C4; --ink:#1E2A22; --ink-dim:#55604F; --ink-faint:#8A9483;
+  --body-c:#1E7F72; --body-c-bg:#DCEEEA; --mind-c:#6E4FA0; --mind-c-bg:#E9E2F3;
+  --mindset-c:#B8781E; --mindset-c-bg:#F3E6D0; --action-c:#B3402E; --action-c-bg:#F3DCD6;
+  --good:#2E8B5D; --bad:#B3402E; --flat:#8A9483;
+  --display:'Fraunces', Georgia, serif; --mono:'IBM Plex Mono', ui-monospace, monospace; --sans:'IBM Plex Sans', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#161B16; --card:#1F251F; --card-line:#33402F; --ink:#E9EDE3; --ink-dim:#AAB3A2; --ink-faint:#6E786A;
+    --body-c:#4FC4B2; --body-c-bg:#1C3630; --mind-c:#B79AE6; --mind-c-bg:#332A47; --mindset-c:#E3A54E; --mindset-c-bg:#3D3020;
+    --action-c:#E27862; --action-c-bg:#402420; --good:#5FC98B; --bad:#E27862; --flat:#8A9483;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#161B16; --card:#1F251F; --card-line:#33402F; --ink:#E9EDE3; --ink-dim:#AAB3A2; --ink-faint:#6E786A;
+  --body-c:#4FC4B2; --body-c-bg:#1C3630; --mind-c:#B79AE6; --mind-c-bg:#332A47; --mindset-c:#E3A54E; --mindset-c-bg:#3D3020;
+  --action-c:#E27862; --action-c-bg:#402420; --good:#5FC98B; --bad:#E27862; --flat:#8A9483;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--body-c);outline-offset:2px}
+.app{max-width:920px;margin:0 auto;padding:36px 20px 60px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 8px}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(32px,6vw,46px);margin:0 0 8px;text-wrap:balance}
+.tagline{margin:0;color:var(--ink-dim);max-width:52ch}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:26px;padding:14px 16px;background:var(--card);border:1px solid var(--card-line);border-radius:14px}
+.chip{border:1px solid var(--card-line);background:transparent;border-radius:99px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--ink-dim);transition:.15s}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.spacer{flex:1}
+.sel{border:1px solid var(--card-line);background:var(--paper);border-radius:10px;padding:7px 10px;font-size:13px}
+.btn{border:1px solid var(--card-line);background:var(--paper);border-radius:10px;padding:8px 14px;font-weight:600;font-size:13px}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn:active{transform:scale(.97)}
+
+.customPanel{margin-top:12px;padding:16px;background:var(--card);border:1px dashed var(--card-line);border-radius:14px;display:none;gap:10px;grid-template-columns:1fr 1fr;align-items:end}
+.customPanel.open{display:grid}
+.field{display:grid;gap:4px}
+.field label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600}
+.field input,.field textarea{border:1px solid var(--card-line);background:var(--paper);border-radius:8px;padding:8px 10px}
+.field.wide{grid-column:1/-1}
+
+h2{font-family:var(--display);font-weight:600;font-size:20px;margin:0}
+.sectionHead{display:flex;align-items:baseline;gap:8px;margin:30px 0 12px}
+.sectionHead .count{font-family:var(--mono);font-size:13px;color:var(--ink-faint)}
+.queueRow{display:flex;gap:10px;flex-wrap:wrap;min-height:40px}
+.queueRow:empty::after,.queueEmpty{content:"";}
+.queueEmpty{color:var(--ink-faint);font-size:14px;font-style:italic}
+.ticket{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--card-line);border-radius:10px;padding:8px 8px 8px 12px}
+.ticket b{font-size:13.5px;font-weight:600}
+.ticket .mins{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint)}
+.ticket .x{border:0;background:none;color:var(--ink-faint);font-size:15px;line-height:1;padding:2px 4px}
+.ticket .x:hover{color:var(--bad)}
+.ticket .run{background:var(--ink);color:var(--paper);border:0;border-radius:7px;padding:5px 10px;font-size:12px;font-weight:700}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.card{position:relative;border-radius:14px;background:var(--card);border:1px solid var(--card-line);padding:16px 16px 14px;display:grid;gap:8px;overflow:hidden}
+.card .tab{position:absolute;top:0;left:0;right:0;height:5px}
+.card.body .tab{background:var(--body-c)}
+.card.mind .tab{background:var(--mind-c)}
+.card.mindset .tab{background:var(--mindset-c)}
+.card.action .tab{background:var(--action-c)}
+.card .label{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.card.body .label{color:var(--body-c)}
+.card.mind .label{color:var(--mind-c)}
+.card.mindset .label{color:var(--mindset-c)}
+.card.action .label{color:var(--action-c)}
+.card .title{font-weight:600;font-size:15.5px;line-height:1.3;margin-top:2px}
+.card .hyp{font-style:italic;color:var(--ink-dim);font-size:13.5px;line-height:1.45}
+.card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.card .mins{font-family:var(--mono);font-size:12px;color:var(--ink-faint)}
+.card .add{background:transparent;border:1.5px solid var(--ink);border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:700}
+.card .add.added{background:var(--good);border-color:var(--good);color:#fff}
+.stamp{position:absolute;right:10px;bottom:10px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--good);border:1.5px solid var(--good);border-radius:6px;padding:2px 6px;transform:rotate(-8deg) scale(0);animation:stampIn .35s ease-out forwards}
+@keyframes stampIn{to{transform:rotate(-8deg) scale(1)}}
+
+.focus{position:fixed;inset:0;background:rgba(10,14,10,.55);display:grid;place-items:center;padding:20px;z-index:20}
+.focus .panel{width:100%;max-width:440px;background:var(--card);border:1px solid var(--card-line);border-radius:18px;padding:22px}
+.focus .label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.focus h3{font-family:var(--display);font-weight:600;font-size:22px;margin:4px 0 6px;text-wrap:balance}
+.focus .hyp{color:var(--ink-dim);font-style:italic;font-size:14px;margin:0 0 14px}
+.scaleRow{display:flex;gap:5px;margin:6px 0 4px;flex-wrap:wrap}
+.dot{width:26px;height:26px;border-radius:7px;border:1px solid var(--card-line);background:var(--paper);font-family:var(--mono);font-size:11px;display:grid;place-items:center;font-weight:600}
+.dot[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.scaleLabel{font-size:11px;color:var(--ink-faint);display:flex;justify-content:space-between;margin-top:2px}
+.timerRow{display:flex;align-items:center;justify-content:space-between;margin:18px 0 6px;font-family:var(--mono)}
+.timerRow b{font-size:30px;font-variant-numeric:tabular-nums}
+.actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.note{width:100%;border:1px solid var(--card-line);background:var(--paper);border-radius:8px;padding:8px 10px;margin-top:10px;min-height:54px}
+.step{display:none}
+.step.on{display:block}
+
+.log table{width:100%;border-collapse:collapse;font-size:13.5px}
+.log th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);padding:6px 8px;border-bottom:1px solid var(--card-line)}
+.log td{padding:8px;border-bottom:1px solid var(--card-line);vertical-align:top}
+.log .wrap{overflow-x:auto;border:1px solid var(--card-line);border-radius:12px}
+.verdict{font-weight:700;font-size:12px}
+.verdict.good{color:var(--good)}.verdict.bad{color:var(--bad)}.verdict.flat{color:var(--flat)}
+.empty{color:var(--ink-faint);font-style:italic;font-size:14px}
+
+.chartWrap{margin-top:16px;display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;font-size:12.5px}
+.bar .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{position:relative;height:16px;background:var(--paper);border-radius:4px;border:1px solid var(--card-line)}
+.track .zero{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--ink-faint)}
+.track .fill{position:absolute;top:1px;bottom:1px;border-radius:3px}
+
+@media (max-width:520px){.controls{padding:12px}.customPanel{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="app">
+  <p class="eyebrow">Sophia's self-experiment lab</p>
+  <h1>Field Notes</h1>
+  <p class="tagline">A library of small, testable protocols from Huberman, Dispenza, Proctor and Cardone. Filter, queue up as many or as few as you want, run them in any order, and log what actually changed.</p>
+
+  <div class="controls" id="controls">
+    <button class="chip" data-cat="all" aria-pressed="true">All</button>
+    <button class="chip" data-cat="body" aria-pressed="false">Body</button>
+    <button class="chip" data-cat="mind" aria-pressed="false">Mind</button>
+    <button class="chip" data-cat="mindset" aria-pressed="false">Mindset</button>
+    <button class="chip" data-cat="action" aria-pressed="false">Action</button>
+    <div class="spacer"></div>
+    <select class="sel" id="durFilter">
+      <option value="0">Any length</option>
+      <option value="5">5 min or less</option>
+      <option value="10">10 min or less</option>
+      <option value="20">20 min or less</option>
+    </select>
+    <button class="btn" id="customToggle">+ New experiment</button>
+  </div>
+
+  <div class="customPanel" id="customPanel">
+    <div class="field"><label>Name</label><input id="cName" placeholder="e.g. Journal one page"></div>
+    <div class="field"><label>Minutes</label><input id="cMins" type="number" min="1" max="120" value="5"></div>
+    <div class="field"><label>Category</label>
+      <select id="cCat" class="sel"><option value="body">Body</option><option value="mind">Mind</option><option value="mindset">Mindset</option><option value="action">Action</option></select>
+    </div>
+    <div class="field"><label>What you're testing</label><input id="cHyp" placeholder="e.g. Might clear my head before calls"></div>
+    <div class="field wide" style="grid-column:1/-1;display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" id="cCancel">Cancel</button>
+      <button class="btn primary" id="cSave">Add to library</button>
+    </div>
+  </div>
+
+  <div class="sectionHead"><h2>Today's queue</h2><span class="count" id="qCount">(0)</span></div>
+  <div class="queueRow" id="queueRow"><span class="queueEmpty">Nothing queued yet — add cards from the library below, any number, any order.</span></div>
+
+  <div class="sectionHead"><h2>Library</h2><span class="count" id="libCount"></span></div>
+  <div class="grid" id="grid"></div>
+
+  <div class="sectionHead"><h2>Today's results</h2></div>
+  <div class="log">
+    <div class="wrap">
+      <table>
+        <thead><tr><th>Time</th><th>Experiment</th><th>Before</th><th>After</th><th>Verdict</th><th>Note</th></tr></thead>
+        <tbody id="logBody"><tr><td colspan="6" class="empty" style="padding:14px">Nothing logged yet today.</td></tr></tbody>
+      </table>
+    </div>
+    <div class="chartWrap" id="chart"></div>
+  </div>
+</div>
+
+<div class="focus" id="focus" hidden>
+  <div class="panel">
+    <div class="label" id="fLabel"></div>
+    <h3 id="fName"></h3>
+    <p class="hyp" id="fHyp"></p>
+
+    <div class="step on" id="stepPre">
+      <div style="font-size:13px;color:var(--ink-dim);margin-bottom:4px">Before you start — how are you feeling right now, overall?</div>
+      <div class="scaleRow" id="preScale"></div>
+      <div class="scaleLabel"><span>1 low</span><span>10 high</span></div>
+      <div class="actions"><button class="btn primary" id="startTimerBtn">Start timer</button></div>
+    </div>
+
+    <div class="step" id="stepRun">
+      <div class="timerRow"><span id="timerLabel">time left</span><b id="clock">0:00</b></div>
+      <div class="actions">
+        <button class="btn primary" id="finishBtn">Done — log result</button>
+        <button class="btn" id="pauseBtn">Pause</button>
+      </div>
+    </div>
+
+    <div class="step" id="stepPost">
+      <div style="font-size:13px;color:var(--ink-dim);margin-bottom:4px">Now — how are you feeling?</div>
+      <div class="scaleRow" id="postScale"></div>
+      <div class="scaleLabel"><span>1 low</span><span>10 high</span></div>
+      <textarea class="note" id="noteInput" placeholder="Anything worth noting (optional)"></textarea>
+      <div class="actions"><button class="btn primary" id="saveResultBtn">Save to log</button></div>
+    </div>
+
+    <div class="actions" style="margin-top:14px"><button class="btn" id="cancelFocus">Cancel</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const CATS = { body:'Body · Huberman', mind:'Mind · Dispenza', mindset:'Mindset · Proctor', action:'Action · Cardone' };
+  const BASE = [
+    {id:'sigh', cat:'body', mins:2, name:'Physiological sigh reset', hyp:'A double inhale through the nose and one long exhale through the mouth, repeated for 2 minutes, might drop stress faster than sitting quietly.'},
+    {id:'coldface', cat:'body', mins:3, name:'Cold water on face & wrists', hyp:'30 seconds of cold water on the face and wrists, repeated over 3 minutes, might spike alertness like a mini cold plunge.'},
+    {id:'fixate', cat:'body', mins:1, name:'Visual fixation warm-up', hyp:'Staring at one fixed point for 60 seconds before starting work might make real focus arrive faster.'},
+    {id:'nsdr', cat:'body', mins:10, name:'Afternoon NSDR body scan', hyp:'A 10-minute non-sleep deep rest session midafternoon might restore energy as well as a short nap.'},
+    {id:'coherence', cat:'mind', mins:5, name:'Heart coherence breathing', hyp:'5 minutes of slow breathing — 5 seconds in, 5 seconds out — while focused on the chest might raise a felt sense of calm.'},
+    {id:'elevate', cat:'mind', mins:5, name:'Elevated emotion rehearsal', hyp:'Sitting with a real memory of gratitude or joy for 5 minutes before a task might change your state going into it.'},
+    {id:'bodyscan', cat:'mind', mins:8, name:'Slow body scan', hyp:'Moving attention slowly through the body for 8 minutes might quiet mental chatter faster than trying to distract from it.'},
+    {id:'gap', cat:'mind', mins:5, name:'Space between thoughts', hyp:'Sitting quietly and noticing the gap between thoughts for 5 minutes might lower a racing-mind feeling.'},
+    {id:'goalcard', cat:'mindset', mins:2, name:'Read the goal card aloud', hyp:'Reading one present-tense goal statement aloud might sharpen your focus on it for the rest of the day.'},
+    {id:'gratitude10', cat:'mindset', mins:5, name:'Gratitude list of 10', hyp:'Writing 10 specific things you are grateful for might lift mood more than one general grateful thought.'},
+    {id:'visualize', cat:'mindset', mins:5, name:'Visualize the finished result', hyp:'Vividly picturing a goal already completed for 5 minutes might increase motivation to start on it.'},
+    {id:'imagine3', cat:'mindset', mins:5, name:'Imagine 3 solutions', hyp:'Deliberately imagining three different solutions to one real problem might unstick it faster than just thinking about it.'},
+    {id:'writegoals', cat:'action', mins:3, name:'Write goals, twice today', hyp:'Writing your top goals by hand once now and again tonight might increase follow-through versus writing them once.'},
+    {id:'sprint', cat:'action', mins:15, name:'Massive action sprint', hyp:'15 minutes of nonstop work on one task, no switching, might get more done than a scattered 15 minutes.'},
+    {id:'tenx', cat:'action', mins:5, name:'10X one goal', hyp:'Rewriting a current goal at 10 times its size might change how you plan to reach it, even the smaller version.'},
+    {id:'followup', cat:'action', mins:5, name:'Do the delayed follow-up', hyp:'Doing the one follow-up you keep pushing off, first, might lower background anxiety about the whole list.'},
+  ];
+  const KEY = 'fieldnotes.v1';
+  const today = () => new Date().toISOString().slice(0,10);
+  const def = () => ({ day: today(), queue: [], results: [], custom: [] });
+  let S = def();
+  try { const raw = localStorage.getItem(KEY); if (raw) { const s = JSON.parse(raw); S = {...def(), ...s, custom: s.custom||[]}; if (s.day !== today()) { S.day = today(); S.queue = []; S.results = []; } } } catch(e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} };
+
+  let activeCats = new Set(['all']);
+  let qidSeq = 1;
+  const library = () => BASE.concat(S.custom);
+
+  function toggleCat(cat, btn) {
+    if (cat === 'all') { activeCats = new Set(['all']); }
+    else {
+      activeCats.delete('all');
+      if (activeCats.has(cat)) activeCats.delete(cat); else activeCats.add(cat);
+      if (activeCats.size === 0) activeCats = new Set(['all']);
+    }
+    document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', activeCats.has(c.dataset.cat) ? 'true' : 'false'));
+    renderGrid();
+  }
+  document.getElementById('controls').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (b) toggleCat(b.dataset.cat, b);
+  });
+  document.getElementById('durFilter').addEventListener('change', renderGrid);
+
+  function renderGrid() {
+    const grid = document.getElementById('grid');
+    const maxMin = parseInt(document.getElementById('durFilter').value, 10);
+    const items = library().filter(x => (activeCats.has('all') || activeCats.has(x.cat)) && (!maxMin || x.mins <= maxMin));
+    document.getElementById('libCount').textContent = `(${items.length})`;
+    grid.innerHTML = '';
+    items.forEach(x => {
+      const inQueue = S.queue.some(q => q.expId === x.id);
+      const card = document.createElement('div');
+      card.className = 'card ' + x.cat;
+      card.innerHTML = `<span class="tab"></span><span class="label">${CATS[x.cat]}</span>
+        <div class="title">${escapeHtml(x.name)}</div>
+        <div class="hyp">${escapeHtml(x.hyp)}</div>
+        <div class="foot"><span class="mins">${x.mins} min</span>
+        <button class="add">${inQueue ? '+ Add again' : '+ Add to queue'}</button></div>`;
+      card.querySelector('.add').onclick = () => { addToQueue(x); flashStamp(card); };
+      grid.appendChild(card);
+    });
+  }
+  function flashStamp(card) {
+    const s = document.createElement('span'); s.className = 'stamp'; s.textContent = 'QUEUED';
+    card.appendChild(s); setTimeout(() => s.remove(), 900);
+  }
+  function addToQueue(x) {
+    S.queue.push({ qid: qidSeq++, expId: x.id, name: x.name, hyp: x.hyp, mins: x.mins, cat: x.cat });
+    save(); renderQueue(); renderGrid();
+  }
+  function removeFromQueue(qid) { S.queue = S.queue.filter(q => q.qid !== qid); save(); renderQueue(); renderGrid(); }
+  function renderQueue() {
+    const row = document.getElementById('queueRow');
+    document.getElementById('qCount').textContent = `(${S.queue.length})`;
+    if (!S.queue.length) { row.innerHTML = '<span class="queueEmpty">Nothing queued yet — add cards from the library below, any number, any order.</span>'; return; }
+    row.innerHTML = '';
+    S.queue.forEach(q => {
+      const t = document.createElement('div'); t.className = 'ticket';
+      t.innerHTML = `<b>${escapeHtml(q.name)}</b><span class="mins">${q.mins} min</span><button class="run">Run</button><button class="x" aria-label="Remove">×</button>`;
+      t.querySelector('.run').onclick = () => runExperiment(q);
+      t.querySelector('.x').onclick = () => removeFromQueue(q.qid);
+      row.appendChild(t);
+    });
+  }
+  const escapeHtml = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  // ---------- custom experiments ----------
+  const customPanel = document.getElementById('customPanel');
+  document.getElementById('customToggle').onclick = () => customPanel.classList.toggle('open');
+  document.getElementById('cCancel').onclick = () => customPanel.classList.remove('open');
+  document.getElementById('cSave').onclick = () => {
+    const name = document.getElementById('cName').value.trim();
+    const mins = parseInt(document.getElementById('cMins').value, 10) || 5;
+    const cat = document.getElementById('cCat').value;
+    const hyp = document.getElementById('cHyp').value.trim() || 'A quick self-test.';
+    if (!name) return;
+    S.custom.push({ id: 'custom-' + Date.now(), cat, mins, name, hyp });
+    save(); document.getElementById('cName').value=''; document.getElementById('cHyp').value=''; customPanel.classList.remove('open');
+    renderGrid();
+  };
+
+  // ---------- run panel ----------
+  const focus = document.getElementById('focus');
+  let current = null, preVal = null, postVal = null, timerId = null, remaining = 0, paused = false;
+
+  function scaleButtons(container, onPick) {
+    container.innerHTML = '';
+    for (let i = 1; i <= 10; i++) {
+      const d = document.createElement('button'); d.className = 'dot'; d.textContent = i; d.setAttribute('aria-pressed','false');
+      d.onclick = () => { [...container.children].forEach(c => c.setAttribute('aria-pressed','false')); d.setAttribute('aria-pressed','true'); onPick(i); };
+      container.appendChild(d);
+    }
+  }
+  function showStep(id) { ['stepPre','stepRun','stepPost'].forEach(s => document.getElementById(s).classList.toggle('on', s === id)); }
+
+  function runExperiment(q) {
+    current = q; preVal = null; postVal = null; paused = false;
+    document.getElementById('fLabel').textContent = CATS[q.cat];
+    document.getElementById('fName').textContent = q.name;
+    document.getElementById('fHyp').textContent = q.hyp;
+    document.getElementById('noteInput').value = '';
+    scaleButtons(document.getElementById('preScale'), v => preVal = v);
+    scaleButtons(document.getElementById('postScale'), v => postVal = v);
+    showStep('stepPre');
+    focus.hidden = false;
+  }
+  document.getElementById('cancelFocus').onclick = () => { clearInterval(timerId); focus.hidden = true; current = null; };
+  document.getElementById('startTimerBtn').onclick = () => {
+    if (preVal === null) { document.getElementById('startTimerBtn').textContent = 'Pick a number first'; return; }
+    showStep('stepRun');
+    remaining = current.mins * 60;
+    document.getElementById('timerLabel').textContent = 'time left';
+    updateClock();
+    timerId = setInterval(() => {
+      if (paused) return;
+      remaining -= 1;
+      if (remaining <= 0) { document.getElementById('timerLabel').textContent = 'time is up — finish when ready'; remaining = 0; clearInterval(timerId); }
+      updateClock();
+    }, 1000);
+  };
+  function updateClock() { const m = Math.floor(remaining/60), s = remaining%60; document.getElementById('clock').textContent = m + ':' + String(s).padStart(2,'0'); }
+  document.getElementById('pauseBtn').onclick = () => { paused = !paused; document.getElementById('pauseBtn').textContent = paused ? 'Resume' : 'Pause'; };
+  document.getElementById('finishBtn').onclick = () => { clearInterval(timerId); showStep('stepPost'); };
+  document.getElementById('saveResultBtn').onclick = () => {
+    if (postVal === null) { document.getElementById('saveResultBtn').textContent = 'Pick a number first'; return; }
+    const note = document.getElementById('noteInput').value.trim();
+    const delta = postVal - preVal;
+    S.results.unshift({ name: current.name, cat: current.cat, pre: preVal, post: postVal, delta, note, time: new Date().toTimeString().slice(0,5) });
+    S.queue = S.queue.filter(q => q.qid !== current.qid);
+    save(); focus.hidden = true; current = null;
+    renderQueue(); renderGrid(); renderLog();
+  };
+
+  function verdict(delta) { if (delta >= 2) return ['seemed to help','good']; if (delta <= -2) return ['seemed to hinder','bad']; return ['no clear change','flat']; }
+  function renderLog() {
+    const body = document.getElementById('logBody');
+    if (!S.results.length) { body.innerHTML = '<tr><td colspan="6" class="empty" style="padding:14px">Nothing logged yet today.</td></tr>'; document.getElementById('chart').innerHTML = ''; return; }
+    body.innerHTML = '';
+    S.results.forEach(r => {
+      const [label, cls] = verdict(r.delta);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${r.time}</td><td>${escapeHtml(r.name)}</td><td>${r.pre}</td><td>${r.post}</td><td><span class="verdict ${cls}">${label}</span></td><td>${escapeHtml(r.note||'')}</td>`;
+      body.appendChild(tr);
+    });
+    const chart = document.getElementById('chart'); chart.innerHTML = '';
+    S.results.forEach(r => {
+      const pct = Math.abs(r.delta) / 9 * 50;
+      const color = r.delta > 0 ? 'var(--good)' : r.delta < 0 ? 'var(--bad)' : 'var(--flat)';
+      const bar = document.createElement('div'); bar.className = 'bar';
+      bar.innerHTML = `<span class="name">${escapeHtml(r.name)}</span><div class="track"><span class="zero"></span><span class="fill" style="${r.delta >= 0 ? 'left:50%' : 'right:50%'};width:${pct}%;background:${color}"></span></div>`;
+      chart.appendChild(bar);
+    });
+  }
+
+  renderGrid(); renderQueue(); renderLog();
+})();
+</script>
