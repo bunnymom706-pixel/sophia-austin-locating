@@ -29,3 +29,8 @@
 | ~10:30 | Designed **The Primer Experiment**: 5-min primer (2 min squats/stairs, 2 min cyclic sighing, 1 min if-then line + fixed gaze) before the 15-min work rep. Alternating 6-day design (primer / no primer). Record one line of what got done + drift word (barely/some/a lot). Science: Balban 2023 cyclic sighing; Chang 2012 acute exercise + executive function; Norris 2018 brief attention practice; Gollwitzer & Sheeran 2006 if-then plans. |
 | ~10:40 | Reframed: the focus rep is the container; the leap is the revenue action inside it. Every rep now carries one of four actions: new renter outreach, follow-ups with quiet leads, posting where renters look, or contacting a property/leasing office. Target: ~5 contacts per rep. Record: which action, how many. |
 | ~10:50 | Chose next rep: **Group Blast**. Write one service post (free-to-renter locator, budget/area/move-in date, "message me 'list'") and publish it to as many Austin housing groups as possible in 15 min. Hypothesis: 8+ groups brings 1+ inbound message in 48 hrs. Record: number of groups. Result: (to fill in) |
+
+## Career scoreboard
+| Day | Groups posted | Messages in | Lists sent | Tours | Leases |
+|---|---|---|---|---|---|
+| Sept 3 | | | | | |
