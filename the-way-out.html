@@ -1,0 +1,178 @@
+<title>The Way Out</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#EEF1EA; --card:#F8F9F4; --card-line:#CBD4C4; --ink:#1E2A22; --ink-dim:#55604F; --ink-faint:#8A9483;
+  --accent:#B3402E; --accent-bg:#F3DCD6; --good:#1E7F72; --good-bg:#DCEEEA; --warn:#B8781E; --warn-bg:#F3E6D0;
+  --display:'Fraunces', Georgia, serif; --mono:'IBM Plex Mono', ui-monospace, monospace; --sans:'IBM Plex Sans', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#161B16; --card:#1F251F; --card-line:#33402F; --ink:#E9EDE3; --ink-dim:#AAB3A2; --ink-faint:#6E786A;
+    --accent:#E27862; --accent-bg:#402420; --good:#4FC4B2; --good-bg:#1C3630; --warn:#E3A54E; --warn-bg:#3D3020;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#161B16; --card:#1F251F; --card-line:#33402F; --ink:#E9EDE3; --ink-dim:#AAB3A2; --ink-faint:#6E786A;
+  --accent:#E27862; --accent-bg:#402420; --good:#4FC4B2; --good-bg:#1C3630; --warn:#E3A54E; --warn-bg:#3D3020;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--good)}
+.wrap{max-width:740px;margin:0 auto;padding:36px 20px 80px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 8px}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,6vw,50px);margin:0 0 10px;text-wrap:balance;line-height:1.05}
+.tagline{margin:0 0 26px;color:var(--ink-dim);max-width:58ch;font-size:16.5px}
+h2{font-family:var(--display);font-weight:600;font-size:26px;margin:44px 0 10px;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:18px;margin:22px 0 8px}
+p{margin:0 0 12px;max-width:66ch}
+.loop{display:grid;gap:0;margin:16px 0 8px;border:1px solid var(--card-line);border-radius:14px;overflow:hidden;background:var(--card)}
+.loop div{padding:11px 16px;border-bottom:1px solid var(--card-line);font-size:14.5px;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:baseline}
+.loop div:last-child{border-bottom:0}
+.loop b{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.loop .weak{background:var(--good-bg)}
+.loop .weak b{color:var(--good)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 6px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--card-line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px;background:var(--card);border:1px solid var(--card-line);border-radius:5px;padding:1px 5px;white-space:nowrap}
+ul{margin:0 0 12px;padding-left:20px}
+li{margin-bottom:6px;font-size:15px}
+.rep{border:1px solid var(--card-line);background:var(--card);border-radius:14px;padding:14px 16px;margin:10px 0}
+.rep h4{margin:0 0 6px;font-size:15px}
+.rep .when{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.rep ol{margin:6px 0 0;padding-left:20px}
+.rep li{font-size:14.5px;margin-bottom:3px}
+.callout{border-radius:14px;padding:14px 18px;margin:14px 0;font-size:14.5px}
+.callout.good{background:var(--good-bg)}
+.callout.warn{background:var(--warn-bg)}
+.callout.accent{background:var(--accent-bg)}
+.callout b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px}
+.tpl{background:var(--card);border-left:3px solid var(--good);padding:10px 14px;border-radius:0 10px 10px 0;font-size:14px;margin:8px 0 12px;font-style:italic;color:var(--ink-dim)}
+.small{font-size:13px;color:var(--ink-faint)}
+.links{margin-top:40px;padding-top:16px;border-top:1px solid var(--card-line);font-size:14px;color:var(--ink-dim)}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Sophia Reddehase · Austin apartment locator · September 2026</p>
+  <h1>The Way Out</h1>
+  <p class="tagline">A plan built from four research reports and one day of your own log: what a lease actually pays, how many messages it takes, how to get the money faster, and how to stop scarcity from eating the focus you need to do it.</p>
+
+  <h2>Your loop, and where it breaks</h2>
+  <p>The video showed poverty as a system of arrows feeding each other. Here is yours, taken from what you said today.</p>
+  <div class="loop">
+    <div><b>1</b><span>Income is irregular: commissions that take months to arrive, plus babysitting.</span></div>
+    <div><b>2</b><span>Money going out for IV therapy, doctor bills, and insurance you're still untangling.</span></div>
+    <div><b>3</b><span>Scarcity taxes attention. Research puts it at roughly 10 IQ points of working memory while you're worried about money. On an ADHD brain that's a tax on a tax.</span></div>
+    <div><b>4</b><span>Less bandwidth means scattered sessions, agitation, "no progress," and the messages don't get sent.</span></div>
+    <div><b>5</b><span>Fewer messages, fewer leads, fewer leases, and back to 1.</span></div>
+    <div class="weak"><b>→</b><span><strong>The weak point is 4.</strong> Messages sent is the only arrow you control directly, daily, in 5-minute reps you already proved work. Everything below is aimed at it.</span></div>
+  </div>
+
+  <h2>What a lease is actually worth to you</h2>
+  <p>You're at Spirit Real Estate Group on their 100% model. That changes the math in your favor compared to most Austin locators.</p>
+  <table>
+    <tr><th>Item</th><th>Number</th><th>Source</th></tr>
+    <tr><td>Property pays</td><td class="n">50–125% of one month's rent</td><td>Texas locator norms, Smart City, AptAmigo</td></tr>
+    <tr><td>Average Austin rent, 2026</td><td class="n">$1,508–$1,641</td><td>Yardi Matrix, RentCafe</td></tr>
+    <tr><td>Realistic gross fee per lease</td><td class="n">$1,600–$1,800</td><td>Blended; luxury-only runs $2,000–$2,500</td></tr>
+    <tr><td>Spirit takes</td><td class="n">$25 per deal + $99/month</td><td>You keep the rest</td></tr>
+    <tr><td>Smart City agent on the same lease</td><td class="n">$800–$1,200</td><td>40–60% split. You net roughly double per deal.</td></tr>
+    <tr><td>Time from lease signed to cash in hand</td><td class="n">60–150 days</td><td>Move-in, then net 30–90, then broker disbursement</td></tr>
+  </table>
+  <table>
+    <tr><th>Pace</th><th>Leases / month</th><th>Net to you / month</th><th>Per year</th></tr>
+    <tr><td>Where you are</td><td class="n">0–1</td><td class="n">$0–$1,475</td><td class="n">—</td></tr>
+    <tr><td><strong>December target</strong></td><td class="n">3</td><td class="n">~$4,900</td><td class="n">~$59k</td></tr>
+    <tr><td>Spring target</td><td class="n">5–6</td><td class="n">$8,800–$10,500</td><td class="n">$105k–$127k</td></tr>
+    <tr><td>Top Austin producers</td><td class="n">15–25</td><td class="n">$30k+</td><td class="n">$350k+</td></tr>
+  </table>
+  <div class="callout warn"><b>The market right now</b>Austin has 73% of units offering concessions and the highest renter turnover in the country. Lease-up buildings are paying 100–125% fees because they're desperate for move-ins. This is the best locator market in years. It won't last forever, so the next 12 months matter.</div>
+
+  <h2>The daily numbers</h2>
+  <p>Working backward from 3 leases a month at a 10% lead-to-lease rate, which is about what Greystar reports for locator leads.</p>
+  <table>
+    <tr><th>Layer</th><th>Number</th><th>Why</th></tr>
+    <tr><td>Leases</td><td class="n">3 / month</td><td>Breaks the ceiling. Doubles from there.</td></tr>
+    <tr><td>New inquiries needed</td><td class="n">30 / month, about 1–2 / day</td><td>At ~10% lead-to-credited-lease</td></tr>
+    <tr><td>Group comments and DM replies</td><td class="n">10–15 / day</td><td>Commenting on "moving to Austin, budget $1,600" posts beats posting</td></tr>
+    <tr><td>Group posts</td><td class="n">1 / day, rotating groups</td><td>Specials this week, budget lists, neighborhood explainers</td></tr>
+    <tr><td>Short videos</td><td class="n">2–3 / week</td><td>"3 one-bedrooms under $1,500 near Samsung, 10 weeks free" is a live Austin format</td></tr>
+    <tr><td>Leasing office touches</td><td class="n">3–5 / week</td><td>"Who did you turn away this week?" They send you walk-ins they can't approve</td></tr>
+    <tr><td>First reply speed</td><td class="n">under 5 minutes</td><td>A 5-minute reply is 21x more likely to qualify than a 30-minute one. Almost nobody does it.</td></tr>
+  </table>
+
+  <h2>Three reps a day. That's the whole routine.</h2>
+  <p>Everything else, tours and list-building, is scheduled work. These three are the non-negotiables, each in your rep format: squats, "starting," timer, work, "done."</p>
+  <div class="rep"><div class="when">Morning · after meds · 15 min</div><h4>Rep 1: Speed to lead</h4><ol><li>Reply to every new inquiry with the intake template.</li><li>Comment on 5 "moving to Austin" or "looking for" posts in the groups.</li><li>Log each new person in Spark with a next-follow-up date.</li></ol></div>
+  <div class="rep"><div class="when">Midday · after lunch · 15 min</div><h4>Rep 2: Pipeline</h4><ol><li>Open everyone whose follow-up date is today.</li><li>Send the day-1, day-3, day-7, day-14 or day-30 template. Move the date.</li><li>Post one thing in one group.</li></ol></div>
+  <div class="rep"><div class="when">Evening · car parked at home · 10 min</div><h4>Rep 3: Money</h4><ol><li>Any lease signed today: send invoice, W-9, and lease confirmation to the property within 48 hours.</li><li>Any invoice past its expected date: one chase text.</li><li>Update the tracker.</li></ol></div>
+  <div class="callout good"><b>Missed a day</b>No catch-up day. Run today's three reps, oldest lead first. Students who forgave themselves for one lapse procrastinated less on the next one. Shame is what causes the second miss.</div>
+
+  <h2>The messages</h2>
+  <h3>First contact, within 5 minutes</h3>
+  <div class="tpl">Hey [Name]! Sophia here, licensed Austin locator. Free to you, the properties pay me. Four quick things so I don't waste your time: move-in date? Budget all-in? Areas you're leaning toward? Must-haves like pets or in-unit washer? And anything credit or lease-history wise I should know so I only send places that will approve you?</div>
+  <h3>Follow-up schedule</h3>
+  <ul>
+    <li><strong>Day 0:</strong> list sent same day. Five to eight places, each with the special, the commute, and one "why you" line.</li>
+    <li><strong>Day 1:</strong> "Did any of those jump out? I can hold [Property]'s 10 weeks free through Friday."</li>
+    <li><strong>Day 3:</strong> one new option or a changed special.</li>
+    <li><strong>Day 7:</strong> "Still on for a [date] move? Specials rotate weekly, want a fresh list?"</li>
+    <li><strong>Day 14:</strong> a 20-second video walkthrough of one unit.</li>
+    <li><strong>Day 30:</strong> "If you already signed, congrats. If not, here's what changed."</li>
+  </ul>
+  <h3>The line that gets you paid</h3>
+  <div class="tpl">When you tour or apply, put "Sophia Reddehase / Spirit Real Estate Group" under "How did you hear about us" on the guest card and the application. That's how I get paid, and it costs you nothing.</div>
+  <p>Repeat this on every message. Most lost commissions are renters who toured on their own and forgot the guest card.</p>
+  <h3>After move-in, and again at 60 days</h3>
+  <div class="tpl">So glad you're in! Two asks: a Google review helps me more than anything, and if a friend or coworker is moving, send them my way. When they sign I send you a $50 gift card, which is the legal max in Texas.</div>
+
+  <h2>Getting the money in the door</h2>
+  <ul>
+    <li><strong>Register your name before the tour.</strong> Many properties only pay if the locator was on the guest card at first contact. Confirm each property the night before.</li>
+    <li><strong>Invoice within 48 hours of signing.</strong> Spirit invoices and collects for you, which is a real advantage. Your job is to get them the lease confirmation fast.</li>
+    <li><strong>Tracker, one sheet:</strong> client, property, lease date, move-in, rent, fee %, invoice date, expected pay date, status. Anything past 60 days from move-in turns red.</li>
+    <li><strong>Weekly 15-minute aging review.</strong> Day 31 for net-30 properties, day 61 for net-60, escalate to corporate at 90–120. This is the highest dollars-per-minute rep in the business.</li>
+    <li><strong>Referral fees:</strong> $50 gift card max to unlicensed people. Never cash. Never more.</li>
+  </ul>
+
+  <h2>The money system that stops the loop</h2>
+  <p>Scarcity research says the fix isn't willpower, it's converting every recurring decision into a one-time setup. Do this on the day your next commission lands, when your bandwidth is highest.</p>
+  <ol>
+    <li><strong>One hub account.</strong> Every commission and every babysitting payment goes here first.</li>
+    <li><strong>On each deposit, same day:</strong> 25% to a tax account, 10% to a buffer account, rest stays in the hub.</li>
+    <li><strong>Pay yourself a fixed salary</strong> from the hub to a spending account on the 1st and 15th. Set it at your lowest realistic month, not your average. Good months build the hub, bad months draw on it, and your spending account never sees the swing.</li>
+    <li><strong>Autopay every fixed bill</strong> from one bills account. One account, one purpose, zero decisions.</li>
+    <li><strong>One card for all subscriptions.</strong> People guess $86 a month and actually pay $219. A single card makes the list visible and cancellation one freeze.</li>
+    <li><strong>Buffer first: $500, then $1,000, then one month.</strong> Families with $250–$750 in savings are 28% less likely to miss rent after an income shock. The first $500 does more than any later thousand.</li>
+  </ol>
+  <div class="callout warn"><b>Two dates and one honest note</b>Quarterly estimated taxes are due September 15 and January 15. If you owed nothing last year you may not be penalized, but the money is still owed in April, so fund the tax account anyway. And the honest note: IV therapy runs $130–$320 a session and insurance won't cover it because there's no evidence it works for people with normal nutrient levels. Four sessions is your entire first buffer. A covered doctor visit with bloodwork, then oral supplements if anything is low, gets the same result for a copay. This isn't a lecture. It's the single cheapest lever in the whole plan.</div>
+  <div class="callout good"><b>Free help in Austin</b>Foundation Communities Prosper Centers, 737-717-4000: free tax prep under $60k income, free insurance enrollment help, and one-on-one financial coaching. Open enrollment for 2027 health plans runs November 1 to January 15. Report your projected income carefully and update it midyear so the subsidy math doesn't bite you in April.</div>
+
+  <h2>Built for your brain</h2>
+  <ul>
+    <li><strong>One inbox.</strong> Texts. Leads arrive there anyway. Instagram DMs get an auto-reply with your number. Email is checked in one scheduled block.</li>
+    <li><strong>One list, one calendar.</strong> Todoist for tasks, Google Calendar for tours and the three reps as recurring events. Spark holds client state, not to-dos.</li>
+    <li><strong>Templates at the point of action.</strong> Put all eight messages in your phone's text replacements so each is one tap. Use scheduled send for the day-3 and day-7 touches the moment you send day-1.</li>
+    <li><strong>Body doubling for the tasks you avoid.</strong> Focusmate is free three times a week. Use it only for invoice chasing and cold-lead reengagement, the two things ADHD brains skip.</li>
+    <li><strong>Theme days.</strong> Monday pipeline and invoices. Tuesday to Thursday tours in the afternoon, lists in the morning. Friday follow-ups and next week's tour booking. Weekend, one 20-minute inbox rep only.</li>
+    <li><strong>Meds and sleep.</strong> Adderall XR at the same clock time daily so the peak window covers reps 1 and 2. Fixed wake time is the load-bearing variable. Finish hard exercise 3–4 hours before bed.</li>
+    <li><strong>Impulsivity is the asset.</strong> The research on ADHD entrepreneurs says the "just message them, just drive there" energy predicts success. Inattention is the leak, and everything above plugs it with systems instead of willpower.</li>
+  </ul>
+
+  <h2>The next 30 days</h2>
+  <ul>
+    <li><strong>Week 1:</strong> the three reps daily. Templates loaded. Tracker built. Join 10 Austin housing groups. First video posted, badly, on purpose.</li>
+    <li><strong>Week 2:</strong> add 3 leasing-office touches. Bank accounts set up on the next deposit. Google Business Profile claimed.</li>
+    <li><strong>Week 3:</strong> first Focusmate session for the aging review. Review requests to every past client.</li>
+    <li><strong>Week 4:</strong> count leases signed and leads in. Adjust the daily numbers, not the plan.</li>
+  </ul>
+  <div class="callout accent"><b>What breaks the ceiling</b>Not a bigger goal. Three reps a day, sent from a phone, on the days you feel like it and the days you don't. Three leases a month is the crack. Five is the floor becoming the new normal. You did four reps today on a day you called hopeless.</div>
+
+  <p class="small">Sources include TREC, Yardi Matrix, RentCafe, RealPage, Bisnow's July 2026 locator report, Spirit Real Estate Group's published fee schedule, Smart City and AptAmigo agent data, Mullainathan and Shafir's scarcity research, Urban Institute and JPMorgan Chase Institute buffer studies, the 2026 meta-analysis on ADHD and entrepreneurship, and Safren's CBT-for-ADHD trial. Several primary pages were blocked from direct fetch, so spot-check any number before quoting it to someone else.</p>
+
+  <div class="links">Companion pages: <a href="https://claude.ai/code/artifact/66566a88-fe1d-42e8-88b5-21031d512b9f">Field Notes</a> for running the reps, <a href="https://claude.ai/code/artifact/1d7f08f2-5d06-49f5-b838-3a1ffee83b2e">The Dossier</a> for the research behind the mindset work.</div>
+</div>
