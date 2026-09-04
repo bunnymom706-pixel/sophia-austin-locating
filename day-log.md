@@ -45,6 +45,7 @@ Note: Sophia steers. She names the exact task; the exercise is built around it. 
 | ~11:50 | Results reported: admin block — stretch done; therapist text took 1 min; BCBS portal took 3 min; doctor's office called. Walk tasks — food yesterday logged, food today logged, water only half of what she wants, sleep 7–8 hrs (woke ~7:30), period due any day. |
 | 11:11 | Took supplements. Schedule set for the run-up to the 1:00 pm IV clinic (pay) then babysitting: 11:15–11:45 work session (30 min, one revenue action), 11:45–11:55 clean, 11:55–12:25 30-min vest workout, 12:25–12:45 pack babysitting bag + shower + dress (20 min total), 12:50 leave, 10-min drive, clinic by 1:00. |
 | ~11:14 | Work block reshaped with Psycho-Cybernetics: 2 min "quiet room" relaxation, 2 min "theater of the mind" rehearsal of a calm competent locator, self-image sentence out loud, 25 min work acting as her with mistakes treated as course-correction feedback, 1 min replay of one good moment. |
+| 11:15–11:45 | **Work session done (30 min, Psycho-Cybernetics shape).** Drank all her water during it. In her words: "GOT SO MUCH INCOME PRODUCING WORK DONE ITS INSANE." |
 | ~11:55–12:25 | **Workout done:** 30 min going up and down the stairs with the 8 lb weighted vest, unpacking the car into the new apartment (just moved in). Workout and unpacking in one. |
 | ~1:00 | IV clinic (pay). Then babysitting. |
 | afternoon | At babysitting: 5-min check of the whole to-do list and how to implement new things. Will report back. |
