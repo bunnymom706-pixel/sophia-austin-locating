@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Green Checks — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #4d6b46; }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f2ebd9;
+  }
+
+  /* full-bleed checkerboard, 140.625px cells = 8 across */
+  .checks {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #4d6b46 25%, transparent 25%, transparent 75%, #4d6b46 75%),
+      linear-gradient(45deg, #4d6b46 25%, transparent 25%, transparent 75%, #4d6b46 75%);
+    background-size: 281.25px 281.25px;
+    background-position: 0 0, 140.625px 140.625px;
+  }
+
+  .type { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="checks"></div>
+
+    <svg class="type" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <!-- name, cream-outlined so it reads over either check colour -->
+      <g font-family="Bagel Fat One" font-size="136" text-anchor="middle"
+         stroke="#f2ebd9" stroke-width="19" stroke-linejoin="round" paint-order="stroke" fill="#eda6c9">
+        <text x="562" y="288">sophia sky</text>
+        <text x="562" y="434">reddehase</text>
+      </g>
+
+      <text x="562" y="516" text-anchor="middle"
+            font-family="Poppins" font-weight="700" font-size="23" letter-spacing="7.5"
+            stroke="#4d6b46" stroke-width="7" stroke-linejoin="round" paint-order="stroke"
+            fill="#f2ebd9">TEXAS APARTMENT LOCATOR</text>
+
+      <!-- cream sparkles, sitting on the dark squares like the pin -->
+      <g fill="#f2ebd9">
+        <path transform="translate(880,120) scale(1.9)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(1030,44) scale(1.1)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+  </div>
+</body>
+</html>

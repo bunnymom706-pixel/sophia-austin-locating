@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Green Checks — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #4d6b46; }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f2ebd9;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* cream head, green body — the pin splits a little under halfway */
+  .band {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 372px;
+    background: #4d6b46;
+  }
+
+  .head {
+    position: absolute;
+    top: 44px;
+    left: 78px;
+  }
+
+  .body {
+    position: absolute;
+    left: 78px;
+    right: 78px;
+    top: 358px;
+    display: grid;
+    grid-template-columns: 1fr 218px;
+    column-gap: 44px;
+    align-items: start;
+  }
+
+  .icons { display: flex; gap: 17px; margin-bottom: 24px; }
+  .icons svg { display: block; }
+
+  .lines {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.6;
+    color: #f2ebd9;
+    letter-spacing: 0.4px;
+  }
+
+  /* QR sits straight on the green, pink modules — as on the pin */
+  .qr { width: 218px; height: 218px; }
+  .qr img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+  .compliance {
+    position: absolute;
+    left: 78px;
+    bottom: 46px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: 1.2px;
+    color: #b9c7ae;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="band"></div>
+
+    <svg width="1125" height="290" viewBox="0 0 1125 290" xmlns="http://www.w3.org/2000/svg" style="position:absolute; inset:0;">
+      <g fill="#eda6c9">
+        <path transform="translate(966,52) scale(1.7)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(1046,124) scale(1.0)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+
+    <div class="head">
+      <svg width="900" height="252" viewBox="0 0 900 252" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="94" fill="#eda6c9">
+          <text x="0" y="92">sophia sky</text>
+          <text x="0" y="192">reddehase</text>
+        </g>
+        <text x="6" y="238" font-family="Poppins" font-weight="700" font-size="21"
+              letter-spacing="6.5" fill="#4d6b46">TEXAS APARTMENT LOCATOR</text>
+      </svg>
+    </div>
+
+    <div class="body">
+      <div>
+        <div class="icons">
+          <svg width="48" height="48" viewBox="0 0 44 44" fill="none" stroke="#f2ebd9" stroke-width="2.4">
+            <rect x="4" y="4" width="36" height="36" rx="11"/>
+            <circle cx="22" cy="22" r="8.4"/>
+            <circle cx="32.4" cy="11.6" r="2.1" fill="#f2ebd9" stroke="none"/>
+          </svg>
+          <svg width="48" height="48" viewBox="0 0 44 44" fill="none" stroke="#f2ebd9" stroke-width="2.4">
+            <circle cx="22" cy="22" r="18"/>
+            <path d="M16 14.5c1.6 0 2 .6 2.6 2l1 2.4c.4 1 .2 1.6-.6 2.2l-1 .8c1.2 2.6 3.3 4.7 5.9 5.9l.8-1c.6-.8 1.2-1 2.2-.6l2.4 1c1.4.6 2 1 2 2.6 0 2-1.6 3.4-3.6 3.4C20.7 33.2 12.8 25.3 12.8 18.1c0-2 1.4-3.6 3.2-3.6Z" fill="#f2ebd9" stroke="none"/>
+          </svg>
+          <svg width="48" height="48" viewBox="0 0 44 44" fill="none" stroke="#f2ebd9" stroke-width="2.4">
+            <circle cx="22" cy="22" r="18"/>
+            <rect x="12" y="16" width="20" height="13" rx="2.6"/>
+            <path d="M12.6 17.4 22 24l9.4-6.6"/>
+          </svg>
+          <svg width="48" height="48" viewBox="0 0 44 44" fill="none" stroke="#f2ebd9" stroke-width="2.4">
+            <circle cx="22" cy="22" r="18"/>
+            <ellipse cx="22" cy="22" rx="7.4" ry="18"/>
+            <path d="M4.6 16.4h34.8M4.6 27.6h34.8"/>
+          </svg>
+        </div>
+        <div class="lines">
+          @sophiasky.atx<br>
+          sparkapt.com/sophia-reddehase<br>
+          sophia.reddehase@spiritre.com
+        </div>
+      </div>
+
+      <div class="qr">
+        <img src="../../assets/v2/qr_sage_dark_on_pink.png" alt="QR code to sparkapt.com/sophia-reddehase">
+      </div>
+    </div>
+
+    <div class="compliance">(512) 676-1215 &nbsp;·&nbsp; TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP</div>
+  </div>
+</body>
+</html>

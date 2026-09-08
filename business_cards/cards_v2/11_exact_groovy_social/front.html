@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Groovy Social — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* vertical card: 2.25 x 3.75in @300dpi incl. bleed */
+  html, body { width: 675px; height: 1125px; overflow: hidden; background: #e8532e; }
+
+  .card {
+    position: relative;
+    width: 675px;
+    height: 1125px;
+    overflow: hidden;
+    background: #e8532e;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .waves { position: absolute; inset: 0; }
+
+  /* the big pink arch that holds the scan block */
+  .arch {
+    position: absolute;
+    left: 62px;
+    top: 300px;
+    width: 424px;
+    height: 730px;
+    background: #f6b4d0;
+    border-radius: 212px 212px 34px 34px;
+  }
+
+  .qr-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 214px;
+    width: 306px;
+    height: 306px;
+    background: #ffffff;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-box img { width: 262px; height: 262px; object-fit: contain; }
+
+  .handle-pill {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 46px;
+    background: #e8532e;
+    border-radius: 999px;
+    padding: 11px 28px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: 2.4px;
+    color: #ffeee6;
+    white-space: nowrap;
+  }
+
+  /* "let's find your place" running bottom-to-top up the right edge */
+  .vertical {
+    position: absolute;
+    right: 26px;
+    top: 50%;
+    width: 132px;
+    height: 940px;
+    transform: translateY(-50%);
+  }
+  .vertical svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+
+  .compliance {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 52px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    color: #b8341a;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- groovy pink waves top and bottom -->
+    <svg class="waves" width="675" height="1125" viewBox="0 0 675 1125" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#f6b4d0" d="M0,0 L675,0 L675,118 C 520,178 400,88 250,146 C 150,184 70,138 0,166 Z"/>
+      <path fill="#f6b4d0" d="M0,1125 L675,1125 L675,1012 C 520,952 400,1042 250,984 C 150,946 70,992 0,964 Z"/>
+    </svg>
+
+    <div class="arch">
+      <svg width="424" height="180" viewBox="0 0 424 180" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:34px; left:0;">
+        <defs><path id="toConnect" d="M 78 142 Q 212 44 346 142" fill="none"/></defs>
+        <text font-family="Poppins" font-weight="700" font-size="21" letter-spacing="6" fill="#c4381a">
+          <textPath href="#toConnect" startOffset="50%" text-anchor="middle">TO CONNECT</textPath>
+        </text>
+        <text x="212" y="164" text-anchor="middle" font-family="Shrikhand" font-size="54" fill="#e8532e">scan here</text>
+      </svg>
+
+      <div class="qr-box">
+        <img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code to sparkapt.com/sophia-reddehase">
+      </div>
+
+      <div class="handle-pill">@SOPHIASKY.ATX</div>
+    </div>
+
+    <div class="vertical">
+      <svg width="940" height="132" viewBox="0 0 940 132" xmlns="http://www.w3.org/2000/svg">
+        <text x="470" y="98" text-anchor="middle" font-family="Shrikhand" font-size="82" fill="#fff6ef">let's find your place</text>
+      </svg>
+    </div>
+
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP</div>
+  </div>
+</body>
+</html>

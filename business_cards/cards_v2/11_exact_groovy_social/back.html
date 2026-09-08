@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Groovy Social — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 675px; height: 1125px; overflow: hidden; background: #f6b4d0; }
+
+  .card {
+    position: relative;
+    width: 675px;
+    height: 1125px;
+    overflow: hidden;
+    background: #f6b4d0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .waves { position: absolute; inset: 0; }
+  .ring { position: absolute; top: 176px; left: 50%; transform: translateX(-50%); }
+
+  .details {
+    position: absolute;
+    left: 62px;
+    right: 62px;
+    top: 662px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.86;
+    color: #b8341a;
+  }
+
+  .site {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 128px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #fff6ef;
+  }
+
+  .compliance {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 52px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    color: #ffd3c2;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="waves" width="675" height="1125" viewBox="0 0 675 1125" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#e8532e" d="M0,0 L675,0 L675,132 C 520,192 400,102 250,160 C 150,198 70,152 0,180 Z"/>
+      <path fill="#e8532e" d="M0,1125 L675,1125 L675,986 C 520,926 400,1016 250,958 C 150,920 70,966 0,938 Z"/>
+    </svg>
+
+    <!-- name set around a ring, like the logo lockup on the pin -->
+    <svg class="ring" width="440" height="440" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="ringPath" d="M 220,220 m -168,0 a 168,168 0 1,1 336,0 a 168,168 0 1,1 -336,0" fill="none"/>
+      </defs>
+      <text font-family="Poppins" font-weight="700" font-size="27" letter-spacing="5.5" fill="#b8341a">
+        <textPath href="#ringPath" startOffset="0">SOPHIA SKY REDDEHASE · TEXAS APARTMENT LOCATOR · </textPath>
+      </text>
+
+      <g font-family="Shrikhand" text-anchor="middle" fill="#e8532e">
+        <text x="220" y="204" font-size="62">sophia</text>
+        <text x="220" y="272" font-size="62">sky</text>
+      </g>
+      <text x="220" y="316" text-anchor="middle" font-family="Poppins" font-weight="700"
+            font-size="17" letter-spacing="4.5" fill="#b8341a">AUSTIN, TEXAS</text>
+    </svg>
+
+    <div class="details">
+      @sophiasky.atx<br>
+      sophia.reddehase@spiritre.com<br>
+      (512) 676-1215<br>
+      Austin &amp; surrounding areas, TX
+    </div>
+
+    <div class="site">SPARKAPT.COM/SOPHIA-REDDEHASE</div>
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP</div>
+  </div>
+</body>
+</html>

@@ -4,73 +4,103 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sophia Sky Reddehase | Business Card Suite</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="business_cards/assets/fonts/fonts.css">
 <style>
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
     background: #fdf3f6;
     color: #2b1420;
     padding: 48px 24px 80px;
   }
   header {
     max-width: 980px;
-    margin: 0 auto 48px;
+    margin: 0 auto 40px;
     text-align: center;
   }
   header h1 {
-    font-family: 'Baloo 2', sans-serif;
-    font-size: 40px;
-    margin: 0 0 8px;
+    font-family: 'Bagel Fat One', cursive;
+    font-size: 44px;
+    margin: 0 0 10px;
     color: #a3164e;
+    font-weight: 400;
   }
   header p {
-    font-size: 17px;
+    font-size: 16px;
     color: #6b2140;
     margin: 0;
   }
+
+  section {
+    max-width: 1240px;
+    margin: 0 auto 12px;
+  }
+  section > h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #a3164e;
+    margin: 44px 0 6px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f6d3e0;
+  }
+  section > p.note {
+    font-size: 14px;
+    color: #8a5468;
+    margin: 0 0 24px;
+  }
+
   .grid {
-    max-width: 1200px;
-    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    gap: 32px;
   }
   .style-card {
     background: #ffffff;
-    border-radius: 24px;
-    padding: 28px;
+    border-radius: 22px;
+    padding: 24px;
     box-shadow: 0 10px 30px rgba(163, 22, 78, 0.08);
   }
-  .style-card h2 {
-    font-family: 'Baloo 2', sans-serif;
-    font-size: 24px;
-    margin: 0 0 18px;
+  .style-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 0 4px;
     color: #a3164e;
+  }
+  .style-card .dims {
+    font-size: 12.5px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #b58098;
+    margin: 0 0 16px;
   }
   .faces {
     display: flex;
-    gap: 18px;
+    gap: 16px;
+    align-items: flex-start;
     flex-wrap: wrap;
   }
   .faces img {
-    width: 100%;
-    max-width: 260px;
-    aspect-ratio: 1125 / 675;
+    flex: 1 1 200px;
+    min-width: 0;
+    max-height: 340px;
     object-fit: contain;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-    flex: 1 1 260px;
+    background: #fff;
   }
+
   footer {
     max-width: 980px;
     margin: 56px auto 0;
     text-align: center;
     font-size: 13px;
     color: #8a5468;
+    line-height: 1.7;
   }
 </style>
 </head>
@@ -80,73 +110,140 @@
     <p>Texas Apartment Locator &middot; TREC #831516 &middot; Brokered by Spirit Real Estate Group</p>
   </header>
 
-  <div class="grid">
-    <div class="style-card">
-      <h2>🌿 Sage Checkers</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Sage_Checkers_FRONT.png" alt="Sage Checkers front">
-        <img src="business_cards/print_ready_images/v2/Sage_Checkers_BACK.png" alt="Sage Checkers back">
+  <section>
+    <h2>Original suite</h2>
+    <p class="note">The first four styles, unchanged.</p>
+    <div class="grid">
+      <div class="style-card">
+        <h3>🍒 Cherry Checkers</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Cherry_Checkers_FRONT.png" alt="Cherry Checkers front">
+          <img src="business_cards/print_ready_images/v2/Cherry_Checkers_BACK.png" alt="Cherry Checkers back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🌸 Marshmallow Pink</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Marshmallow_Pink_FRONT.png" alt="Marshmallow Pink front">
+          <img src="business_cards/print_ready_images/v2/Marshmallow_Pink_BACK.png" alt="Marshmallow Pink back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🧡 Terracotta Cobalt</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Terracotta_Cobalt_FRONT.png" alt="Terracotta Cobalt front">
+          <img src="business_cards/print_ready_images/v2/Terracotta_Cobalt_BACK.png" alt="Terracotta Cobalt back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>✨ Y2K Sticker Pop</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Y2K_Sticker_Pop_FRONT.png" alt="Y2K Sticker Pop front">
+          <img src="business_cards/print_ready_images/v2/Y2K_Sticker_Pop_BACK.png" alt="Y2K Sticker Pop back">
+        </div>
       </div>
     </div>
-    <div class="style-card">
-      <h2>🌊 Groovy Waves</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Groovy_Waves_FRONT.png" alt="Groovy Waves front">
-        <img src="business_cards/print_ready_images/v2/Groovy_Waves_BACK.png" alt="Groovy Waves back">
+  </section>
+
+  <section>
+    <h2>Apartment illustration</h2>
+    <p class="note">Illustrated Austin block, with the QR framed as a front door.</p>
+    <div class="grid">
+      <div class="style-card">
+        <h3>🏡 Sweet Suite</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Sweet_Suite_FRONT.png" alt="Sweet Suite front">
+          <img src="business_cards/print_ready_images/v2/Sweet_Suite_BACK.png" alt="Sweet Suite back">
+        </div>
       </div>
     </div>
-    <div class="style-card">
-      <h2>🟠 Warped Checkers</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Warped_Checkers_FRONT.png" alt="Warped Checkers front">
-        <img src="business_cards/print_ready_images/v2/Warped_Checkers_BACK.png" alt="Warped Checkers back">
+  </section>
+
+  <section>
+    <h2>Pinterest-inspired</h2>
+    <p class="note">The four reference looks adapted to the standard landscape card.</p>
+    <div class="grid">
+      <div class="style-card">
+        <h3>🌿 Sage Checkers</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Sage_Checkers_FRONT.png" alt="Sage Checkers front">
+          <img src="business_cards/print_ready_images/v2/Sage_Checkers_BACK.png" alt="Sage Checkers back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🌊 Groovy Waves</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Groovy_Waves_FRONT.png" alt="Groovy Waves front">
+          <img src="business_cards/print_ready_images/v2/Groovy_Waves_BACK.png" alt="Groovy Waves back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🟠 Warped Checkers</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Warped_Checkers_FRONT.png" alt="Warped Checkers front">
+          <img src="business_cards/print_ready_images/v2/Warped_Checkers_BACK.png" alt="Warped Checkers back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🎀 Pink Gingham</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Pink_Gingham_FRONT.png" alt="Pink Gingham front">
+          <img src="business_cards/print_ready_images/v2/Pink_Gingham_BACK.png" alt="Pink Gingham back">
+        </div>
       </div>
     </div>
-    <div class="style-card">
-      <h2>🎀 Pink Gingham</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Pink_Gingham_FRONT.png" alt="Pink Gingham front">
-        <img src="business_cards/print_ready_images/v2/Pink_Gingham_BACK.png" alt="Pink Gingham back">
+  </section>
+
+  <section>
+    <h2>Exact recreations</h2>
+    <p class="note">Each reference rebuilt in its own shape &mdash; including the vertical and square formats.</p>
+    <div class="grid">
+      <div class="style-card">
+        <h3>🌿 Green Checks</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Exact_Green_Checks_FRONT.png" alt="Green Checks front">
+          <img src="business_cards/print_ready_images/v2/Exact_Green_Checks_BACK.png" alt="Green Checks back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🌊 Groovy Social</h3>
+        <p class="dims">2.0 &times; 3.5 in &middot; vertical</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Exact_Groovy_Social_FRONT.png" alt="Groovy Social front">
+          <img src="business_cards/print_ready_images/v2/Exact_Groovy_Social_BACK.png" alt="Groovy Social back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🟠 Warped Checks</h3>
+        <p class="dims">3.5 &times; 2.0 in &middot; landscape</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Exact_Warped_Checks_FRONT.png" alt="Warped Checks front">
+          <img src="business_cards/print_ready_images/v2/Exact_Warped_Checks_BACK.png" alt="Warped Checks back">
+        </div>
+      </div>
+      <div class="style-card">
+        <h3>🎀 Gingham Square</h3>
+        <p class="dims">2.5 &times; 2.5 in &middot; square</p>
+        <div class="faces">
+          <img src="business_cards/print_ready_images/v2/Exact_Gingham_Square_FRONT.png" alt="Gingham Square front">
+          <img src="business_cards/print_ready_images/v2/Exact_Gingham_Square_BACK.png" alt="Gingham Square back">
+        </div>
       </div>
     </div>
-    <div class="style-card">
-      <h2>🏡 Sweet Suite</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Sweet_Suite_FRONT.png" alt="Sweet Suite front">
-        <img src="business_cards/print_ready_images/v2/Sweet_Suite_BACK.png" alt="Sweet Suite back">
-      </div>
-    </div>
-    <div class="style-card">
-      <h2>🍒 Cherry Checkers</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Cherry_Checkers_FRONT.png" alt="Cherry Checkers front">
-        <img src="business_cards/print_ready_images/v2/Cherry_Checkers_BACK.png" alt="Cherry Checkers back">
-      </div>
-    </div>
-    <div class="style-card">
-      <h2>🌸 Marshmallow Pink</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Marshmallow_Pink_FRONT.png" alt="Marshmallow Pink front">
-        <img src="business_cards/print_ready_images/v2/Marshmallow_Pink_BACK.png" alt="Marshmallow Pink back">
-      </div>
-    </div>
-    <div class="style-card">
-      <h2>🧡 Terracotta Cobalt</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Terracotta_Cobalt_FRONT.png" alt="Terracotta Cobalt front">
-        <img src="business_cards/print_ready_images/v2/Terracotta_Cobalt_BACK.png" alt="Terracotta Cobalt back">
-      </div>
-    </div>
-    <div class="style-card">
-      <h2>✨ Y2K Sticker Pop</h2>
-      <div class="faces">
-        <img src="business_cards/print_ready_images/v2/Y2K_Sticker_Pop_FRONT.png" alt="Y2K Sticker Pop front">
-        <img src="business_cards/print_ready_images/v2/Y2K_Sticker_Pop_BACK.png" alt="Y2K Sticker Pop back">
-      </div>
-    </div>
-  </div>
+  </section>
 
   <footer>
+    All artwork is exported at 300dpi with 0.125in bleed on every side.<br>
     Pricing and availability subject to change daily. All specials and effective rents subject to property terms and leasing approval.
   </footer>
 </body>

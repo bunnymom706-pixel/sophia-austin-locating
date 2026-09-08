@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Gingham Square — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* square card: 2.75 x 2.75in @300dpi incl. bleed (trims to 2.5in) */
+  html, body { width: 825px; height: 825px; overflow: hidden; background: #e9b7bd; }
+
+  .card {
+    position: relative;
+    width: 825px;
+    height: 825px;
+    overflow: hidden;
+    background: #f8f3ea;
+  }
+
+  /* fine gingham: 68.75px cells = exactly 12 x 12 */
+  .checks {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%),
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%);
+    background-size: 137.5px 137.5px;
+    background-position: 0 0, 68.75px 68.75px;
+  }
+
+  .type { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="checks"></div>
+
+    <svg class="type" width="825" height="825" viewBox="0 0 825 825" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="arcA" d="M 96 352 Q 412 258 728 352" fill="none"/>
+        <path id="arcB" d="M 112 470 Q 412 380 712 470" fill="none"/>
+      </defs>
+
+      <g font-family="Alfa Slab One" font-size="70" fill="#b8332a" letter-spacing="1.5">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+      </g>
+
+      <text x="412" y="556" text-anchor="middle"
+            font-family="Poppins" font-weight="600" font-size="21" letter-spacing="6" fill="#b8332a">Texas Apartment Locator</text>
+
+      <g fill="#b8332a">
+        <path transform="translate(126,150) scale(1.3)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(634,138) scale(1.7)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+
+      <text x="412" y="742" text-anchor="middle"
+            font-family="Poppins" font-weight="600" font-size="14" letter-spacing="1.4" fill="#b8332a">TREC #831516 &#183; SPIRIT REAL ESTATE GROUP</text>
+    </svg>
+  </div>
+</body>
+</html>

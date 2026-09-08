@@ -8,23 +8,31 @@ const CARDS_DIR = path.join(REPO, 'business_cards', 'cards_v2');
 const OUT_DIR = path.join(REPO, 'business_cards', 'print_ready_images', 'v2');
 const DESKTOP_OUT = 'C:\\Users\\sophi\\Desktop\\Sophia_Business_Cards_HQ\\v2';
 
-const W = 1125, H = 675; // 3.75in x 2.25in @300dpi (incl. 0.125in bleed each side)
+// All sizes are 300dpi and include 0.125in bleed on each side.
+const LANDSCAPE = { w: 1125, h: 675 };  // trims to 3.5 x 2.0in
+const PORTRAIT  = { w: 675, h: 1125 };  // trims to 2.0 x 3.5in
+const SQUARE    = { w: 825, h: 825 };   // trims to 2.5 x 2.5in
 
 const STYLES = [
-  { dir: '1_cherry_checkers', name: 'Cherry_Checkers' },
-  { dir: '2_marshmallow_pink', name: 'Marshmallow_Pink' },
-  { dir: '3_terracotta_cobalt', name: 'Terracotta_Cobalt' },
-  { dir: '4_y2k_sticker_pop', name: 'Y2K_Sticker_Pop' },
-  { dir: '5_sweet_suite', name: 'Sweet_Suite' },
-  { dir: '6_sage_checkers', name: 'Sage_Checkers' },
-  { dir: '7_groovy_waves', name: 'Groovy_Waves' },
-  { dir: '8_warped_checkers', name: 'Warped_Checkers' },
-  { dir: '9_pink_gingham', name: 'Pink_Gingham' },
+  { dir: '1_cherry_checkers', name: 'Cherry_Checkers', size: LANDSCAPE },
+  { dir: '2_marshmallow_pink', name: 'Marshmallow_Pink', size: LANDSCAPE },
+  { dir: '3_terracotta_cobalt', name: 'Terracotta_Cobalt', size: LANDSCAPE },
+  { dir: '4_y2k_sticker_pop', name: 'Y2K_Sticker_Pop', size: LANDSCAPE },
+  { dir: '5_sweet_suite', name: 'Sweet_Suite', size: LANDSCAPE },
+  { dir: '6_sage_checkers', name: 'Sage_Checkers', size: LANDSCAPE },
+  { dir: '7_groovy_waves', name: 'Groovy_Waves', size: LANDSCAPE },
+  { dir: '8_warped_checkers', name: 'Warped_Checkers', size: LANDSCAPE },
+  { dir: '9_pink_gingham', name: 'Pink_Gingham', size: LANDSCAPE },
+  { dir: '10_exact_green_checks', name: 'Exact_Green_Checks', size: LANDSCAPE },
+  { dir: '11_exact_groovy_social', name: 'Exact_Groovy_Social', size: PORTRAIT },
+  { dir: '12_exact_warped_checks', name: 'Exact_Warped_Checks', size: LANDSCAPE },
+  { dir: '13_exact_gingham_square', name: 'Exact_Gingham_Square', size: SQUARE },
 ];
 
-async function shot(browser, htmlPath, outPng) {
+async function shot(browser, htmlPath, outPng, size) {
+  const { w: W, h: H } = size;
   const page = await browser.newPage();
-  await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 }); // exact 1125x675px = 300dpi at 3.75x2.25in
+  await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
   await page.goto('file:///' + htmlPath.replace(/\\/g, '/'), { waitUntil: 'networkidle0', timeout: 30000 });
   await page.evaluate(() => document.fonts && document.fonts.ready);
   await new Promise(r => setTimeout(r, 300));
@@ -49,8 +57,8 @@ async function shot(browser, htmlPath, outPng) {
     const frontPng = path.join(OUT_DIR, `${style.name}_FRONT.png`);
     const backPng = path.join(OUT_DIR, `${style.name}_BACK.png`);
     console.log(`rendering ${style.dir} ...`);
-    await shot(browser, frontHtml, frontPng);
-    await shot(browser, backHtml, backPng);
+    await shot(browser, frontHtml, frontPng, style.size);
+    await shot(browser, backHtml, backPng, style.size);
     fs.copyFileSync(frontPng, path.join(DESKTOP_OUT, path.basename(frontPng)));
     fs.copyFileSync(backPng, path.join(DESKTOP_OUT, path.basename(backPng)));
     console.log(`  -> ${frontPng}`);
