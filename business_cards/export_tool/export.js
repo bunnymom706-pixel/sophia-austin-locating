@@ -16,6 +16,10 @@ const STYLES = [
   { dir: '3_terracotta_cobalt', name: 'Terracotta_Cobalt' },
   { dir: '4_y2k_sticker_pop', name: 'Y2K_Sticker_Pop' },
   { dir: '5_sweet_suite', name: 'Sweet_Suite' },
+  { dir: '6_sage_checkers', name: 'Sage_Checkers' },
+  { dir: '7_groovy_waves', name: 'Groovy_Waves' },
+  { dir: '8_warped_checkers', name: 'Warped_Checkers' },
+  { dir: '9_pink_gingham', name: 'Pink_Gingham' },
 ];
 
 async function shot(browser, htmlPath, outPng) {

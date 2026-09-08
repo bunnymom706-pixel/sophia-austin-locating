@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Warped Checkers — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f2a3d4;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f2a3d4;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .stack {
+    position: absolute;
+    left: 37.5px; right: 37.5px;
+    top: 128px;
+    text-align: center;
+  }
+
+  .compliance {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 58px;
+    background: #f7e6c9;
+    border-radius: 999px;
+    padding: 9px 26px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: 1.4px;
+    color: #4e6b36;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- warped checkerboard: a flat checker pattern pushed around by turbulence -->
+    <svg class="bg" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="checks" width="204" height="204" patternUnits="userSpaceOnUse">
+          <rect width="204" height="204" fill="#f2a3d4"/>
+          <rect width="102" height="102" fill="#e8542c"/>
+          <rect x="102" y="102" width="102" height="102" fill="#e8542c"/>
+        </pattern>
+        <filter id="warp" x="-25%" y="-25%" width="150%" height="150%"
+                filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0042 0.0062" numOctaves="2" seed="11" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="78" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <g filter="url(#warp)">
+        <rect x="-200" y="-200" width="1525" height="1075" fill="url(#checks)"/>
+      </g>
+    </svg>
+
+    <div class="stack">
+      <svg width="1050" height="400" viewBox="0 0 1050 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- offset shadow copy, then the green face on top -->
+        <g font-family="Bagel Fat One" font-size="126" text-anchor="middle">
+          <g fill="#3f5a2c" opacity="0.55" transform="translate(7,8)">
+            <text x="525" y="118">sophia sky</text>
+            <text x="525" y="256">reddehase</text>
+          </g>
+          <g fill="#7a9b52">
+            <text x="525" y="118">sophia sky</text>
+            <text x="525" y="256">reddehase</text>
+          </g>
+        </g>
+        <text x="525" y="330" text-anchor="middle"
+              font-family="Poppins" font-weight="700" font-size="25" letter-spacing="7.5"
+              stroke="#3f5a2c" stroke-width="7" stroke-linejoin="round" paint-order="stroke" fill="#f7e6c9">TEXAS APARTMENT LOCATOR</text>
+      </svg>
+    </div>
+
+    <!-- green sparkles, like the reference -->
+    <svg width="112" height="112" viewBox="0 0 40 40" style="position:absolute; top:52px; right:84px;">
+      <path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#7a9b52"/>
+    </svg>
+    <svg width="62" height="62" viewBox="0 0 40 40" style="position:absolute; top:142px; right:52px;">
+      <path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#7a9b52"/>
+    </svg>
+    <svg width="74" height="74" viewBox="0 0 40 40" style="position:absolute; top:74px; left:70px;">
+      <path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#7a9b52"/>
+    </svg>
+
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP</div>
+  </div>
+</body>
+</html>

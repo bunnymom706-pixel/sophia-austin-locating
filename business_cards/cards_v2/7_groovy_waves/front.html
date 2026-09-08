@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Groovy Waves — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #e8532e;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #e8532e;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .waves { position: absolute; inset: 0; }
+
+  .type { position: absolute; inset: 0; }
+
+  .handle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 128px;
+    background: #f6b4d0;
+    border-radius: 999px;
+    padding: 12px 34px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    letter-spacing: 2.6px;
+    color: #c4381a;
+    white-space: nowrap;
+  }
+
+  .compliance {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 58px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: 1.5px;
+    color: #ffd9c8;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- groovy pink waves down both edges -->
+    <svg class="waves" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#f6b4d0"
+            d="M0,0 L128,0 C 176,96 78,168 122,262 C 166,356 74,420 124,516 C 168,602 86,640 112,675 L0,675 Z"/>
+      <path fill="#f6b4d0"
+            d="M1125,0 L997,0 C 949,96 1047,168 1003,262 C 959,356 1051,420 1001,516 C 957,602 1039,640 1013,675 L1125,675 Z"/>
+    </svg>
+
+    <svg class="type" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <g transform="rotate(-4 562 300)">
+        <g font-family="Shrikhand" text-anchor="middle" fill="#fff6ef">
+          <text x="562" y="248" font-size="96">sophia sky</text>
+          <text x="562" y="360" font-size="96">reddehase</text>
+        </g>
+      </g>
+      <text x="562" y="452" text-anchor="middle"
+            font-family="Poppins" font-weight="700" font-size="24" letter-spacing="8" fill="#ffd9c8">TEXAS APARTMENT LOCATOR</text>
+    </svg>
+
+    <div class="handle">AUSTIN, TX &nbsp;·&nbsp; 100% FREE FOR RENTERS</div>
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Groovy Waves — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f6b4d0;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f6b4d0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .waves { position: absolute; inset: 0; }
+
+  /* cream arch panel holding the QR, like the reference */
+  .arch {
+    position: absolute;
+    left: 88px;
+    top: 106px;
+    width: 372px;
+    height: 486px;
+    background: #fff6ef;
+    border-radius: 186px 186px 30px 30px;
+  }
+
+  .qr-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 174px;
+    width: 248px;
+    height: 248px;
+    background: #ffffff;
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 0 rgba(196,56,26,0.16);
+  }
+  .qr-box img { width: 212px; height: 212px; object-fit: contain; }
+
+  .scan-pill {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 24px;
+    background: #e8532e;
+    border-radius: 999px;
+    padding: 9px 26px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 2.2px;
+    color: #fff6ef;
+    white-space: nowrap;
+  }
+
+  .details {
+    position: absolute;
+    left: 512px;
+    top: 214px;
+    width: 546px;
+  }
+  .details .row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 17px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: #b8341a;
+    letter-spacing: 0.2px;
+  }
+  .details .row svg { display: block; flex: none; }
+
+  .compliance {
+    position: absolute;
+    left: 480px;
+    right: 60px;
+    bottom: 136px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1.3px;
+    color: #b03a5a;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="waves" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#e8532e"
+            d="M0,0 L1125,0 L1125,96 C 900,150 760,58 540,112 C 320,166 190,84 0,132 Z"/>
+      <path fill="#e8532e"
+            d="M0,675 L1125,675 L1125,584 C 900,530 760,622 540,568 C 320,514 190,596 0,548 Z"/>
+    </svg>
+
+    <div class="arch">
+      <!-- "to connect" riding an arc across the top of the arch -->
+      <svg width="372" height="140" viewBox="0 0 372 140" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:26px; left:0;">
+        <defs><path id="connArc" d="M 66 118 Q 186 30 306 118" fill="none"/></defs>
+        <text font-family="Poppins" font-weight="700" font-size="19" letter-spacing="5.5" fill="#c4381a">
+          <textPath href="#connArc" startOffset="50%" text-anchor="middle">TO CONNECT</textPath>
+        </text>
+        <text x="186" y="128" text-anchor="middle" font-family="Shrikhand" font-size="44" fill="#e8532e">scan here</text>
+      </svg>
+
+      <div class="qr-box">
+        <img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code to sparkapt.com/sophia-reddehase">
+      </div>
+
+      <div class="scan-pill">@SOPHIASKY.ATX</div>
+    </div>
+
+    <div class="details">
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <path d="M16 14.5c1.6 0 2 .6 2.6 2l1 2.4c.4 1 .2 1.6-.6 2.2l-1 .8c1.2 2.6 3.3 4.7 5.9 5.9l.8-1c.6-.8 1.2-1 2.2-.6l2.4 1c1.4.6 2 1 2 2.6 0 2-1.6 3.4-3.6 3.4C20.7 33.2 12.8 25.3 12.8 18.1c0-2 1.4-3.6 3.2-3.6Z" fill="#b8341a" stroke="none"/>
+        </svg>
+        (512) 676-1215
+      </div>
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <rect x="9" y="14" width="26" height="17" rx="3.4"/>
+          <path d="M9.8 15.6 22 24.4l12.2-8.8"/>
+        </svg>
+        sophia.reddehase@spiritre.com
+      </div>
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <circle cx="22" cy="22" r="13.4"/>
+          <ellipse cx="22" cy="22" rx="5.6" ry="13.4"/>
+          <path d="M8.8 17.6h26.4M8.8 26.4h26.4"/>
+        </svg>
+        sparkapt.com/sophia-reddehase
+      </div>
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <path d="M22 34s-11-7.6-11-15a11 11 0 0 1 22 0c0 7.4-11 15-11 15Z"/>
+          <circle cx="22" cy="19" r="4.2"/>
+        </svg>
+        Austin &amp; surrounding areas
+      </div>
+    </div>
+
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP</div>
+  </div>
+</body>
+</html>

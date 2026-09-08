@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pink Gingham — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #e9b7bd;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f8f3ea;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* fine gingham check: 75px cells = exactly 15 x 9 */
+  .checks {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%),
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%);
+    background-size: 150px 150px;
+    background-position: 0 0, 75px 75px;
+  }
+
+  .type {
+    position: absolute;
+    inset: 0;
+  }
+
+  .compliance {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 58px;
+    background: #f8f3ea;
+    border-radius: 999px;
+    padding: 9px 26px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: 1.4px;
+    color: #b8332a;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="checks"></div>
+
+    <svg class="type" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="arcA" d="M 100 286 Q 562 190 1025 286" fill="none"/>
+        <path id="arcB" d="M 118 430 Q 562 340 1007 430" fill="none"/>
+      </defs>
+
+      <!-- name on two gentle arcs, as on the reference -->
+      <g font-family="Alfa Slab One" font-size="82" fill="#b8332a" letter-spacing="2">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+      </g>
+
+      <text x="562" y="522" text-anchor="middle"
+            font-family="Poppins" font-weight="700" font-size="24" letter-spacing="8" fill="#b8332a">TEXAS APARTMENT LOCATOR</text>
+
+      <!-- little red stars, as on the reference -->
+      <g fill="#b8332a">
+        <path transform="translate(126,126) scale(1.5)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(934,110) scale(1.9)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(884,182) scale(1.0)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP</div>
+  </div>
+</body>
+</html>
