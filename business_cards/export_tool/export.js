@@ -15,6 +15,7 @@ const STYLES = [
   { dir: '2_marshmallow_pink', name: 'Marshmallow_Pink' },
   { dir: '3_terracotta_cobalt', name: 'Terracotta_Cobalt' },
   { dir: '4_y2k_sticker_pop', name: 'Y2K_Sticker_Pop' },
+  { dir: '5_sweet_suite', name: 'Sweet_Suite' },
 ];
 
 async function shot(browser, htmlPath, outPng) {
