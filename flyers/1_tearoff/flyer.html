@@ -12,9 +12,9 @@
   .page { bottom: 196px; gap: 0; }
   .head { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   h1 { font-size: 36px; }
-  .arch { width: 262px; height: 296px; margin-top: 22px; }
-  .lede { margin-top: 22px; font-size: 17px; }
-  .services { margin-top: 16px; }
+  .arch { width: 236px; height: 236px; margin-top: 16px; }
+  .lede { margin-top: 14px; font-size: 15.5px; }
+  .services { margin-top: 12px; }
   .tabs { position: absolute; left: 44px; right: 44px; bottom: 44px; height: 124px; display: grid; grid-template-columns: repeat(10, 1fr); border-top: 1px dashed var(--line); }
   .tab { position: relative; min-width: 0; overflow: hidden; border-right: 1px dashed var(--line); }
   .tab:last-child { border-right: 0; }
@@ -22,13 +22,14 @@
   .tab .v b { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; }
   .tab .v small { font-size: 7.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
   .frame { bottom: 168px; }
+  .corners span:nth-child(3), .corners span:nth-child(4) { bottom: 168px; }
 
 </style>
 </head>
 <body>
 <div class="sheet">
 
-  <div class="frame"></div>
+  <div class="frame"></div><div class="corners"><span></span><span></span><span></span><span></span></div>
   <div class="page">
     <div class="head">
       <div class="eyebrow">Austin, Texas &nbsp;&middot;&nbsp; Complimentary service</div>
@@ -36,8 +37,16 @@
       <div class="orn diamond"></div>
     </div>
     <div class="arch"><img src="../shared/photos/78753_North_Austin_photo_3.jpg" alt=""></div>
+    <div class="cap">Downtown &middot; Skyline residence</div>
     <p class="lede">A private search, video tours of every finalist, and move-in specials negotiated on your behalf. <i>Complimentary &mdash; the property pays the fee.</i></p>
     <div class="services"><span>Private search</span><i></i><span>Video tours</span><i></i><span>Negotiated specials</span></div>
+    <div class="eyebrow details-title">The service</div>
+    <div class="details">
+      <div><span><b>Curated shortlist</b> within 24 hours, ranked by your commute and priorities</span></div>
+      <div><span><b>Video tour</b> of every finalist &mdash; the actual unit, not the model</span></div>
+      <div><span><b>Move-in specials</b> and effective rent negotiated on your behalf</span></div>
+      <div><span><b>Application</b> handled start to finish, including flexible-approval options</span></div>
+    </div>
     
   <div class="foot">
     <div class="contact">

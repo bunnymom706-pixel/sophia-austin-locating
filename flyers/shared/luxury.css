@@ -30,7 +30,7 @@ h1 i, .ital { font-family: 'Cormorant Garamond', serif; font-style: italic; font
 
 /* footer */
 .foot { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: center; }
-.contact { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 0 14px; }
+.contact { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 22px 0 14px; }
 .contact .name { font-family: 'Italiana', 'Cormorant Garamond', serif; font-size: 30px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1; }
 .contact .role { font-size: 9px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
 .contact .lines { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink); }
@@ -48,3 +48,18 @@ h1 i, .ital { font-family: 'Cormorant Garamond', serif; font-style: italic; font
 .broker .eho { font-size: 7.5px; color: var(--muted); }
 .compliance { margin-top: 9px; font-size: 7.8px; line-height: 1.45; color: var(--muted); font-weight: 400; }
 .compliance strong { font-weight: 500; color: var(--ink); }
+
+/* corner marks on the frame */
+.corners span { position: absolute; width: 14px; height: 14px; border-color: var(--gold); border-style: solid; border-width: 0; }
+.corners span:nth-child(1) { top: 40px; left: 40px; border-top-width: 1px; border-left-width: 1px; }
+.corners span:nth-child(2) { top: 40px; right: 40px; border-top-width: 1px; border-right-width: 1px; }
+.corners span:nth-child(3) { bottom: 40px; left: 40px; border-bottom-width: 1px; border-left-width: 1px; }
+.corners span:nth-child(4) { bottom: 40px; right: 40px; border-bottom-width: 1px; border-right-width: 1px; }
+/* photo caption */
+.cap { margin-top: 8px; font-size: 8px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
+/* what's included */
+.details { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 36px; text-align: left; }
+.details div { display: grid; grid-template-columns: 10px 1fr; gap: 10px; align-items: baseline; font-size: 10.5px; line-height: 1.45; font-weight: 300; color: var(--muted); border-bottom: 1px solid var(--line); padding: 5px 0; }
+.details div::before { content: ""; width: 4px; height: 4px; background: var(--gold); transform: rotate(45deg) translateY(-1px); }
+.details b { font-weight: 500; color: var(--ink); }
+.details-title { margin: 16px 0 6px; }
