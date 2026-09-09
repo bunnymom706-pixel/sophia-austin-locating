@@ -28,46 +28,6 @@
   }
 
   .type { position: absolute; inset: 0; }
-
-  /* Broker block. TREC 22 TAC 535.155(a)(2): broker name >= half the largest
-     agent contact item on the face. Sizes here are checked by verify_trec.py. */
-  .broker {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 44px;
-    background: #f2ebd9;
-    border-radius: 22px;
-    padding: 11px 32px 13px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .broker .eyebrow {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 5px;
-    color: #a8386b;
-  }
-  .broker .bname {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 46px;
-    line-height: 1.06;
-    color: #3c5537;
-    margin-top: 2px;
-  }
-  .broker .tline {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 16.5px;
-    letter-spacing: 1.5px;
-    color: #4d6b46;
-    margin-top: 5px;
-  }
 </style>
 </head>
 <body>
@@ -76,16 +36,16 @@
 
     <svg class="type" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
       <!-- name, cream-outlined so it reads over either check colour -->
-      <g font-family="Bagel Fat One" font-size="90" text-anchor="middle"
-         stroke="#a8386b" stroke-width="9" stroke-linejoin="round" paint-order="stroke" fill="#f2ebd9">
-        <text x="562" y="214">sophia sky</text>
-        <text x="562" y="322">reddehase</text>
+      <g font-family="Bagel Fat One" font-size="136" text-anchor="middle"
+         stroke="#f2ebd9" stroke-width="19" stroke-linejoin="round" paint-order="stroke" fill="#a8386b">
+        <text x="562" y="288">sophia sky</text>
+        <text x="562" y="434">reddehase</text>
       </g>
 
-      <text x="562" y="404" text-anchor="middle"
+      <text x="562" y="516" text-anchor="middle"
             font-family="Poppins" font-weight="700" font-size="23" letter-spacing="7.5"
             stroke="#4d6b46" stroke-width="7" stroke-linejoin="round" paint-order="stroke"
-            fill="#f2ebd9">APARTMENT LOCATING &#183; AUSTIN, TX</text>
+            fill="#f2ebd9">TEXAS APARTMENT LOCATOR</text>
 
       <!-- cream sparkles, sitting on the dark squares like the pin -->
       <g fill="#f2ebd9">
@@ -93,11 +53,6 @@
         <path transform="translate(1030,44) scale(1.1)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
       </g>
     </svg>
-    <div class="broker">
-      <span class="eyebrow">BROKERED BY</span>
-      <span class="bname">Spirit Real Estate Group, LLC</span>
-      <span class="tline">TREC #831516 &nbsp;&#183;&nbsp; SOPHIA SKY REDDEHASE, SALES AGENT</span>
-    </div>
   </div>
 </body>
 </html>

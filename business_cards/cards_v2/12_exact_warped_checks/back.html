@@ -25,7 +25,7 @@
     position: absolute;
     left: 78px;
     right: 78px;
-    top: 318px;
+    top: 356px;
     display: grid;
     grid-template-columns: 1fr 204px;
     column-gap: 40px;
@@ -38,8 +38,8 @@
   .lines {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 22px;
-    line-height: 1.48;
+    font-size: 25px;
+    line-height: 1.58;
     color: #3f5a2c;
   }
 
@@ -56,58 +56,6 @@
     font-size: 13.5px;
     letter-spacing: 1.2px;
     color: #3f5a2c;
-  }
-
-  /* Broker block. TREC 22 TAC 535.155(a)(2): broker name >= half the largest
-     agent contact item on the face. Sizes here are checked by verify_trec.py. */
-  .broker {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 40px;
-    background: #f7e6c9;
-    border-radius: 22px;
-    padding: 11px 32px 13px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .broker .eyebrow {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 5px;
-    color: #a8386b;
-  }
-  .broker .bname {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 44px;
-    line-height: 1.06;
-    color: #3f5a2c;
-    margin-top: 2px;
-  }
-  .broker .tline {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 16.5px;
-    letter-spacing: 1.5px;
-    color: #4e6b36;
-    margin-top: 5px;
-  }
-
-  .qr-col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .qr-cap {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 1.6px;
-    line-height: 1.3;
-    text-align: center;
-    color: #3f5a2c;
-    max-width: 210px;
   }
 </style>
 </head>
@@ -135,7 +83,7 @@
 
     <div class="name">
       <svg width="900" height="260" viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
-        <g font-family="Bagel Fat One" font-size="82">
+        <g font-family="Bagel Fat One" font-size="92">
           <g fill="#3f5a2c" opacity="0.55" transform="translate(6,7)">
             <text x="0" y="92">sophia sky</text>
             <text x="0" y="192">reddehase</text>
@@ -147,13 +95,18 @@
         </g>
         <text x="6" y="240" font-family="Poppins" font-weight="700" font-size="21" letter-spacing="6.5"
               stroke="#3f5a2c" stroke-width="6" stroke-linejoin="round" paint-order="stroke"
-              fill="#f7e6c9">APARTMENT LOCATING &#183; AUSTIN, TX</text>
+              fill="#f7e6c9">TEXAS APARTMENT LOCATOR</text>
       </svg>
     </div>
 
     <div class="body">
       <div>
         <div class="icons">
+          <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#3f5a2c" stroke-width="2.6">
+            <rect x="4" y="4" width="36" height="36" rx="11"/>
+            <circle cx="22" cy="22" r="8.4"/>
+            <circle cx="32.4" cy="11.6" r="2.1" fill="#3f5a2c" stroke="none"/>
+          </svg>
           <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#3f5a2c" stroke-width="2.6">
             <circle cx="22" cy="22" r="18"/>
             <path d="M16 14.5c1.6 0 2 .6 2.6 2l1 2.4c.4 1 .2 1.6-.6 2.2l-1 .8c1.2 2.6 3.3 4.7 5.9 5.9l.8-1c.6-.8 1.2-1 2.2-.6l2.4 1c1.4.6 2 1 2 2.6 0 2-1.6 3.4-3.6 3.4C20.7 33.2 12.8 25.3 12.8 18.1c0-2 1.4-3.6 3.2-3.6Z" fill="#3f5a2c" stroke="none"/>
@@ -176,19 +129,12 @@
         </div>
       </div>
 
-      <div class="qr-col">
-        <div class="qr">
-        <img src="../../assets/v2/qr_warped_dark_on_pink.png" alt="QR code linking to Sophia Reddehase\'s intake form">
-        </div>
-        <div class="qr-cap">FILL OUT MY FORM TO GET STARTED</div>
+      <div class="qr">
+        <img src="../../assets/v2/qr_warped_dark_on_pink.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
       </div>
     </div>
 
-    <div class="broker">
-      <span class="eyebrow">BROKERED BY</span>
-      <span class="bname">Spirit Real Estate Group, LLC</span>
-      <span class="tline">TREC #831516 &nbsp;&#183;&nbsp; SOPHIA SKY REDDEHASE, SALES AGENT</span>
-    </div>
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP, LLC</div>
   </div>
 </body>
 </html>

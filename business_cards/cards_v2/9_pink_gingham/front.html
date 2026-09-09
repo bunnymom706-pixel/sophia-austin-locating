@@ -53,46 +53,6 @@
     color: #b8332a;
     white-space: nowrap;
   }
-
-  /* Broker block. TREC 22 TAC 535.155(a)(2): broker name >= half the largest
-     agent contact item on the face. Sizes here are checked by verify_trec.py. */
-  .broker {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 44px;
-    background: #f8f3ea;
-    border-radius: 22px;
-    padding: 11px 32px 13px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .broker .eyebrow {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 5px;
-    color: #a8386b;
-  }
-  .broker .bname {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 42px;
-    line-height: 1.06;
-    color: #b8332a;
-    margin-top: 2px;
-  }
-  .broker .tline {
-    display: block;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 16.5px;
-    letter-spacing: 1.5px;
-    color: #8f3128;
-    margin-top: 5px;
-  }
 </style>
 </head>
 <body>
@@ -101,18 +61,18 @@
 
     <svg class="type" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <path id="arcA" d="M 100 250 Q 562 154 1025 250" fill="none"/>
-        <path id="arcB" d="M 118 386 Q 562 296 1007 386" fill="none"/>
+        <path id="arcA" d="M 100 286 Q 562 190 1025 286" fill="none"/>
+        <path id="arcB" d="M 118 430 Q 562 340 1007 430" fill="none"/>
       </defs>
 
       <!-- name on two gentle arcs, as on the reference -->
-      <g font-family="Alfa Slab One" font-size="76" fill="#b8332a" letter-spacing="2">
+      <g font-family="Alfa Slab One" font-size="82" fill="#b8332a" letter-spacing="2">
         <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
         <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
       </g>
 
-      <text x="562" y="466" text-anchor="middle"
-            font-family="Poppins" font-weight="700" font-size="24" letter-spacing="8" fill="#b8332a">APARTMENT LOCATING &#183; AUSTIN, TX</text>
+      <text x="562" y="522" text-anchor="middle"
+            font-family="Poppins" font-weight="700" font-size="24" letter-spacing="8" fill="#b8332a">TEXAS APARTMENT LOCATOR</text>
 
       <!-- little red stars, as on the reference -->
       <g fill="#b8332a">
@@ -122,11 +82,7 @@
       </g>
     </svg>
 
-    <div class="broker">
-      <span class="eyebrow">BROKERED BY</span>
-      <span class="bname">Spirit Real Estate Group, LLC</span>
-      <span class="tline">TREC #831516 &nbsp;&#183;&nbsp; SOPHIA SKY REDDEHASE, SALES AGENT</span>
-    </div>
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP, LLC</div>
   </div>
 </body>
 </html>
