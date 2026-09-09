@@ -18,9 +18,11 @@ arch-framed or full-bleed interior photography, and the same footer (contact, br
 Shared styles live in `shared/luxury.css`; each flyer only sets its palette and layout on top. Photos in `shared/photos/`
 are Sophia's own tour photography (exported from her iCloud camera roll, HEIC converted to JPG at up to 2400 px). The
 captions name the feature only (pool, kitchen, model residence), not a property or neighborhood, so nothing on the sheet
-has to be re-verified when a community changes hands. Every file carries Apple iPhone EXIF (web saves in the camera roll were rejected). Source files: palm-court pool IMG_1737,
-courtyard pool with loungers IMG_3703 and IMG_3640, kitchen IMG_4169, model living room IMG_4102, clubhouse lobby IMG_3587,
-courtyard pool deck IMG_4324.
+has to be re-verified when a community changes hands. Every file was shot on Sophia's own phone: her selfies from May through September 2026 are all iPhone 17, so only iPhone 17
+captures are allowed here (iPhone 13 and iPhone 15 files in the roll were shared in by other people and are rejected).
+`shared/photos/SOURCES.json` records the source file and camera for each photo. Sources: clubhouse pool IMG_4145,
+sunset courtyard pool IMG_4324, kitchen IMG_4169, model living room IMG_4102, clubhouse lounge IMG_4323, clubhouse
+lobby IMG_4321, arched facade IMG_4247.
 
 ## Print specs
 
