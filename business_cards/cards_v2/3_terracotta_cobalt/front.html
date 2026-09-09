@@ -31,29 +31,69 @@
   .sparkle { position: absolute; }
   .sparkle svg { display: block; }
 
+
+
   .stack {
     position: absolute;
     left: 37.5px; right: 37.5px;
-    top: 78px;
+    top: 44px;
     text-align: center;
   }
-  .role { margin-top: 10px; }
+  .stack svg { display: block; margin: 0 auto; }
 
-  .compliance {
+  /* role and services are pills so they size to their own text */
+  .role, .services {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #f3e6d2;
+    background: #1b2a6b;
+    box-shadow: 0 5px 0 #0d1730;
+  }
+  .role {
+    margin-top: 6px;
+    font-size: 24px;
+    letter-spacing: 7px;
+    padding: 12px 30px 13px;
+    border-radius: 14px;
+  }
+  .services {
+    display: block;
+    width: fit-content;
+    margin: 12px auto 0;
+    font-size: 15px;
+    letter-spacing: 2.4px;
+    padding: 8px 22px 9px;
+    border-radius: 999px;
+  }
+
+  /* broker mark: navy logo on a cream plate so it holds on any pattern.
+     450px wide gives a 54px "SPIRIT" cap against the 96px name — 1.79x,
+     inside the half-size floor in 22 TAC 535.155(a)(2) with margin */
+  .brokermark {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 62px;
+    bottom: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
     background: #f3e6d2;
-    border-radius: 999px;
-    padding: 9px 26px;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #1b2a6b, 0 6px 0 #0d1730;
+  }
+  .brokermark img { width: 450px; height: auto; display: block; }
+  .brokermark .line {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 15px;
     letter-spacing: 0.9px;
     color: #1b2a6b;
     white-space: nowrap;
-    box-shadow: 0 0 0 3px #1b2a6b, 0 5px 0 rgba(0,0,0,0.16);
   }
 </style>
 </head>
@@ -72,42 +112,38 @@
     </div>
 
     <div class="stack">
-      <svg width="1050" height="330" viewBox="0 0 1050 330" xmlns="http://www.w3.org/2000/svg">
-        <g font-family="Bagel Fat One" font-size="132" text-anchor="middle"
-         stroke-linejoin="round" paint-order="stroke">
-        <!-- cast shadow -->
-        <g stroke="#0d1730" stroke-width="32" fill="#0d1730" opacity="0.22" transform="translate(6,9)">
-          <text x="525" y="128">sophia sky</text>
-          <text x="525" y="272">reddehase</text>
+      <svg width="1050" height="228" viewBox="0 0 1050 228" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="96" text-anchor="middle"
+           stroke-linejoin="round" paint-order="stroke">
+          <!-- cast shadow -->
+          <g stroke="#0d1730" stroke-width="23" fill="#0d1730" opacity="0.22" transform="translate(4.5,6.5)">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <!-- dark keyline: holds the edge over the light squares -->
+          <g stroke="#0d1730" stroke-width="23" fill="#0d1730">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <!-- light halo: holds the edge over the dark squares -->
+          <g stroke="#f3e6d2" stroke-width="13" fill="#f3e6d2">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <g fill="#1b2a6b">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
         </g>
-        <!-- dark keyline: holds the edge over the light squares -->
-        <g stroke="#0d1730" stroke-width="32" fill="#0d1730">
-          <text x="525" y="128">sophia sky</text>
-          <text x="525" y="272">reddehase</text>
-        </g>
-        <!-- cream halo: holds the edge over the dark squares -->
-        <g stroke="#f3e6d2" stroke-width="18.0" fill="#f3e6d2">
-          <text x="525" y="128">sophia sky</text>
-          <text x="525" y="272">reddehase</text>
-        </g>
-        <g fill="#1b2a6b">
-          <text x="525" y="128">sophia sky</text>
-          <text x="525" y="272">reddehase</text>
-        </g>
-      </g>
       </svg>
-      <div class="role">
-        <svg width="1050" height="46" viewBox="0 0 1050 46" xmlns="http://www.w3.org/2000/svg">
-          <rect x="238.5" y="-2.0" width="566.0" height="61.0" rx="14" fill="#0d1730" opacity="0.85"/>
-      <rect x="238.5" y="-7.0" width="566.0" height="61.0" rx="14" fill="#1b2a6b"/>
-      <text x="525" y="32" text-anchor="middle"
-                font-family="Poppins" font-weight="700" font-size="24" letter-spacing="7"
-                fill="#f3e6d2">TEXAS APARTMENT LOCATOR</text>
-        </svg>
-      </div>
+      <div class="role">Texas Apartment Locator</div>
+      <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
     </div>
 
-    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP, LLC</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
   </div>
 </body>
 </html>

@@ -26,7 +26,7 @@
     left: 62px;
     top: 300px;
     width: 424px;
-    height: 730px;
+    height: 600px;
     background: #f6b4d0;
     border-radius: 212px 212px 34px 34px;
   }
@@ -82,23 +82,56 @@
   /* the orange band between the top wave and the arch was dead space */
   .skyline { position: absolute; left: 0; top: 0; }
 
-  .compliance {
+
+  /* broker mark: navy logo on a cream plate so it holds on any ground.
+     the only agent contact on this face is the 19px phone pill; 380px gives a 45px cap */
+  .brokermark {
     position: absolute;
-    left: 0; right: 0;
-    bottom: 52px;
-    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: #fff6ef;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #a82d12, 0 6px 0 #741e0b;
+  }
+  .brokermark img { width: 380px; height: auto; display: block; }
+  .brokermark .line {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 15px;
     letter-spacing: 0.9px;
     color: #a82d12;
-    background: #fff6ef;
-    border-radius: 999px;
-    padding: 9px 26px;
-    width: fit-content;
-    margin: 0 auto;
-    box-shadow: 0 0 0 3px #a82d12, 0 5px 0 rgba(0,0,0,0.16);
+    white-space: nowrap;
   }
+
+  /* FREE, as a sticker on the corner of the QR tile */
+  .free {
+    position: absolute;
+    left: 366px;
+    top: 476px;
+    width: 118px;
+    height: 118px;
+    transform: rotate(-12deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #fff6ef;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #a82d12; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
 </style>
 </head>
 <body>
@@ -204,7 +237,14 @@
       </svg>
     </div>
 
-    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP, LLC</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
   </div>
 </body>
 </html>

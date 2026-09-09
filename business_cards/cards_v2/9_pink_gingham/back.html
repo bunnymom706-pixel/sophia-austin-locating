@@ -55,14 +55,14 @@
     text-align: center;
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    font-size: 17px;
+    font-size: 19px;
     letter-spacing: 0.8px;
     line-height: 1.28;
     color: #fbf6ee;
     background: #b8332a;
     box-shadow: 0 4px 0 #7d1e17;
     border-radius: 13px;
-    padding: 11px 14px 12px;
+    padding: 12px 16px 13px;
     box-sizing: border-box;
   }
   .brokermark {
@@ -84,6 +84,30 @@
     color: #8a231a;
     white-space: nowrap;
   }
+
+  /* FREE, as a sticker on the corner of the QR tile */
+  .free {
+    position: absolute;
+    left: 64px;
+    top: 192px;
+    width: 118px;
+    height: 118px;
+    transform: rotate(-12deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #fbf6ee;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #b8332a; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
 </style>
 </head>
 <body>
@@ -118,6 +142,10 @@
     <div class="brokermark">
       <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
       <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
     </div>
   </div>
 </body>
