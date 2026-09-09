@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chunky Diagonal — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* vertical card: 2.25 x 3.75in @300dpi incl. bleed */
+  html, body { width: 675px; height: 1125px; overflow: hidden; background: #e8532e; }
+  .card { position: relative; width: 675px; height: 1125px; overflow: hidden; background: #e8532e;
+          font-family: 'Poppins', sans-serif; }
+
+  /* orange / pink split on a diagonal, yellow corner, as on the flyer */
+  .split { position: absolute; inset: 0; }
+
+  .head { position: absolute; left: 0; top: 0; }
+  .qr { position: absolute; left: 62px; top: 400px; width: 292px; height: 292px;
+         background: #ffffff; border-radius: 22px; display: flex; align-items: center; justify-content: center;
+         box-shadow: 0 6px 0 #5e1806; }
+  .qr img { width: 250px; height: 250px; display: block; }
+  .qr-cap { position: absolute; left: 62px; top: 718px; }
+  .contacts { position: absolute; left: 62px; top: 792px; font-family: 'Poppins', sans-serif; font-weight: 700;
+               font-size: 19px; line-height: 1.55; color: #8f2408; }
+
+  .qr-cap {
+    
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 1px;
+    text-transform: uppercase; white-space: nowrap;
+    color: #fff6ef; background: #8f2408; padding: 12px 26px 13px; border-radius: 14px;
+    box-shadow: 0 5px 0 #5e1806;
+  }
+  .free {
+    position: absolute; left: 359px; top: 487px;          
+     width: 118px; height: 118px;
+    transform: rotate(-12deg); display: flex; align-items: center; justify-content: center;
+    text-align: center; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 14px;
+    line-height: 1.05; letter-spacing: 0.6px; color: #fff6ef;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #8f2408; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
+  /* broker mark: navy logo on a cream plate. name on this face is 64px; 380px gives a 45px cap — 1.41x */
+  .brokermark {
+    position: absolute; left: 50%; transform: translateX(-50%); bottom: 44px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    background: #fff6ef; border-radius: 18px; padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #8f2408, 0 6px 0 #5e1806;
+  }
+  .brokermark img { width: 380px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.9px;
+    color: #8f2408; white-space: nowrap;
+  }</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="split" width="675" height="1125" viewBox="0 0 675 1125" xmlns="http://www.w3.org/2000/svg">
+      <rect width="675" height="1125" fill="#e8532e"/>
+      <path d="M0,430 L675,352 L675,1125 L0,1125 Z" fill="#f79ad3"/>
+      <path d="M675,0 L675,190 L400,0 Z" fill="#f5c84a"/>
+    </svg>
+
+    <div class="head">
+      <svg width="675" height="420" viewBox="0 0 675 420" xmlns="http://www.w3.org/2000/svg">
+        <g transform="rotate(-6 300 176)" font-family="Bagel Fat One" font-size="60" text-anchor="middle"
+           stroke-linejoin="round" paint-order="stroke">
+          <g stroke="#8f2408" stroke-width="15" fill="#8f2408">
+            <text x="300" y="120">fill out</text><text x="300" y="188">my form</text><text x="300" y="256">to get started</text>
+          </g>
+          <g stroke="#fff6ef" stroke-width="8" fill="#fff6ef">
+            <text x="300" y="120">fill out</text><text x="300" y="188">my form</text><text x="300" y="256">to get started</text>
+          </g>
+          <g fill="#f79ad3">
+            <text x="300" y="120">fill out</text><text x="300" y="188">my form</text><text x="300" y="256">to get started</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="qr"><img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code linking to Sophia Reddehase&#39;s intake form"></div>
+    <div class="qr-cap">SCAN TO START</div>
+
+    <div class="contacts">
+      (512) 676-1215<br>
+      sophia.reddehase@spiritre.com<br>
+      sparkapt.com/sophia-reddehase
+    </div>
+
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+  </div>
+</body>
+</html>
