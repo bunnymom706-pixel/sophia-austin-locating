@@ -1,0 +1,52 @@
+{
+  "artboards": [
+    {
+      "file": "TearOff.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 816,
+      "h": 1056,
+      "title": "Tear-off",
+      "print": "fixed"
+    },
+    {
+      "file": "Main.dc.html",
+      "x": 916,
+      "y": 0,
+      "w": 816,
+      "h": 1056,
+      "title": "Free locating",
+      "print": "fixed"
+    },
+    {
+      "file": "Relocation.dc.html",
+      "x": 1832,
+      "y": 0,
+      "w": 816,
+      "h": 1056,
+      "title": "Relocation",
+      "print": "fixed"
+    },
+    {
+      "file": "MoveSeason.dc.html",
+      "x": 2748,
+      "y": 0,
+      "w": 816,
+      "h": 1056,
+      "title": "Move season",
+      "print": "fixed"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "print-spec",
+      "x": 0,
+      "y": -150,
+      "w": 700,
+      "text": "US Letter trim, 8.5 x 11 in, drawn at 96 px per inch. Export PDF prints each artboard as one page. For Canva Print add a 0.125 in bleed on all four sides and keep type inside the current margins."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}
