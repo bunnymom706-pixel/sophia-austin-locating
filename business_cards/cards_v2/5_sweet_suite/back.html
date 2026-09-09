@@ -194,26 +194,30 @@
     box-shadow: 0 3px 0 #c2255c;
   }
 
-  .compliance {
+  .brokermark {
     position: absolute;
-    left: 37.5px;
-    right: 37.5px;
-    bottom: 54px;
-    text-align: center;
-    font-weight: 700;
+    right: 62px; top: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  /* 184px wide gives a 22px "SPIRIT" cap against the 40px agent name
+     — inside the half-size floor in 22 TAC 535.155(a)(2), with margin */
+  .brokermark img { width: 184px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     font-size: 13.5px;
+    letter-spacing: 1.3px;
     color: #6b2140;
-    background: rgba(255,255,255,0.80);
-    border-radius: 16px;
-    padding: 8px 18px;
-    z-index: 4;
+    white-space: nowrap;
   }
 </style>
 </head>
 <body>
   <div class="card">
     <div class="sun"></div>
-    <div class="cloud c1"></div>
 
     <div class="sparkle" style="top:56px; left:640px;">
       <svg width="18" height="18" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
@@ -319,7 +323,10 @@
       </div>
     </div>
 
-    <div class="compliance">TREC #831516 &nbsp;·&nbsp; Brokered by Spirit Real Estate Group, LLC</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
   </div>
 </body>
 </html>

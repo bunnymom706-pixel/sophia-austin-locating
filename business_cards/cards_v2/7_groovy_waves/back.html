@@ -86,17 +86,24 @@
   }
   .details .row svg { display: block; flex: none; }
 
-  .compliance {
+  .brokermark {
     position: absolute;
-    left: 480px;
-    right: 60px;
-    bottom: 136px;
-    text-align: center;
+    right: 60px; bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+  }
+  /* 203px wide gives a 24px "SPIRIT" cap against the 44px agent name
+     — inside the half-size floor in 22 TAC 535.155(a)(2), with margin */
+  .brokermark img { width: 203px; height: auto; display: block; }
+  .brokermark .line {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13.5px;
     letter-spacing: 1.3px;
-    color: #8a2a12;
+    color: #ffd9c8;
+    white-space: nowrap;
   }
 </style>
 </head>
@@ -113,10 +120,10 @@
       <!-- "to connect" riding an arc across the top of the arch -->
       <svg width="372" height="140" viewBox="0 0 372 140" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:26px; left:0;">
         <defs><path id="connArc" d="M 66 118 Q 186 30 306 118" fill="none"/></defs>
-        <text font-family="Poppins" font-weight="700" font-size="19" letter-spacing="5.5" fill="#c4381a">
+        <text font-family="Poppins" font-weight="700" font-size="16" letter-spacing="3.4" fill="#c4381a">
           <textPath href="#connArc" startOffset="50%" text-anchor="middle">FILL OUT MY FORM</textPath>
         </text>
-        <text x="186" y="128" text-anchor="middle" font-family="Shrikhand" font-size="44" fill="#e8532e">to get started</text>
+        <text x="186" y="128" text-anchor="middle" font-family="Shrikhand" font-size="34" fill="#e8532e">to get started</text>
       </svg>
 
       <div class="qr-box">
@@ -157,7 +164,10 @@
       </div>
     </div>
 
-    <div class="compliance">TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP, LLC</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_cream.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
   </div>
 </body>
 </html>

@@ -45,16 +45,24 @@
     color: #fff6ef;
   }
 
-  .compliance {
+  .brokermark {
     position: absolute;
-    left: 0; right: 0;
-    bottom: 52px;
-    text-align: center;
+    left: 50%; transform: translateX(-50%); bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+  /* 286px wide gives a 34px "SPIRIT" cap against the 62px agent name
+     — inside the half-size floor in 22 TAC 535.155(a)(2), with margin */
+  .brokermark img { width: 286px; height: auto; display: block; }
+  .brokermark .line {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1.2px;
+    font-size: 13.5px;
+    letter-spacing: 1.3px;
     color: #ffd3c2;
+    white-space: nowrap;
   }
 </style>
 </head>
@@ -89,7 +97,10 @@
     </div>
 
     <div class="site">SPARKAPT.COM/SOPHIA-REDDEHASE</div>
-    <div class="compliance">TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP, LLC</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_cream.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
   </div>
 </body>
 </html>

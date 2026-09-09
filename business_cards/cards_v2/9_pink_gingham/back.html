@@ -49,17 +49,6 @@
     letter-spacing: 0.3px;
   }
 
-  .compliance {
-    position: absolute;
-    left: 0; right: 0;
-    bottom: 52px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 1.3px;
-    color: #b8332a;
-  }
   .qr-cap {
     position: absolute;
     left: 112px;  top: 534px;  width: 292px;
@@ -70,6 +59,25 @@
     letter-spacing: 1.5px;
     line-height: 1.3;
     color: #b8332a;
+  }
+  .brokermark {
+    position: absolute;
+    right: 78px; bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+  }
+  /* 332px wide gives a 40px "SPIRIT" cap against the 72px agent name
+     — inside the half-size floor in 22 TAC 535.155(a)(2), with margin */
+  .brokermark img { width: 332px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    letter-spacing: 1.3px;
+    color: #8f3128;
+    white-space: nowrap;
   }
 </style>
 </head>
@@ -102,7 +110,10 @@
       Austin &amp; surrounding areas, TX
     </div>
 
-    <div class="compliance">TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP, LLC</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
   </div>
 </body>
 </html>
