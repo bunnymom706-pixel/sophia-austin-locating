@@ -18,13 +18,15 @@ arch-framed or full-bleed interior photography, and the same footer (contact, br
 Shared styles live in `shared/luxury.css`; each flyer only sets its palette and layout on top. Photos in `shared/photos/`
 are Sophia's own tour photography (exported from her iCloud camera roll, HEIC converted to JPG at up to 2400 px). The
 captions name the feature only (pool, kitchen, model residence), not a property or neighborhood, so nothing on the sheet
-has to be re-verified when a community changes hands. Source files: rooftop skyline pool IMG_5937, courtyard pool with
-loungers IMG_3703 and IMG_3640, kitchen IMG_4169, model living room IMG_4102, cabana pool IMG_7137, courtyard pool deck IMG_4324.
+has to be re-verified when a community changes hands. Every file carries Apple iPhone EXIF (web saves in the camera roll were rejected). Source files: palm-court pool IMG_1737,
+courtyard pool with loungers IMG_3703 and IMG_3640, kitchen IMG_4169, model living room IMG_4102, clubhouse lobby IMG_3587,
+courtyard pool deck IMG_4324.
 
 ## Print specs
 
 - **Trim size:** 8.5 × 11 in (US Letter). **With bleed:** 8.75 × 11.25 in (0.125 in each side).
-- **PNG:** `*_LETTER_BLEED_300dpi.png` — 2625 × 3375 px, bleed included. Upload to Canva Print, Vistaprint, Moo, or a local shop; tell them the file **includes a 1/8 in bleed**.
+- **PNG:** `*_LETTER_BLEED_300dpi.png` — 2625 × 3375 px, bleed included, tagged 300 dpi. Upload to Canva Print, Vistaprint, Moo, or a local shop; tell them the file **includes a 1/8 in bleed**.
+- **Canva Print:** `print_ready/canva/*.jpg` — same artwork as JPG (quality 95, 300 dpi tag). In Canva: Create a design → Custom size → 8.75 × 11.25 in → Upload → drag the JPG to fill the page → Share → Print your design → Flyers, Letter. Canva's bleed lines will sit exactly on the artwork's 0.125 in margin; nothing needs to be moved. Run `python flyers/export_tool/canva_prep.py` after `export.js` to regenerate.
 - **PDF:** `*_LETTER_BLEED.pdf` — same artwork as a single-page PDF at 8.75 × 11.25 in. Preferred by most print shops.
 - **Safe zone:** all text and logos sit ≥ 0.25 in inside the trim line.
 - **Home / office printing:** print the PDF at 100 % (not "fit to page") on Letter and it will simply crop the bleed, or choose "fit" and accept a small white border.
