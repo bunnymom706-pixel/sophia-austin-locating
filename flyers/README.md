@@ -11,10 +11,12 @@ Four print-ready US Letter flyers, one editorial design system, all built to pas
 
 ## Design system
 
-One editorial system across all four so they read as a set: **Instrument Serif** for display, **Inter** for text, a strict
-left-aligned grid with 60 px margins, hairline rules, and the same footer (contact, broker line, compliance) on every sheet.
-No photography — the type carries it. Colorways: cream/navy (1), navy/cream with gold (2), white/navy (3), signal red/cream (4).
-Shared styles live in `shared/editorial.css`; each flyer only sets its palette and layout on top.
+Luxury-real-estate treatment, built from the website's own faces so print and web match: **Cormorant Garamond**
+(light, for headlines), **Italiana** (the name wordmark), **Plus Jakarta Sans** (letter-spaced labels and body).
+Ivory / charcoal / champagne-gold palette, a thin double-line frame inset from the trim, centered composition,
+arch-framed or full-bleed interior photography, and the same footer (contact, broker line, compliance) on every sheet.
+Shared styles live in `shared/luxury.css`; each flyer only sets its palette and layout on top. Photos are copies of
+`assets/properties/*` in `shared/photos/` (~1130 px wide — fine at the sizes used; don't scale them past ~4.5 in).
 
 ## Print specs
 
@@ -23,7 +25,7 @@ Shared styles live in `shared/editorial.css`; each flyer only sets its palette a
 - **PDF:** `*_LETTER_BLEED.pdf` — same artwork as a single-page PDF at 8.75 × 11.25 in. Preferred by most print shops.
 - **Safe zone:** all text and logos sit ≥ 0.25 in inside the trim line.
 - **Home / office printing:** print the PDF at 100 % (not "fit to page") on Letter and it will simply crop the bleed, or choose "fit" and accept a small white border.
-- **Paper suggestion:** 100 lb uncoated or silk text for hand-outs (the serif/cream look wants matte, not gloss); 80 lb uncoated for the tear-off flyer so the tabs tear cleanly.
+- **Paper suggestion:** 100 lb silk or soft-touch for hand-outs (matte finish, never gloss — it fights the ivory); 80 lb uncoated for the tear-off flyer so the tabs tear cleanly.
 - **Layout guard:** the export fails if a flyer's content overflows the page box (footer would leave the safe zone).
 - **Screen previews:** `preview/*.png` (840 × 1080) — for the showcase page and quick checks, not for print.
 

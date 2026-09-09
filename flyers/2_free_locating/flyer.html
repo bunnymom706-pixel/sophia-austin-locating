@@ -2,63 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Free locating — The property pays me</title>
+<title>The property pays — free locating</title>
 <link rel="stylesheet" href="../shared/fonts.css">
 <link rel="stylesheet" href="../shared/base.css">
-<link rel="stylesheet" href="../shared/editorial.css">
+<link rel="stylesheet" href="../shared/luxury.css">
 <style>
 
-  .sheet { --paper: #0F2D5C; --ink: #F4EFE6; --accent: #E9A23B; --muted: #A9B4CC; --logo: #F4EFE6; }
-  .top { display: flex; justify-content: space-between; align-items: baseline; }
-  h1 { margin-top: 26px; font-size: 100px; }
-  h1 i { color: var(--accent); }
-  .lede { margin-top: 24px; max-width: 560px; }
-  .steps { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; }
-  .step { border-top: 1px solid rgba(244,239,230,.35); padding-top: 12px; }
-  .step .num { font-size: 30px; }
-  .step .h3 { margin-top: 10px; }
-  .step p { margin: 4px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
-  .hoods { margin-top: 22px; font-family: 'Instrument Serif', serif; font-size: 19px; line-height: 1.35; color: var(--ink); }
-  .hoods span { color: var(--muted); margin: 0 6px; }
-  .hoods .kicker { display: block; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
-  .contact .line span, .contact .role, .qr span, .broker .txt small, .broker .eho, .compliance { color: var(--muted); }
-  .compliance strong { color: var(--ink); }
-  .rule.strong { background: var(--ink); }
-  .broker { border-color: rgba(244,239,230,.5); }
+  .sheet { --paper:#F7F4EE; --ink:#1C1B1A; --gold:#B99A5B; --muted:#6F6A62; --line:#CFC6B8; }
+  .hero { position: absolute; left: 0; right: 0; top: 0; height: 468px; overflow: hidden; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+  .hero::after { content: ""; z-index: 1; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,18,16,.05) 0%, rgba(20,18,16,.30) 45%, rgba(20,18,16,.88) 100%); }
+  .hero-text { position: absolute; left: 72px; right: 72px; bottom: 38px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; color: #F7F4EE; }
+  .hero-text .eyebrow { color: #E7DDC8; }
+  .hero-text h1 { font-size: 54px; color: #F7F4EE; text-shadow: 0 2px 18px rgba(0,0,0,.35); }
+  .hero-text .orn { background: #D9C08C; }
+  .frame { top: 40px; }
+  .page { top: 494px; }
+  .lede { font-size: 17px; }
+  .services { margin-top: 14px; }
+  .strip { margin-top: 20px; }
+  .strip .photo { height: 112px; }
 
 </style>
 </head>
 <body>
 <div class="sheet">
 
+  <div class="hero"><img src="../shared/photos/78717_NW_Austin_photo_3.jpg" alt="">
+    <div class="hero-text">
+      <div class="eyebrow">Austin apartment locating</div>
+      <h1>The property pays.<br><i>You simply move in.</i></h1>
+      <div class="orn"></div>
+    </div>
+  </div>
+  <div class="frame"></div>
   <div class="page">
-    <div class="top">
-      <div class="kicker">Austin, Texas &nbsp;&mdash;&nbsp; Apartment locating</div>
-      <div class="kicker"><b>No fee. Ever.</b></div>
+    <p class="lede">Every building in Austin compensates locators to place residents. That means a personal search, video tours and negotiated specials &mdash; <i>at no cost to you, ever.</i></p>
+    <div class="services"><span>Private search</span><i></i><span>Video tours</span><i></i><span>Negotiated specials</span><i></i><span>Flexible approval</span></div>
+    <div class="strip">
+      <div class="photo"><img src="../shared/photos/78717_NW_Austin_photo_1.jpg" alt=""></div>
+      <div class="photo"><img src="../shared/photos/78747_SE_Austin_photo_1.jpg" alt=""></div>
+      <div class="photo"><img src="../shared/photos/78664_Round_Rock_photo_4.jpg" alt=""></div>
     </div>
-    <h1>The property<br>pays me.<br><i>You pay nothing.</i></h1>
-    <p class="lede">Apartment locating is a free service to renters: every building in Austin pays locators to fill units. That means you get a personal search, video tours and negotiated specials &mdash; <b>and the invoice goes to them, not you.</b></p>
-    <div class="steps">
-      <div class="step"><div class="num">01</div><div class="h3">Text me what you want</div><p>Budget, move date, neighborhoods, pets, parking. Five minutes.</p></div>
-      <div class="step"><div class="num">02</div><div class="h3">I tour, film and shortlist</div><p>Video walkthroughs of the real units, ranked by your commute and priorities.</p></div>
-      <div class="step"><div class="num">03</div><div class="h3">You pick, I negotiate</div><p>Move-in specials, effective rent, fees. Then I handle the application.</p></div>
-    </div>
-    <div class="hoods"><span class="kicker">Where I work</span>Downtown<span>&middot;</span>South Congress<span>&middot;</span>East Austin<span>&middot;</span>The Domain<span>&middot;</span>Mueller<span>&middot;</span>Zilker<span>&middot;</span>Rainey St<span>&middot;</span>South Lamar<span>&middot;</span>Riverside<span>&middot;</span>Round Rock<span>&middot;</span>Cedar Park<span>&middot;</span>Bee Cave</div>
     
   <div class="foot">
-    <div class="rule strong"></div>
     <div class="contact">
-      <div>
-        <div class="name" data-trec="contact" data-label="name">Sophia Sky Reddehase</div>
-        <div class="role">Apartment Locator &middot; Austin, TX &middot; TREC #831516</div>
-        <div class="lines">
-          <div class="line" data-trec="contact" data-label="phone"><span>Call / text</span>(512) 676-1215</div>
-          <div class="line" data-trec="contact" data-label="instagram"><span>Instagram</span>@sophiasky.atx</div>
-          <div class="line" data-trec="contact" data-label="email"><span>Email</span>sophia.reddehase@spiritre.com</div>
-          <div class="line web" data-trec="contact" data-label="web"><span>Online</span>sparkapt.com/inquiry/sophia-reddehase859</div>
-        </div>
+      <div class="name" data-trec="contact" data-label="name">Sophia Sky Reddehase</div>
+      <div class="role">Apartment Locator &middot; Austin, Texas &middot; TREC #831516</div>
+      <div class="lines">
+        <div class="line" data-trec="contact" data-label="phone">(512) 676-1215</div>
+        <div class="line" data-trec="contact" data-label="email">sophia.reddehase@spiritre.com</div>
+        <div class="line" data-trec="contact" data-label="instagram">@sophiasky.atx</div>
       </div>
-      <div class="qr"><img src="../shared/qr/qr_cream.svg" alt="QR code: start your free apartment search"><span>Scan to start</span></div>
+      <div class="qr-row"><img src="../shared/qr/qr_charcoal.svg" alt="QR code: begin your complimentary search"><span data-trec="contact" data-label="web">Scan to begin your search<br><em>sparkapt.com/inquiry/sophia-reddehase859</em></span></div>
     </div>
     <div class="broker">
       <div class="txt" data-trec="broker">Brokered by Spirit Real Estate Group<small>Licensed sales agent sponsored by this broker</small></div>
@@ -66,7 +62,7 @@
       <div class="eho">Equal Housing<br>Opportunity</div>
     </div>
     <div class="compliance">
-      <p><strong>Sophia Sky Reddehase</strong> is a Texas real estate sales agent (TREC License #831516) sponsored by <strong>Spirit Real Estate Group</strong>. Texas law requires all license holders to provide the <strong>Information About Brokerage Services</strong> form and the <strong>TREC Consumer Protection Notice</strong> to prospective clients; both are available at trec.texas.gov and on request. Apartment locating is free to you; the agent is compensated by the property you lease. Pricing, specials and availability change daily and are subject to each property's terms and leasing approval.</p>
+      <p><strong>Sophia Sky Reddehase</strong> is a Texas real estate sales agent (TREC License #831516) sponsored by <strong>Spirit Real Estate Group</strong>. Texas law requires all license holders to provide the <strong>Information About Brokerage Services</strong> form and the <strong>TREC Consumer Protection Notice</strong> to prospective clients; both are available at trec.texas.gov and on request. Apartment locating is complimentary to you; the agent is compensated by the property you lease. Pricing, specials and availability change daily and are subject to each property's terms and leasing approval.</p>
     </div>
   </div>
   </div>

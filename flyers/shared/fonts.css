@@ -28,6 +28,41 @@
   src: url('fonts/Baloo_2_800.woff2') format('woff2');
 }
 @font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('fonts/Cormorant_Garamond_300i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Cormorant_Garamond_400i.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('fonts/Cormorant_Garamond_300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Cormorant_Garamond_400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/Cormorant_Garamond_500.woff2') format('woff2');
+}
+@font-face {
   font-family: 'Fredoka';
   font-style: normal;
   font-weight: 500;
@@ -94,6 +129,13 @@
   src: url('fonts/Inter_700.woff2') format('woff2');
 }
 @font-face {
+  font-family: 'Italiana';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Italiana_400.woff2') format('woff2');
+}
+@font-face {
   font-family: 'Lilita One';
   font-style: normal;
   font-weight: 400;
@@ -148,6 +190,34 @@
   font-weight: 900;
   font-display: swap;
   src: url('fonts/Nunito_900.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('fonts/Plus_Jakarta_Sans_300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/Plus_Jakarta_Sans_400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/Plus_Jakarta_Sans_500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/Plus_Jakarta_Sans_600.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Space Grotesk';

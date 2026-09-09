@@ -2,57 +2,47 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Move season — Don't renew blind</title>
+<title>Your lease is ending</title>
 <link rel="stylesheet" href="../shared/fonts.css">
 <link rel="stylesheet" href="../shared/base.css">
-<link rel="stylesheet" href="../shared/editorial.css">
+<link rel="stylesheet" href="../shared/luxury.css">
 <style>
 
-  .sheet { --paper: #B8281F; --ink: #F7EFE4; --accent: #F7EFE4; --muted: #F2C8BF; --logo: #F7EFE4; }
-  .top { display: flex; justify-content: space-between; align-items: baseline; }
-  h1 { margin-top: 28px; font-size: 148px; }
-  .lede { margin-top: 34px; max-width: 560px; font-size: 17px; }
-  .stats { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; }
-  .stat { border-top: 1px solid rgba(247,239,228,.45); padding-top: 12px; }
-  .stat .big { font-family: 'Instrument Serif', serif; font-size: 76px; line-height: 0.95; letter-spacing: -0.02em; }
-  .stat .big i { font-style: italic; }
-  .stat p { margin: 8px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
-  .contact .line span, .contact .role, .qr span, .broker .txt small, .broker .eho, .compliance { color: var(--muted); }
+  .sheet { --paper:#1C1B1A; --ink:#F7F4EE; --gold:#C9AD6E; --muted:#A79F92; --line:#4A453E; --logo:#F7F4EE; }
+  .head { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  h1 { font-size: 50px; }
+  h1 i { color: var(--gold); }
+  .arch { width: 320px; height: 356px; margin-top: 24px; }
+  .lede { margin-top: 24px; font-size: 18px; }
+  .services { margin-top: 16px; }
   .compliance strong { color: var(--ink); }
-  .broker { border-color: rgba(247,239,228,.5); }
 
 </style>
 </head>
 <body>
 <div class="sheet">
 
+  <div class="frame"></div>
   <div class="page">
-    <div class="top">
-      <div class="kicker">Lease ending soon? &nbsp;&mdash;&nbsp; Austin, Texas</div>
-      <div class="kicker"><b>Read before you renew</b></div>
+    <div class="head">
+      <div class="eyebrow gold">Lease ending soon &nbsp;&middot;&nbsp; Austin, Texas</div>
+      <h1>Your lease is ending.<br><i>Your options aren't.</i></h1>
+      <div class="orn"></div>
     </div>
-    <h1>Don't renew<br><i>blind.</i></h1>
-    <p class="lede">Your renewal offer is one number. Before you sign it, let me show you what the same money gets across Austin right now &mdash; move-in specials included. One text, a shortlist by tomorrow. <b>It costs you nothing; the property pays me.</b></p>
-    <div class="stats">
-      <div class="stat"><div class="big">$0</div><p>What you pay for a full search, video tours and negotiation.</p></div>
-      <div class="stat"><div class="big">1 <i>text</i></div><p>Budget, move date, must-haves. That's the whole intake.</p></div>
-      <div class="stat"><div class="big">24 <i>hrs</i></div><p>Typical turnaround on a first shortlist with current specials.</p></div>
-    </div>
+    <div class="arch"><img src="../shared/photos/78747_SE_Austin_photo_3.jpg" alt=""></div>
+    <p class="lede">Before you sign the renewal, see what the same rent secures across Austin this month &mdash; specials included. <i>One message. A curated shortlist by tomorrow.</i></p>
+    <div class="services"><span>Renewal review</span><i></i><span>Curated shortlist</span><i></i><span>Negotiated specials</span></div>
     
   <div class="foot">
-    <div class="rule strong"></div>
     <div class="contact">
-      <div>
-        <div class="name" data-trec="contact" data-label="name">Sophia Sky Reddehase</div>
-        <div class="role">Apartment Locator &middot; Austin, TX &middot; TREC #831516</div>
-        <div class="lines">
-          <div class="line" data-trec="contact" data-label="phone"><span>Call / text</span>(512) 676-1215</div>
-          <div class="line" data-trec="contact" data-label="instagram"><span>Instagram</span>@sophiasky.atx</div>
-          <div class="line" data-trec="contact" data-label="email"><span>Email</span>sophia.reddehase@spiritre.com</div>
-          <div class="line web" data-trec="contact" data-label="web"><span>Online</span>sparkapt.com/inquiry/sophia-reddehase859</div>
-        </div>
+      <div class="name" data-trec="contact" data-label="name">Sophia Sky Reddehase</div>
+      <div class="role">Apartment Locator &middot; Austin, Texas &middot; TREC #831516</div>
+      <div class="lines">
+        <div class="line" data-trec="contact" data-label="phone">(512) 676-1215</div>
+        <div class="line" data-trec="contact" data-label="email">sophia.reddehase@spiritre.com</div>
+        <div class="line" data-trec="contact" data-label="instagram">@sophiasky.atx</div>
       </div>
-      <div class="qr"><img src="../shared/qr/qr_cream.svg" alt="QR code: start your free apartment search"><span>Scan to start</span></div>
+      <div class="qr-row"><img src="../shared/qr/qr_ivory.svg" alt="QR code: begin your complimentary search"><span data-trec="contact" data-label="web">Scan to begin your search<br><em>sparkapt.com/inquiry/sophia-reddehase859</em></span></div>
     </div>
     <div class="broker">
       <div class="txt" data-trec="broker">Brokered by Spirit Real Estate Group<small>Licensed sales agent sponsored by this broker</small></div>
@@ -60,7 +50,7 @@
       <div class="eho">Equal Housing<br>Opportunity</div>
     </div>
     <div class="compliance">
-      <p><strong>Sophia Sky Reddehase</strong> is a Texas real estate sales agent (TREC License #831516) sponsored by <strong>Spirit Real Estate Group</strong>. Texas law requires all license holders to provide the <strong>Information About Brokerage Services</strong> form and the <strong>TREC Consumer Protection Notice</strong> to prospective clients; both are available at trec.texas.gov and on request. Apartment locating is free to you; the agent is compensated by the property you lease. Pricing, specials and availability change daily and are subject to each property's terms and leasing approval.</p>
+      <p><strong>Sophia Sky Reddehase</strong> is a Texas real estate sales agent (TREC License #831516) sponsored by <strong>Spirit Real Estate Group</strong>. Texas law requires all license holders to provide the <strong>Information About Brokerage Services</strong> form and the <strong>TREC Consumer Protection Notice</strong> to prospective clients; both are available at trec.texas.gov and on request. Apartment locating is complimentary to you; the agent is compensated by the property you lease. Pricing, specials and availability change daily and are subject to each property's terms and leasing approval.</p>
     </div>
   </div>
   </div>

@@ -4,7 +4,8 @@ import re, subprocess, os
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
 families = ["Baloo+2:wght@600;700;800","Nunito:wght@500;600;700;800;900","Montserrat:wght@500;900",
             "Anton","Space+Grotesk:wght@400;500;600;700","Lilita+One","Fredoka:wght@500;600;700",
-            "Instrument+Serif:ital@0;1","Inter:wght@400;500;600;700"]
+            "Instrument+Serif:ital@0;1","Inter:wght@400;500;600;700",
+            "Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400","Italiana","Plus+Jakarta+Sans:wght@300;400;500;600"]
 ROOT = os.path.join(os.path.dirname(__file__), "..", "shared")
 os.makedirs(os.path.join(ROOT, "fonts"), exist_ok=True)
 url = "https://fonts.googleapis.com/css2?" + "&".join("family="+f for f in families) + "&display=swap"
