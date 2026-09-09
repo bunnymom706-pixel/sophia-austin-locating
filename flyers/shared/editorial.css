@@ -1,0 +1,39 @@
+/* Editorial system shared by all four flyers.
+   Type: Instrument Serif (display) + Inter (text). One grid, one footer, four colorways.
+   Colors are set per flyer via --paper / --ink / --accent / --muted on .sheet. */
+.sheet { background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; font-size: 13px; line-height: 1.45; font-feature-settings: "ss01", "cv11"; }
+.page { position: absolute; top: 60px; left: 60px; right: 60px; bottom: 54px; display: flex; flex-direction: column; }
+
+.serif { font-family: 'Instrument Serif', 'Times New Roman', serif; font-weight: 400; }
+.kicker { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.kicker b { color: var(--accent); font-weight: 600; }
+h1 { margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.015em; line-height: 0.94; }
+h1 i, .lede i { font-style: italic; }
+.lede { font-size: 16px; line-height: 1.5; font-weight: 400; max-width: 520px; color: var(--ink); }
+.lede b { font-weight: 600; }
+.rule { height: 1px; background: var(--ink); opacity: 0.22; }
+.rule.strong { opacity: 1; }
+.num { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 34px; line-height: 1; color: var(--accent); }
+.h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.005em; }
+.small { font-size: 12px; line-height: 1.5; color: var(--muted); }
+
+/* ---- footer: contact + broker + compliance ---- */
+.foot { margin-top: auto; }
+.contact { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; align-items: end; padding: 16px 0 14px; }
+.contact .name { font-family: 'Instrument Serif', serif; font-size: 28px; line-height: 1; letter-spacing: -0.01em; }
+.contact .role { margin-top: 6px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.contact .lines { margin-top: 12px; display: grid; grid-template-columns: auto auto; justify-content: start; column-gap: 30px; row-gap: 5px; }
+.contact .line { font-size: 12.5px; font-weight: 500; white-space: nowrap; }
+.contact .line.web { grid-column: 1 / -1; }
+.contact .line span { display: inline-block; width: 86px; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.qr { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.qr img { width: 92px; height: 92px; }
+.qr span { font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+
+.broker { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.broker .txt { font-size: 16px; font-weight: 600; letter-spacing: -0.005em; line-height: 1.15; }
+.broker .txt small { display: block; font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+.broker .spirit-logo { --logo-size: 22px; --navy: var(--logo, var(--ink)); }
+.broker .eho { font-size: 8px; color: var(--muted); }
+.compliance { margin-top: 8px; font-size: 8.4px; line-height: 1.4; color: var(--muted); }
+.compliance strong { font-weight: 600; color: var(--ink); }

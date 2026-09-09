@@ -1,13 +1,20 @@
 # Flyers — Sophia Sky Reddehase · Spirit Real Estate Group
 
-Four print-ready US Letter flyers, one per business-card style, all built to pass TREC advertising rules.
+Four print-ready US Letter flyers, one editorial design system, all built to pass TREC advertising rules.
 
 | # | Folder | Use it for | Print files |
 |---|--------|-----------|-------------|
-| 1 | `1_cherry_tearoff/` | Bulletin boards — coffee shops, gyms, laundromats, UT/ACC campus boards. Ten tear-off tabs with the phone number. | `print_ready/cherry_tearoff_*` |
-| 2 | `2_marshmallow_free_locating/` | General "free apartment locating" hand-out. Matches the website palette. | `print_ready/marshmallow_free_locating_*` |
-| 3 | `3_terracotta_relocation/` | Relocation / corporate — HR contacts, coworking spaces, hotels, property managers. More editorial. | `print_ready/terracotta_relocation_*` |
-| 4 | `4_y2k_move_season/` | Lease-ending season — students, renters whose rent went up. Loudest of the four. | `print_ready/y2k_move_season_*` |
+| 1 | `1_tearoff/` | Bulletin boards — coffee shops, gyms, laundromats, UT/ACC campus boards. Ten tear-off tabs with the phone number. | `print_ready/tearoff_*` |
+| 2 | `2_free_locating/` | General "free apartment locating" hand-out. Why it's free + how it works in three steps. | `print_ready/free_locating_*` |
+| 3 | `3_relocation/` | Relocation / corporate — HR contacts, coworking spaces, hotels, property managers. Neighborhood index. | `print_ready/relocation_*` |
+| 4 | `4_move_season/` | Lease-ending season — renters whose renewal just went up. | `print_ready/move_season_*` |
+
+## Design system
+
+One editorial system across all four so they read as a set: **Instrument Serif** for display, **Inter** for text, a strict
+left-aligned grid with 60 px margins, hairline rules, and the same footer (contact, broker line, compliance) on every sheet.
+No photography — the type carries it. Colorways: cream/navy (1), navy/cream with gold (2), white/navy (3), signal red/cream (4).
+Shared styles live in `shared/editorial.css`; each flyer only sets its palette and layout on top.
 
 ## Print specs
 
@@ -16,7 +23,8 @@ Four print-ready US Letter flyers, one per business-card style, all built to pas
 - **PDF:** `*_LETTER_BLEED.pdf` — same artwork as a single-page PDF at 8.75 × 11.25 in. Preferred by most print shops.
 - **Safe zone:** all text and logos sit ≥ 0.25 in inside the trim line.
 - **Home / office printing:** print the PDF at 100 % (not "fit to page") on Letter and it will simply crop the bleed, or choose "fit" and accept a small white border.
-- **Paper suggestion:** 100 lb gloss or silk text for hand-outs; 80 lb uncoated for the tear-off flyer so the tabs tear cleanly and people can write on it.
+- **Paper suggestion:** 100 lb uncoated or silk text for hand-outs (the serif/cream look wants matte, not gloss); 80 lb uncoated for the tear-off flyer so the tabs tear cleanly.
+- **Layout guard:** the export fails if a flyer's content overflows the page box (footer would leave the safe zone).
 - **Screen previews:** `preview/*.png` (840 × 1080) — for the showcase page and quick checks, not for print.
 
 ## TREC compliance (22 TAC §535.154 / §535.155)
@@ -51,4 +59,6 @@ While designing, add `class="guides"` to `<body>` to show the trim (red) and saf
 
 ## Editing
 
-Each flyer is a single self-contained `flyer.html`. Photos and QR codes are shared with the business cards (`business_cards/assets/v2/`). The QR codes point to `sparkapt.com/sophia-reddehase`.
+Each flyer is a single self-contained `flyer.html`. QR codes are SVG in `shared/qr/` (navy, cream, ink, red) and point to
+`https://sparkapt.com/inquiry/sophia-reddehase859` — the same link as the website's "Start Free Search" button. Regenerate with
+`python3 -c "import segno; ..."` (see git history) if the link changes.

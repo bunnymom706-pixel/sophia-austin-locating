@@ -3,7 +3,8 @@ Run once (or when adding a family); the woff2 files are committed so rendering n
 import re, subprocess, os
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
 families = ["Baloo+2:wght@600;700;800","Nunito:wght@500;600;700;800;900","Montserrat:wght@500;900",
-            "Anton","Space+Grotesk:wght@400;500;600;700","Lilita+One","Fredoka:wght@500;600;700"]
+            "Anton","Space+Grotesk:wght@400;500;600;700","Lilita+One","Fredoka:wght@500;600;700",
+            "Instrument+Serif:ital@0;1","Inter:wght@400;500;600;700"]
 ROOT = os.path.join(os.path.dirname(__file__), "..", "shared")
 os.makedirs(os.path.join(ROOT, "fonts"), exist_ok=True)
 url = "https://fonts.googleapis.com/css2?" + "&".join("family="+f for f in families) + "&display=swap"
@@ -13,6 +14,7 @@ for subset, block in re.findall(r"/\*\s*(\w+)\s*\*/\s*(@font-face\s*\{[^}]*\})",
     if subset != "latin": continue
     fam = re.search(r"font-family:\s*'([^']+)'", block).group(1)
     wt = re.search(r"font-weight:\s*(\d+)", block).group(1)
+    if re.search(r"font-style:\s*italic", block): wt += "i"
     src = re.search(r"url\(([^)]+)\)", block).group(1)
     fname = re.sub(r"[^A-Za-z0-9]+","_",fam) + f"_{wt}.woff2"
     path = os.path.join(ROOT, "fonts", fname)

@@ -80,6 +80,10 @@ async function trecCheck(page) {
     await page.evaluate(() => document.fonts && document.fonts.ready);
     await page.waitForTimeout(400);
 
+    // Layout guard: the .page flex column must not overflow (footer would run past the safe zone).
+    const overflow = await page.evaluate(() => { const el = document.querySelector('.page'); return el ? el.scrollHeight - el.clientHeight : 0; });
+    if (overflow > 0) { console.warn(`  ! LAYOUT OVERFLOW: .page content is ${overflow}px too tall`); failures++; }
+
     const box = await (await page.$('body')).boundingBox();
     if (Math.abs(box.width - W) > 1 || Math.abs(box.height - H) > 1) {
       console.warn(`  ! SIZE MISMATCH: body is ${box.width}x${box.height}, expected ${W}x${H}`);

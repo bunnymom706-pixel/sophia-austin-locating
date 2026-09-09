@@ -7,61 +7,58 @@
 <link rel="stylesheet" href="shared/fonts.css">
 <style>
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: 'Nunito', sans-serif; background: #fdf3f6; color: #2b1420; padding: 48px 24px 80px; }
-  header { max-width: 980px; margin: 0 auto 40px; text-align: center; }
-  header h1 { font-family: 'Baloo 2', sans-serif; font-size: 40px; margin: 0 0 8px; color: #a3164e; }
-  header p { font-size: 17px; color: #6b2140; margin: 0; }
-  .grid { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
-  .style-card { background: #fff; border-radius: 24px; padding: 22px; box-shadow: 0 10px 30px rgba(163,22,78,0.08); display: flex; flex-direction: column; gap: 14px; }
-  .style-card h2 { font-family: 'Baloo 2', sans-serif; font-size: 22px; margin: 0; color: #a3164e; }
-  .style-card p { margin: 0; font-size: 14px; line-height: 1.4; color: #6b2140; }
-  .style-card img { width: 100%; aspect-ratio: 840 / 1080; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #F4EFE6; color: #1B1B1F; padding: 56px 32px 80px; }
+  header { max-width: 1100px; margin: 0 auto 40px; }
+  header h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 44px; letter-spacing: -0.01em; margin: 0 0 6px; color: #0F2D5C; }
+  header p { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #5A6478; margin: 0; }
+  .grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+  .card { display: flex; flex-direction: column; gap: 12px; }
+  .card img { width: 100%; aspect-ratio: 840 / 1080; object-fit: contain; box-shadow: 0 12px 30px rgba(15,45,92,0.14); }
+  .card h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 22px; margin: 6px 0 0; color: #0F2D5C; }
+  .card p { margin: 0; font-size: 13px; line-height: 1.5; color: #5A6478; }
   .links { display: flex; flex-wrap: wrap; gap: 8px; }
-  .links a { font-size: 13px; font-weight: 800; color: #fff; background: #a3164e; text-decoration: none; padding: 8px 12px; border-radius: 999px; }
-  .links a.alt { background: #fff; color: #a3164e; border: 2px solid #ffc2dd; }
-  .trec { max-width: 980px; margin: 44px auto 0; background: #fff; border-radius: 18px; padding: 20px 24px; font-size: 14px; line-height: 1.5; color: #6b2140; }
-  .trec h3 { margin: 0 0 8px; font-family: 'Baloo 2', sans-serif; color: #a3164e; font-size: 20px; }
-  footer { max-width: 980px; margin: 40px auto 0; text-align: center; font-size: 13px; color: #8a5468; }
+  .links a { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0F2D5C; text-decoration: none; border: 1px solid #0F2D5C; padding: 7px 10px; }
+  .links a.primary { background: #0F2D5C; color: #F4EFE6; }
+  .trec { max-width: 1100px; margin: 48px auto 0; border-top: 1px solid #0F2D5C; padding-top: 16px; font-size: 13px; line-height: 1.55; color: #5A6478; }
+  .trec h3 { margin: 0 0 6px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #0F2D5C; }
 </style>
 </head>
 <body>
   <header>
-    <h1>Sophia Sky Reddehase — Flyer Suite</h1>
-    <p>Texas Apartment Locator &middot; TREC #831516 &middot; Brokered by Spirit Real Estate Group</p>
+    <h1>Flyer suite</h1>
+    <p>Sophia Sky Reddehase &middot; Apartment Locator &middot; TREC #831516 &middot; Brokered by Spirit Real Estate Group</p>
   </header>
 
   <div class="grid">
-    <div class="style-card">
-      <h2>🍒 Cherry Checkers — Tear-off</h2>
-      <p>Bulletin boards: coffee shops, gyms, laundromats, campus. Ten tear-off phone tabs.</p>
-      <a href="1_cherry_tearoff/flyer.html"><img src="preview/cherry_tearoff.png" alt="Cherry Checkers tear-off flyer"></a>
-      <div class="links"><a href="print_ready/cherry_tearoff_LETTER_BLEED.pdf">Print PDF</a><a class="alt" href="print_ready/cherry_tearoff_LETTER_BLEED_300dpi.png">300dpi PNG</a><a class="alt" href="1_cherry_tearoff/flyer.html">Edit HTML</a></div>
+    <div class="card">
+      <a href="1_tearoff/flyer.html"><img src="preview/tearoff.png" alt="Tear-off flyer"></a>
+      <h2>Tear-off</h2>
+      <p>Bulletin boards: coffee shops, gyms, laundromats, campus. Ten tear-off tabs with the phone number.</p>
+      <div class="links"><a class="primary" href="print_ready/tearoff_LETTER_BLEED.pdf">Print PDF</a><a href="print_ready/tearoff_LETTER_BLEED_300dpi.png">300 dpi PNG</a><a href="1_tearoff/flyer.html">HTML</a></div>
     </div>
-    <div class="style-card">
-      <h2>🌸 Marshmallow Pink — Free Locating</h2>
-      <p>General hand-out. Matches the website. How-it-works in three steps.</p>
-      <a href="2_marshmallow_free_locating/flyer.html"><img src="preview/marshmallow_free_locating.png" alt="Marshmallow Pink flyer"></a>
-      <div class="links"><a href="print_ready/marshmallow_free_locating_LETTER_BLEED.pdf">Print PDF</a><a class="alt" href="print_ready/marshmallow_free_locating_LETTER_BLEED_300dpi.png">300dpi PNG</a><a class="alt" href="2_marshmallow_free_locating/flyer.html">Edit HTML</a></div>
+    <div class="card">
+      <a href="2_free_locating/flyer.html"><img src="preview/free_locating.png" alt="Free locating flyer"></a>
+      <h2>Free locating</h2>
+      <p>The general hand-out. Explains why locating is free and how it works in three steps.</p>
+      <div class="links"><a class="primary" href="print_ready/free_locating_LETTER_BLEED.pdf">Print PDF</a><a href="print_ready/free_locating_LETTER_BLEED_300dpi.png">300 dpi PNG</a><a href="2_free_locating/flyer.html">HTML</a></div>
     </div>
-    <div class="style-card">
-      <h2>🧡 Terracotta Cobalt — Relocation</h2>
-      <p>Corporate / relocation audience: HR, coworking spaces, hotels, property managers.</p>
-      <a href="3_terracotta_relocation/flyer.html"><img src="preview/terracotta_relocation.png" alt="Terracotta Cobalt relocation flyer"></a>
-      <div class="links"><a href="print_ready/terracotta_relocation_LETTER_BLEED.pdf">Print PDF</a><a class="alt" href="print_ready/terracotta_relocation_LETTER_BLEED_300dpi.png">300dpi PNG</a><a class="alt" href="3_terracotta_relocation/flyer.html">Edit HTML</a></div>
+    <div class="card">
+      <a href="3_relocation/flyer.html"><img src="preview/relocation.png" alt="Relocation flyer"></a>
+      <h2>Relocation</h2>
+      <p>Corporate / relocation audience: HR contacts, coworking spaces, hotels. Neighborhood index.</p>
+      <div class="links"><a class="primary" href="print_ready/relocation_LETTER_BLEED.pdf">Print PDF</a><a href="print_ready/relocation_LETTER_BLEED_300dpi.png">300 dpi PNG</a><a href="3_relocation/flyer.html">HTML</a></div>
     </div>
-    <div class="style-card">
-      <h2>✨ Y2K Sticker Pop — Lease Ending</h2>
-      <p>Move-out season: students and renters whose rent just went up.</p>
-      <a href="4_y2k_move_season/flyer.html"><img src="preview/y2k_move_season.png" alt="Y2K Sticker Pop flyer"></a>
-      <div class="links"><a href="print_ready/y2k_move_season_LETTER_BLEED.pdf">Print PDF</a><a class="alt" href="print_ready/y2k_move_season_LETTER_BLEED_300dpi.png">300dpi PNG</a><a class="alt" href="4_y2k_move_season/flyer.html">Edit HTML</a></div>
+    <div class="card">
+      <a href="4_move_season/flyer.html"><img src="preview/move_season.png" alt="Move season flyer"></a>
+      <h2>Move season</h2>
+      <p>Lease-ending season: renters whose renewal just went up. The loud one.</p>
+      <div class="links"><a class="primary" href="print_ready/move_season_LETTER_BLEED.pdf">Print PDF</a><a href="print_ready/move_season_LETTER_BLEED_300dpi.png">300 dpi PNG</a><a href="4_move_season/flyer.html">HTML</a></div>
     </div>
   </div>
 
   <div class="trec">
     <h3>TREC checklist (verified on every export)</h3>
-    Broker name "Spirit Real Estate Group" in a readily noticeable place at ≥ ½ the size of the largest contact info &middot; Sophia identified as a sponsored sales agent, TREC #831516 &middot; IABS and Consumer Protection Notice referenced &middot; "Free" explained (paid by the property) &middot; No rents, rebates or referral fees promised &middot; Equal Housing Opportunity. See <code>README.md</code>.
+    Broker name "Spirit Real Estate Group" in a readily noticeable place at &ge; &frac12; the size of the largest contact info &middot; Sophia identified as a sponsored sales agent, TREC #831516 &middot; IABS and Consumer Protection Notice referenced &middot; "Free" explained (paid by the property) &middot; No rents, rebates or referral fees promised &middot; Equal Housing Opportunity. See <code>README.md</code>.
   </div>
-
-  <footer>Pricing and availability subject to change daily. All specials and effective rents subject to property terms and leasing approval.</footer>
 </body>
 </html>
