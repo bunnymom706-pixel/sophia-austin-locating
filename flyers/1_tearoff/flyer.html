@@ -5,73 +5,57 @@
 <title>Apartment Locating — tear-off</title>
 <link rel="stylesheet" href="../shared/fonts.css">
 <link rel="stylesheet" href="../shared/base.css">
-<link rel="stylesheet" href="../shared/luxury.css">
+<link rel="stylesheet" href="../shared/pop.css">
 <style>
 
-  .sheet { --paper:#FFE3C9; --ink:#12285A; --gold:#E8563F; --muted:#5B4A46; --line:#E9B18F; --cta-bg:#12285A; --cta-ink:#FFE3C9; }
-  .eyebrow, .cap, .details-title { color: var(--gold); }
-  .tab .v small { color: var(--gold); }
-  .tabs, .tab { border-color: var(--gold); }
-  .page { bottom: 196px; gap: 0; }
-  .head { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-  h1 { font-size: 36px; }
-  .arch { width: 196px; height: 196px; margin-top: 12px; }
-  .arch img { object-position: center 78%; }
-  .lede { margin-top: 8px; font-size: 15px; }
-  .services { margin-top: 12px; }
-  .tabs { position: absolute; left: 44px; right: 44px; bottom: 44px; height: 124px; display: grid; grid-template-columns: repeat(10, 1fr); border-top: 1px dashed var(--line); }
-  .tab { position: relative; min-width: 0; overflow: hidden; border-right: 1px dashed var(--line); }
+  .sheet { --paper: var(--pink); --ink: var(--plum); --cta-bg: var(--plum); --cta-ink: var(--cream); }
+  .block.y { left: -40px; right: -40px; bottom: 130px; height: 420px; background: var(--yellow); clip-path: polygon(0 34%, 100% 0, 100% 100%, 0 100%); }
+  .page { bottom: 168px; }
+  h1 { font-size: 88px; color: var(--orange); }
+  .cta { padding: 10px 18px; }
+  .cta img { width: 104px; height: 104px; }
+  .broker { padding: 8px 20px; margin-top: 8px; }
+  .compliance { margin-top: 6px; }
+  .kick { margin-top: 6px; color: var(--plum); }
+  .photo-card { width: 560px; height: 236px; margin-top: 10px; }
+  .photo-card img { object-position: center 78%; }
+  .pills { margin-top: 12px; }
+  .contact { padding-top: 6px; }
+  .tabs { position: absolute; left: 44px; right: 44px; bottom: 44px; height: 100px; display: grid; grid-template-columns: repeat(10, 1fr); border-top: 2px dashed var(--plum); }
+  .tab { position: relative; min-width: 0; overflow: hidden; border-right: 2px dashed var(--plum); }
   .tab:last-child { border-right: 0; }
-  .tab .v { position: absolute; left: 50%; top: 50%; width: 118px; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
-  .tab .v b { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; }
-  .tab .v small { font-size: 7.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
-  .frame { bottom: 168px; }
-  .corners span:nth-child(3), .corners span:nth-child(4) { bottom: 168px; }
+  .tab .v { position: absolute; left: 50%; top: 50%; width: 90px; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .tab .v b { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 13.5px; letter-spacing: 0.04em; color: var(--plum); }
+  .tab .v small { font-family: 'Lilita One', sans-serif; font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); }
 
-  .contact { padding: 14px 0 6px; }
-  .broker { margin-top: 12px; }
 </style>
 </head>
 <body>
 <div class="sheet">
-
-  <div class="frame"></div><div class="corners"><span></span><span></span><span></span><span></span></div>
+  <div class="block y"></div>
+  <div style="position:absolute;left:52px;top:44px"><svg class="star o l" viewBox="0 0 40 40"><path d="M20 0c2 11 7 16 20 20-13 4-18 9-20 20-2-11-7-16-20-20 13-4 18-9 20-20z"/></svg></div>
+  <div style="position:absolute;right:70px;top:120px"><svg class="star c" viewBox="0 0 40 40"><path d="M20 0c2 11 7 16 20 20-13 4-18 9-20 20-2-11-7-16-20-20 13-4 18-9 20-20z"/></svg></div>
+  <div style="position:absolute;left:96px;top:300px"><svg class="star c s" viewBox="0 0 40 40"><path d="M20 0c2 11 7 16 20 20-13 4-18 9-20 20-2-11-7-16-20-20 13-4 18-9 20-20z"/></svg></div>
+  <div style="position:absolute;right:52px;top:330px"><svg class="star o" viewBox="0 0 40 40"><path d="M20 0c2 11 7 16 20 20-13 4-18 9-20 20-2-11-7-16-20-20 13-4 18-9 20-20z"/></svg></div>
   <div class="page">
-    <div class="head">
-      <div class="eyebrow">Austin, Texas &nbsp;&middot;&nbsp; Complimentary service</div>
-      <h1 class="caps">Apartment Locating</h1>
-      <div class="orn diamond"></div>
-    </div>
-    <div class="arch"><img src="../shared/photos/sophia_pool_clubhouse.jpg" alt=""></div>
-    <div class="cap">Resort pool &middot; Clubhouse deck</div>
-    <p class="lede">A private search, video tours of every finalist, and move-in specials negotiated on your behalf. <i>Complimentary &mdash; the property pays the fee.</i></p>
-    <div class="services"><span>Private search</span><i></i><span>Video tours</span><i></i><span>Negotiated specials</span></div>
-    <div class="eyebrow details-title">The service</div>
-    <div class="details">
-      <div><span><b>Curated shortlist</b> within 24 hours, ranked by your commute and priorities</span></div>
-      <div><span><b>Video tour</b> of every finalist &mdash; the actual unit, not the model</span></div>
-      <div><span><b>Move-in specials</b> and effective rent negotiated on your behalf</span></div>
-      <div><span><b>Application</b> handled start to finish, including flexible-approval options</span></div>
-    </div>
-    
+    <div class="kick tilt" style="color:var(--cream)">Austin, Texas &nbsp;&#9733;&nbsp; It's free</div>
+    <h1>Apartment<br>Locating</h1>
+    <div class="kick">The property pays. You just move in.</div>
+    <div class="photo-card"><img src="../shared/photos/sophia_pool_clubhouse.jpg" alt=""></div>
+    <div class="pills"><span class="pill">Search</span><span class="pill o">Video tours</span><span class="pill c">Specials</span><span class="pill">Move in</span></div>
   <div class="foot">
     <div class="contact">
       <div class="name" data-trec="contact" data-label="name">Sophia Sky Reddehase</div>
       <div class="role">Apartment Locator &middot; Austin, Texas &middot; TREC #831516</div>
-      <div class="lines">
-        <div class="line" data-trec="contact" data-label="phone">(512) 676-1215</div>
-        <div class="line" data-trec="contact" data-label="email">sophia.reddehase@spiritre.com</div>
-        <div class="line" data-trec="contact" data-label="instagram">@sophiasky.atx</div>
-      </div>
     </div>
-    <div class="cta"><img src="../shared/qr/qr_navy.svg" alt="QR code: begin your complimentary search"><div class="t"><div class="k">Free apartment locating &middot; Austin</div><div class="h">Scan, text or call to start your free search</div><div class="p" data-trec="contact" data-label="cta-phone">(512) 676-1215</div><div class="u" data-trec="contact" data-label="web">sparkapt.com/inquiry/sophia-reddehase859 &nbsp;&middot;&nbsp; @sophiasky.atx</div></div></div>
+    <div class="cta"><img src="../shared/qr/qr_navy.svg" alt="QR code: begin your free search"><div class="t"><div class="k">Free apartment locating</div><div class="h">Scan, text or call.</div><div class="p" data-trec="contact" data-label="phone">(512) 676-1215</div><div class="u" data-trec="contact" data-label="web">sparkapt.com/inquiry/sophia-reddehase859 &nbsp;&middot;&nbsp; sophia.reddehase@spiritre.com</div></div></div>
     <div class="broker">
       <div class="txt" data-trec="broker">Brokered by Spirit Real Estate Group<small>Licensed sales agent sponsored by this broker</small></div>
       <div class="spirit-logo"></div>
       <div class="eho">Equal Housing<br>Opportunity</div>
     </div>
     <div class="compliance">
-      <p><strong>Sophia Sky Reddehase</strong> is a Texas real estate sales agent (TREC License #831516) sponsored by <strong>Spirit Real Estate Group</strong>. Texas law requires all license holders to provide the <strong>Information About Brokerage Services</strong> form and the <strong>TREC Consumer Protection Notice</strong> to prospective clients; both are available at trec.texas.gov and on request. Apartment locating is complimentary to you; the agent is compensated by the property you lease. Pricing, specials and availability change daily and are subject to each property's terms and leasing approval.</p>
+      <p><strong>Sophia Sky Reddehase</strong>, sales agent, TREC License #831516, sponsored by <strong>Spirit Real Estate Group</strong>. <strong>Information About Brokerage Services</strong> and the <strong>TREC Consumer Protection Notice</strong>: trec.texas.gov. Locating is free to you; the property pays the agent. Pricing and availability subject to change daily; specials subject to property terms and leasing approval.</p>
     </div>
   </div>
   </div>

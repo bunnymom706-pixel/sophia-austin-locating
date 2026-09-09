@@ -13,7 +13,7 @@ Four print-ready US Letter flyers, one editorial design system, all built to pas
 
 Luxury-real-estate treatment, built from the website's own faces so print and web match: **Cormorant Garamond**
 (light, for headlines), **Italiana** (the name wordmark), **Plus Jakarta Sans** (letter-spaced labels and body).
-Ivory / charcoal / champagne-gold palette on the relocation and move-season sheets; the tear-off (peach paper, navy ink, coral accents) and free-locating (cobalt paper, white ink, flame-gold accents) sheets run a colorful variant of the same system with a large navy or gold call-to-action band (QR, phone, link) above the broker line. a thin double-line frame inset from the trim, centered composition,
+Ivory / charcoal / champagne-gold palette on the relocation and move-season sheets; the tear-off and free-locating sheets use a separate pop system (`shared/pop.css`: hot pink, orange, butter yellow, plum; Anton display, Lilita One and Fredoka body; diagonal color blocks and sparkles; 8 px cream photo card). All four carry a large call-to-action band (124 px QR, phone at 38 px) and a broker block with the Spirit lockup at 48 px logo-size (wordmark about 39 px against the 40 px name). Copy is deliberately minimal. `export_tool/build_pop.py` regenerates all four HTML files. a thin double-line frame inset from the trim, centered composition,
 arch-framed or full-bleed interior photography, and the same footer (contact, broker line, compliance) on every sheet.
 Shared styles live in `shared/luxury.css`; each flyer only sets its palette and layout on top. Photos in `shared/photos/`
 are Sophia's own tour photography (exported from her iCloud camera roll, HEIC converted to JPG at up to 2400 px). The

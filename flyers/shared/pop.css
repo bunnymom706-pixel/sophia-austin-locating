@@ -1,0 +1,42 @@
+/* Pop system for the colorful flyers: hot pink / orange / butter yellow, Anton display, Fredoka body.
+   Tokens on .sheet: --pink --orange --yellow --plum --paper --ink */
+.sheet { --pink:#F48AD9; --orange:#F4531C; --yellow:#F8CF5A; --plum:#6E1140; --cream:#FFF4E6;
+  background: var(--paper); color: var(--ink); font-family: 'Fredoka', 'Baloo 2', system-ui, sans-serif; font-size: 13px; line-height: 1.4; font-weight: 500; }
+.block { position: absolute; }
+.star { position: absolute; width: 34px; height: 34px; fill: var(--yellow); }
+.star.o { fill: var(--orange); } .star.p { fill: var(--pink); } .star.c { fill: var(--cream); } .star.pl { fill: var(--plum); }
+.star.s { width: 20px; height: 20px; } .star.l { width: 52px; height: 52px; }
+.page { position: absolute; top: 48px; left: 52px; right: 52px; bottom: 44px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.page > * { flex: none; }
+h1 { margin: 0; font-family: 'Anton', 'Impact', sans-serif; font-weight: 400; text-transform: uppercase; line-height: .9; letter-spacing: 0.005em; text-wrap: balance; }
+.kick { font-family: 'Lilita One', 'Fredoka', sans-serif; font-size: 22px; letter-spacing: 0.02em; line-height: 1.05; }
+.kick i { font-style: normal; }
+.tilt { transform: rotate(-3deg); }
+.photo-card { overflow: hidden; border-radius: 26px; border: 8px solid var(--cream); box-shadow: 0 14px 0 rgba(110,17,64,.18); }
+.photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cap { font-family: 'Lilita One', sans-serif; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.pill { font-family: 'Lilita One', sans-serif; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; padding: 7px 16px; border-radius: 999px; background: var(--plum); color: var(--cream); }
+.pill.y { background: var(--yellow); color: var(--plum); } .pill.o { background: var(--orange); color: var(--cream); } .pill.c { background: var(--cream); color: var(--plum); }
+
+/* footer */
+.foot { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: center; }
+.contact { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 0 4px; }
+.contact .name { font-family: 'Anton', sans-serif; font-size: 40px; letter-spacing: 0.03em; text-transform: uppercase; line-height: 1; }
+.contact .role { font-family: 'Lilita One', sans-serif; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; }
+.cta { width: 100%; display: flex; align-items: center; gap: 22px; margin-top: 10px; padding: 14px 20px; background: var(--cta-bg); color: var(--cta-ink); border-radius: 22px; text-align: left; }
+.cta img { width: 124px; height: 124px; background: #FFFFFF; padding: 7px; border-radius: 14px; flex: none; }
+.cta .t { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+.cta .k { font-family: 'Lilita One', sans-serif; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; opacity: .9; }
+.cta .h { font-family: 'Anton', sans-serif; font-size: 32px; line-height: 1; text-transform: uppercase; }
+.cta .p { font-family: 'Anton', sans-serif; font-size: 38px; letter-spacing: 0.02em; line-height: 1; margin-top: 4px; }
+.cta .u { font-size: 11.5px; font-weight: 600; margin-top: 3px; }
+.broker { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 22px; margin-top: 10px; background: var(--cream); color: var(--plum); border-radius: 18px; }
+.broker .txt { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 23px; letter-spacing: 0.01em; line-height: 1.05; text-align: left; text-transform: uppercase; white-space: nowrap; }
+.broker .txt small { display: block; font-family: 'Fredoka', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; margin-top: 3px; opacity: .8; }
+.broker .spirit-logo { --logo-size: 48px; --navy: #0F2D5C; }
+.broker .eho { display: inline-flex; align-items: center; gap: 6px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+.broker .eho svg { height: 1.9em; width: auto; }
+.compliance { margin-top: 8px; font-size: 8.6px; line-height: 1.45; font-weight: 500; }
+.compliance p { margin: 0; }
+.compliance strong { font-weight: 700; }

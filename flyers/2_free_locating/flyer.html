@@ -5,70 +5,49 @@
 <title>The property pays — free locating</title>
 <link rel="stylesheet" href="../shared/fonts.css">
 <link rel="stylesheet" href="../shared/base.css">
-<link rel="stylesheet" href="../shared/luxury.css">
+<link rel="stylesheet" href="../shared/pop.css">
 <style>
 
-  .sheet { --paper:#1E3A8A; --ink:#FFFFFF; --gold:#F2A93B; --muted:#C9D4F5; --line:#4A62B5; --logo:#F7F4EE; --cta-bg:#F2A93B; --cta-ink:#12285A; }
-  .cap, .eyebrow { color: var(--gold); }
-  .services { color: #FFFFFF; }
-  .hero { position: absolute; left: 0; right: 0; top: 0; height: 400px; overflow: hidden; }
+  .sheet { --paper: var(--orange); --ink: var(--cream); --cta-bg: var(--yellow); --cta-ink: var(--plum); }
+  .block.p { left: -40px; right: -40px; top: 410px; height: 720px; background: var(--pink); clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%); }
+  .hero { position: absolute; left: 0; right: 0; top: 0; height: 450px; overflow: hidden; }
   .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
-  .hero::after { content: ""; z-index: 1; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30,58,138,.05) 0%, rgba(30,58,138,.35) 45%, rgba(30,58,138,.96) 100%); }
-  .hero-text { position: absolute; left: 72px; right: 72px; bottom: 38px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; color: #F7F4EE; }
-  .hero-text .eyebrow { color: #E7DDC8; }
-  .hero-text h1 { font-size: 54px; color: #F7F4EE; text-shadow: 0 2px 18px rgba(0,0,0,.35); }
-  .hero-text .orn { background: #D9C08C; }
-  .frame { top: 40px; }
-  .page { top: 424px; }
-  .lede { font-size: 16px; }
-  .services { margin-top: 14px; }
-  .strip { margin-top: 20px; }
-  .strip .photo { height: 86px; }
-  .strip figure { margin: 0; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(110,17,64,0) 30%, rgba(110,17,64,.55) 100%); }
+  .page { top: 450px; bottom: 44px; }
+  h1 { margin-top: -96px; font-size: 80px; color: var(--cream); position: relative; z-index: 2; text-shadow: 0 6px 0 rgba(110,17,64,.25); }
+  h1 i { font-style: normal; color: var(--yellow); }
+  .kick { margin-top: 8px; color: var(--plum); font-size: 22px; }
+  .pills { margin-top: 12px; }
+  .contact { color: var(--plum); }
+  .foot { color: var(--plum); }
+  .compliance { color: var(--plum); }
 
-  .contact { padding: 14px 0 6px; }
-  .broker { margin-top: 12px; }
-  .hero-text .eyebrow { color: #FFD9A0; }
 </style>
 </head>
 <body>
 <div class="sheet">
-
-  <div class="hero"><img src="../shared/photos/sophia_pool_sunset_courtyard.jpg" alt="">
-    <div class="hero-text">
-      <div class="eyebrow">Austin apartment locating</div>
-      <h1>The property pays.<br><i>You simply move in.</i></h1>
-      <div class="orn"></div>
-    </div>
-  </div>
-  <div class="frame"></div><div class="corners"><span></span><span></span><span></span><span></span></div>
+  <div class="hero"><img src="../shared/photos/sophia_pool_sunset_courtyard.jpg" alt=""></div>
+  <div class="block p"></div>
+  <div style="position:absolute;left:60px;top:560px"><svg class="star c l" viewBox="0 0 40 40"><path d="M20 0c2 11 7 16 20 20-13 4-18 9-20 20-2-11-7-16-20-20 13-4 18-9 20-20z"/></svg></div>
+  <div style="position:absolute;right:64px;top:520px"><svg class="star y" viewBox="0 0 40 40"><path d="M20 0c2 11 7 16 20 20-13 4-18 9-20 20-2-11-7-16-20-20 13-4 18-9 20-20z"/></svg></div>
+  <div style="position:absolute;right:110px;top:640px"><svg class="star c s" viewBox="0 0 40 40"><path d="M20 0c2 11 7 16 20 20-13 4-18 9-20 20-2-11-7-16-20-20 13-4 18-9 20-20z"/></svg></div>
   <div class="page">
-    <p class="lede">Every building in Austin compensates locators to place residents. That means a personal search, video tours and negotiated specials &mdash; <i>at no cost to you, ever.</i></p>
-    <div class="services"><span>Private search</span><i></i><span>Video tours</span><i></i><span>Negotiated specials</span><i></i><span>Flexible approval</span></div>
-    <div class="strip">
-      <figure><div class="photo"><img src="../shared/photos/sophia_kitchen_island_pendants.jpg" alt=""></div><div class="cap">Chef's kitchen &middot; Quartz island</div></figure>
-      <figure><div class="photo"><img src="../shared/photos/sophia_living_room_model.jpg" alt=""></div><div class="cap">Model residence &middot; Living room</div></figure>
-      <figure><div class="photo"><img src="../shared/photos/sophia_clubhouse_lounge.jpg" alt=""></div><div class="cap">Clubhouse &middot; Resident lounge</div></figure>
-    </div>
-    
+    <h1>The property<br><i>pays.</i> You just<br>move in.</h1>
+    <div class="kick">Free apartment locating &nbsp;&#9733;&nbsp; Austin</div>
+    <div class="pills"><span class="pill">Search</span><span class="pill o">Video tours</span><span class="pill c">Specials</span></div>
   <div class="foot">
     <div class="contact">
       <div class="name" data-trec="contact" data-label="name">Sophia Sky Reddehase</div>
       <div class="role">Apartment Locator &middot; Austin, Texas &middot; TREC #831516</div>
-      <div class="lines">
-        <div class="line" data-trec="contact" data-label="phone">(512) 676-1215</div>
-        <div class="line" data-trec="contact" data-label="email">sophia.reddehase@spiritre.com</div>
-        <div class="line" data-trec="contact" data-label="instagram">@sophiasky.atx</div>
-      </div>
     </div>
-    <div class="cta"><img src="../shared/qr/qr_navy.svg" alt="QR code: begin your complimentary search"><div class="t"><div class="k">Free apartment locating &middot; Austin</div><div class="h">Scan, text or call to start your free search</div><div class="p" data-trec="contact" data-label="cta-phone">(512) 676-1215</div><div class="u" data-trec="contact" data-label="web">sparkapt.com/inquiry/sophia-reddehase859 &nbsp;&middot;&nbsp; @sophiasky.atx</div></div></div>
+    <div class="cta"><img src="../shared/qr/qr_red.svg" alt="QR code: begin your free search"><div class="t"><div class="k">Free apartment locating</div><div class="h">Scan, text or call.</div><div class="p" data-trec="contact" data-label="phone">(512) 676-1215</div><div class="u" data-trec="contact" data-label="web">sparkapt.com/inquiry/sophia-reddehase859 &nbsp;&middot;&nbsp; sophia.reddehase@spiritre.com</div></div></div>
     <div class="broker">
       <div class="txt" data-trec="broker">Brokered by Spirit Real Estate Group<small>Licensed sales agent sponsored by this broker</small></div>
-      <div class="spirit-logo on-dark"></div>
+      <div class="spirit-logo"></div>
       <div class="eho">Equal Housing<br>Opportunity</div>
     </div>
     <div class="compliance">
-      <p><strong>Sophia Sky Reddehase</strong> is a Texas real estate sales agent (TREC License #831516) sponsored by <strong>Spirit Real Estate Group</strong>. Texas law requires all license holders to provide the <strong>Information About Brokerage Services</strong> form and the <strong>TREC Consumer Protection Notice</strong> to prospective clients; both are available at trec.texas.gov and on request. Apartment locating is complimentary to you; the agent is compensated by the property you lease. Pricing, specials and availability change daily and are subject to each property's terms and leasing approval.</p>
+      <p><strong>Sophia Sky Reddehase</strong>, sales agent, TREC License #831516, sponsored by <strong>Spirit Real Estate Group</strong>. <strong>Information About Brokerage Services</strong> and the <strong>TREC Consumer Protection Notice</strong>: trec.texas.gov. Locating is free to you; the property pays the agent. Pricing and availability subject to change daily; specials subject to property terms and leasing approval.</p>
     </div>
   </div>
   </div>

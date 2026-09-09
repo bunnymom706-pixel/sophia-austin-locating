@@ -30,9 +30,9 @@ h1 i, .ital { font-family: 'Cormorant Garamond', serif; font-style: italic; font
 
 /* footer */
 .foot { margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: center; }
-.contact { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 22px 0 14px; }
-.contact .name { font-family: 'Italiana', 'Cormorant Garamond', serif; font-size: 30px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1; }
-.contact .role { font-size: 9px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+.contact { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 0 4px; }
+.contact .name { font-family: 'Italiana', 'Cormorant Garamond', serif; font-size: 40px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1; }
+.contact .role { font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
 .contact .lines { margin-top: 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; color: var(--ink); }
 .contact .line { white-space: nowrap; }
 .contact .line + .line::before { content: ""; display: inline-block; width: 1px; height: 9px; background: var(--line); margin: 0 14px; vertical-align: -1px; }
@@ -41,14 +41,14 @@ h1 i, .ital { font-family: 'Cormorant Garamond', serif; font-style: italic; font
 .qr-row span { font-size: 8.5px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); text-align: left; line-height: 1.6; }
 .qr-row em { font-style: normal; text-transform: none; letter-spacing: 0.06em; font-size: 10px; color: var(--ink); }
 
-.broker { width: 100%; display: flex; align-items: center; justify-content: center; gap: 28px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.broker .txt { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 16px; letter-spacing: 0.04em; line-height: 1.1; text-align: left; }
-.broker .txt small { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 8px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
-.broker .spirit-logo { --logo-size: 28px; --navy: var(--logo, #0F2D5C); }
+.broker { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 0; margin-top: 12px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.broker .txt { white-space: nowrap; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 22px; letter-spacing: 0.04em; line-height: 1.1; text-align: left; }
+.broker .txt small { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+.broker .spirit-logo { --logo-size: 48px; --navy: var(--logo, #0F2D5C); }
 /* Official lockup: the SPIRIT wordmark is 47.6% of the PNG height. At --logo-size 28px the image renders 47.6px tall,
-   so the broker name in the logo reads ~22.7px cap height, above 1/2 of the 30px name (TREC 22 TAC 535.155). */
-.broker .eho { font-size: 7.5px; color: var(--muted); }
-.compliance { margin-top: 9px; font-size: 7.8px; line-height: 1.45; color: var(--muted); font-weight: 400; }
+   so the SPIRIT wordmark reads ~38.9px cap height against the 40px name (TREC 22 TAC 535.155 needs >= 1/2). */
+.broker .eho { font-size: 9px; color: var(--muted); }
+.compliance { margin-top: 9px; font-size: 8.6px; line-height: 1.45; color: var(--muted); font-weight: 400; }
 .compliance strong { font-weight: 500; color: var(--ink); }
 
 /* corner marks on the frame */
@@ -58,7 +58,7 @@ h1 i, .ital { font-family: 'Cormorant Garamond', serif; font-style: italic; font
 .corners span:nth-child(3) { bottom: 40px; left: 40px; border-bottom-width: 1px; border-left-width: 1px; }
 .corners span:nth-child(4) { bottom: 40px; right: 40px; border-bottom-width: 1px; border-right-width: 1px; }
 /* photo caption */
-.cap { margin-top: 8px; font-size: 8px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
+.cap { margin-top: 8px; font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
 /* what's included */
 .details { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 36px; text-align: left; }
 .details div { display: grid; grid-template-columns: 10px 1fr; gap: 10px; align-items: baseline; font-size: 10.5px; line-height: 1.45; font-weight: 300; color: var(--muted); border-bottom: 1px solid var(--line); padding: 5px 0; }
@@ -67,10 +67,10 @@ h1 i, .ital { font-family: 'Cormorant Garamond', serif; font-style: italic; font
 .details-title { margin: 16px 0 6px; }
 
 /* big call to action (colorful flyers). --cta-bg / --cta-ink set per flyer. */
-.cta { width: 100%; display: flex; align-items: center; gap: 18px; margin-top: 12px; padding: 13px 18px; background: var(--cta-bg, var(--ink)); color: var(--cta-ink, var(--paper)); border-radius: 8px; text-align: left; }
-.cta img { width: 76px; height: 76px; background: #FFFFFF; padding: 5px; border-radius: 5px; flex: none; }
+.cta { width: 100%; display: flex; align-items: center; gap: 22px; margin-top: 10px; padding: 14px 20px; background: var(--cta-bg, var(--ink)); color: var(--cta-ink, var(--paper)); border-radius: 8px; text-align: left; }
+.cta img { width: 124px; height: 124px; background: #FFFFFF; padding: 5px; border-radius: 5px; flex: none; }
 .cta .t { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.cta .k { font-size: 8.5px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; opacity: .85; }
-.cta .h { font-family: 'Cormorant Garamond', serif; font-size: 23px; line-height: 1.05; font-weight: 500; }
-.cta .p { font-size: 25px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; margin-top: 4px; }
-.cta .u { font-size: 9.5px; letter-spacing: 0.06em; opacity: .9; margin-top: 2px; }
+.cta .k { font-size: 10px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; opacity: .85; }
+.cta .h { font-family: 'Cormorant Garamond', serif; font-size: 34px; line-height: 1.05; font-weight: 500; }
+.cta .p { font-size: 38px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; margin-top: 4px; }
+.cta .u { font-size: 11px; letter-spacing: 0.06em; opacity: .9; margin-top: 2px; }
