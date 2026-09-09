@@ -10,6 +10,8 @@ Four US Letter flyers as Design Component artboards, published as a Claude Desig
 - Palette: warm cream and warm white paper, deep pine and espresso fields, clay and brass accents.
 - Photos are Sophia's own iPhone 17 captures, cropped to each slot (see `../shared/photos/SOURCES.json`).
 - No em dashes anywhere (house rule).
+- The QR is drawn inline from `qr_path.txt` at 160 px (1.67 in) with a 4 module quiet zone. It decodes
+  to https://sparkapt.com/inquiry/sophia-reddehase859, verified with an OpenCV decode of the rendered code.
 
 ## TREC
 

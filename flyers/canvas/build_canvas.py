@@ -79,7 +79,7 @@ def footer(t):
 
     <div style="height:1px;background:{rule}"></div>
 
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:18px 0 16px">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:12px 0 10px">
       <div style="display:flex;flex-direction:column;gap:10px;text-align:left">
         <div style="display:flex;flex-direction:column;gap:5px">
           <div style="font-family:{display};font-size:30px;line-height:1;letter-spacing:0.03em;color:{ink}">Sophia Sky Reddehase</div>
@@ -91,14 +91,14 @@ def footer(t):
         </div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:7px;flex:none">
-        <div style="padding:7px;background:#FFFFFF">{qr}</div>
+        <div style="padding:8px;background:#FFFFFF">{qr}</div>
         <div style="font-family:{sans};font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:{stone}">Scan to start</div>
       </div>
     </div>
 
     <div style="height:1px;background:{rule}"></div>
 
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 0 12px">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:10px 0 8px">
       <div style="display:flex;flex-direction:column;gap:4px;text-align:left">
         <div style="font-family:{display};font-size:{broker}px;line-height:1.05;letter-spacing:0.015em;color:{ink}">Brokered by Spirit Real Estate Group</div>
         <div style="font-family:{sans};font-size:9.5px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:{stone}">Sponsored sales agent</div>
@@ -114,10 +114,10 @@ def footer(t):
 
   </div>""".format(display=DISPLAY, sans=SANS, ink=th['ink'], stone=th['stone'], rule=th['rule'],
                    accent=th['accent'], phone=PHONE_PX, broker=BROKER_PX, logo=th['logo'],
-                   logoh=LOGO_H, qr=qr(100), eho=eho(th['stone']))
+                   logoh=LOGO_H, qr=qr(160), eho=eho(th['stone']))
 
 
-def page(t, title, inner, root_extra='', pad='54px 60px 44px'):
+def page(t, title, inner, root_extra='', pad='48px 60px 44px'):
     th = THEMES[t]
     return """<!doctype html>
 <html>
@@ -164,7 +164,7 @@ inner1 = """    <div style="display:flex;flex-direction:column;align-items:flex-
 
     <div style="height:1px;background:{rule};margin:22px 0 0"></div>
 
-    <div style="margin-top:20px;overflow:hidden"><img src="pool_clubhouse.jpg" alt="Resort pool and clubhouse deck" style="width:100%;height:202px;object-fit:cover;display:block"></div>
+    <div style="margin-top:20px;overflow:hidden"><img src="pool_clubhouse.jpg" alt="Resort pool and clubhouse deck" style="width:100%;height:168px;object-fit:cover;display:block"></div>
 
     <p style="margin:22px 0 0;font-family:{display};font-size:23px;line-height:1.35;color:{ink};max-width:660px;text-wrap:pretty">Your search, your tours, your negotiation. <span style="font-style:italic;color:{accent}">Free to you.</span></p>
 """.format(label=label('Austin apartment locating', 'tearoff'), display=DISPLAY, sans=SANS,
@@ -174,11 +174,11 @@ tabs_block = """  <div style="position:absolute;z-index:3;left:60px;right:60px;b
 """.format(rule=th['rule'], tabs=tabs)
 
 open(os.path.join(HERE, 'TearOff.dc.html'), 'w', encoding='utf-8').write(
-    page('tearoff', 'Tear-off flyer', inner1, root_extra=tabs_block, pad='54px 60px 198px'))
+    page('tearoff', 'Tear-off flyer', inner1, root_extra=tabs_block, pad='48px 60px 198px'))
 
 # ------------------------------------------------------- 2 free locating (Main)
 th = THEMES['free']
-hero = """  <div style="position:absolute;left:0;right:0;top:0;height:430px;overflow:hidden">
+hero = """  <div style="position:absolute;left:0;right:0;top:0;height:396px;overflow:hidden">
     <img src="courtyard_pool.jpg" alt="Resort courtyard pool at dusk" style="width:100%;height:100%;object-fit:cover;display:block">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(47,81,72,0) 40%, rgba(47,81,72,0.55) 74%, {paper} 100%)"></div>
     <div style="position:absolute;left:60px;right:60px;bottom:34px;display:flex;flex-direction:column;gap:12px">
@@ -208,7 +208,7 @@ inner2 = """    <p style="margin:0;font-family:{display};font-size:24px;line-hei
 """.format(display=DISPLAY, sans=SANS, ink=th['ink'], accent=th['accent'], stone=th['stone'])
 
 open(os.path.join(HERE, 'Main.dc.html'), 'w', encoding='utf-8').write(
-    page('free', 'Free locating flyer', inner2, root_extra=hero, pad='452px 60px 44px'))
+    page('free', 'Free locating flyer', inner2, root_extra=hero, pad='418px 60px 44px'))
 
 # ------------------------------------------------------------- 3 relocation
 th = THEMES['reloc']
@@ -223,7 +223,7 @@ inner3 = """    <div style="display:flex;flex-direction:column;align-items:flex-
 
     <p style="margin:20px 0 0;font-family:{display};font-size:23px;line-height:1.38;color:{ink};max-width:600px;text-wrap:pretty">I tour the unit, film it, and negotiate the terms before you land. <span style="font-style:italic;color:{accent}">You arrive with keys, not doubts.</span></p>
 
-    <div style="margin-top:24px;overflow:hidden"><img src="clubhouse_lobby.jpg" alt="Clubhouse lobby and resident lounge" style="width:100%;height:262px;object-fit:cover;display:block"></div>
+    <div style="margin-top:24px;overflow:hidden"><img src="clubhouse_lobby.jpg" alt="Clubhouse lobby and resident lounge" style="width:100%;height:228px;object-fit:cover;display:block"></div>
 
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-top:12px">
       <div style="font-family:{sans};font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:{stone}">Clubhouse lobby &middot; Resident lounge</div>
@@ -246,7 +246,7 @@ inner4 = """    <div style="display:flex;gap:40px;align-items:flex-start">
         {label}
         <h1 style="margin:0;font-family:{display};font-weight:400;font-size:63px;line-height:0.98;letter-spacing:-0.008em;color:{ink};text-wrap:balance">Your lease<br>is ending.<br><span style="font-style:italic;color:{accent}">Your options<br>aren't.</span></h1>
       </div>
-      <div style="flex:none;width:340px;overflow:hidden"><img src="arched_facade.jpg" alt="Arched facade over a resident courtyard" style="width:100%;height:452px;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:340px;overflow:hidden"><img src="arched_facade.jpg" alt="Arched facade over a resident courtyard" style="width:100%;height:418px;object-fit:cover;display:block"></div>
     </div>
 
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-top:12px">
