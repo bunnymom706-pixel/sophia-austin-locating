@@ -8,13 +8,16 @@
 <link rel="stylesheet" href="../shared/luxury.css">
 <style>
 
-  .sheet { --paper:#F7F4EE; --ink:#1C1B1A; --gold:#B99A5B; --muted:#6F6A62; --line:#CFC6B8; }
+  .sheet { --paper:#FFE3C9; --ink:#12285A; --gold:#E8563F; --muted:#5B4A46; --line:#E9B18F; --cta-bg:#12285A; --cta-ink:#FFE3C9; }
+  .eyebrow, .cap, .details-title { color: var(--gold); }
+  .tab .v small { color: var(--gold); }
+  .tabs, .tab { border-color: var(--gold); }
   .page { bottom: 196px; gap: 0; }
   .head { display: flex; flex-direction: column; align-items: center; gap: 14px; }
   h1 { font-size: 36px; }
-  .arch { width: 236px; height: 236px; margin-top: 16px; }
+  .arch { width: 196px; height: 196px; margin-top: 12px; }
   .arch img { object-position: center 78%; }
-  .lede { margin-top: 14px; font-size: 15.5px; }
+  .lede { margin-top: 8px; font-size: 15px; }
   .services { margin-top: 12px; }
   .tabs { position: absolute; left: 44px; right: 44px; bottom: 44px; height: 124px; display: grid; grid-template-columns: repeat(10, 1fr); border-top: 1px dashed var(--line); }
   .tab { position: relative; min-width: 0; overflow: hidden; border-right: 1px dashed var(--line); }
@@ -25,6 +28,8 @@
   .frame { bottom: 168px; }
   .corners span:nth-child(3), .corners span:nth-child(4) { bottom: 168px; }
 
+  .contact { padding: 14px 0 6px; }
+  .broker { margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -58,8 +63,8 @@
         <div class="line" data-trec="contact" data-label="email">sophia.reddehase@spiritre.com</div>
         <div class="line" data-trec="contact" data-label="instagram">@sophiasky.atx</div>
       </div>
-      <div class="qr-row"><img src="../shared/qr/qr_charcoal.svg" alt="QR code: begin your complimentary search"><span data-trec="contact" data-label="web">Scan to begin your search<br><em>sparkapt.com/inquiry/sophia-reddehase859</em></span></div>
     </div>
+    <div class="cta"><img src="../shared/qr/qr_navy.svg" alt="QR code: begin your complimentary search"><div class="t"><div class="k">Free apartment locating &middot; Austin</div><div class="h">Scan, text or call to start your free search</div><div class="p" data-trec="contact" data-label="cta-phone">(512) 676-1215</div><div class="u" data-trec="contact" data-label="web">sparkapt.com/inquiry/sophia-reddehase859 &nbsp;&middot;&nbsp; @sophiasky.atx</div></div></div>
     <div class="broker">
       <div class="txt" data-trec="broker">Brokered by Spirit Real Estate Group<small>Licensed sales agent sponsored by this broker</small></div>
       <div class="spirit-logo"></div>
