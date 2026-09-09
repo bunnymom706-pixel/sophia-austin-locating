@@ -150,10 +150,11 @@ th = THEMES['tearoff']
 tabs = ''.join(
     '<div style="display:flex;align-items:center;justify-content:center;{br}">'
     '<div style="writing-mode:vertical-rl;transform:rotate(180deg);display:flex;flex-direction:column;align-items:center;gap:5px">'
-    '<span style="font-family:{d};font-size:17px;letter-spacing:0.01em;color:{ink}">(512) 676-1215</span>'
-    '<span style="font-family:{s};font-size:8px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:{ac}">Sophia &middot; Locating</span>'
+    '<span style="font-family:{d};font-size:16px;letter-spacing:0.01em;color:{ink}">(512) 676-1215</span>'
+    '<span style="font-family:{s};font-size:8px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:{ac}">Sophia Reddehase</span>'
+    '<span style="font-family:{s};font-size:8px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:{st}">Spirit Real Estate Group</span>'
     '</div></div>'.format(br='' if i == 9 else 'border-right:1px dashed ' + th['rule'],
-                          d=DISPLAY, s=SANS, ink=th['ink'], ac=th['accent'])
+                          d=DISPLAY, s=SANS, ink=th['ink'], ac=th['accent'], st=th['stone'])
     for i in range(10))
 
 inner1 = """    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:16px">
@@ -163,17 +164,17 @@ inner1 = """    <div style="display:flex;flex-direction:column;align-items:flex-
 
     <div style="height:1px;background:{rule};margin:22px 0 0"></div>
 
-    <div style="margin-top:20px;overflow:hidden"><img src="pool_clubhouse.jpg" alt="Resort pool and clubhouse deck" style="width:100%;height:218px;object-fit:cover;display:block"></div>
+    <div style="margin-top:20px;overflow:hidden"><img src="pool_clubhouse.jpg" alt="Resort pool and clubhouse deck" style="width:100%;height:202px;object-fit:cover;display:block"></div>
 
     <p style="margin:22px 0 0;font-family:{display};font-size:23px;line-height:1.35;color:{ink};max-width:660px;text-wrap:pretty">Your search, your tours, your negotiation. <span style="font-style:italic;color:{accent}">Free to you.</span></p>
 """.format(label=label('Austin apartment locating', 'tearoff'), display=DISPLAY, sans=SANS,
            ink=th['ink'], accent=th['accent'], rule=th['rule'], stone=th['stone'])
 
-tabs_block = """  <div style="position:absolute;z-index:3;left:60px;right:60px;bottom:30px;height:130px;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border-top:1px dashed {rule}">{tabs}</div>
+tabs_block = """  <div style="position:absolute;z-index:3;left:60px;right:60px;bottom:30px;height:150px;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border-top:1px dashed {rule}">{tabs}</div>
 """.format(rule=th['rule'], tabs=tabs)
 
 open(os.path.join(HERE, 'TearOff.dc.html'), 'w', encoding='utf-8').write(
-    page('tearoff', 'Tear-off flyer', inner1, root_extra=tabs_block, pad='54px 60px 182px'))
+    page('tearoff', 'Tear-off flyer', inner1, root_extra=tabs_block, pad='54px 60px 198px'))
 
 # ------------------------------------------------------- 2 free locating (Main)
 th = THEMES['free']
@@ -188,7 +189,7 @@ hero = """  <div style="position:absolute;left:0;right:0;top:0;height:430px;over
 """.format(paper=th['paper'], display=DISPLAY, accent=th['accent'],
            label=label('Free apartment locating &middot; Austin', 'free', color='#F1E4BE'))
 
-inner2 = """    <p style="margin:0;font-family:{display};font-size:24px;line-height:1.35;color:{ink};max-width:700px;text-wrap:pretty">Every building pays the locator. <span style="font-style:italic;color:{accent}">My work costs you nothing.</span></p>
+inner2 = """    <p style="margin:0;font-family:{display};font-size:24px;line-height:1.35;color:{ink};max-width:700px;text-wrap:pretty">The property pays the locator. <span style="font-style:italic;color:{accent}">My work costs you nothing.</span></p>
 
     <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px">
       <figure style="margin:0;display:flex;flex-direction:column;gap:9px">
