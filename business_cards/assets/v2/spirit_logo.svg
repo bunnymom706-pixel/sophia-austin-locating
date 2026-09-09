@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Spirit Real Estate Group, LLC — REDRAWN mark.
+
+  This is a vector reconstruction traced from a screenshot of the logo, not the
+  brokerage's official artwork. It is close but it is not authoritative: the
+  wordmark is set in Montserrat, which approximates the original's geometric
+  sans rather than matching it. Replace this file with the official asset
+  before a production print run — every card references this one path, so
+  dropping the real file in here updates the whole suite at once.
+
+  Colours sampled from the supplied image: navy #0E2C5A, flame #F5A62B.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 168" width="620" height="168"
+     role="img" aria-label="Spirit Real Estate Group, LLC">
+  <style>
+    .wm { font-family: 'Montserrat', 'Poppins', sans-serif; font-weight: 800; font-size: 104px;
+          letter-spacing: -1px; fill: #0e2c5a; }
+    .sub { font-family: 'Montserrat', 'Poppins', sans-serif; font-weight: 500; font-size: 33px;
+           letter-spacing: 11.5px; fill: #0e2c5a; }
+  </style>
+
+  <!-- wordmark; the I keeps no tittle because the flame sits above it -->
+  <text class="wm" x="310" y="98" text-anchor="middle">SPIRIT</text>
+
+  <!-- flame standing in for the dot of the I -->
+  <g transform="translate(388, 2)">
+    <path d="M17.4 0 C 22.6 12.8 33.6 20.4 33.9 34.4 C 34.2 45.6 26.4 54 17.2 54
+             C 7.9 54 0 45.8 0 34.6 C 0 22.2 9.4 17.6 12.4 6.4 C 13.4 2.6 15.4 0.8 17.4 0 Z"
+          fill="#f5a62b"/>
+    <path d="M17.6 20.6 C 20.4 27.4 25.6 31.2 25.7 38.6 C 25.9 44.4 22.2 48.8 17.4 48.8
+             C 12.6 48.8 8.6 44.5 8.6 38.7 C 8.6 32.2 13.2 29.6 15.1 23.8 C 15.7 21.8 16.6 21 17.6 20.6 Z"
+          fill="#ffffff"/>
+  </g>
+
+  <text class="sub" x="310" y="152" text-anchor="middle">REAL ESTATE GROUP</text>
+</svg>

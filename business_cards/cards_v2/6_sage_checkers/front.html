@@ -87,10 +87,27 @@
       <!-- SVG text so the cream outline sits cleanly over the checks -->
       <svg width="1050" height="330" viewBox="0 0 1050 330" xmlns="http://www.w3.org/2000/svg">
         <g font-family="Bagel Fat One" font-size="132" text-anchor="middle"
-           stroke="#f2ebd9" stroke-width="18" stroke-linejoin="round" paint-order="stroke" fill="#a8386b">
+         stroke-linejoin="round" paint-order="stroke">
+        <!-- cast shadow -->
+        <g stroke="#42182f" stroke-width="32" fill="#42182f" opacity="0.22" transform="translate(6,9)">
           <text x="525" y="128">sophia sky</text>
           <text x="525" y="272">reddehase</text>
         </g>
+        <!-- dark keyline: holds the edge over the light squares -->
+        <g stroke="#42182f" stroke-width="32" fill="#42182f">
+          <text x="525" y="128">sophia sky</text>
+          <text x="525" y="272">reddehase</text>
+        </g>
+        <!-- cream halo: holds the edge over the dark squares -->
+        <g stroke="#f2ebd9" stroke-width="18.0" fill="#f2ebd9">
+          <text x="525" y="128">sophia sky</text>
+          <text x="525" y="272">reddehase</text>
+        </g>
+        <g fill="#a8386b">
+          <text x="525" y="128">sophia sky</text>
+          <text x="525" y="272">reddehase</text>
+        </g>
+      </g>
       </svg>
       <div class="role">
         <svg width="1050" height="46" viewBox="0 0 1050 46" xmlns="http://www.w3.org/2000/svg">

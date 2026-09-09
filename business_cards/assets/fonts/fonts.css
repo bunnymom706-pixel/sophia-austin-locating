@@ -142,3 +142,17 @@
   font-weight: 400 700;
   src: url('Fredoka-Variable.woff2') format('woff2-variations');
 }
+
+/* ---- Montserrat (Spirit logo wordmark only) ---- */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: url('Montserrat-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  src: url('Montserrat-ExtraBold.woff2') format('woff2');
+}
