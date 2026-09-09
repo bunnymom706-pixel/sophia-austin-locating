@@ -1,5 +1,5 @@
 /* Injects the Spirit Real Estate Group logo and the Equal Housing Opportunity mark.
-   If assets/brand/spirit_logo.png exists (drop the official file there), it is used;
+   If assets/brand/spirit_logo.png exists (official file), it is used (spirit_logo_white.png on dark flyers);
    otherwise the logo is rebuilt from HTML/SVG so the flyer still renders. */
 (function () {
   var FLAME =
@@ -26,7 +26,8 @@
       '<div class="spirit-word"><span>SPIR</span><span class="i-flame">I' + FLAME + '</span><span>T</span></div>' +
       '<div class="spirit-sub">Real Estate Group</div>';
     img.onerror = function () { img.remove(); built.hidden = false; };
-    img.src = root + 'spirit_logo.png';
+    var onDark = el.classList.contains('on-dark') || /^\s*#?(F7F4EE|FFF(FFF)?|white)\s*$/i.test(getComputedStyle(el).getPropertyValue('--logo'));
+    img.src = root + (onDark ? 'spirit_logo_white.png' : 'spirit_logo.png');
     el.appendChild(img);
     el.appendChild(built);
   }

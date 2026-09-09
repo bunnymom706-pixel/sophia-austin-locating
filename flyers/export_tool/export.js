@@ -45,8 +45,15 @@ async function trecCheck(page) {
     const text = document.body.innerText;
     const maxContact = Math.max(0, ...contacts.map((c) => c.size));
     const maxBroker = Math.max(0, ...brokers.map((b) => b.size));
+    // Official Spirit lockup PNG: the SPIRIT wordmark occupies 47.6% of the image height (measured on
+    // Spirit_logo_BlueTransparent_2.png, 1020x420, wordmark band 200px). Treat that as the broker name's cap height
+    // and require it to be >= 1/2 of the largest contact font size as well.
+    const logoImg = document.querySelector('.broker .spirit-logo-img');
+    const logoLoaded = !!(logoImg && logoImg.complete && logoImg.naturalWidth > 0 && logoImg.isConnected);
+    const logoWordmarkPx = logoLoaded ? logoImg.getBoundingClientRect().height * 0.476 : 0;
     return {
-      contacts, brokers, maxContact, maxBroker,
+      contacts, brokers, maxContact, maxBroker, logoLoaded, logoWordmarkPx,
+      logoHalfSize: logoLoaded && logoWordmarkPx >= maxContact / 2,
       brokerNamed: brokers.some((b) => /Spirit Real Estate Group/i.test(b.text)),
       brokerHalfSize: maxBroker >= maxContact / 2,
       hasLicense: /TREC\s*(License\s*)?#?\s*831516/i.test(text),
@@ -103,6 +110,8 @@ async function trecCheck(page) {
     const rows = [
       ['broker named (Spirit Real Estate Group)', r.brokerNamed],
       [`broker >= 1/2 largest contact (${r.maxBroker.toFixed(1)}px vs ${r.maxContact.toFixed(1)}px max)`, r.brokerHalfSize],
+      ['official Spirit logo PNG loaded', r.logoLoaded],
+      [`logo wordmark >= 1/2 largest contact (${r.logoWordmarkPx.toFixed(1)}px vs ${r.maxContact.toFixed(1)}px)`, r.logoHalfSize],
       ['TREC license # shown', r.hasLicense],
       ['IABS referenced', r.hasIabs],
       ['Consumer Protection Notice referenced', r.hasCpn],
