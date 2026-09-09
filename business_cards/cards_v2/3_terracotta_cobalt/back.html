@@ -2,187 +2,156 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sophia Reddehase — Business Card Back — Sunset Terracotta &amp; Cobalt</title>
+<title>Terracotta Cobalt — Back</title>
 <link rel="stylesheet" href="../../assets/fonts/fonts.css">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html, body {
-    width:1125px; height:675px;
-    background:#C1502E;
-    overflow:hidden;
-  }
-  body { font-family:"Space Grotesk", sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #c1502e; }
 
   .card {
-    position:relative;
-    width:1125px; height:675px;
-    background:#C1502E;
-    overflow:hidden;
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f3e6d2;
+    font-family: 'Poppins', sans-serif;
   }
 
-  /* cream panel — visual echo of the front's photo panel, now holding the QR */
-  .cream-panel {
-    position:absolute;
-    right:0; top:0;
-    width:430px; height:675px;
-    background:#F3E6D2;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+  .band {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 415px;
+    background: #c1502e;
   }
 
-  .qr-box {
-    width:290px; height:290px;
-    background:#F3E6D2;
-    border:5px solid #1B2A6B;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-  }
-  .qr-box img {
-    width:264px; height:264px;
-    display:block;
+  .sparkle { position: absolute; }
+  .sparkle svg { display: block; }
+
+  .head {
+    position: absolute;
+    top: 46px;
+    left: 37.5px; right: 37.5px;
+    text-align: center;
   }
 
-  .scan-caption {
-    margin-top:26px;
-    font-family:"Anton", "Archivo Black", sans-serif;
-    font-size:34px;
-    letter-spacing:1px;
-    color:#1B2A6B;
-    text-transform:uppercase;
-    text-align:center;
-    line-height:1.15;
+  .body {
+    position: absolute;
+    left: 78px;
+    right: 78px;
+    top: 300px;
+    bottom: 58px;
+    display: grid;
+    grid-template-columns: 1fr 236px;
+    column-gap: 40px;
+    align-items: center;
   }
 
-  .monogram {
-    position:absolute;
-    left:52px; top:60px;
-    font-family:"Anton", "Archivo Black", sans-serif;
-    font-size:230px;
-    line-height:1;
-    color:#F3E6D2;
-    opacity:0.10;
-    z-index:0;
+  .icons { display: flex; gap: 16px; margin-bottom: 22px; }
+  .icons svg { display: block; }
+
+  .lines {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 1.62;
+    color: #f3e6d2;
+    letter-spacing: 0.6px;
   }
 
-  .eyebrow {
-    position:absolute;
-    left:63px; top:58px;
-    font-size:16px;
-    font-weight:600;
-    letter-spacing:6px;
-    color:#F3E6D2;
-    text-transform:uppercase;
+  .qr-col { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .qr-card {
+    width: 236px;
+    height: 236px;
+    background: #f3e6d2;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-card img { width: 196px; height: 196px; object-fit: contain; }
+  .qr-cap {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1.6px;
+    line-height: 1.3;
+    text-align: center;
+    color: #e8c7a8;
+    max-width: 240px;
   }
 
-  .headline {
-    position:absolute;
-    left:60px; top:88px;
-    width:560px;
-    font-family:"Anton", "Archivo Black", sans-serif;
-    font-weight:400;
-    font-size:70px;
-    line-height:1.0;
-    letter-spacing:0.5px;
-    color:#1B2A6B;
-    text-transform:uppercase;
-  }
-
-  .accent-line {
-    position:absolute;
-    left:63px; top:222px;
-    width:520px; height:3px;
-    background:#F3E6D2;
-  }
-
-  .contact-list {
-    position:absolute;
-    left:63px; top:264px;
-    width:560px;
-  }
-  .contact-item { margin-bottom:38px; }
-  .contact-item:last-child { margin-bottom:0; }
-  .contact-label {
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:4px;
-    color:#EBC9A6;
-    text-transform:uppercase;
-    margin-bottom:6px;
-  }
-  .contact-value {
-    font-size:29px;
-    font-weight:700;
-    letter-spacing:0.3px;
-    color:#F6ECDD;
-  }
-
-  .footer-rule {
-    position:absolute;
-    left:63px; bottom:78px;
-    width:520px; height:2px;
-    background:rgba(243,230,210,0.55);
-  }
-
-  .footer {
-    position:absolute;
-    left:63px; bottom:40px;
-    width:700px;
-    font-size:15px;
-    font-weight:600;
-    letter-spacing:0.5px;
-    color:#F6ECDD;
-  }
-  .footer .sep { margin:0 10px; color:#EBC9A6; }
-  .footer .trec { color:#EBC9A6; font-weight:500; }
-
-  .corner-mark {
-    position:absolute;
-    left:37.5px; bottom:37.5px;
-    width:14px; height:14px;
-    border-bottom:3px solid #F6ECDD;
-    border-left:3px solid #F6ECDD;
-    opacity:0.9;
+  .compliance {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 22px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1.3px;
+    color: #e8c7a8;
   }
 </style>
 </head>
 <body>
   <div class="card">
-    <div class="monogram">S</div>
+    <div class="band"></div>
 
-    <div class="eyebrow">Let's Connect</div>
-    <div class="headline">Reach Me<br>Directly</div>
+    <div class="sparkle" style="top:52px; left:52px;">
+      <svg width="48" height="48" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#1b2a6b"/></svg>
+    </div>
+    <div class="sparkle" style="top:110px; left:104px;">
+      <svg width="26" height="26" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#1b2a6b"/></svg>
+    </div>
+    <div class="sparkle" style="top:50px; right:56px;">
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#1b2a6b"/></svg>
+    </div>
 
-    <div class="accent-line"></div>
+    <div class="head">
+      <svg width="1050" height="238" viewBox="0 0 1050 238" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="84" text-anchor="middle" fill="#1b2a6b">
+          <text x="525" y="90">sophia sky reddehase</text>
+        </g>
+        <text x="525" y="150" text-anchor="middle"
+              font-family="Poppins" font-weight="700" font-size="22" letter-spacing="6.5"
+              fill="#7c3a24">TEXAS APARTMENT LOCATOR</text>
+      </svg>
+    </div>
 
-    <div class="contact-list">
-      <div class="contact-item">
-        <div class="contact-label">Direct Cell</div>
-        <div class="contact-value">(512) 676-1215</div>
+    <div class="body">
+      <div>
+        <div class="icons">
+          <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#f3e6d2" stroke-width="2.4">
+            <circle cx="22" cy="22" r="18"/>
+            <path d="M16 14.5c1.6 0 2 .6 2.6 2l1 2.4c.4 1 .2 1.6-.6 2.2l-1 .8c1.2 2.6 3.3 4.7 5.9 5.9l.8-1c.6-.8 1.2-1 2.2-.6l2.4 1c1.4.6 2 1 2 2.6 0 2-1.6 3.4-3.6 3.4C20.7 33.2 12.8 25.3 12.8 18.1c0-2 1.4-3.6 3.2-3.6Z" fill="#f3e6d2" stroke="none"/>
+          </svg>
+          <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#f3e6d2" stroke-width="2.4">
+            <circle cx="22" cy="22" r="18"/>
+            <rect x="12" y="16" width="20" height="13" rx="2.6"/>
+            <path d="M12.6 17.4 22 24l9.4-6.6"/>
+          </svg>
+          <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#f3e6d2" stroke-width="2.4">
+            <circle cx="22" cy="22" r="18"/>
+            <ellipse cx="22" cy="22" rx="7.4" ry="18"/>
+            <path d="M4.6 16.4h34.8M4.6 27.6h34.8"/>
+          </svg>
+        </div>
+        <div class="lines">
+          (512) 676-1215<br>
+          sophia.reddehase@spiritre.com<br>
+          sparkapt.com/sophia-reddehase
+        </div>
       </div>
-      <div class="contact-item">
-        <div class="contact-label">Email</div>
-        <div class="contact-value">sophia.reddehase@spiritre.com</div>
+
+      <div class="qr-col">
+        <div class="qr-card">
+          <img src="../../assets/v2/qr_terracotta.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
+        </div>
+        <div class="qr-cap">FILL OUT MY FORM TO GET STARTED</div>
       </div>
     </div>
 
-    <div class="footer-rule"></div>
-    <div class="footer">
-      Brokered by Spirit Real Estate Group, LLC<span class="sep">|</span><span class="trec">TREC #831516</span>
-    </div>
-
-    <div class="corner-mark"></div>
-
-    <div class="cream-panel">
-      <div class="qr-box">
-        <img src="../../assets/v2/qr_terracotta.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
-      </div>
-      <div class="scan-caption">Fill out my form<br>to get started</div>
-    </div>
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; BROKERED BY SPIRIT REAL ESTATE GROUP, LLC</div>
   </div>
 </body>
 </html>

@@ -1,110 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cherry Checkers — Front</title>
 <link rel="stylesheet" href="../../assets/fonts/fonts.css">
 <style>
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 1125px;
-    height: 675px;
-    overflow: hidden;
-  }
-  :root {
-    --cherry: #D91635;
-    --cherry-deep: #A80F27;
-    --pink: #FFB4C8;
-    --cream: #FFF8EE;
-    --ink: #3A0B14;
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #d91635; }
+
   .card {
     position: relative;
     width: 1125px;
     height: 675px;
-    background: var(--cherry);
     overflow: hidden;
-    font-family: 'Nunito', sans-serif;
+    background: #fff8ee;
+    font-family: 'Poppins', sans-serif;
   }
-  .checker {
+
+  /* full-bleed checkerboard: 112.5px cells = exactly 10 x 6 */
+  .checks {
     position: absolute;
-    top: -220px;
-    left: -220px;
-    width: 1565px;
-    height: 1115px;
-    background-image: repeating-conic-gradient(var(--cherry) 0% 25%, var(--pink) 0% 50%);
-    background-size: 72px 72px;
-    transform: rotate(-7deg);
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #d91635 25%, transparent 25%, transparent 75%, #d91635 75%),
+      linear-gradient(45deg, #d91635 25%, transparent 25%, transparent 75%, #d91635 75%);
+    background-size: 225px 225px;
+    background-position: 0 0, 112.5px 112.5px;
   }
-  .sticker {
+
+  .sparkle { position: absolute; }
+  .sparkle svg { display: block; }
+
+  .stack {
     position: absolute;
-    left: 90px;
-    bottom: 25px;
-    width: 340px;
-    height: auto;
-    transform: rotate(-4deg);
-    z-index: 2;
+    left: 37.5px; right: 37.5px;
+    top: 78px;
+    text-align: center;
   }
-  .panel {
+
+  .role { margin-top: 10px; }
+
+  .compliance {
     position: absolute;
-    top: 87px;
-    right: 75px;
-    width: 545px;
-    height: 501px;
-    background: var(--cream);
-    border-radius: 34px;
-    box-shadow: 0 10px 0 rgba(168, 15, 39, 0.35);
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 46px;
-  }
-  .name {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 800;
-    color: var(--cherry-deep);
-    font-size: 60px;
-    line-height: 0.98;
-    letter-spacing: 0.5px;
-    margin: 0 0 16px 0;
-  }
-  .title {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    color: var(--ink);
-    font-size: 26px;
-    letter-spacing: 0.5px;
-    margin: 0 0 18px 0;
-  }
-  .divider {
-    width: 100%;
-    height: 4px;
-    background-image: repeating-linear-gradient(90deg, var(--cherry) 0 16px, var(--pink) 16px 32px);
-    border-radius: 4px;
-    margin-bottom: 18px;
-  }
-  .meta {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    color: var(--ink);
-    font-size: 21px;
-    line-height: 1.55;
-    margin: 0;
-  }
-  .meta .trec {
-    color: var(--cherry-deep);
-    font-weight: 800;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 62px;
+    background: #fff8ee;
+    border-radius: 999px;
+    padding: 9px 26px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    letter-spacing: 1.4px;
+    color: #a80f27;
+    white-space: nowrap;
   }
 </style>
+</head>
+<body>
+  <div class="card">
+    <div class="checks"></div>
 
-<div class="card">
-  <div class="checker"></div>
-  <img class="sticker" src="../../assets/v2/sophia_headshot_sticker.png" alt="Sophia Sky Reddehase">
-  <div class="panel">
-    <p class="name">SOPHIA SKY<br>REDDEHASE</p>
-    <p class="title">Texas Apartment Locator</p>
-    <div class="divider"></div>
-    <p class="meta">
-      <span class="trec">TREC #831516</span><br>
-      Brokered by Spirit Real Estate Group, LLC
-    </p>
+    <div class="sparkle" style="top:139px; left:927px;">
+      <svg width="62" height="62" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff8ee"/></svg>
+    </div>
+    <div class="sparkle" style="top:480px; left:142px;">
+      <svg width="54" height="54" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff8ee"/></svg>
+    </div>
+    <div class="sparkle" style="top:484px; left:820px;">
+      <svg width="46" height="46" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff8ee"/></svg>
+    </div>
+
+    <div class="stack">
+      <svg width="1050" height="330" viewBox="0 0 1050 330" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="132" text-anchor="middle"
+           stroke="#fff8ee" stroke-width="18" stroke-linejoin="round" paint-order="stroke" fill="#a80f27">
+          <text x="525" y="128">sophia sky</text>
+          <text x="525" y="272">reddehase</text>
+        </g>
+      </svg>
+      <div class="role">
+        <svg width="1050" height="46" viewBox="0 0 1050 46" xmlns="http://www.w3.org/2000/svg">
+          <text x="525" y="32" text-anchor="middle"
+                font-family="Poppins" font-weight="700" font-size="24" letter-spacing="7"
+                stroke="#a80f27" stroke-width="7" stroke-linejoin="round" paint-order="stroke"
+                fill="#fff8ee">TEXAS APARTMENT LOCATOR</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="compliance">TREC #831516 &nbsp;·&nbsp; SPIRIT REAL ESTATE GROUP, LLC</div>
   </div>
-</div>
+</body>
+</html>
