@@ -15,8 +15,11 @@ Luxury-real-estate treatment, built from the website's own faces so print and we
 (light, for headlines), **Italiana** (the name wordmark), **Plus Jakarta Sans** (letter-spaced labels and body).
 Ivory / charcoal / champagne-gold palette, a thin double-line frame inset from the trim, centered composition,
 arch-framed or full-bleed interior photography, and the same footer (contact, broker line, compliance) on every sheet.
-Shared styles live in `shared/luxury.css`; each flyer only sets its palette and layout on top. Photos are copies of
-`assets/properties/*` in `shared/photos/` (~1130 px wide — fine at the sizes used; don't scale them past ~4.5 in).
+Shared styles live in `shared/luxury.css`; each flyer only sets its palette and layout on top. Photos in `shared/photos/`
+are Sophia's own tour photography (exported from her iCloud camera roll, HEIC converted to JPG at up to 2400 px). The
+captions name the feature only (pool, kitchen, model residence), not a property or neighborhood, so nothing on the sheet
+has to be re-verified when a community changes hands. Source files: rooftop skyline pool IMG_5937, courtyard pool with
+loungers IMG_3703 and IMG_3640, kitchen IMG_4169, model living room IMG_4102, cabana pool IMG_7137, courtyard pool deck IMG_4324.
 
 ## Print specs
 
@@ -57,7 +60,10 @@ While designing, add `class="guides"` to `<body>` to show the trim (red) and saf
 
 ## Spirit logo
 
-`shared/brand.js` looks for `assets/brand/spirit_logo.png` (the official file). If it's missing it rebuilds the logo from HTML/SVG (Montserrat wordmark + flame) so the flyer still renders. Drop the real PNG in `assets/brand/` and re-export to use the official artwork.
+`shared/brand.js` loads the official lockup from `assets/brand/spirit_logo.png` (navy) or `spirit_logo_white.png` on the
+dark flyer. The footer sizes it so the SPIRIT wordmark reads about 22.7 px against the 30 px name, and `export.js` fails the
+build if the PNG did not load or the wordmark drops under half the largest contact line. If the PNGs are missing the logo is
+rebuilt from HTML/SVG so the flyer still renders.
 
 ## Editing
 
