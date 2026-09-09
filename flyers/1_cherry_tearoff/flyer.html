@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cherry Checkers — Tear-Off Flyer</title>
+<link rel="stylesheet" href="../shared/fonts.css">
+<link rel="stylesheet" href="../shared/base.css">
+<style>
+  :root {
+    --cherry-deep: #A80F27; --cherry: #D91635; --cream: #FFF8EE; --ink: #3A0B14; --pink: #FFB4C8;
+  }
+  body { background: var(--cream); font-family: 'Nunito', sans-serif; color: var(--ink); }
+  .sheet { background: var(--cream); }
+
+  /* checkerboard band that bleeds off the top */
+  .checker-top {
+    position: absolute; left: 0; right: 0; top: 0; height: 120px;
+    background-color: var(--cherry);
+    background-image:
+      linear-gradient(45deg, var(--cherry-deep) 25%, transparent 25%, transparent 75%, var(--cherry-deep) 75%),
+      linear-gradient(45deg, var(--cherry-deep) 25%, transparent 25%, transparent 75%, var(--cherry-deep) 75%);
+    background-size: 40px 40px; background-position: 0 0, 20px 20px;
+  }
+  .checker-top::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 26px; background: var(--cream); border-radius: 26px 26px 0 0; }
+
+  .hero { position: absolute; top: 36px; left: 36px; right: 36px; height: 300px; }
+  .headline {
+    position: absolute; left: 0; top: 74px; width: 470px;
+    font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 66px; line-height: 0.93; color: var(--cherry-deep);
+    text-shadow: 3px 3px 0 var(--pink);
+  }
+  .headline .free { color: var(--cherry); display: block; font-size: 84px; }
+  .sub {
+    position: absolute; left: 0; top: 290px; width: 480px;
+    font-size: 18px; font-weight: 700; line-height: 1.32; color: var(--ink);
+  }
+  .photo {
+    position: absolute; right: 0; top: 30px; width: 280px; height: 280px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .photo .disc { position: absolute; inset: 0; border-radius: 50%; background: var(--pink); border: 8px solid #fff; box-shadow: 0 10px 0 rgba(168,15,39,0.18); }
+  .photo img { position: relative; z-index: 2; width: 262px; height: 262px; object-fit: contain; }
+  .badge {
+    position: absolute; z-index: 3; right: -10px; top: 214px; transform: rotate(-8deg);
+    background: var(--cherry); color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 20px;
+    padding: 8px 18px; border-radius: 999px; border: 4px solid #fff; box-shadow: 0 4px 0 var(--cherry-deep); white-space: nowrap;
+  }
+
+  .perks { position: absolute; left: 36px; right: 36px; top: 404px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .perk { background: #fff; border: 3px solid var(--cherry); border-radius: 20px; padding: 14px 12px 12px; text-align: center; box-shadow: 0 5px 0 var(--pink); }
+  .perk .ico { font-size: 30px; line-height: 1; }
+  .perk h3 { margin: 8px 0 3px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 19px; color: var(--cherry-deep); line-height: 1.05; }
+  .perk p { margin: 0; font-size: 12.5px; font-weight: 600; line-height: 1.3; color: #5a1a28; }
+
+  .cta { position: absolute; left: 36px; right: 36px; top: 562px; height: 186px; display: grid; grid-template-columns: 1fr 170px; gap: 22px; }
+  .contact-card { background: var(--cherry-deep); border-radius: 26px; padding: 22px 28px; color: #fff; position: relative; overflow: hidden; }
+  .contact-card::before { content: ""; position: absolute; right: -60px; top: -60px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+  .contact-card .who { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 34px; line-height: 1; }
+  .contact-card .role { margin-top: 4px; font-size: 14px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); }
+  .lines { margin-top: 12px; display: grid; grid-template-columns: auto 1fr; gap: 7px 18px; }
+  .line.wide { grid-column: 1 / -1; }
+  .line { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 18px; white-space: nowrap; }
+  .line .ico { font-size: 17px; }
+  .line.phone { font-size: 24px; }
+  .qr-card { background: #fff; border: 3px solid var(--cherry); border-radius: 22px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 5px 0 var(--pink); }
+  .qr-card img { width: 128px; height: 128px; }
+  .qr-card span { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 14px; color: var(--cherry-deep); text-align: center; line-height: 1.05; }
+
+  .broker { position: absolute; left: 36px; right: 36px; top: 760px; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: #fff; border: 3px dashed var(--pink); border-radius: 20px; padding: 9px 22px; }
+  .broker .txt { font-weight: 800; font-size: 18px; color: var(--ink); line-height: 1.2; }
+  .broker .txt small { display: block; font-size: 12px; font-weight: 700; color: #7a2a3a; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 3px; }
+  .broker .spirit-logo { --logo-size: 30px; }
+  .broker .eho { font-size: 9px; color: var(--ink); }
+
+  .compliance { position: absolute; left: 36px; right: 36px; top: 836px; color: #5a1a28; font-size: 9px; }
+
+  /* tear-off tabs: 10 tabs, cut lines bleed to the bottom edge */
+  .tabs { position: absolute; left: 36px; right: 36px; top: 900px; bottom: 0; display: grid; grid-template-columns: repeat(10, 1fr); border-top: 2px dashed var(--cherry); }
+  .tab { position: relative; border-right: 2px dashed var(--cherry); display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; }
+  .tab:last-child { border-right: 0; }
+  .tab .rot { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 900; font-size: 11.5px; line-height: 1.25; color: var(--cherry-deep); letter-spacing: 0.02em; white-space: nowrap; height: 132px; }
+  .tab .rot b { display: block; font-size: 12.5px; color: var(--ink); }
+  .scissors { position: absolute; left: 6px; top: 888px; font-size: 16px; line-height: 1; background: var(--cream); padding: 0 4px; z-index: 2; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="checker-top"></div>
+
+  <div class="hero">
+    <div class="headline">Need an<br>apartment?<span class="free">It's free.</span></div>
+    <div class="sub">I search every Austin property, negotiate move-in specials, and send you custom video tours. <b>You pay $0 &mdash; the property pays me.</b></div>
+    <div class="photo">
+      <div class="disc"></div>
+      <img src="../../business_cards/assets/v2/sophia_headshot_sticker.png" alt="Sophia Sky Reddehase">
+      <div class="badge">Austin, TX 🍒</div>
+    </div>
+  </div>
+
+  <div class="perks">
+    <div class="perk"><div class="ico">💸</div><h3>$0 to you</h3><p>Locating is paid for by the property, never by you.</p></div>
+    <div class="perk"><div class="ico">🎥</div><h3>Video tours</h3><p>Custom walkthroughs so you tour from your couch.</p></div>
+    <div class="perk"><div class="ico">🏷️</div><h3>Specials</h3><p>Ask about current move-in specials and effective rents.</p></div>
+    <div class="perk"><div class="ico">🤝</div><h3>Flexible screening</h3><p>Options for credit, income and rental-history hurdles.</p></div>
+  </div>
+
+  <div class="cta">
+    <div class="contact-card">
+      <div class="who" data-trec="contact" data-label="name">Sophia Sky Reddehase</div>
+      <div class="role">Texas Apartment Locator &middot; TREC #831516</div>
+      <div class="lines">
+        <div class="line phone" data-trec="contact" data-label="phone"><span class="ico">📞</span>(512) 676-1215</div>
+        <div class="line" data-trec="contact" data-label="instagram"><span class="ico">📸</span>@sophiasky.atx</div>
+        <div class="line wide" data-trec="contact" data-label="email"><span class="ico">✉️</span>sophia.reddehase@spiritre.com</div>
+        <div class="line wide" data-trec="contact" data-label="web"><span class="ico">🔎</span>sparkapt.com/sophia-reddehase</div>
+      </div>
+    </div>
+    <div class="qr-card">
+      <img src="../../business_cards/assets/v2/qr_cherry_whitebg.png" alt="QR code to start your free apartment search">
+      <span>Scan to start<br>your free search</span>
+    </div>
+  </div>
+
+  <div class="broker">
+    <div class="txt" data-trec="broker">Brokered by Spirit Real Estate Group<small>Licensed sales agent sponsored by this broker</small></div>
+    <div class="spirit-logo"></div>
+    <div class="eho">Equal Housing<br>Opportunity</div>
+  </div>
+
+  <div class="compliance">
+    <p><strong>Sophia Sky Reddehase</strong> is a Texas real estate sales agent (TREC License #831516) sponsored by <strong>Spirit Real Estate Group</strong>. Texas law requires all real estate license holders to provide the <strong>Information About Brokerage Services</strong> form and the <strong>TREC Consumer Protection Notice</strong> to prospective clients; both are available at <strong>trec.texas.gov</strong> and on request. Apartment locating is free to you; the agent is compensated by the property you lease. Pricing, specials, and availability change daily and are subject to each property's terms and leasing approval.</p>
+  </div>
+
+  <div class="scissors">✂️</div>
+  <div class="tabs">
+    <div class="tab"><div class="rot" data-trec="contact" data-label="tab">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+    <div class="tab"><div class="rot">Free apt locating<b>Sophia (512) 676-1215</b></div></div>
+  </div>
+</div>
+<script src="../shared/brand.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+/* Shared print base for all flyers.
+   Canvas: US Letter 8.5x11in + 0.125in bleed on every side = 8.75x11.25in.
+   Authored at CSS 96px/in -> 840x1080px. Export at deviceScaleFactor 3.125 = 2625x3375px (300dpi).
+   Bleed edge   = 12px in from the canvas edge (trim line).
+   Safe zone    = 36px in from the canvas edge (0.25in inside the trim). Keep all text/logos inside .safe. */
+@page { size: 8.75in 11.25in; margin: 0; }
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  width: 840px; height: 1080px;
+  overflow: hidden;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  -webkit-font-smoothing: antialiased;
+}
+.sheet { position: relative; width: 840px; height: 1080px; overflow: hidden; }
+.safe { position: absolute; top: 36px; left: 36px; right: 36px; bottom: 36px; }
+
+/* Add class="guides" to <body> while designing to see trim (red) and safe (blue) lines. Never export with it on. */
+body.guides .sheet::before { content: ""; position: absolute; inset: 12px; border: 1px dashed rgba(255,0,0,.7); pointer-events: none; z-index: 999; }
+body.guides .sheet::after  { content: ""; position: absolute; inset: 36px; border: 1px dashed rgba(0,120,255,.7); pointer-events: none; z-index: 999; }
+
+img { display: block; }
+
+/* ---------- Spirit Real Estate Group logo (built from HTML so it uses the page fonts) ---------- */
+.spirit-logo { display: inline-flex; flex-direction: column; align-items: center; line-height: 1; --navy: #0F2D5C; --flame: #F2A93B; }
+.spirit-logo .spirit-logo-img { height: calc(var(--logo-size, 40px) * 1.7); width: auto; }
+.spirit-word { display: inline-flex; align-items: flex-end; font-family: 'Montserrat', 'Arial Black', sans-serif; font-weight: 900; font-size: var(--logo-size, 40px); color: var(--navy); letter-spacing: 0.01em; }
+.spirit-word .i-flame { position: relative; display: inline-block; }
+.spirit-word .i-flame svg { position: absolute; left: 50%; bottom: 96%; transform: translateX(-50%); height: 0.62em; width: auto; }
+.spirit-sub { margin-top: 0.22em; font-family: 'Montserrat', 'Arial', sans-serif; font-weight: 500; font-size: calc(var(--logo-size, 40px) * 0.29); letter-spacing: 0.34em; padding-left: 0.34em; color: var(--navy); text-transform: uppercase; white-space: nowrap; }
+.spirit-logo.on-dark { --navy: #FFFFFF; }
+
+/* ---------- Equal Housing Opportunity mark ---------- */
+.eho { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+.eho svg { height: 1.9em; width: auto; }
+
+/* ---------- TREC compliance footer (shared structure; colors come from each flyer) ---------- */
+.compliance { font-size: 9.5px; line-height: 1.32; }
+.compliance p { margin: 0; }
+.compliance strong { font-weight: 800; }
