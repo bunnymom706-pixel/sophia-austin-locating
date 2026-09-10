@@ -8,7 +8,7 @@ Professional pass (2026-09-10): a shared letterhead strip on every sheet, one un
 action (scan label, phone, link, email), cleaner photo shadows, no promo burst, no "shortlist" copy.
 
 House rules: no em dashes; brokerage is exactly "Spirit Real Estate Group"; never mention a shortlist.
-TREC 22 TAC 535.155: the phone (40 px) is the largest contact line; the broker line is 22 px and the
+TREC 22 TAC 535.155: on each tear-off tab the broker name is 9 px beside a 16 px phone. On the sheet the phone (40 px) is the largest contact line; the broker line is 22 px and the
 Spirit wordmark inside the 68 px logo reads about 32 px, so both clear the half-size rule.
 """
 import json, math, os, re
@@ -94,9 +94,10 @@ def letterhead(ink, rule):
 
 COMPLIANCE = ('Sophia Sky Reddehase is a Texas real estate sales agent, TREC License #831516, sponsored by '
               'Spirit Real Estate Group. The <strong style="font-weight:700">Information About Brokerage Services</strong> '
-              'form and the <strong style="font-weight:700">TREC Consumer Protection Notice</strong> are at trec.texas.gov '
-              'and on request. Locating is free to you; the agent is compensated by the property you lease. Pricing and '
-              'availability subject to change daily. All specials and effective rents subject to property terms and leasing approval.')
+              'form is available on request, and the <strong style="font-weight:700">TREC Consumer Protection Notice</strong> '
+              'is at trec.texas.gov. Locating is free to you; any locator fee is paid by the property to the broker. '
+              'Pricing and availability subject to change daily. All specials and effective rents subject to property '
+              'terms and leasing approval.')
 
 
 def legal_band(bg, ink, muted):
@@ -143,7 +144,7 @@ for i in range(10):
         '<div style="writing-mode:vertical-rl;transform:rotate(180deg);display:flex;flex-direction:column;align-items:center;gap:4px">'
         '<span style="font-family:' + BODY + ';font-size:16px;font-weight:700;color:' + CHOC + ';white-space:nowrap">(512) 676-1215</span>'
         '<span style="font-family:' + BODY + ';font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B01E30;white-space:nowrap">Sophia Sky Reddehase</span>'
-        '<span style="font-family:' + BODY + ';font-size:8px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:' + CHOC + ';white-space:nowrap">Spirit Real Estate Group</span>'
+        '<span style="font-family:' + BODY + ';font-size:9px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;color:' + CHOC + ';white-space:nowrap">Spirit Real Estate Group</span>'
         '</div></div>')
 
 tear = f'''<div style="position:relative;width:816px;height:1056px;overflow:hidden;background:{RED};display:flex;flex-direction:column;font-family:{BODY}">

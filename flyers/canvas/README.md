@@ -46,5 +46,6 @@ Measured in the rendered artboards: the phone is the largest contact line at 40 
 "Brokered by Spirit Real Estate Group" is 22 px and the Spirit wordmark inside the 68 px logo reads
 about 32 px, so both clear the half-size rule in 22 TAC 535.155. Every sheet carries the sponsored-agent
 line, TREC #831516, the IABS and Consumer Protection Notice reference, the explanation that locating is
-free because the agent is compensated by the property leased, the daily pricing and specials disclaimer, and the Equal Housing
-Opportunity mark. Each tear-off tab carries the phone, Sophia Sky Reddehase and Spirit Real Estate Group.
+free to the renter with any locator fee paid by the property to the broker, the daily pricing and specials disclaimer, and the Equal Housing
+Opportunity mark. Each tear-off tab carries the phone (16 px), Sophia Sky Reddehase and Spirit Real Estate Group (9 px, above half).
+The IABS form is offered on request (the broker's completed form); only the Consumer Protection Notice is cited at trec.texas.gov.
