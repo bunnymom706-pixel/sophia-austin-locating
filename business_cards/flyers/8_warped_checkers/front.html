@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Warped Checkers — Flyer front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* square flyer: 5.5 x 5.5in trim, 5.75 x 5.75in with bleed, 300 DPI */
+  html, body { width: 1725px; height: 1725px; overflow: hidden; background: #ffffff; }
+  .flyer {
+    position: relative; width: 1725px; height: 1725px; overflow: hidden;
+    border-radius: 110px; background: #f2a3d4;
+    font-family: 'Poppins', sans-serif;
+  }
+  .ground { position: absolute; inset: 0; }
+
+
+  .pill {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif; font-weight: 700; text-transform: uppercase;
+    white-space: nowrap; color: #f7e6c9; background: #2b3d1e;
+    box-shadow: 0 8px 0 #1b2712;
+  }
+  .role { font-size: 38px; letter-spacing: 11px; padding: 19px 46px 21px; border-radius: 22px; }
+  .services { font-size: 23px; letter-spacing: 3.6px; padding: 13px 34px 14px; border-radius: 999px; }
+
+  .brokermark {
+    position: absolute; left: 50%; transform: translateX(-50%); bottom: 118px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    background: #f7e6c9; border-radius: 28px; padding: 22px 44px 17px;
+    box-shadow: 0 0 0 5px #2b3d1e, 0 9px 0 #1b2712;
+  }
+  /* 700px wide gives an 84px "SPIRIT" cap against the 150px name — 1.79x,
+     inside the half-size floor in 22 TAC 535.155(a)(2) */
+  .brokermark img { width: 700px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 23px;
+    letter-spacing: 1.4px; color: #2b3d1e; white-space: nowrap;
+  }
+
+  .free {
+    position: absolute; width: 200px; height: 200px; transform: rotate(-12deg);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 23px;
+    line-height: 1.05; letter-spacing: 0.9px; color: #f7e6c9;
+    filter: drop-shadow(0 6px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #3f5a2c; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 41px; line-height: 1; }
+
+  .stack {
+    position: absolute; left: 0; right: 0; top: 240px;
+    display: flex; flex-direction: column; align-items: center; gap: 28px;
+  }
+  .stack svg { display: block; }
+  .tagline { margin-top: 30px; }
+  .cta {
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 44px;
+    letter-spacing: 3.4px; text-transform: uppercase; white-space: nowrap;
+    color: #f7e6c9; background: #2b3d1e;
+    padding: 25px 54px 27px; border-radius: 26px; box-shadow: 0 9px 0 #1b2712;
+  }
+</style>
+</head>
+<body>
+  <div class="flyer">
+    <svg class="ground" width="1725" height="1725" viewBox="0 0 1725 1725" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="ck" width="286" height="286" patternUnits="userSpaceOnUse">
+          <rect width="286" height="286" fill="#f2a3d4"/>
+          <rect width="143" height="143" fill="#e8542c"/>
+          <rect x="143" y="143" width="143" height="143" fill="#e8542c"/>
+        </pattern>
+        <filter id="wp" x="-25%" y="-25%" width="150%" height="150%"
+                filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0026 0.0034" numOctaves="2" seed="11" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="105" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <g filter="url(#wp)"><rect x="-300" y="-300" width="2325" height="2325" fill="url(#ck)"/></g>
+    </svg>
+    <svg width="1725" height="1725" viewBox="0 0 1725 1725" xmlns="http://www.w3.org/2000/svg" style="position:absolute; inset:0;">
+      <g fill="#f7e6c9">
+        <path transform="translate(190,250) scale(2.4)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(1420,300) scale(1.7)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(1350,1180) scale(2.0)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+
+    <div class="stack">
+      <svg width="1400" height="430" viewBox="0 0 1400 430" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Bagel Fat One" font-size="150" text-anchor="middle"
+         stroke-linejoin="round" paint-order="stroke">
+        <g stroke="#2b3d1e" stroke-width="36" fill="#2b3d1e" opacity="0.22" transform="translate(7,10)">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+        <g stroke="#2b3d1e" stroke-width="36" fill="#2b3d1e">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+        <g stroke="#f7e6c9" stroke-width="20" fill="#f7e6c9">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+        <g fill="#7a9b52">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+      </g>
+      </svg>
+      <div class="pill role">Texas Apartment Locator</div>
+      <div class="pill services">Relocation &#183; Second Chance &#183; First-Time Renters &#183; Luxury</div>
+
+      <svg class="tagline" width="1400" height="152" viewBox="0 0 1400 152" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Bagel Fat One" font-size="96" text-anchor="middle"
+         stroke-linejoin="round" paint-order="stroke">
+        <g stroke="#2b3d1e" stroke-width="23" fill="#2b3d1e" opacity="0.22" transform="translate(7,10)">
+          <text x="700" y="112">free for renters</text>
+        </g>
+        <g stroke="#2b3d1e" stroke-width="23" fill="#2b3d1e">
+          <text x="700" y="112">free for renters</text>
+        </g>
+        <g stroke="#f7e6c9" stroke-width="13" fill="#f7e6c9">
+          <text x="700" y="112">free for renters</text>
+        </g>
+        <g fill="#7a9b52">
+          <text x="700" y="112">free for renters</text>
+        </g>
+      </g>
+      </svg>
+      <div class="cta">Call or text (512) 676-1215</div>
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>
