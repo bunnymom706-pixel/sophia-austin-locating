@@ -91,7 +91,7 @@ def wave_path(y0, amp, wavelength, thickness=26, width=860):
 COMPLIANCE = ('Sophia Sky Reddehase is a Texas real estate sales agent, TREC License #831516, sponsored by '
               'Spirit Real Estate Group. The <strong style="font-weight:700">Information About Brokerage Services</strong> '
               'form and the <strong style="font-weight:700">TREC Consumer Protection Notice</strong> are at trec.texas.gov '
-              'and on request. Locating is free to you; the property pays the agent. Pricing and availability subject '
+              'and on request. Locating is free to you; the agent is compensated by the property you lease. Pricing and availability subject '
               'to change daily. All specials and effective rents subject to property terms and leasing approval.')
 
 
@@ -101,7 +101,7 @@ def legal_band(bg, ink, muted):
         '<div style="display:flex;align-items:center;justify-content:space-between;gap:22px">'
         '<div style="display:flex;flex-direction:column;gap:3px">'
         '<div style="font-family:' + BODY + ';font-size:20px;font-weight:700;line-height:1.1;white-space:nowrap">Brokered by Spirit Real Estate Group</div>'
-        '<div style="font-family:' + BODY + ';font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:' + muted + '">Sponsored sales agent</div>'
+        '<div style="font-family:' + BODY + ';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:' + muted + '">Sophia Sky Reddehase, sponsored sales agent</div>'
         '</div>'
         '<img src="spirit_logo.png" alt="Spirit Real Estate Group" style="height:70px;width:auto;flex:none;display:block">'
         '<div style="display:flex;align-items:center;gap:7px;flex:none">' + eho(muted) +
@@ -137,7 +137,7 @@ for i in range(10):
         '<div style="display:flex;align-items:center;justify-content:center;' + border + '">'
         '<div style="writing-mode:vertical-rl;transform:rotate(180deg);display:flex;flex-direction:column;align-items:center;gap:4px">'
         '<span style="font-family:' + BODY + ';font-size:16px;font-weight:700;color:' + CHOC + ';white-space:nowrap">(512) 676-1215</span>'
-        '<span style="font-family:' + BODY + ';font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B01E30;white-space:nowrap">Sophia Reddehase</span>'
+        '<span style="font-family:' + BODY + ';font-size:8px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#B01E30;white-space:nowrap">Sophia Sky Reddehase</span>'
         '<span style="font-family:' + BODY + ';font-size:8px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:' + CHOC + ';white-space:nowrap">Spirit Real Estate Group</span>'
         '</div></div>')
 
@@ -195,7 +195,7 @@ reloc = f'''<div style="position:relative;width:816px;height:1056px;overflow:hid
       <div style="position:absolute;left:0px;top:302px;transform:rotate(-14deg)">{daisy(124, TANG3, CREAM3)}</div>
     </div>
     <h1 style="margin:14px 0 0;font-family:{SERIF};font-weight:400;font-size:60px;line-height:1.02;color:{INDIGO};text-wrap:balance">Moving to Austin?<br><span style="color:{TANG3}">I've got you.</span></h1>
-    <p style="margin:12px 0 0;font-size:21px;font-weight:500;line-height:1.3;color:{INDIGO}">Video tours, local advice, keys when you land.</p>
+    <p style="margin:12px 0 0;font-size:21px;font-weight:500;line-height:1.3;color:{INDIGO}">Video tours, local advice, a shortlist before you land.</p>
     <div style="margin-top:auto;width:100%">{cta(INDIGO, CREAM3, TANG3, 'Relocating? Scan to start.')}</div>
   </div>
   {legal_band(CREAM3, INDIGO, '#5A4F7A')}
