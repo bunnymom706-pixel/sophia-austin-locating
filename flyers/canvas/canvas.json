@@ -42,8 +42,8 @@
       "id": "print-spec",
       "x": 0,
       "y": -150,
-      "w": 700,
-      "text": "US Letter trim, 8.5 x 11 in, drawn at 96 px per inch. Export PDF prints each artboard as one page. For Canva Print add a 0.125 in bleed on all four sides and keep type inside the current margins."
+      "w": 760,
+      "text": "US Letter trim, 8.5 x 11 in at 96 px per inch. Export PDF prints each artboard as one page. For Canva Print add a 0.125 in bleed on all four sides. The QR on every flyer opens sparkapt.com/inquiry/sophia-reddehase859."
     }
   ],
   "launch": {
