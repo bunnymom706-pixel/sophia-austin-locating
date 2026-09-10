@@ -4,11 +4,14 @@ Settled with Sophia on 2026-09-10: polished retro pop, full color, one color pai
 a mix of eras, patterns, letterforms and headline shapes, a mix of tones, property photos only,
 QR to her public intake form (sparkapt.com/inquiry/sophia-reddehase859, verified by decode).
 
-House rules: no em dashes; brokerage is exactly "Spirit Real Estate Group".
-TREC 22 TAC 535.155: the phone (34 px) is the largest contact line; the broker line is 20 px and
-the Spirit wordmark inside the 70 px logo reads about 33 px, so both clear the half-size rule.
+Professional pass (2026-09-10): a shared letterhead strip on every sheet, one unified call to
+action (scan label, phone, link, email), cleaner photo shadows, no promo burst, no "shortlist" copy.
+
+House rules: no em dashes; brokerage is exactly "Spirit Real Estate Group"; never mention a shortlist.
+TREC 22 TAC 535.155: the phone (40 px) is the largest contact line; the broker line is 22 px and the
+Spirit wordmark inside the 68 px logo reads about 32 px, so both clear the half-size rule.
 """
-import json, math, os
+import json, math, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 QR_D = open(os.path.join(HERE, 'qr_path.txt'), encoding='utf-8').read().strip()
@@ -59,15 +62,6 @@ def scallop(bumps, amp, radius, n=288):
     return 'polygon(' + ','.join(pts) + ')'
 
 
-def burst_points(n, ro, ri):
-    pts = []
-    for i in range(2 * n):
-        r = ro if i % 2 == 0 else ri
-        a = math.pi * i / n - math.pi / 2
-        pts.append('%.2f,%.2f' % (50 + r * math.cos(a), 50 + r * math.sin(a)))
-    return ' '.join(pts)
-
-
 def daisy(size, petal, center):
     petals = ''.join('<ellipse cx="50" cy="25" rx="11" ry="22" fill="%s" transform="rotate(%d 50 50)"></ellipse>'
                      % (petal, i * 45) for i in range(8))
@@ -88,44 +82,55 @@ def wave_path(y0, amp, wavelength, thickness=26, width=860):
             + ' L'.join('%.1f %.1f' % p for p in reversed(bot)) + ' Z')
 
 
+def letterhead(ink, rule):
+    """Shared top strip: the same identity line on all four sheets."""
+    return (
+        '<div style="flex:none;align-self:stretch;display:flex;align-items:baseline;justify-content:space-between;gap:20px;'
+        'padding-bottom:12px;border-bottom:1.5px solid ' + rule + ';margin-bottom:22px;text-align:left">'
+        '<div style="font-family:' + BODY + ';font-size:20px;font-weight:700;line-height:1.1;letter-spacing:-0.005em;color:' + ink + ';white-space:nowrap">Sophia Sky Reddehase</div>'
+        '<div style="font-family:' + BODY + ';font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:' + ink + ';white-space:nowrap">Austin Apartment Locator &middot; TREC #831516</div>'
+        '</div>')
+
+
 COMPLIANCE = ('Sophia Sky Reddehase is a Texas real estate sales agent, TREC License #831516, sponsored by '
               'Spirit Real Estate Group. The <strong style="font-weight:700">Information About Brokerage Services</strong> '
               'form and the <strong style="font-weight:700">TREC Consumer Protection Notice</strong> are at trec.texas.gov '
-              'and on request. Locating is free to you; the agent is compensated by the property you lease. Pricing and availability subject '
-              'to change daily. All specials and effective rents subject to property terms and leasing approval.')
+              'and on request. Locating is free to you; the agent is compensated by the property you lease. Pricing and '
+              'availability subject to change daily. All specials and effective rents subject to property terms and leasing approval.')
 
 
 def legal_band(bg, ink, muted):
     return (
-        '<div style="flex:none;background:' + bg + ';color:' + ink + ';padding:16px 52px 18px;display:flex;flex-direction:column;gap:10px">'
-        '<div style="display:flex;align-items:center;justify-content:space-between;gap:22px">'
-        '<div style="display:flex;flex-direction:column;gap:3px">'
-        '<div style="font-family:' + BODY + ';font-size:20px;font-weight:700;line-height:1.1;white-space:nowrap">Brokered by Spirit Real Estate Group</div>'
+        '<div style="flex:none;background:' + bg + ';color:' + ink + ';padding:16px 48px 18px;display:flex;flex-direction:column;gap:10px">'
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:18px">'
+        '<div style="display:flex;flex-direction:column;gap:4px">'
+        '<div style="font-family:' + BODY + ';font-size:22px;font-weight:700;line-height:1.1;letter-spacing:-0.005em;white-space:nowrap">Brokered by Spirit Real Estate Group</div>'
         '<div style="font-family:' + BODY + ';font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:' + muted + '">Sophia Sky Reddehase, sponsored sales agent</div>'
         '</div>'
-        '<img src="spirit_logo.png" alt="Spirit Real Estate Group" style="height:70px;width:auto;flex:none;display:block">'
+        '<img src="spirit_logo.png" alt="Spirit Real Estate Group" style="height:68px;width:auto;flex:none;display:block">'
         '<div style="display:flex;align-items:center;gap:7px;flex:none">' + eho(muted) +
-        '<div style="font-family:' + BODY + ';font-size:9.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;line-height:1.3;color:' + muted + '">Equal Housing<br>Opportunity</div>'
+        '<div style="font-family:' + BODY + ';font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;line-height:1.3;color:' + muted + '">Equal Housing<br>Opportunity</div>'
         '</div></div>'
         '<div style="font-family:' + BODY + ';font-size:12px;font-weight:500;line-height:1.42;color:' + muted + ';text-wrap:pretty">' + COMPLIANCE + '</div>'
         '</div>')
 
 
-def cta(bg, ink, accent, pitch):
+def cta(bg, ink, accent):
+    """One call to action on every sheet: scan label, phone, link and email beside a large QR."""
     return (
-        '<div style="display:flex;align-items:center;gap:26px;background:' + bg + ';color:' + ink + ';border-radius:22px;padding:12px 26px 12px 12px">'
-        '<div style="background:#FFFFFF;border-radius:14px;padding:8px;flex:none">' + qr(148) + '</div>'
-        '<div style="display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left">'
-        '<div style="font-family:' + BODY + ';font-size:14px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:' + accent + '">' + pitch + '</div>'
-        '<div style="font-family:' + BODY + ';font-size:34px;font-weight:700;line-height:1;letter-spacing:-0.01em">(512) 676-1215</div>'
-        '<div style="display:flex;flex-direction:column;gap:2px;margin-top:4px">'
-        '<div style="font-family:' + BODY + ';font-size:24px;font-weight:700;line-height:1.1">Sophia Sky Reddehase</div>'
-        '<div style="font-family:' + BODY + ';font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase">Apartment Locator &middot; Austin, Texas &middot; TREC #831516</div>'
-        '<div style="font-family:' + BODY + ';font-size:12px;font-weight:500;white-space:nowrap">sparkapt.com/inquiry/sophia-reddehase859 &middot; sophia.reddehase@spiritre.com</div>'
+        '<div style="display:flex;align-items:center;gap:28px;background:' + bg + ';color:' + ink + ';border-radius:20px;padding:12px 28px 12px 12px">'
+        '<div style="background:#FFFFFF;border-radius:12px;padding:8px;flex:none">' + qr(148) + '</div>'
+        '<div style="display:flex;flex-direction:column;gap:8px;min-width:0;text-align:left">'
+        '<div style="font-family:' + BODY + ';font-size:14px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:' + accent + '">Scan to start your free search</div>'
+        '<div style="font-family:' + BODY + ';font-size:40px;font-weight:700;line-height:1;letter-spacing:-0.015em">(512) 676-1215</div>'
+        '<div style="display:flex;flex-direction:column;gap:3px;margin-top:2px">'
+        '<div style="font-family:' + BODY + ';font-size:14px;font-weight:500;white-space:nowrap">sparkapt.com/inquiry/sophia-reddehase859</div>'
+        '<div style="font-family:' + BODY + ';font-size:14px;font-weight:500;white-space:nowrap">sophia.reddehase@spiritre.com</div>'
         '</div></div></div>')
 
 
 DMS = 'DM+Sans:wght@500;700'
+PHOTO_SHADOW = 'box-shadow:0 14px 30px rgba(60,12,32,0.22)'
 
 # ------------------------------------------ 1 TEAR-OFF: cherry red + cream, 60s mod, checker trim
 RED, CREAM, BUTTER, CHOC = '#D7263D', '#FFF1DC', '#F6C94C', '#3A1F17'
@@ -143,16 +148,16 @@ for i in range(10):
 
 tear = f'''<div style="position:relative;width:816px;height:1056px;overflow:hidden;background:{RED};display:flex;flex-direction:column;font-family:{BODY}">
   <div style="height:26px;flex:none;background:repeating-conic-gradient({CREAM} 0% 25%, {RED} 0% 50%) 0 0 / 52px 52px"></div>
-  <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:28px 52px 22px">
+  <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:24px 52px 22px">
+    {letterhead(CREAM, CREAM + '59')}
     <div style="display:flex;gap:28px;align-items:flex-start">
-      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:10px">
-        <div style="font-size:14px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:{CREAM}">Austin, Texas</div>
-        <h1 style="margin:0;font-family:{BLOCK};font-weight:900;text-transform:uppercase;line-height:0.86;letter-spacing:0.004em;color:{CREAM}"><span style="display:block;font-size:146px;color:{BUTTER}">Free</span><span style="display:block;font-size:84px">Apartment</span><span style="display:block;font-size:84px">Locating</span></h1>
+      <div style="flex:1;min-width:0">
+        <h1 style="margin:0;font-family:{BLOCK};font-weight:900;text-transform:uppercase;line-height:0.86;letter-spacing:0.004em;color:{CREAM}"><span style="display:block;font-size:136px;color:{BUTTER}">Free</span><span style="display:block;font-size:84px">Apartment</span><span style="display:block;font-size:84px">Locating</span></h1>
       </div>
-      <div style="flex:none;width:300px;height:340px;border-radius:150px 150px 0 0;overflow:hidden;border:8px solid {CREAM};box-sizing:border-box"><img src="tear_arch.jpg" alt="Poolside lounge chairs" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:300px;height:318px;border-radius:150px 150px 0 0;overflow:hidden;border:8px solid {CREAM};box-sizing:border-box"><img src="tear_arch.jpg" alt="Poolside lounge chairs" style="width:100%;height:100%;object-fit:cover;display:block"></div>
     </div>
-    <p style="margin:34px 0 0;font-size:24px;font-weight:500;line-height:1.3;color:{CREAM};text-wrap:pretty">Tell me what you want. I'll send a shortlist.</p>
-    <div style="margin-top:auto">{cta(BUTTER, CHOC, '#B01E30', 'Scan for your free search')}</div>
+    <p style="margin:26px 0 0;font-size:24px;font-weight:500;line-height:1.3;color:{CREAM};text-wrap:pretty">Tell me what you need. I'll do the searching.</p>
+    <div style="margin-top:auto">{cta(BUTTER, CHOC, '#B01E30')}</div>
   </div>
   {legal_band(CREAM, CHOC, '#6B4A3C')}
   <div style="flex:none;height:146px;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border-top:1.5px dashed {CHOC}66;background:{CREAM}">{''.join(tabs)}</div>
@@ -161,23 +166,22 @@ tear = f'''<div style="position:relative;width:816px;height:1056px;overflow:hidd
 # ------------------------------------ 2 FREE LOCATING (Main): pink + orange, 70s groovy, stripes
 PINK, PINK2, TANG, CREAM2, PLUM = '#F6A6D6', '#F9BFE2', '#F05A22', '#FFF3E2', '#5B1433'
 GROOVY = "Shrikhand, 'Cooper Black', Georgia, serif"
-SQUIG = 'M8 58 C 38 6, 74 6, 96 46 S 146 104, 176 58 S 222 4, 252 42 S 300 96, 330 52'
 
 free = f'''<div style="position:relative;width:816px;height:1056px;overflow:hidden;background:repeating-linear-gradient(90deg, {PINK} 0px 36px, {PINK2} 36px 72px);display:flex;flex-direction:column;font-family:{BODY}">
-  <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:42px 52px 22px">
-    <div style="font-size:14px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:{PLUM}">Free apartment locating &middot; Austin</div>
-    <h1 style="margin:14px 0 0;font-family:{GROOVY};font-weight:400;line-height:0.98;transform:rotate(-4deg);transform-origin:0 60%"><span style="display:block;font-size:90px;color:{TANG};text-shadow:5px 5px 0 {PLUM}">Pad hunting?</span><span style="display:block;font-size:64px;color:{PLUM};margin-left:64px">Let me do it.</span></h1>
-    <div style="position:relative;height:372px;margin-top:26px;flex:none">
-      <div style="position:absolute;right:14px;top:4px;width:390px;background:#FFFFFF;padding:12px 12px 40px;box-sizing:border-box;transform:rotate(4deg);box-shadow:0 10px 0 rgba(91,20,51,0.2)">
-        <img src="free_pool.jpg" alt="Courtyard pool" style="width:100%;height:316px;object-fit:cover;display:block">
-        <div style="position:absolute;left:0;right:0;bottom:13px;text-align:center;font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:{PLUM}">Courtyard pool</div>
+  <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:34px 52px 22px">
+    {letterhead(PLUM, PLUM + '40')}
+    <h1 style="margin:4px 0 0;font-family:{GROOVY};font-weight:400;line-height:0.98;transform:rotate(-4deg);transform-origin:0 60%"><span style="display:block;font-size:90px;color:{TANG};text-shadow:4px 4px 0 {PLUM}">Pad hunting?</span><span style="display:block;font-size:64px;color:{PLUM};margin-left:64px">Let me do it.</span></h1>
+    <div style="position:relative;height:342px;margin-top:22px;flex:none">
+      <div style="position:absolute;right:14px;top:2px;width:380px;background:#FFFFFF;padding:12px 12px 38px;box-sizing:border-box;transform:rotate(4deg);{PHOTO_SHADOW}">
+        <img src="free_pool.jpg" alt="Courtyard pool" style="width:100%;height:292px;object-fit:cover;display:block">
+        <div style="position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:{PLUM}">Courtyard pool</div>
       </div>
-      <div style="position:absolute;left:36px;top:64px;width:270px;background:#FFFFFF;padding:10px 10px 36px;box-sizing:border-box;transform:rotate(-6deg);box-shadow:0 10px 0 rgba(91,20,51,0.2)">
-        <img src="free_kitchen.jpg" alt="Kitchen with island" style="width:100%;height:250px;object-fit:cover;display:block">
-        <div style="position:absolute;left:0;right:0;bottom:11px;text-align:center;font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:{PLUM}">Chef's kitchen</div>
+      <div style="position:absolute;left:36px;top:56px;width:262px;background:#FFFFFF;padding:10px 10px 34px;box-sizing:border-box;transform:rotate(-6deg);{PHOTO_SHADOW}">
+        <img src="free_kitchen.jpg" alt="Kitchen with island" style="width:100%;height:232px;object-fit:cover;display:block">
+        <div style="position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:{PLUM}">Chef's kitchen</div>
       </div>
     </div>
-    <div style="margin-top:auto">{cta(TANG, CREAM2, PLUM, 'Free for you. Scan to start.')}</div>
+    <div style="margin-top:auto">{cta(TANG, CREAM2, PLUM)}</div>
   </div>
   {legal_band(CREAM2, PLUM, '#7A3A55')}
 </div>'''
@@ -189,14 +193,15 @@ SERIF = "'Young Serif', Georgia, 'Times New Roman', serif"
 reloc = f'''<div style="position:relative;width:816px;height:1056px;overflow:hidden;background:{LILAC};display:flex;flex-direction:column;font-family:{BODY}">
   <svg viewBox="0 0 816 220" width="816" height="220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;left:0;top:222px;display:block"><path d="{wave_path(34, 18, 272)}" fill="{TANG3}"></path><path d="{wave_path(84, 18, 272)}" fill="{CREAM3}"></path><path d="{wave_path(134, 18, 272)}" fill="{TANG3}"></path></svg>
   <div style="position:relative;z-index:2;flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;padding:30px 52px 22px;text-align:center">
-    <div style="position:relative;width:460px;height:440px;flex:none">
-      <svg viewBox="0 0 460 116" width="460" height="116" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Relocating to Austin" style="position:absolute;left:0;top:-36px;display:block"><path id="relocArc" d="M 40 110 A 260 260 0 0 1 420 110" fill="none"></path><text style="font-family:{BODY};font-size:22px;font-weight:700;letter-spacing:6px" fill="{INDIGO}"><textPath href="#relocArc" startOffset="50%" text-anchor="middle">RELOCATING TO AUSTIN</textPath></text></svg>
-      <div style="position:absolute;left:45px;top:70px;width:370px;height:370px;border-radius:50%;overflow:hidden;border:12px solid {CREAM3};box-sizing:border-box"><img src="reloc_circle.jpg" alt="Furnished model living room" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-      <div style="position:absolute;left:0px;top:302px;transform:rotate(-14deg)">{daisy(124, TANG3, CREAM3)}</div>
+    {letterhead(INDIGO, INDIGO + '40')}
+    <div style="position:relative;width:460px;height:386px;flex:none">
+      <svg viewBox="0 0 460 116" width="460" height="116" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Relocating to Austin" style="position:absolute;left:0;top:-22px;display:block"><path id="relocArc" d="M 40 110 A 260 260 0 0 1 420 110" fill="none"></path><text style="font-family:{BODY};font-size:22px;font-weight:700;letter-spacing:6px" fill="{INDIGO}"><textPath href="#relocArc" startOffset="50%" text-anchor="middle">RELOCATING TO AUSTIN</textPath></text></svg>
+      <div style="position:absolute;left:72px;top:70px;width:316px;height:316px;border-radius:50%;overflow:hidden;border:12px solid {CREAM3};box-sizing:border-box"><img src="reloc_circle.jpg" alt="Furnished model living room" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="position:absolute;left:14px;top:250px;transform:rotate(-14deg)">{daisy(124, TANG3, CREAM3)}</div>
     </div>
-    <h1 style="margin:14px 0 0;font-family:{SERIF};font-weight:400;font-size:60px;line-height:1.02;color:{INDIGO};text-wrap:balance">Moving to Austin?<br><span style="color:{TANG3}">I've got you.</span></h1>
-    <p style="margin:12px 0 0;font-size:21px;font-weight:500;line-height:1.3;color:{INDIGO}">Video tours, local advice, a shortlist before you land.</p>
-    <div style="margin-top:auto;width:100%">{cta(INDIGO, CREAM3, TANG3, 'Relocating? Scan to start.')}</div>
+    <h1 style="margin:12px 0 0;font-family:{SERIF};font-weight:400;font-size:56px;line-height:1.02;color:{INDIGO};text-wrap:balance">Moving to Austin?<br><span style="color:{TANG3}">I've got you.</span></h1>
+    <p style="margin:10px 0 0;font-size:21px;font-weight:500;line-height:1.3;color:{INDIGO}">Video tours and local advice before you land.</p>
+    <div style="margin-top:auto;width:100%">{cta(INDIGO, CREAM3, TANG3)}</div>
   </div>
   {legal_band(CREAM3, INDIGO, '#5A4F7A')}
 </div>'''
@@ -206,26 +211,20 @@ RED4, HOT, BLUSH, MAROON = '#E8332A', '#F25CA2', '#FFE3EC', '#5A0F24'
 FAT = "'Titan One', 'Arial Black', Impact, sans-serif"
 
 move = f'''<div style="position:relative;width:816px;height:1056px;overflow:hidden;background:{RED4};display:flex;flex-direction:column;font-family:{BODY}">
-  <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:38px 52px 22px">
+  <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column;padding:32px 52px 22px">
+    {letterhead(BLUSH, BLUSH + '59')}
     <div style="position:relative;height:410px;flex:none">
       <div style="position:absolute;left:0;top:0;width:410px;height:410px;background:{HOT};clip-path:{scallop(20, 3.0, 46.5)};display:flex;align-items:center;justify-content:center;padding-right:80px;box-sizing:border-box">
-        <div style="transform:rotate(-6deg);display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
-          <div style="font-family:{BODY};font-size:14px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:{MAROON}">Austin, Texas</div>
-          <div style="font-family:{FAT};font-size:56px;line-height:0.92;color:{MAROON};text-transform:uppercase">Lease<br>ending?</div>
-        </div>
+        <div style="transform:rotate(-6deg);font-family:{FAT};font-size:58px;line-height:0.92;color:{MAROON};text-transform:uppercase;text-align:center">Lease<br>ending?</div>
       </div>
       <div style="position:absolute;right:0;top:14px;width:382px;height:382px">
         <div style="position:absolute;left:0;top:0;width:382px;height:382px;background:{BLUSH};clip-path:{scallop(22, 2.6, 47.5)}"></div>
         <img src="move_scallop.jpg" alt="Arched facade over a resident courtyard" style="position:absolute;left:16px;top:16px;width:350px;height:350px;object-fit:cover;display:block;clip-path:{scallop(22, 2.6, 46.0)}">
-        <div style="position:absolute;right:-8px;top:-8px;width:114px;height:114px;transform:rotate(12deg)">
-          <svg viewBox="0 0 100 100" width="114" height="114" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;left:0;top:0;display:block"><polygon points="{burst_points(14, 50, 40)}" fill="{MAROON}"></polygon></svg>
-          <div style="position:absolute;left:0;top:0;width:114px;height:114px;display:flex;align-items:center;justify-content:center;font-family:{FAT};font-size:26px;color:{BLUSH}">FREE</div>
-        </div>
       </div>
     </div>
-    <h1 style="margin:62px 0 0;font-family:{FAT};font-weight:400;font-size:58px;line-height:1;color:{BLUSH};text-shadow:4px 4px 0 {MAROON}">Don't just renew.</h1>
+    <h1 style="margin:30px 0 0;font-family:{FAT};font-weight:400;font-size:58px;line-height:1;color:{BLUSH};text-shadow:4px 4px 0 {MAROON}">Don't just renew.</h1>
     <p style="margin:12px 0 0;font-size:22px;font-weight:500;line-height:1.3;color:{BLUSH}">See what your rent gets you across Austin this month.</p>
-    <div style="margin-top:auto">{cta(MAROON, BLUSH, HOT, 'Before you renew, scan here')}</div>
+    <div style="margin-top:auto">{cta(MAROON, BLUSH, HOT)}</div>
   </div>
   {legal_band(BLUSH, MAROON, '#8A3B53')}
 </div>'''
@@ -239,6 +238,7 @@ OUT = {
 }
 for name, html in OUT.items():
     assert '—' not in html and '&mdash;' not in html, 'em dash in ' + name
+    assert not re.search(r'(?i)short\s*list', html), 'shortlist copy in ' + name
     assert 'Spirit Real Estate Group,' not in html and 'LLC' not in html, 'brokerage name in ' + name
     assert 'sparkapt.com/inquiry/sophia-reddehase859' in html and 'TREC #831516' in html
     assert 'Information About Brokerage Services' in html and 'Consumer Protection Notice' in html

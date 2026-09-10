@@ -183,7 +183,7 @@ hero = """  <div style="position:absolute;left:0;right:0;top:0;height:396px;over
     <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(47,81,72,0) 40%, rgba(47,81,72,0.55) 74%, {paper} 100%)"></div>
     <div style="position:absolute;left:60px;right:60px;bottom:34px;display:flex;flex-direction:column;gap:12px">
       {label}
-      <h1 style="margin:0;font-family:{display};font-weight:400;font-size:62px;line-height:0.98;letter-spacing:-0.005em;color:#F5F0E6;text-wrap:balance;text-shadow:0 2px 26px rgba(18,32,28,0.55)">A shortlist,<br><span style="font-style:italic;color:{accent}">not a search.</span></h1>
+      <h1 style="margin:0;font-family:{display};font-weight:400;font-size:62px;line-height:0.98;letter-spacing:-0.005em;color:#F5F0E6;text-wrap:balance;text-shadow:0 2px 26px rgba(18,32,28,0.55)">Your next place,<br><span style="font-style:italic;color:{accent}">found for you.</span></h1>
     </div>
   </div>
 """.format(paper=th['paper'], display=DISPLAY, accent=th['accent'],
@@ -250,13 +250,13 @@ inner4 = """    <div style="display:flex;gap:40px;align-items:flex-start">
     </div>
 
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-top:12px">
-      <div style="font-family:{sans};font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:{stone}">Renewal review &middot; Shortlist &middot; Specials</div>
+      <div style="font-family:{sans};font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:{stone}">Renewal review &middot; Video tours &middot; Specials</div>
       <div style="font-family:{sans};font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:{stone};white-space:nowrap">Resident courtyard</div>
     </div>
 
     <div style="height:1px;background:{rule};margin-top:22px"></div>
 
-    <p style="margin:22px 0 0;font-family:{display};font-size:24px;line-height:1.38;color:{ink};max-width:640px;text-wrap:pretty">Before you sign the renewal, see what the same rent secures across Austin this month. <span style="font-style:italic;color:{accent}">One message. A shortlist by tomorrow.</span></p>
+    <p style="margin:22px 0 0;font-family:{display};font-size:24px;line-height:1.38;color:{ink};max-width:640px;text-wrap:pretty">Before you sign the renewal, see what the same rent secures across Austin this month. <span style="font-style:italic;color:{accent}">One message to get started.</span></p>
 """.format(label=label('Lease ending soon &middot; Austin, Texas', 'move'), display=DISPLAY,
            sans=SANS, ink=th['ink'], accent=th['accent'], stone=th['stone'], rule=th['rule'])
 
