@@ -114,19 +114,18 @@ copying over the committed PNGs. It needs Playwright and desktop Chrome.
 
 A website has a **stricter** requirement than print. 22 TAC §531.20 wants the
 IABS notice and the TREC Consumer Protection Notice linked on the homepage.
-Both are in `website/index.html`, but **the IABS link is still a placeholder**
-pointing at TREC's current blank form (IABS 1-2; the old 1-0 link was dead).
+Both are in `website/index.html`, and the IABS link now opens `website/IABS_Spirit_Real_Estate_Group_Sophia_Reddehase.pdf`,
+TREC's current IABS 1-2 form filled in from the TREC records (awaiting Bryan's OK).
 The site mentions specials, so its footer carries the required disclaimer:
 "Pricing and availability subject to change daily. All specials and effective
 rents subject to property terms and leasing approval."
 
 ## Open items
 
-1. **Spirit's completed IABS PDF** for the website footer. It should read
-   Bryan Keith Bjerke dba Spirit Real Estate Group, #562021, as the broker
-   and designated broker, and Sophia Sky Reddehase, #831516, as the sales
-   agent. A file named `IABSSophia.pdf` exists on Sophia's computer, but it
-   is the old **One Place Locators** form (broker #9014999). **Never use it.**
+1. **IABS form, confirm with Bryan.** Filled in from TREC: sponsoring broker Bryan Keith Bjerke
+   dba Spirit Real Estate Group, #562021; sales agent Sophia Sky Reddehase, #831516. The designated
+   broker and supervisor rows are blank because he is licensed as an individual. The old
+   `IABSSophia.pdf` on Sophia's computer is the One Place Locators form. **Never use it.**
 2. **Broker approval.** See below.
 3. The root-level v1 pages (`index.html`, `pinterest_modern_business_cards.html`,
    `all_business_cards_showcase.html`, `app.js`, `styles.css`) had the brokerage
