@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Social Checks — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* vertical card: 2.25 x 3.75in @300dpi incl. bleed */
+  html, body { width: 675px; height: 1125px; overflow: hidden; background: #c8102e; }
+  .card { position: relative; width: 675px; height: 1125px; overflow: hidden; background: #c8102e;
+          font-family: 'Poppins', sans-serif; }
+
+  /* pink/red checkered border frame, 56px cells, with a flat panel inside */
+  .frame {
+    position: absolute; inset: 0;
+    background-color: #f9b8cf;
+    background-image:
+      linear-gradient(45deg, #c8102e 25%, transparent 25%, transparent 75%, #c8102e 75%),
+      linear-gradient(45deg, #c8102e 25%, transparent 25%, transparent 75%, #c8102e 75%);
+    background-size: 112.5px 112.5px;
+    background-position: 0 0, 56.25px 56.25px;
+  }
+  .panel { position: absolute; left: 76px; top: 76px; right: 76px; bottom: 76px; background: #c8102e; }
+
+  .name { position: absolute; left: 76px; right: 76px; top: 236px; text-align: center; }
+  .name svg { display: block; margin: 0 auto; }
+  .role { position: absolute; left: 50%; transform: translateX(-50%); top: 582px; }
+  .services { position: absolute; left: 50%; transform: translateX(-50%); top: 654px; }
+  .sparkle { position: absolute; }
+
+  .role {
+    
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 6px;
+    text-transform: uppercase; white-space: nowrap;
+    color: #7a0a1e; background: #f9b8cf; padding: 12px 30px 13px; border-radius: 14px;
+    box-shadow: 0 5px 0 #560716;
+  }
+  .services {
+    
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13.5px; letter-spacing: 1.8px;
+    text-transform: uppercase; white-space: nowrap;
+    color: #7a0a1e; background: #f9b8cf; padding: 8px 18px 9px; border-radius: 999px;
+    box-shadow: 0 5px 0 #560716;
+  }
+  /* broker mark: navy logo on a cream plate. 420px gives a 50px cap against the 88px name — 1.76x */
+  .brokermark {
+    position: absolute; left: 50%; transform: translateX(-50%); bottom: 44px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    background: #fff3f5; border-radius: 18px; padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #7a0a1e, 0 6px 0 #560716;
+  }
+  .brokermark img { width: 420px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.9px;
+    color: #7a0a1e; white-space: nowrap;
+  }</style>
+</head>
+<body>
+  <div class="card">
+    <div class="frame"></div>
+    <div class="panel"></div>
+
+    <div class="sparkle" style="top:170px; left:104px;"><svg width="46" height="46" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#f9b8cf"/></svg></div>
+    <div class="sparkle" style="top:520px; left:540px;"><svg width="38" height="38" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#f9b8cf"/></svg></div>
+    <div class="sparkle" style="top:762px; left:120px;"><svg width="52" height="52" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#f9b8cf"/></svg></div>
+    <div class="sparkle" style="top:840px; left:212px;"><svg width="30" height="30" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#f9b8cf"/></svg></div>
+    <div class="sparkle" style="top:756px; left:452px;"><svg width="40" height="40" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#f9b8cf"/></svg></div>
+
+    <!-- tall condensed caps, as on the pin -->
+    <div class="name">
+      <svg width="523" height="330" viewBox="0 0 523 330" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Anton" font-size="88" text-anchor="middle" letter-spacing="6" fill="#f9b8cf">
+          <text x="261" y="96">SOPHIA</text>
+          <text x="261" y="202">SKY</text>
+          <text x="261" y="308">REDDEHASE</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="role">Austin Apartment Locator</div>
+    <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>

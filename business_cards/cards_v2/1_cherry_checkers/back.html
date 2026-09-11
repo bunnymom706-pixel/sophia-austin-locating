@@ -1,175 +1,205 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cherry Checkers — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
 <style>
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 1125px;
-    height: 675px;
-    overflow: hidden;
-  }
-  :root {
-    --cherry: #D91635;
-    --cherry-deep: #A80F27;
-    --pink: #FFB4C8;
-    --cream: #FFF8EE;
-    --ink: #3A0B14;
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #d91635; }
+
   .card {
     position: relative;
     width: 1125px;
     height: 675px;
-    background: var(--cherry);
     overflow: hidden;
-    font-family: 'Nunito', sans-serif;
-  }
-  .checker {
-    position: absolute;
-    top: -220px;
-    left: -220px;
-    width: 1565px;
-    height: 1115px;
-    background-image: repeating-conic-gradient(var(--cherry) 0% 25%, var(--pink) 0% 50%);
-    background-size: 72px 72px;
-    transform: rotate(6deg);
+    background: #fff8ee;
+    font-family: 'Poppins', sans-serif;
   }
 
-  /* QR panel, left side */
-  .qr-panel {
+  /* cream head, cherry body */
+  .band {
     position: absolute;
-    top: 95px;
-    left: 75px;
-    width: 440px;
-    height: 470px;
-    background: var(--cream);
-    border-radius: 34px;
-    box-shadow: 0 10px 0 rgba(168, 15, 39, 0.35);
-    z-index: 3;
+    left: 0; right: 0; bottom: 0;
+    height: 415px;
+    background: #d91635;
+  }
+
+  .sparkle { position: absolute; }
+  .sparkle svg { display: block; }
+
+  .head {
+    position: absolute;
+    top: 46px;
+    left: 37.5px; right: 37.5px;
+    text-align: center;
+  }
+
+  /* contacts left, QR right, brokermark bottom-left: each gets its own column
+     so nothing collides when content changes */
+  .body { position: absolute; left: 78px; top: 292px; }
+
+  .icons { display: flex; gap: 16px; margin-bottom: 22px; }
+  .icons svg { display: block; }
+
+  .lines {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 1.42;
+    color: #fff8ee;
+    letter-spacing: 0.6px;
+  }
+
+  .qr-col {
+    position: absolute;
+    right: 78px;
+    top: 286px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 26px;
+    gap: 10px;
   }
-  .qr-caption {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
-    color: var(--cherry-deep);
-    font-size: 28px;
-    line-height: 1.12;
-    text-align: center;
-    letter-spacing: 0.3px;
-    margin: 0 0 18px 0;
-  }
-  .qr-frame {
-    width: 320px;
-    height: 320px;
-    background: #ffffff;
-    border-radius: 20px;
-    border: 4px solid var(--cherry);
+  .qr-card {
+    width: 236px;
+    height: 236px;
+    background: #fff8ee;
+    border-radius: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
-  .qr-frame img {
-    width: 296px;
-    height: 296px;
-    object-fit: contain;
-    display: block;
-  }
-
-  /* Contact panel, right side */
-  .contact-panel {
-    position: absolute;
-    top: 95px;
-    right: 75px;
-    width: 460px;
-    height: 470px;
-    background: var(--cream);
-    border-radius: 34px;
-    box-shadow: 0 10px 0 rgba(168, 15, 39, 0.35);
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 44px;
-  }
-  .contact-row {
-    margin-bottom: 30px;
-  }
-  .contact-row:last-of-type {
-    margin-bottom: 0;
-  }
-  .contact-label {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    color: var(--cherry-deep);
-    font-size: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin: 0 0 4px 0;
-  }
-  .contact-value {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
-    color: var(--ink);
-    font-size: 32px;
-    line-height: 1.1;
-    margin: 0;
-    word-break: break-word;
-  }
-  .contact-value.small {
-    font-size: 26px;
-  }
-  .footer-license {
-    position: absolute;
-    top: 578px;
-    left: 0;
-    right: 0;
-    margin: 0;
-    text-align: center;
-    z-index: 4;
-  }
-  .footer-license span {
-    display: inline-block;
-    background: var(--cream);
-    color: var(--cherry-deep);
-    font-family: 'Nunito', sans-serif;
+  .qr-card img { width: 196px; height: 196px; object-fit: contain; }
+  .qr-cap {
+    font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    font-size: 16px;
-    letter-spacing: 0.3px;
-    padding: 8px 22px;
-    border-radius: 999px;
+    font-size: 19px;
+    letter-spacing: 0.8px;
+    line-height: 1.28;
+    text-align: center;
+    color: #b00f28;
+    max-width: 240px;
+    background: #fff8ee;
+    box-shadow: 0 4px 0 #8a0a20;
+    border-radius: 13px;
+    padding: 12px 16px 13px;
+    box-sizing: border-box;
   }
+
+  .brokermark {
+    position: absolute;
+    left: 78px;
+    bottom: 46px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    background: #fff8ee;
+    border-radius: 16px;
+    padding: 10px 20px 8px;
+    box-shadow: 0 0 0 3px #a30f28, 0 5px 0 #6e0819;
+  }
+  /* 387px gives a 46px "SPIRIT" cap against the 84px
+     agent name — inside the 535.155(a)(2) half-size floor, with margin */
+  .brokermark img { width: 380px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #a30f28;
+  }
+
+  /* FREE, as a sticker on the corner of the QR tile */
+  .free {
+    position: absolute; left: 687px; top: 343px;            
+    
+    
+    
+    width: 118px;
+    height: 118px;
+    transform: rotate(-12deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #fff8ee;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #a30f28; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
 </style>
+</head>
+<body>
+  <div class="card">
+    <div class="band"></div>
 
-<div class="card">
-  <div class="checker"></div>
+    <div class="sparkle" style="top:52px; left:52px;">
+      <svg width="48" height="48" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#ffb4c8"/></svg>
+    </div>
+    <div class="sparkle" style="top:110px; left:104px;">
+      <svg width="26" height="26" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#ffb4c8"/></svg>
+    </div>
+    <div class="sparkle" style="top:50px; right:56px;">
+      <svg width="42" height="42" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#ffb4c8"/></svg>
+    </div>
 
-  <div class="qr-panel">
-    <p class="qr-caption">SCAN TO FIND<br>YOUR NEXT APARTMENT</p>
-    <div class="qr-frame">
-      <img src="../../assets/v2/qr_cherry.png" alt="QR code to sparkapt.com/sophia-reddehase">
+    <div class="head">
+      <svg width="1050" height="238" viewBox="0 0 1050 238" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="84" text-anchor="middle" fill="#a80f27">
+          <text x="525" y="90">sophia sky reddehase</text>
+        </g>
+        <text x="525" y="150" text-anchor="middle"
+              font-family="Poppins" font-weight="700" font-size="22" letter-spacing="6.5"
+              fill="#3a0b14">TEXAS APARTMENT LOCATOR</text>
+      </svg>
+    </div>
+
+    <div class="body">
+      <div class="icons">
+        <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#fff8ee" stroke-width="2.4">
+          <circle cx="22" cy="22" r="18"/>
+          <path d="M16 14.5c1.6 0 2 .6 2.6 2l1 2.4c.4 1 .2 1.6-.6 2.2l-1 .8c1.2 2.6 3.3 4.7 5.9 5.9l.8-1c.6-.8 1.2-1 2.2-.6l2.4 1c1.4.6 2 1 2 2.6 0 2-1.6 3.4-3.6 3.4C20.7 33.2 12.8 25.3 12.8 18.1c0-2 1.4-3.6 3.2-3.6Z" fill="#fff8ee" stroke="none"/>
+        </svg>
+        <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#fff8ee" stroke-width="2.4">
+          <circle cx="22" cy="22" r="18"/>
+          <rect x="12" y="16" width="20" height="13" rx="2.6"/>
+          <path d="M12.6 17.4 22 24l9.4-6.6"/>
+        </svg>
+        <svg width="46" height="46" viewBox="0 0 44 44" fill="none" stroke="#fff8ee" stroke-width="2.4">
+          <circle cx="22" cy="22" r="18"/>
+          <ellipse cx="22" cy="22" rx="7.4" ry="18"/>
+          <path d="M4.6 16.4h34.8M4.6 27.6h34.8"/>
+        </svg>
+      </div>
+      <div class="lines">
+        (512) 676-1215<br>
+        sophia.reddehase@spiritre.com<br>
+        sparkapt.com/sophia-reddehase
+      </div>
+    </div>
+
+    <div class="qr-col">
+      <div class="qr-card">
+        <img src="../../assets/v2/qr_cherry.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
+      </div>
+      <div class="qr-cap">FILL OUT MY FORM<br>TO GET STARTED</div>
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
     </div>
   </div>
-
-  <div class="contact-panel">
-    <div class="contact-row">
-      <p class="contact-label">Call / Text</p>
-      <p class="contact-value">(512) 676-1215</p>
-    </div>
-    <div class="contact-row">
-      <p class="contact-label">Email</p>
-      <p class="contact-value small">sophia.reddehase<br>@spiritre.com</p>
-    </div>
-    <div class="contact-row">
-      <p class="contact-label">Instagram</p>
-      <p class="contact-value">@sophiasky.atx</p>
-    </div>
-  </div>
-
-  <p class="footer-license"><span>TREC #831516 &nbsp;&middot;&nbsp; Brokered by Spirit Real Estate Group</span></p>
-</div>
+</body>
+</html>

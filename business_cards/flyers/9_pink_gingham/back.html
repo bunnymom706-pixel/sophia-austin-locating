@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pink Gingham — Flyer back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* square flyer: 5.5 x 5.5in trim, 5.75 x 5.75in with bleed, 300 DPI */
+  html, body { width: 1725px; height: 1725px; overflow: hidden; background: #ffffff; }
+  .flyer {
+    position: relative; width: 1725px; height: 1725px; overflow: hidden;
+    border-radius: 110px; background: #f8f3ea;
+    font-family: 'Poppins', sans-serif;
+  }
+  .ground { position: absolute; inset: 0; }
+  /* gingham: two translucent bands crossing, so the overlap reads darker */
+  .ground {
+    position: absolute; inset: 0;
+    background-color: #f8f3ea;
+    background-image:
+      linear-gradient(90deg, rgba(214,120,134,0.55) 50%, rgba(0,0,0,0) 50%),
+      linear-gradient(rgba(214,120,134,0.55) 50%, rgba(0,0,0,0) 50%);
+    background-size: 192px 192px, 192px 192px;
+    opacity: 1;
+  }
+
+  .pill {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif; font-weight: 700; text-transform: uppercase;
+    white-space: nowrap; color: #fbf6ee; background: #8a231a;
+    box-shadow: 0 8px 0 #5e1610;
+  }
+  .role { font-size: 38px; letter-spacing: 11px; padding: 19px 46px 21px; border-radius: 22px; }
+  .services { font-size: 23px; letter-spacing: 3.6px; padding: 13px 34px 14px; border-radius: 999px; }
+
+  .brokermark {
+    position: absolute; left: 50%; transform: translateX(-50%); bottom: 118px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    background: #f8f3ea; border-radius: 28px; padding: 22px 44px 17px;
+    box-shadow: 0 0 0 5px #8a231a, 0 9px 0 #5e1610;
+  }
+  /* 700px wide gives an 84px "SPIRIT" cap against the 150px name — 1.79x,
+     inside the half-size floor in 22 TAC 535.155(a)(2) */
+  .brokermark img { width: 700px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 23px;
+    letter-spacing: 1.4px; color: #8a231a; white-space: nowrap;
+  }
+
+  .free {
+    position: absolute; width: 200px; height: 200px; transform: rotate(-12deg);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 23px;
+    line-height: 1.05; letter-spacing: 0.9px; color: #fbf6ee;
+    filter: drop-shadow(0 6px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #b8332a; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 41px; line-height: 1; }
+
+  /* every back sets its type on one panel rather than on the pattern — the
+     grounds here are checks, gingham and warped boards, and small type laid
+     straight on those disappears wherever the squares go light */
+  .panel {
+    position: absolute; left: 120px; top: 120px; right: 120px; bottom: 120px;
+    background: #f8f3ea; border-radius: 60px;
+    box-shadow: 0 0 0 6px #8a231a, 0 12px 0 #5e1610;
+  }
+  .head {
+    position: absolute; left: 0; right: 0; top: 266px; text-align: center;
+    font-family: 'Alfa Slab One', sans-serif; font-size: 96px; color: #8a231a;
+    letter-spacing: 2px;
+  }
+  .qr {
+    position: absolute; left: 50%; transform: translateX(-50%); top: 398px;
+    width: 540px; height: 540px; background: #ffffff; border-radius: 34px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 5px #8a231a, 0 10px 0 #5e1610;
+  }
+  .qr img { width: 462px; height: 462px; display: block; }
+  .cta {
+    position: absolute; left: 50%; transform: translateX(-50%); top: 986px;
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 31px; letter-spacing: 1.6px;
+    text-transform: uppercase; white-space: nowrap; color: #fbf6ee; background: #8a231a;
+    padding: 19px 40px 21px; border-radius: 22px; box-shadow: 0 8px 0 #5e1610;
+  }
+  .contacts {
+    position: absolute; left: 0; right: 0; top: 1104px; text-align: center;
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 33px;
+    line-height: 1.52; color: #8a231a;
+  }
+  .brokermark { bottom: 158px; background: transparent; box-shadow: none; padding: 0; }
+  .free { left: 196px; top: 366px; }
+</style>
+</head>
+<body>
+  <div class="flyer">
+    <div class="ground"></div>
+    <div class="panel"></div>
+
+    <div class="head">LET&#39;S CONNECT</div>
+
+    <div class="qr">
+      <img src="../../assets/v2/qr_gingham_red_on_cream.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
+    </div>
+    <div class="cta">Fill out my form to get started</div>
+
+    <div class="contacts">
+      (512) 676-1215<br>
+      sophia.reddehase@spiritre.com<br>
+      sparkapt.com/sophia-reddehase
+    </div>
+
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+  </div>
+</body>
+</html>

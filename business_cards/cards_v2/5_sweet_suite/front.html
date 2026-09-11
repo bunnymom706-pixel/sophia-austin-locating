@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sweet Suite — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #ffd3e4; }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background:
+      radial-gradient(circle at 84% 10%, #fff6ea 0%, rgba(255,246,234,0) 44%),
+      linear-gradient(170deg, #ffeef4 0%, #ffe1ec 44%, #ffd3e4 100%);
+  }
+
+  .sun {
+    position: absolute;
+    top: -52px; right: -44px;
+    width: 210px; height: 210px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 36%, #fff3cd 0%, #ffd98a 62%, #ffcb6b 100%);
+    box-shadow: 0 0 0 18px rgba(255,203,107,0.36);
+  }
+
+  /* the illustrated block is this card's pattern */
+  .city { position: absolute; left: 0; right: 0; bottom: 0; height: 246px; }
+
+  .sparkle { position: absolute; }
+  .sparkle svg { display: block; }
+
+  .stack { position: absolute; left: 37.5px; right: 37.5px; top: 44px; text-align: center; }
+  .stack svg { display: block; margin: 0 auto; }
+  .role {
+    display: inline-block; margin-top: 6px;
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: 7px;
+    text-transform: uppercase; white-space: nowrap;
+    color: #fff6ea; background: #6b2140; padding: 12px 30px 13px; border-radius: 14px;
+    box-shadow: 0 5px 0 #421327;
+  }
+
+
+  .services {
+    display: block; width: fit-content; margin: 12px auto 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff6ea;
+    background: #6b2140;
+    padding: 8px 22px 9px;
+    border-radius: 999px;
+    box-shadow: 0 5px 0 #421327;
+  }
+
+  /* broker mark: navy logo on a cream plate so it holds on any ground.
+     450px gives a 54px "SPIRIT" cap against the 96px name — 1.79x */
+  .brokermark {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: #fff6ea;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #6b2140, 0 6px 0 #421327;
+  }
+  .brokermark img { width: 450px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #6b2140;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="sun"></div>
+
+    <div class="sparkle" style="top:44px; left:96px;">
+      <svg width="46" height="46" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff6ea"/></svg>
+    </div>
+    <div class="sparkle" style="top:250px; left:1006px;">
+      <svg width="34" height="34" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff6ea"/></svg>
+    </div>
+
+    <svg class="city" viewBox="0 0 1125 268" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- hazy back row -->
+      <g opacity="0.42">
+        <rect x="24"   y="112" width="118" height="110" rx="12" fill="#ffffff"/>
+        <rect x="252"  y="88"  width="90"  height="134" rx="12" fill="#ffffff"/>
+        <rect x="668"  y="98"  width="106" height="124" rx="12" fill="#ffffff"/>
+        <rect x="1012" y="118" width="100" height="104" rx="12" fill="#ffffff"/>
+      </g>
+
+      <!-- A: mint low-rise -->
+      <g>
+        <rect x="86" y="104" width="176" height="118" rx="14" fill="#bfe6d8"/>
+        <rect x="76" y="92"  width="196" height="24"  rx="10" fill="#8fd3bd"/>
+        <g fill="#ffd66b">
+          <rect x="110" y="134" width="30" height="30" rx="7"/>
+          <rect x="159" y="134" width="30" height="30" rx="7"/>
+          <rect x="208" y="134" width="30" height="30" rx="7"/>
+          <rect x="110" y="180" width="30" height="30" rx="7"/>
+          <rect x="208" y="180" width="30" height="30" rx="7"/>
+        </g>
+        <rect x="157" y="180" width="34" height="42" rx="8" fill="#f78fb3"/>
+        <circle cx="184" cy="202" r="3.5" fill="#fff3cd"/>
+      </g>
+
+      <!-- B: cream tower with balconies -->
+      <g>
+        <rect x="286" y="32" width="150" height="190" rx="14" fill="#fff6ea"/>
+        <rect x="276" y="20" width="170" height="24"  rx="10" fill="#f6cfa4"/>
+        <g fill="#ffd66b">
+          <rect x="306" y="58"  width="28" height="28" rx="7"/>
+          <rect x="352" y="58"  width="28" height="28" rx="7"/>
+          <rect x="398" y="58"  width="28" height="28" rx="7"/>
+          <rect x="306" y="110" width="28" height="28" rx="7"/>
+          <rect x="352" y="110" width="28" height="28" rx="7"/>
+          <rect x="398" y="110" width="28" height="28" rx="7"/>
+          <rect x="306" y="162" width="28" height="28" rx="7"/>
+          <rect x="398" y="162" width="28" height="28" rx="7"/>
+        </g>
+        <g fill="#f3a6c4">
+          <rect x="298" y="90"  width="140" height="9" rx="4.5"/>
+          <rect x="298" y="142" width="140" height="9" rx="4.5"/>
+        </g>
+        <rect x="344" y="186" width="34" height="36" rx="8" fill="#d97a55"/>
+        <circle cx="371" cy="205" r="3.5" fill="#fff3cd"/>
+      </g>
+
+      <!-- C: pink mid-rise, the hero -->
+      <g>
+        <rect x="470" y="70" width="196" height="152" rx="16" fill="#ffb3d1"/>
+        <path d="M460 72 L568 20 L676 72 Z" fill="#e86ea3"/>
+        <rect x="556" y="36" width="24" height="34" rx="6" fill="#e86ea3"/>
+        <g fill="#fff3cd">
+          <rect x="498" y="100" width="30" height="32" rx="7"/>
+          <rect x="552" y="100" width="30" height="32" rx="7"/>
+          <rect x="606" y="100" width="30" height="32" rx="7"/>
+          <rect x="498" y="152" width="30" height="32" rx="7"/>
+          <rect x="606" y="152" width="30" height="32" rx="7"/>
+        </g>
+        <rect x="544" y="170" width="46" height="52" rx="10" fill="#a3164e"/>
+        <circle cx="579" cy="198" r="4.5" fill="#ffd66b"/>
+      </g>
+
+      <!-- D: terracotta walk-up -->
+      <g>
+        <rect x="712" y="94" width="164" height="128" rx="14" fill="#f0a07a"/>
+        <rect x="702" y="82" width="184" height="24"  rx="10" fill="#d97a55"/>
+        <g fill="#fff3cd">
+          <rect x="736" y="124" width="28" height="30" rx="7"/>
+          <rect x="782" y="124" width="28" height="30" rx="7"/>
+          <rect x="828" y="124" width="28" height="30" rx="7"/>
+          <rect x="736" y="176" width="28" height="30" rx="7"/>
+          <rect x="828" y="176" width="28" height="30" rx="7"/>
+        </g>
+        <rect x="778" y="180" width="36" height="42" rx="9" fill="#7c3a24"/>
+        <circle cx="806" cy="202" r="3.5" fill="#ffd66b"/>
+      </g>
+
+      <!-- E: lavender tower -->
+      <g>
+        <rect x="906" y="52" width="140" height="170" rx="14" fill="#d7c8f0"/>
+        <rect x="896" y="40" width="160" height="24"  rx="10" fill="#b7a2e0"/>
+        <g fill="#ffd66b">
+          <rect x="930"  y="78"  width="26" height="30" rx="7"/>
+          <rect x="972"  y="78"  width="26" height="30" rx="7"/>
+          <rect x="1014" y="78"  width="26" height="30" rx="7"/>
+          <rect x="930"  y="130" width="26" height="30" rx="7"/>
+          <rect x="972"  y="130" width="26" height="30" rx="7"/>
+          <rect x="1014" y="130" width="26" height="30" rx="7"/>
+          <rect x="930"  y="182" width="26" height="30" rx="7"/>
+          <rect x="1014" y="182" width="26" height="30" rx="7"/>
+        </g>
+        <rect x="966" y="186" width="38" height="36" rx="9" fill="#6d5aa0"/>
+      </g>
+
+      <!-- street trees -->
+      <g fill="#8fd3bd">
+        <rect x="272" y="196" width="14" height="26" rx="7"/><circle cx="279" cy="190" r="18"/>
+        <rect x="452" y="198" width="13" height="24" rx="6.5"/><circle cx="458.5" cy="192" r="15"/>
+        <rect x="884" y="196" width="14" height="26" rx="7"/><circle cx="891" cy="190" r="18"/>
+      </g>
+
+      <!-- sidewalk, bleeds past the trim edge -->
+      <rect x="0" y="222" width="1125" height="46" fill="#ffffff" opacity="0.82"/>
+      <rect x="0" y="222" width="1125" height="5"  fill="#ffc2dd" opacity="0.7"/>
+    </svg>
+
+    <div class="stack">
+      <svg width="1050" height="228" viewBox="0 0 1050 228" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="96" text-anchor="middle"
+         stroke-linejoin="round" paint-order="stroke">
+        <!-- cast shadow -->
+        <g stroke="#5c0c2b" stroke-width="23" fill="#5c0c2b" opacity="0.22" transform="translate(4.5,6.5)">
+          <text x="525" y="92">sophia sky</text>
+          <text x="525" y="197">reddehase</text>
+        </g>
+        <!-- dark keyline: holds the edge over the light squares -->
+        <g stroke="#5c0c2b" stroke-width="23" fill="#5c0c2b">
+          <text x="525" y="92">sophia sky</text>
+          <text x="525" y="197">reddehase</text>
+        </g>
+        <!-- cream halo: holds the edge over the dark squares -->
+        <g stroke="#fff6ea" stroke-width="13" fill="#fff6ea">
+          <text x="525" y="92">sophia sky</text>
+          <text x="525" y="197">reddehase</text>
+        </g>
+        <g fill="#a3164e">
+          <text x="525" y="92">sophia sky</text>
+          <text x="525" y="197">reddehase</text>
+        </g>
+      </g>
+      </svg>
+      <div class="role">Texas Apartment Locator</div>
+      <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
+
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>

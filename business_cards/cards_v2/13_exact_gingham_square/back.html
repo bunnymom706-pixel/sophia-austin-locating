@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Gingham Square — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 825px; height: 825px; overflow: hidden; background: #f8f3ea; }
+
+  .card {
+    position: relative;
+    width: 825px;
+    height: 825px;
+    overflow: hidden;
+    background: #f8f3ea;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .type { position: absolute; inset: 0; }
+
+  .qr {
+    position: absolute;
+    top: 218px;
+    right: 92px;
+    width: 268px;
+    height: 268px;
+  }
+  .qr img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+  .details {
+    position: absolute;
+    left: 88px;
+    bottom: 196px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.72;
+    color: #b8332a;
+  }
+
+  .qr-cap {
+    position: absolute;
+    right: 92px;  top: 500px;  width: 212px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 0.8px;
+    line-height: 1.28;
+    color: #fbf6ee;
+    background: #b8332a;
+    box-shadow: 0 4px 0 #7d1e17;
+    border-radius: 13px;
+    padding: 12px 16px 13px;
+    box-sizing: border-box;
+  }
+  .brokermark {
+    position: absolute;
+    left: 88px;  bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  /* 295px wide gives a 35px "SPIRIT" cap against the 64px agent name
+     — inside the half-size floor in 22 TAC 535.155(a)(2), with margin */
+  .brokermark img { width: 295px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #8a231a;
+    white-space: nowrap;
+  }
+
+  /* FREE, as a sticker on the corner of the QR tile */
+  .free {
+    position: absolute; left: 319px; top: 291px;            
+    
+    
+    
+    width: 118px;
+    height: 118px;
+    transform: rotate(-12deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #fbf6ee;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #b8332a; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="type" width="825" height="825" viewBox="0 0 825 825" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="connectArc" d="M 128 190 Q 412 62 696 190" fill="none"/>
+      </defs>
+
+      <text font-family="Alfa Slab One" font-size="64" fill="#b8332a" letter-spacing="2.5">
+        <textPath href="#connectArc" startOffset="50%" text-anchor="middle">LET'S CONNECT</textPath>
+      </text>
+
+      <g fill="#b8332a">
+        <path transform="translate(70,208) scale(1.3)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(694,88) scale(1.3)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+
+    <div class="qr">
+      <img src="../../assets/v2/qr_gingham_red_on_cream.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
+    </div>
+    <div class="qr-cap">FILL OUT MY FORM<br>TO GET STARTED</div>
+
+    <div class="details">
+      (512) 676-1215<br>
+      sophia.reddehase@spiritre.com<br>
+      sparkapt.com/sophia-reddehase<br>
+      Austin &amp; surrounding areas, TX
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -2,215 +2,145 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Marshmallow Puff — Front</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,500;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<title>Marshmallow Pink — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    width: 1125px;
-    height: 675px;
-    overflow: hidden;
-    background: #ffd7e8;
-  }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #ffb8d9; }
 
   .card {
     position: relative;
     width: 1125px;
     height: 675px;
-    box-sizing: border-box;
     overflow: hidden;
-    background:
-      radial-gradient(circle at 88% 8%, #fff1f8 0%, rgba(255,241,248,0) 40%),
-      radial-gradient(circle at 6% 96%, #ffc2dd 0%, rgba(255,194,221,0) 45%),
-      linear-gradient(135deg, #ffe6f1 0%, #ffd2e6 48%, #ffbedb 100%);
-    font-family: 'Nunito', sans-serif;
+    background: #fff1f8;
+    font-family: 'Poppins', sans-serif;
   }
 
-  /* decorative blobs / bubbles, purely background, may bleed to edges */
-  .blob {
+  .pattern {
     position: absolute;
-    border-radius: 50%;
-    opacity: 0.55;
+    inset: 0;
+    background-color: #ffb8d9;
+      background-image: radial-gradient(circle at 50% 50%, #fff1f8 30px, rgba(255,241,248,0) 31px);
+      background-size: 150px 150px;
+      background-position: 0 0;
   }
-  .blob.b1 { width: 260px; height: 260px; top: -110px; right: -90px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe6f2 55%, rgba(255,230,242,0) 75%); }
-  .blob.b2 { width: 170px; height: 170px; bottom: -80px; right: 90px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffdcee 60%, rgba(255,220,238,0) 78%); opacity: 0.5; }
-  .blob.b3 { width: 120px; height: 120px; top: 40%; left: -60px; background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ffdcee 60%, rgba(255,220,238,0) 78%); opacity: 0.45; }
 
-  /* sparkle accents */
-  .sparkle { position: absolute; color: #ffffff; opacity: 0.9; filter: drop-shadow(0 1px 1px rgba(214,110,160,0.35)); }
+  .sparkle { position: absolute; }
   .sparkle svg { display: block; }
 
-  /* poolside wave footer strip, bleeds to bottom edge */
-  .wave {
+
+
+  .stack {
     position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 46px;
+    left: 37.5px; right: 37.5px;
+    top: 44px;
+    text-align: center;
   }
+  .stack svg { display: block; margin: 0 auto; }
 
-  .safe {
-    position: absolute;
-    top: 37.5px; left: 37.5px; right: 37.5px; bottom: 37.5px;
-    display: grid;
-    grid-template-columns: 292px 1fr;
-    column-gap: 34px;
-    align-items: stretch;
-  }
-
-  /* ---- Photo column ---- */
-  .photo-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .photo-puff {
-    position: absolute;
-    width: 292px;
-    height: 320px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background: #ffffff;
-    border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%;
-    box-shadow: 0 14px 0 rgba(214,110,160,0.18), 0 18px 30px rgba(191,63,119,0.22);
-  }
-  .photo-puff::after {
-    content: "";
-    position: absolute;
-    inset: 10px;
-    border-radius: inherit;
-    border: 3px dashed #ffc7e0;
-  }
-  .headshot {
-    position: relative;
-    z-index: 2;
-    max-width: 258px;
-    max-height: 286px;
-    object-fit: contain;
-    display: block;
-  }
-
-  /* ---- Content column ---- */
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 14px;
-  }
-
-  .name-panel {
-    background: rgba(255,255,255,0.72);
-    border-radius: 26px;
-    padding: 14px 22px 12px;
-    box-shadow: 0 3px 0 rgba(214,110,160,0.18);
-  }
-
-  .name {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 800;
-    font-size: 44px;
-    line-height: 1.02;
-    color: #a3164e;
-    letter-spacing: 0.2px;
-  }
-
-  .title {
-    margin-top: 6px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 20px;
-    letter-spacing: 1.6px;
+  /* role and services are pills so they size to their own text */
+  .role, .services {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
     text-transform: uppercase;
-    color: #6b2140;
+    white-space: nowrap;
+    color: #fff1f8;
+    background: #a3164e;
+    box-shadow: 0 5px 0 #6d0e34;
+  }
+  .role {
+    margin-top: 6px;
+    font-size: 24px;
+    letter-spacing: 7px;
+    padding: 12px 30px 13px;
+    border-radius: 14px;
+  }
+  .services {
+    display: block;
+    width: fit-content;
+    margin: 12px auto 0;
+    font-size: 15px;
+    letter-spacing: 2.4px;
+    padding: 8px 22px 9px;
+    border-radius: 999px;
   }
 
-  .pills {
+  /* broker mark: navy logo on a cream plate so it holds on any pattern.
+     450px wide gives a 54px "SPIRIT" cap against the 96px name — 1.79x,
+     inside the half-size floor in 22 TAC 535.155(a)(2) with margin */
+  .brokermark {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 42px;
     display: flex;
     flex-direction: column;
-    gap: 11px;
-    margin-top: 4px;
-  }
-
-  .pill-row { display: flex; gap: 11px; }
-
-  .pill {
-    display: flex;
     align-items: center;
-    gap: 9px;
-    background: #ffffff;
-    border: 2px solid #ffc2dd;
-    border-radius: 999px;
-    padding: 10px 18px;
-    box-shadow: 0 3px 0 rgba(214,110,160,0.22);
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    color: #7a2048;
+    gap: 5px;
+    background: #fff1f8;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #a3164e, 0 6px 0 #6d0e34;
+  }
+  .brokermark img { width: 450px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #a3164e;
     white-space: nowrap;
-  }
-  .pill .ico {
-    font-size: 16px;
-    line-height: 1;
-  }
-  .pill.wide { flex: 1; }
-  .pill.accent {
-    background: #ff5fa2;
-    border-color: #ff5fa2;
-    color: #ffffff;
-    box-shadow: 0 3px 0 #c2255c;
   }
 </style>
 </head>
 <body>
   <div class="card">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
+    <div class="pattern"></div>
 
-    <div class="sparkle" style="top:52px; left:430px;">
-      <svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    <div class="sparkle" style="top:139px; left:927px;">
+      <svg width="62" height="62" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff1f8"/></svg>
     </div>
-    <div class="sparkle" style="top:150px; left:395px;">
-      <svg width="12" height="12" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    <div class="sparkle" style="top:480px; left:142px;">
+      <svg width="54" height="54" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff1f8"/></svg>
     </div>
-    <div class="sparkle" style="top:600px; left:1060px;">
-      <svg width="16" height="16" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
-    </div>
-    <div class="sparkle" style="top:44px; left:1040px;">
-      <svg width="14" height="14" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    <div class="sparkle" style="top:484px; left:820px;">
+      <svg width="46" height="46" viewBox="0 0 40 40"><path d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z" fill="#fff1f8"/></svg>
     </div>
 
-    <svg class="wave" viewBox="0 0 1125 46" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,20 C 60,40 120,0 180,20 C 240,40 300,0 360,20 C 420,40 480,0 540,20 C 600,40 660,0 720,20 C 780,40 840,0 900,20 C 960,40 1020,0 1080,20 C 1105,26 1115,30 1125,30 L1125,46 L0,46 Z" fill="#ffffff" fill-opacity="0.55"/>
-    </svg>
+    <div class="stack">
+      <svg width="1050" height="228" viewBox="0 0 1050 228" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="96" text-anchor="middle"
+           stroke-linejoin="round" paint-order="stroke">
+          <!-- cast shadow -->
+          <g stroke="#5c0c2b" stroke-width="23" fill="#5c0c2b" opacity="0.22" transform="translate(4.5,6.5)">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <!-- dark keyline: holds the edge over the light squares -->
+          <g stroke="#5c0c2b" stroke-width="23" fill="#5c0c2b">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <!-- light halo: holds the edge over the dark squares -->
+          <g stroke="#fff1f8" stroke-width="13" fill="#fff1f8">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <g fill="#a3164e">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+        </g>
+      </svg>
+      <div class="role">Texas Apartment Locator</div>
+      <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
+    </div>
 
-    <div class="safe">
-      <div class="photo-wrap">
-        <div class="photo-puff"></div>
-        <img class="headshot" src="../../assets/v2/sophia_headshot_sticker.png" alt="Sophia Sky Reddehase">
-      </div>
-
-      <div class="content">
-        <div class="name-panel">
-          <div class="name">SOPHIA SKY<br>REDDEHASE</div>
-          <div class="title">Texas Apartment Locator</div>
-        </div>
-
-        <div class="pills">
-          <div class="pill-row">
-            <div class="pill"><span class="ico">📍</span>AUSTIN, TX</div>
-            <div class="pill accent"><span class="ico">✨</span>100% FREE FOR YOU</div>
-          </div>
-          <div class="pill-row">
-            <div class="pill wide"><span class="ico">🏢</span>Spirit Real Estate Group</div>
-          </div>
-          <div class="pill-row">
-            <div class="pill"><span class="ico">🪪</span>TREC #831516</div>
-          </div>
-        </div>
-      </div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
     </div>
   </div>
 </body>

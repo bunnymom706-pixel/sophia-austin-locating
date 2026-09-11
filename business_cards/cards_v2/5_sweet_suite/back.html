@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sweet Suite — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #ffd9e6;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    background:
+      radial-gradient(circle at 12% 10%, #fff6ea 0%, rgba(255,246,234,0) 46%),
+      linear-gradient(170deg, #ffeef4 0%, #ffe1ec 42%, #ffd3e4 100%);
+  }
+
+  .sun {
+    position: absolute;
+    top: -60px; left: -50px;
+    width: 190px; height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 62% 60%, #fff3cd 0%, #ffd98a 62%, #ffcb6b 100%);
+    box-shadow: 0 0 0 14px rgba(255,217,138,0.28);
+  }
+  .cloud {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 999px;
+    opacity: 0.8;
+  }
+  .cloud::before, .cloud::after {
+    content: "";
+    position: absolute;
+    background: #ffffff;
+    border-radius: 50%;
+  }
+  .c1 { width: 116px; height: 36px; top: 66px; left: 838px; }
+  .c1::before { width: 50px; height: 50px; top: -22px; left: 18px; }
+  .c1::after  { width: 36px; height: 36px; top: -14px; left: 62px; }
+
+  .sparkle { position: absolute; filter: drop-shadow(0 1px 1px rgba(214,110,160,0.30)); }
+  .sparkle svg { display: block; }
+
+  .city {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 190px;
+  }
+
+  .safe {
+    position: absolute;
+    top: 37.5px; left: 37.5px; right: 37.5px; bottom: 37.5px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    column-gap: 40px;
+    align-items: center;
+  }
+
+  /* ---- QR framed as a little front door ---- */
+  .door-col {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .door {
+    position: relative;
+    width: 262px;
+    height: 322px;
+    background: #ffffff;
+    border-radius: 131px 131px 22px 22px;
+    box-shadow: 0 12px 0 rgba(214,110,160,0.20), 0 18px 30px rgba(191,63,119,0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .door::after {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border-radius: 119px 119px 12px 12px;
+    border: 3px dashed #ffc7e0;
+  }
+  .door .transom {
+    position: absolute;
+    top: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 62px;
+    border-radius: 75px 75px 8px 8px;
+    background: linear-gradient(180deg, #ffe9a8 0%, #ffd66b 100%);
+    box-shadow: inset 0 -3px 0 rgba(214,110,160,0.15);
+  }
+  .door .knob {
+    position: absolute;
+    right: 26px;
+    top: 202px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #ffcb6b;
+    box-shadow: 0 2px 0 rgba(214,110,160,0.30);
+  }
+  .door img {
+    position: absolute;
+    top: 108px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 188px;
+    height: 188px;
+    object-fit: contain;
+    border-radius: 14px;
+    background: #ffffff;
+    z-index: 2;
+  }
+  .mat {
+    position: absolute;
+    bottom: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 214px;
+    padding: 7px 0 8px;
+    text-align: center;
+    background: #f0a07a;
+    border-radius: 12px;
+    box-shadow: 0 5px 0 rgba(214,110,160,0.22);
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #6b2140;
+    z-index: 3;
+  }
+
+  /* ---- contact column ---- */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 13px;
+    padding-bottom: 26px;
+  }
+  .headline {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1.05;
+    color: #a3164e;
+  }
+  .subline {
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #fff1f6;
+    margin-top: -4px;
+    background: #6b2140;
+    box-shadow: 0 4px 0 #42132780;
+    border-radius: 999px;
+    padding: 9px 20px 10px;
+    display: inline-block;
+    width: fit-content;
+    align-self: flex-start;
+    margin-bottom: 14px;
+  }
+  .contact-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 4px;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    border: 2px solid #ffc2dd;
+    border-radius: 999px;
+    padding: 11px 20px;
+    box-shadow: 0 3px 0 rgba(214,110,160,0.22);
+    font-weight: 800;
+    font-size: 17px;
+    color: #7a2048;
+    white-space: nowrap;
+  }
+  .pill .ico { font-size: 17px; line-height: 1; }
+  .pill.accent {
+    background: #ff5fa2;
+    border-color: #ff5fa2;
+    color: #ffffff;
+    box-shadow: 0 3px 0 #c2255c;
+  }
+
+  .brokermark {
+    position: absolute;
+    right: 62px; top: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  /* 184px wide gives a 22px "SPIRIT" cap against the 40px agent name
+     — inside the half-size floor in 22 TAC 535.155(a)(2), with margin */
+  .brokermark img { width: 184px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #5c1735;
+    white-space: nowrap;
+  }
+
+  /* FREE, as a sticker on the corner of the QR tile */
+  .free {
+    position: absolute; left: 127px; top: 139px;            
+    
+    
+    
+    width: 118px;
+    height: 118px;
+    transform: rotate(-12deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #fff6ea;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #6b2140; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="sun"></div>
+
+    <div class="sparkle" style="top:56px; left:640px;">
+      <svg width="18" height="18" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffffff"/></svg>
+    </div>
+    <div class="sparkle" style="top:120px; left:1042px;">
+      <svg width="13" height="13" viewBox="0 0 20 20"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#ffd98a"/></svg>
+    </div>
+
+    <!-- low skyline strip along the bottom -->
+    <svg class="city" viewBox="0 0 1125 190" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- hazy back row -->
+      <g opacity="0.40">
+        <rect x="46"  y="34" width="94"  height="71" rx="10" fill="#ffffff"/>
+        <rect x="470" y="24" width="86"  height="81" rx="10" fill="#ffffff"/>
+        <rect x="906" y="38" width="98"  height="67" rx="10" fill="#ffffff"/>
+      </g>
+
+      <!-- mint low-rise -->
+      <g>
+        <rect x="126" y="46" width="130" height="59" rx="11" fill="#bfe6d8"/>
+        <rect x="118" y="36" width="146" height="20" rx="9"  fill="#8fd3bd"/>
+        <g fill="#ffd66b">
+          <rect x="150" y="66" width="22" height="22" rx="6"/>
+          <rect x="184" y="66" width="22" height="22" rx="6"/>
+          <rect x="218" y="66" width="22" height="22" rx="6"/>
+        </g>
+      </g>
+
+      <!-- pink gabled house -->
+      <g>
+        <rect x="310" y="42" width="118" height="63" rx="12" fill="#ffb3d1"/>
+        <path d="M302 44 L369 12 L436 44 Z" fill="#e86ea3"/>
+        <g fill="#fff3cd">
+          <rect x="330" y="60" width="24" height="24" rx="6"/>
+          <rect x="384" y="60" width="24" height="24" rx="6"/>
+        </g>
+        <rect x="356" y="80" width="30" height="25" rx="7" fill="#a3164e"/>
+      </g>
+
+      <!-- cream mid-rise -->
+      <g>
+        <rect x="556" y="30" width="152" height="75" rx="12" fill="#fff6ea"/>
+        <rect x="548" y="20" width="168" height="20" rx="9"  fill="#f6cfa4"/>
+        <g fill="#ffd66b">
+          <rect x="580" y="50" width="22" height="22" rx="6"/>
+          <rect x="618" y="50" width="22" height="22" rx="6"/>
+          <rect x="656" y="50" width="22" height="22" rx="6"/>
+        </g>
+        <rect x="608" y="82" width="42" height="9" rx="4.5" fill="#f3a6c4"/>
+      </g>
+
+      <!-- terracotta walk-up -->
+      <g>
+        <rect x="762" y="38" width="126" height="67" rx="12" fill="#f0a07a"/>
+        <rect x="754" y="28" width="142" height="20" rx="9"  fill="#d97a55"/>
+        <g fill="#fff3cd">
+          <rect x="786" y="56" width="22" height="24" rx="6"/>
+          <rect x="824" y="56" width="22" height="24" rx="6"/>
+          <rect x="858" y="56" width="22" height="24" rx="6"/>
+        </g>
+      </g>
+
+      <!-- lavender low-rise -->
+      <g>
+        <rect x="962" y="46" width="126" height="59" rx="12" fill="#d7c8f0"/>
+        <rect x="954" y="36" width="142" height="20" rx="9"  fill="#b7a2e0"/>
+        <g fill="#ffd66b">
+          <rect x="986"  y="66" width="22" height="22" rx="6"/>
+          <rect x="1022" y="66" width="22" height="22" rx="6"/>
+          <rect x="1058" y="66" width="22" height="22" rx="6"/>
+        </g>
+      </g>
+
+      <!-- street trees -->
+      <g fill="#8fd3bd">
+        <rect x="278" y="86" width="12" height="19" rx="6"/><circle cx="284" cy="82" r="14"/>
+        <rect x="726" y="88" width="11" height="17" rx="5.5"/><circle cx="731.5" cy="84" r="12"/>
+        <rect x="922" y="86" width="12" height="19" rx="6"/><circle cx="928" cy="82" r="14"/>
+      </g>
+
+      <!-- sidewalk, bleeds past the trim edge -->
+      <rect x="0" y="105" width="1125" height="85" fill="#ffffff" opacity="0.84"/>
+      <rect x="0" y="105" width="1125" height="5"  fill="#ffc2dd" opacity="0.7"/>
+    </svg>
+
+    <div class="safe">
+      <div class="door-col">
+        <div class="door">
+          <div class="transom"></div>
+          <div class="knob"></div>
+          <img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
+          <div class="mat">WELCOME</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="headline">LET'S FIND YOUR<br>NEXT FRONT DOOR</div>
+        <div class="subline">Fill out my form to get started</div>
+        <div class="contact-pills">
+          <div class="pill accent"><span class="ico"><svg width="19" height="19" viewBox="0 0 44 44" fill="none"><path d="M16 14.5c1.6 0 2 .6 2.6 2l1 2.4c.4 1 .2 1.6-.6 2.2l-1 .8c1.2 2.6 3.3 4.7 5.9 5.9l.8-1c.6-.8 1.2-1 2.2-.6l2.4 1c1.4.6 2 1 2 2.6 0 2-1.6 3.4-3.6 3.4C20.7 33.2 12.8 25.3 12.8 18.1c0-2 1.4-3.6 3.2-3.6Z" fill="currentColor"/></svg></span>Call/Text (512) 676-1215</div>
+          <div class="pill"><span class="ico"><svg width="19" height="19" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="3"><rect x="8" y="13" width="28" height="19" rx="3.4"/><path d="M8.8 14.6 22 24.4l13.2-9.8"/></svg></span>sophia.reddehase@spiritre.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
+  </div>
+</body>
+</html>

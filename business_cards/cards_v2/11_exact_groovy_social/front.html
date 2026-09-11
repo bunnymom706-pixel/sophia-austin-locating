@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Groovy Social — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* vertical card: 2.25 x 3.75in @300dpi incl. bleed */
+  html, body { width: 675px; height: 1125px; overflow: hidden; background: #e8532e; }
+
+  .card {
+    position: relative;
+    width: 675px;
+    height: 1125px;
+    overflow: hidden;
+    background: #e8532e;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .waves { position: absolute; inset: 0; }
+
+  /* the big pink arch that holds the scan block */
+  .arch {
+    position: absolute;
+    left: 62px;
+    top: 300px;
+    width: 424px;
+    height: 600px;
+    background: #f6b4d0;
+    border-radius: 212px 212px 34px 34px;
+  }
+
+  .qr-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 214px;
+    width: 306px;
+    height: 306px;
+    background: #ffffff;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .qr-box img { width: 262px; height: 262px; object-fit: contain; }
+
+  .handle-pill {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 46px;
+    background: #a82d12;
+    border-radius: 999px;
+    padding: 11px 28px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: 2.4px;
+    color: #ffeee6;
+    white-space: nowrap;
+  }
+
+  /* "let's find your place" running bottom-to-top up the right edge */
+  .vertical {
+    position: absolute;
+    right: 26px;
+    top: 50%;
+    width: 132px;
+    height: 940px;
+    transform: translateY(-50%);
+  }
+  .vertical svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+
+
+  /* the orange band between the top wave and the arch was dead space */
+  .skyline { position: absolute; left: 0; top: 0; }
+
+
+  /* broker mark: navy logo on a cream plate so it holds on any ground.
+     the only agent contact on this face is the 19px phone pill; 380px gives a 45px cap */
+  .brokermark {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: #fff6ef;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #a82d12, 0 6px 0 #741e0b;
+  }
+  .brokermark img { width: 380px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #a82d12;
+    white-space: nowrap;
+  }
+
+  /* FREE, as a sticker on the corner of the QR tile */
+  .free {
+    position: absolute; left: 215px; top: 275px;            
+    
+    
+    
+    width: 118px;
+    height: 118px;
+    transform: rotate(-12deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #fff6ef;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #a82d12; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- groovy pink waves top and bottom -->
+    <svg class="waves" width="675" height="1125" viewBox="0 0 675 1125" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#f6b4d0" d="M0,0 L675,0 L675,118 C 520,178 400,88 250,146 C 150,184 70,138 0,166 Z"/>
+      <path fill="#f6b4d0" d="M0,1125 L675,1125 L675,1012 C 520,952 400,1042 250,984 C 150,946 70,992 0,964 Z"/>
+    </svg>
+
+    <!-- apartment row filling the empty orange band above the arch -->
+    <svg class="skyline" width="675" height="300" viewBox="0 0 675 300"
+         xmlns="http://www.w3.org/2000/svg">
+      <rect x="58" y="224" width="52" height="62" rx="4" fill="#fff6ef"/>
+      <rect x="72" y="236" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="88" y="236" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="72" y="251" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="88" y="251" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="72" y="266" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="88" y="266" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="116" y="198" width="44" height="88" rx="4" fill="#fff6ef"/>
+      <rect x="126" y="210" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="142" y="210" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="126" y="225" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="142" y="225" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="126" y="240" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="142" y="240" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="126" y="255" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="142" y="255" width="8" height="8" rx="2" fill="#e8532e"/>
+      <path d="M166 286 L166 268.0 A34.0 34.0 0 0 1 234 268.0 L234 286 Z" fill="#fff6ef"/>
+      <rect x="181" y="254" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="196" y="254" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="211" y="254" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="181" y="269" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="196" y="269" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="211" y="269" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="240" y="190" width="48" height="96" rx="4" fill="#fff6ef"/>
+      <rect x="252" y="202" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="268" y="202" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="252" y="217" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="268" y="217" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="252" y="232" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="268" y="232" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="252" y="247" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="268" y="247" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="252" y="262" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="268" y="262" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="294" y="218" width="58" height="68" rx="4" fill="#fff6ef"/>
+      <rect x="304" y="230" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="319" y="230" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="334" y="230" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="304" y="245" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="319" y="245" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="334" y="245" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="304" y="260" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="319" y="260" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="334" y="260" width="8" height="8" rx="2" fill="#e8532e"/>
+      <path d="M358 286 L358 227.0 A21.0 21.0 0 0 1 400 227.0 L400 286 Z" fill="#fff6ef"/>
+      <rect x="368" y="226" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="382" y="226" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="368" y="241" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="382" y="241" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="368" y="256" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="382" y="256" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="406" y="230" width="74" height="56" rx="4" fill="#fff6ef"/>
+      <rect x="416" y="242" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="432" y="242" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="446" y="242" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="462" y="242" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="416" y="257" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="432" y="257" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="446" y="257" width="8" height="8" rx="2" fill="#e8532e"/>
+      <rect x="462" y="257" width="8" height="8" rx="2" fill="#e8532e"/>
+    </svg>
+
+    <div class="arch">
+      <svg width="424" height="180" viewBox="0 0 424 180" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:34px; left:0;">
+        <defs><path id="toConnect" d="M 78 142 Q 212 44 346 142" fill="none"/></defs>
+        <text font-family="Poppins" font-weight="800" font-size="22" letter-spacing="3.5" fill="#8f2408">
+          <textPath href="#toConnect" startOffset="50%" text-anchor="middle">FILL OUT MY FORM</textPath>
+        </text>
+        <!-- orange on pink is the weakest pair on the card; a cream keyline
+             cuts the script out of the arch the way the wordmarks are cut out -->
+        <g font-family="Shrikhand" font-size="54" text-anchor="middle" stroke-linejoin="round">
+          <text x="212" y="164" stroke="#a82d12" stroke-width="10" fill="#a82d12"
+                opacity="0.22" paint-order="stroke" transform="translate(3,5)">to get started</text>
+          <text x="212" y="164" stroke="#fff6ef" stroke-width="10" fill="#fff6ef"
+                paint-order="stroke">to get started</text>
+          <text x="212" y="164" fill="#e8532e">to get started</text>
+        </g>
+      </svg>
+
+      <div class="qr-box">
+        <img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
+      </div>
+
+      <div class="handle-pill">(512) 676-1215</div>
+    </div>
+
+    <div class="vertical">
+      <svg width="940" height="132" viewBox="0 0 940 132" xmlns="http://www.w3.org/2000/svg">
+        <text x="470" y="98" text-anchor="middle" font-family="Shrikhand" font-size="82" fill="#fff6ef">let's find your place</text>
+      </svg>
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
+  </div>
+</body>
+</html>

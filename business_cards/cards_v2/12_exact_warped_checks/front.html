@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Warped Checks — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1125px; height: 675px; overflow: hidden; background: #f2a3d4; }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f2a3d4;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .bg { position: absolute; inset: 0; }
+
+  .stack {
+    position: absolute;
+    left: 37.5px; right: 37.5px;
+    top: 44px;
+    text-align: center;
+  }
+  .stack svg { display: block; margin: 0 auto; }
+
+  /* role and services are pills so they size to their own text */
+  .role, .services {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #f7e6c9;
+    background: #2b3d1e;
+    box-shadow: 0 5px 0 #1b2712;
+  }
+  .role {
+    margin-top: 6px;
+    font-size: 24px;
+    letter-spacing: 7px;
+    padding: 12px 30px 13px;
+    border-radius: 14px;
+  }
+  .services {
+    display: block;
+    width: fit-content;
+    margin: 12px auto 0;
+    font-size: 15px;
+    letter-spacing: 2.4px;
+    padding: 8px 22px 9px;
+    border-radius: 999px;
+  }
+
+  /* broker mark: navy logo on a cream plate so it holds on any pattern.
+     450px wide gives a 54px "SPIRIT" cap against the 96px name — 1.79x,
+     inside the half-size floor in 22 TAC 535.155(a)(2) with margin */
+  .brokermark {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: #f7e6c9;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #2b3d1e, 0 6px 0 #1b2712;
+  }
+  .brokermark img { width: 450px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #2b3d1e;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="bg" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="checks" width="204" height="204" patternUnits="userSpaceOnUse">
+          <rect width="204" height="204" fill="#f2a3d4"/>
+          <rect width="102" height="102" fill="#e8542c"/>
+          <rect x="102" y="102" width="102" height="102" fill="#e8542c"/>
+        </pattern>
+        <filter id="warp" x="-25%" y="-25%" width="150%" height="150%"
+                filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0042 0.0062" numOctaves="2" seed="11" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="78" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <g filter="url(#warp)">
+        <rect x="-200" y="-200" width="1525" height="1075" fill="url(#checks)"/>
+      </g>
+    </svg>
+
+    <svg class="sparkles" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg" style="position:absolute; inset:0;">
+      <g fill="#7a9b52">
+        <path transform="translate(898,74) scale(2.2)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(1008,160) scale(1.2)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+
+    <div class="stack">
+      <svg width="1050" height="228" viewBox="0 0 1050 228" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Bagel Fat One" font-size="96" text-anchor="middle"
+           stroke-linejoin="round" paint-order="stroke">
+          <!-- cast shadow -->
+          <g stroke="#2b3d1e" stroke-width="23" fill="#2b3d1e" opacity="0.22" transform="translate(4.5,6.5)">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <!-- dark keyline: holds the edge over the light squares -->
+          <g stroke="#2b3d1e" stroke-width="23" fill="#2b3d1e">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <!-- light halo: holds the edge over the dark squares -->
+          <g stroke="#f7e6c9" stroke-width="13" fill="#f7e6c9">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+          <g fill="#7a9b52">
+            <text x="525" y="92">sophia sky</text>
+            <text x="525" y="197">reddehase</text>
+          </g>
+        </g>
+      </svg>
+      <div class="role">Texas Apartment Locator</div>
+      <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>

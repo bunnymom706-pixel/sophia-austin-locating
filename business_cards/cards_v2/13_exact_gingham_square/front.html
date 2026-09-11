@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exact Gingham Square — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* square card: 2.75 x 2.75in @300dpi incl. bleed (trims to 2.5in) */
+  html, body { width: 825px; height: 825px; overflow: hidden; background: #e9b7bd; }
+
+  .card {
+    position: relative;
+    width: 825px;
+    height: 825px;
+    overflow: hidden;
+    background: #f8f3ea;
+  }
+
+  /* fine gingham: 68.75px cells = exactly 12 x 12 */
+  .checks {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%),
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%);
+    background-size: 137.5px 137.5px;
+    background-position: 0 0, 68.75px 68.75px;
+  }
+
+  .type { position: absolute; inset: 0; }
+
+  .services {
+    position: absolute; left: 50%; transform: translateX(-50%); top: 524px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fbf6ee;
+    background: #8a231a;
+    padding: 8px 22px 9px;
+    border-radius: 999px;
+    box-shadow: 0 5px 0 #5e1610;
+  }
+
+  /* broker mark: navy logo on a cream plate so it holds on any ground.
+     380px gives a 45px "SPIRIT" cap against the 70px name — 1.54x */
+  .brokermark {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: #f8f3ea;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #8a231a, 0 6px 0 #5e1610;
+  }
+  .brokermark img { width: 380px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #8a231a;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="checks"></div>
+
+    <svg class="type" width="825" height="825" viewBox="0 0 825 825" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="arcA" d="M 96 292 Q 412 198 728 292" fill="none"/>
+        <path id="arcB" d="M 112 410 Q 412 320 712 410" fill="none"/>
+      </defs>
+
+      <g font-family="Alfa Slab One" font-size="70" letter-spacing="1.5">
+        <g stroke="#631812" stroke-width="22" fill="#631812" opacity="0.24"
+           stroke-linejoin="round" paint-order="stroke" transform="translate(6,9)">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+        <g stroke="#631812" stroke-width="22" fill="#631812"
+           stroke-linejoin="round" paint-order="stroke">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+        <g stroke="#f8f3ea" stroke-width="12" fill="#f8f3ea"
+           stroke-linejoin="round" paint-order="stroke">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+        <g fill="#b8332a">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+      </g>
+
+      <rect x="178.0" y="460.0" width="462.0" height="57.0" rx="14" fill="#5e1610" opacity="0.85"/>
+      <rect x="178.0" y="455.0" width="462.0" height="57.0" rx="14" fill="#8a231a"/>
+      <text x="412" y="491" text-anchor="middle"
+            font-family="Poppins" font-weight="600" font-size="21" letter-spacing="6"
+            fill="#fbf6ee">Texas Apartment Locator</text>
+
+      <g fill="#b8332a">
+        <path transform="translate(96,110) scale(1.3)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(650,96) scale(1.7)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+
+    </svg>
+
+    <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>

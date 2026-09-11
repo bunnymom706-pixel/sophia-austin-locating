@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Perfect Place — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* vertical card: 2.25 x 3.75in @300dpi incl. bleed */
+  html, body { width: 675px; height: 1125px; overflow: hidden; background: #fbd3e2; }
+  .card { position: relative; width: 675px; height: 1125px; overflow: hidden; background: #fbd3e2;
+          font-family: 'Poppins', sans-serif; }
+
+  /* pink / coral stripes, as on the middle card of the pin */
+  .stripes { position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, #e8532e 0 34px, #fbd3e2 34px 68px); }
+  .panel { position: absolute; left: 62px; top: 92px; right: 62px; bottom: 30px; background: #fbd3e2;
+            border-radius: 26px; box-shadow: 0 0 0 4px #a82d12; }
+  .head { position: absolute; left: 62px; right: 62px; top: 122px; text-align: center; }
+  .head svg { display: block; margin: 0 auto; }
+  .qr { position: absolute; left: 50%; transform: translateX(-50%); top: 372px; width: 292px; height: 292px;
+         background: #ffffff; border-radius: 22px; display: flex; align-items: center; justify-content: center;
+         box-shadow: 0 6px 0 #741e0b; }
+  .qr img { width: 250px; height: 250px; display: block; }
+  .qr-cap { position: absolute; left: 50%; transform: translateX(-50%); top: 692px; text-align: center; }
+  .contacts { position: absolute; left: 62px; right: 62px; top: 774px; text-align: center;
+               font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.6; color: #a82d12; }
+
+  .qr-cap {
+    
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 1px;
+    text-transform: uppercase; white-space: nowrap;
+    color: #fff6ef; background: #e8532e; padding: 12px 26px 13px; border-radius: 14px;
+    box-shadow: 0 5px 0 #741e0b;
+  }
+  .free {
+    position: absolute; left: 67px; top: 459px;   width: 118px; height: 118px;
+    transform: rotate(-12deg); display: flex; align-items: center; justify-content: center;
+    text-align: center; font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 14px;
+    line-height: 1.05; letter-spacing: 0.6px; color: #fff6ef;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #e8532e; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
+  /* broker mark: navy logo on a cream plate. name on this face is 72px; 380px gives a 45px cap — 1.59x */
+  .brokermark {
+    position: absolute; left: 50%; transform: translateX(-50%); bottom: 44px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    background: #fff6ef; border-radius: 18px; padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #a82d12, 0 6px 0 #741e0b;
+  }
+  .brokermark img { width: 380px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.9px;
+    color: #a82d12; white-space: nowrap;
+  }</style>
+</head>
+<body>
+  <div class="card">
+    <div class="stripes"></div>
+    <div class="panel"></div>
+
+    <div class="head">
+      <svg width="551" height="230" viewBox="0 0 551 230" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Alfa Slab One" text-anchor="middle" fill="#e8532e">
+          <text x="275" y="72" font-size="72">Sophia Sky</text>
+          <text x="275" y="158" font-size="72">Reddehase</text>
+        </g>
+        <text x="275" y="212" text-anchor="middle" font-family="Poppins" font-weight="700" font-size="18"
+              letter-spacing="5" fill="#a82d12">AUSTIN APARTMENT LOCATOR</text>
+      </svg>
+    </div>
+
+    <div class="qr"><img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code linking to Sophia Reddehase&#39;s intake form"></div>
+    <div class="qr-cap">FILL OUT MY FORM</div>
+
+    <div class="contacts">
+      (512) 676-1215<br>
+      sophia.reddehase@spiritre.com<br>
+      sparkapt.com/sophia-reddehase
+    </div>
+
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+  </div>
+</body>
+</html>

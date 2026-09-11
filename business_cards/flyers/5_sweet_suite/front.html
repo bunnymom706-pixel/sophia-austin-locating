@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sweet Suite — Flyer front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* square flyer: 5.5 x 5.5in trim, 5.75 x 5.75in with bleed, 300 DPI */
+  html, body { width: 1725px; height: 1725px; overflow: hidden; background: #ffffff; }
+  .flyer {
+    position: relative; width: 1725px; height: 1725px; overflow: hidden;
+    border-radius: 110px; background: #ffd9ec;
+    font-family: 'Poppins', sans-serif;
+  }
+  .ground { position: absolute; inset: 0; }
+
+
+  .pill {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif; font-weight: 700; text-transform: uppercase;
+    white-space: nowrap; color: #fff6ea; background: #6b2140;
+    box-shadow: 0 8px 0 #421327;
+  }
+  .role { font-size: 38px; letter-spacing: 11px; padding: 19px 46px 21px; border-radius: 22px; }
+  .services { font-size: 23px; letter-spacing: 3.6px; padding: 13px 34px 14px; border-radius: 999px; }
+
+  .brokermark {
+    position: absolute; left: 50%; transform: translateX(-50%); bottom: 118px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    background: #fff6ea; border-radius: 28px; padding: 22px 44px 17px;
+    box-shadow: 0 0 0 5px #6b2140, 0 9px 0 #421327;
+  }
+  /* 700px wide gives an 84px "SPIRIT" cap against the 150px name — 1.79x,
+     inside the half-size floor in 22 TAC 535.155(a)(2) */
+  .brokermark img { width: 700px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 23px;
+    letter-spacing: 1.4px; color: #6b2140; white-space: nowrap;
+  }
+
+  .free {
+    position: absolute; width: 200px; height: 200px; transform: rotate(-12deg);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 23px;
+    line-height: 1.05; letter-spacing: 0.9px; color: #fff6ea;
+    filter: drop-shadow(0 6px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #6b2140; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 41px; line-height: 1; }
+
+  .stack {
+    position: absolute; left: 0; right: 0; top: 240px;
+    display: flex; flex-direction: column; align-items: center; gap: 28px;
+  }
+  .stack svg { display: block; }
+  .tagline { margin-top: 30px; }
+  .cta {
+    font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 44px;
+    letter-spacing: 3.4px; text-transform: uppercase; white-space: nowrap;
+    color: #fff6ea; background: #6b2140;
+    padding: 25px 54px 27px; border-radius: 26px; box-shadow: 0 9px 0 #421327;
+  }
+</style>
+</head>
+<body>
+  <div class="flyer">
+    <svg class="ground" width="1725" height="1725" viewBox="0 0 1725 1725" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0.3" y2="1">
+          <stop offset="0" stop-color="#fff6ea"/><stop offset="1" stop-color="#ffd9ec"/>
+        </linearGradient>
+      </defs>
+      <rect width="1725" height="1725" fill="url(#sky)"/>
+      <circle cx="1430" cy="250" r="150" fill="#ffe08a" opacity="0.85"/>
+      <g fill="#ffc2dd"><rect x="40" y="1370" width="150" height="190" rx="10"/><rect x="212" y="1300" width="184" height="260" rx="10"/><rect x="418" y="1410" width="218" height="150" rx="10"/><rect x="658" y="1260" width="150" height="300" rx="10"/><rect x="830" y="1350" width="184" height="210" rx="10"/><rect x="1036" y="1390" width="218" height="170" rx="10"/><rect x="1276" y="1310" width="150" height="250" rx="10"/><rect x="1448" y="1360" width="184" height="200" rx="10"/><rect x="1654" y="1420" width="218" height="140" rx="10"/></g>
+      <rect x="0" y="1560" width="1725" height="165" fill="#ffffff" opacity="0.7"/>
+    </svg>
+    <div class="stack">
+      <svg width="1400" height="430" viewBox="0 0 1400 430" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Bagel Fat One" font-size="150" text-anchor="middle"
+         stroke-linejoin="round" paint-order="stroke">
+        <g stroke="#5c0c2b" stroke-width="36" fill="#5c0c2b" opacity="0.22" transform="translate(7,10)">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+        <g stroke="#5c0c2b" stroke-width="36" fill="#5c0c2b">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+        <g stroke="#fff6ea" stroke-width="20" fill="#fff6ea">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+        <g fill="#a3164e">
+          <text x="700" y="186">sophia sky</text>
+          <text x="700" y="372">reddehase</text>
+        </g>
+      </g>
+      </svg>
+      <div class="pill role">Texas Apartment Locator</div>
+      <div class="pill services">Relocation &#183; Second Chance &#183; First-Time Renters &#183; Luxury</div>
+
+      <svg class="tagline" width="1400" height="152" viewBox="0 0 1400 152" xmlns="http://www.w3.org/2000/svg">
+      <g font-family="Bagel Fat One" font-size="96" text-anchor="middle"
+         stroke-linejoin="round" paint-order="stroke">
+        <g stroke="#5c0c2b" stroke-width="23" fill="#5c0c2b" opacity="0.22" transform="translate(7,10)">
+          <text x="700" y="112">free for renters</text>
+        </g>
+        <g stroke="#5c0c2b" stroke-width="23" fill="#5c0c2b">
+          <text x="700" y="112">free for renters</text>
+        </g>
+        <g stroke="#fff6ea" stroke-width="13" fill="#fff6ea">
+          <text x="700" y="112">free for renters</text>
+        </g>
+        <g fill="#a3164e">
+          <text x="700" y="112">free for renters</text>
+        </g>
+      </g>
+      </svg>
+      <div class="cta">Call or text (512) 676-1215</div>
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>

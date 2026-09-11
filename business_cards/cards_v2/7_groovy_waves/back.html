@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Groovy Waves — Back</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f6b4d0;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f6b4d0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .waves { position: absolute; inset: 0; }
+
+  /* cream arch panel holding the QR, like the reference */
+  .arch {
+    position: absolute;
+    left: 88px;
+    top: 106px;
+    width: 372px;
+    height: 486px;
+    background: #fff6ef;
+    border-radius: 186px 186px 30px 30px;
+  }
+
+  .qr-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 174px;
+    width: 248px;
+    height: 248px;
+    background: #ffffff;
+    border-radius: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 0 rgba(196,56,26,0.16);
+  }
+  .qr-box img { width: 212px; height: 212px; object-fit: contain; }
+
+  .scan-pill {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 24px;
+    background: #a82d12;
+    border-radius: 999px;
+    padding: 9px 26px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 2.2px;
+    color: #fff6ef;
+    white-space: nowrap;
+  }
+
+  .details {
+    position: absolute;
+    left: 512px;
+    top: 214px;
+    width: 546px;
+  }
+  .details .row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 17px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: #b8341a;
+    letter-spacing: 0.2px;
+  }
+  .details .row svg { display: block; flex: none; }
+
+  .brokermark {
+    position: absolute;
+    right: 60px; bottom: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 7px;
+    background: #fff6ef;
+    border-radius: 16px;
+    padding: 10px 20px 8px;
+    box-shadow: 0 0 0 3px #a82d12, 0 5px 0 #741e0b;
+  }
+  /* 203px wide gives a 24px "SPIRIT" cap against the 44px agent name
+     — inside the half-size floor in 22 TAC 535.155(a)(2), with margin */
+  .brokermark img { width: 203px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #a82d12;
+    white-space: nowrap;
+  }
+
+  /* FREE, as a sticker on the corner of the QR tile */
+  .free {
+    position: absolute; left: 407px; top: 443px;            
+    
+    
+    
+    width: 118px;
+    height: 118px;
+    transform: rotate(-12deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.05;
+    letter-spacing: 0.6px;
+    color: #fff6ef;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.18));
+  }
+  .free svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #a82d12; }
+  .free span { position: relative; }
+  .free b { display: block; font-size: 24px; line-height: 1; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="waves" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#e8532e"
+            d="M0,0 L1125,0 L1125,96 C 900,150 760,58 540,112 C 320,166 190,84 0,132 Z"/>
+      <path fill="#e8532e"
+            d="M0,675 L1125,675 L1125,584 C 900,530 760,622 540,568 C 320,514 190,596 0,548 Z"/>
+    </svg>
+
+    <div class="arch">
+      <!-- "to connect" riding an arc across the top of the arch -->
+      <svg width="372" height="140" viewBox="0 0 372 140" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:26px; left:0;">
+        <defs><path id="connArc" d="M 66 118 Q 186 30 306 118" fill="none"/></defs>
+        <text font-family="Poppins" font-weight="800" font-size="18" letter-spacing="2" fill="#a82d12">
+          <textPath href="#connArc" startOffset="50%" text-anchor="middle">FILL OUT MY FORM</textPath>
+        </text>
+        <!-- drop copy gives the script some weight against the cream arch -->
+        <text x="186" y="128" text-anchor="middle" font-family="Shrikhand" font-size="34"
+              fill="#a82d12" opacity="0.2" transform="translate(3,4)">to get started</text>
+        <text x="186" y="128" text-anchor="middle" font-family="Shrikhand" font-size="34" fill="#d8431f">to get started</text>
+      </svg>
+
+      <div class="qr-box">
+        <img src="../../assets/v2/qr_marshmallow_whitebg.png" alt="QR code linking to Sophia Reddehase&#39;s intake form">
+      </div>
+
+      <div class="scan-pill">(512) 676-1215</div>
+    </div>
+
+    <div class="details">
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <path d="M16 14.5c1.6 0 2 .6 2.6 2l1 2.4c.4 1 .2 1.6-.6 2.2l-1 .8c1.2 2.6 3.3 4.7 5.9 5.9l.8-1c.6-.8 1.2-1 2.2-.6l2.4 1c1.4.6 2 1 2 2.6 0 2-1.6 3.4-3.6 3.4C20.7 33.2 12.8 25.3 12.8 18.1c0-2 1.4-3.6 3.2-3.6Z" fill="#b8341a" stroke="none"/>
+        </svg>
+        (512) 676-1215
+      </div>
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <rect x="9" y="14" width="26" height="17" rx="3.4"/>
+          <path d="M9.8 15.6 22 24.4l12.2-8.8"/>
+        </svg>
+        sophia.reddehase@spiritre.com
+      </div>
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <circle cx="22" cy="22" r="13.4"/>
+          <ellipse cx="22" cy="22" rx="5.6" ry="13.4"/>
+          <path d="M8.8 17.6h26.4M8.8 26.4h26.4"/>
+        </svg>
+        sparkapt.com/sophia-reddehase
+      </div>
+      <div class="row">
+        <svg width="34" height="34" viewBox="0 0 44 44" fill="none" stroke="#b8341a" stroke-width="3">
+          <path d="M22 34s-11-7.6-11-15a11 11 0 0 1 22 0c0 7.4-11 15-11 15Z"/>
+          <circle cx="22" cy="19" r="4.2"/>
+        </svg>
+        Austin &amp; surrounding areas
+      </div>
+    </div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">SOPHIA SKY REDDEHASE &nbsp;&#183;&nbsp; TREC #831516</span>
+    </div>
+    <div class="free">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50.0,0.0 L59.1,10.0 L71.7,5.0 L75.6,17.9 L89.1,18.8 L86.9,32.2 L98.7,38.9 L91.0,50.0 L98.7,61.1 L86.9,67.8 L89.1,81.2 L75.6,82.1 L71.7,95.0 L59.1,90.0 L50.0,100.0 L40.9,90.0 L28.3,95.0 L24.4,82.1 L10.9,81.2 L13.1,67.8 L1.3,61.1 L9.0,50.0 L1.3,38.9 L13.1,32.2 L10.9,18.8 L24.4,17.9 L28.3,5.0 L40.9,10.0 Z"/></svg>
+      <span><b>FREE</b>for renters</span>
+    </div>
+  </div>
+</body>
+</html>

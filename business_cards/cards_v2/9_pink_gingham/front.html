@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pink Gingham — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #e9b7bd;
+  }
+
+  .card {
+    position: relative;
+    width: 1125px;
+    height: 675px;
+    overflow: hidden;
+    background: #f8f3ea;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* fine gingham check: 75px cells = exactly 15 x 9 */
+  .checks {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%),
+      linear-gradient(45deg, #e9b7bd 25%, transparent 25%, transparent 75%, #e9b7bd 75%);
+    background-size: 150px 150px;
+    background-position: 0 0, 75px 75px;
+  }
+
+  .type {
+    position: absolute;
+    inset: 0;
+  }
+
+
+  .services {
+    position: absolute; left: 50%; transform: translateX(-50%); top: 415px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fbf6ee;
+    background: #8a231a;
+    padding: 8px 22px 9px;
+    border-radius: 999px;
+    box-shadow: 0 5px 0 #5e1610;
+  }
+
+  /* broker mark: navy logo on a cream plate so it holds on any ground.
+     400px gives a 48px "SPIRIT" cap against the 82px name — 1.72x */
+  .brokermark {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    background: #f8f3ea;
+    border-radius: 18px;
+    padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #8a231a, 0 6px 0 #5e1610;
+  }
+  .brokermark img { width: 400px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.9px;
+    color: #8a231a;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="checks"></div>
+
+    <svg class="type" width="1125" height="675" viewBox="0 0 1125 675" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="arcA" d="M 100 186 Q 562 90 1025 186" fill="none"/>
+        <path id="arcB" d="M 118 330 Q 562 240 1007 330" fill="none"/>
+      </defs>
+
+      <!-- name on two gentle arcs, as on the reference -->
+      <g font-family="Alfa Slab One" font-size="82" letter-spacing="2">
+        <g stroke="#631812" stroke-width="22" fill="#631812" opacity="0.24"
+           stroke-linejoin="round" paint-order="stroke" transform="translate(6,9)">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+        <g stroke="#631812" stroke-width="22" fill="#631812"
+           stroke-linejoin="round" paint-order="stroke">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+        <g stroke="#f8f3ea" stroke-width="12" fill="#f8f3ea"
+           stroke-linejoin="round" paint-order="stroke">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+        <g fill="#b8332a">
+        <text><textPath href="#arcA" startOffset="50%" text-anchor="middle">SOPHIA SKY</textPath></text>
+        <text><textPath href="#arcB" startOffset="50%" text-anchor="middle">REDDEHASE</textPath></text>
+        </g>
+      </g>
+
+      <rect x="264.0" y="350.0" width="588.0" height="61.0" rx="14" fill="#5e1610" opacity="0.85"/>
+      <rect x="264.0" y="345.0" width="588.0" height="61.0" rx="14" fill="#8a231a"/>
+      <text x="562" y="384" text-anchor="middle"
+            font-family="Poppins" font-weight="700" font-size="24" letter-spacing="8"
+            fill="#fbf6ee">TEXAS APARTMENT LOCATOR</text>
+
+      <!-- little red stars, as on the reference -->
+      <g fill="#b8332a">
+        <path transform="translate(96,96) scale(1.5)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(934,110) scale(1.9)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(884,82) scale(1.0)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+
+    <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>

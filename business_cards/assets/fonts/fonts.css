@@ -1,0 +1,158 @@
+/* Locally vendored latin subsets so card export renders identically on any
+   machine, with or without network access. Fetched from Google Fonts.
+
+   Every family and weight referenced by any card in cards_v2/ is declared here.
+   Do not reintroduce a fonts.googleapis.com <link> in a card file — the export
+   runs offline and a CDN miss silently falls back to a system font. */
+
+/* ---- display faces ---- */
+@font-face {
+  font-family: 'Bagel Fat One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('BagelFatOne-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Shrikhand';
+  font-style: normal;
+  font-weight: 400;
+  src: url('Shrikhand-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Alfa Slab One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('AlfaSlabOne-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  src: url('Anton-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lilita One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('LilitaOne-Regular.woff2') format('woff2');
+}
+
+/* ---- Baloo 2 ---- */
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 500;
+  src: url('Baloo2-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 600;
+  src: url('Baloo2-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 700;
+  src: url('Baloo2-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 800;
+  src: url('Baloo2-ExtraBold.woff2') format('woff2');
+}
+
+/* ---- Nunito ---- */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 500;
+  src: url('Nunito-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  src: url('Nunito-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  src: url('Nunito-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  src: url('Nunito-ExtraBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 700;
+  src: url('Nunito-BoldItalic.woff2') format('woff2');
+}
+
+/* ---- Poppins ---- */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  src: url('Poppins-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  src: url('Poppins-Bold.woff2') format('woff2');
+}
+
+/* ---- Space Grotesk ---- */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  src: url('SpaceGrotesk-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  src: url('SpaceGrotesk-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  src: url('SpaceGrotesk-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  src: url('SpaceGrotesk-Bold.woff2') format('woff2');
+}
+
+/* ---- Fredoka (variable, 400-700 in one file) ---- */
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 400 700;
+  src: url('Fredoka-Variable.woff2') format('woff2-variations');
+}
+
+/* ---- Montserrat (Spirit logo wordmark only) ---- */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: url('Montserrat-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  src: url('Montserrat-ExtraBold.woff2') format('woff2');
+}

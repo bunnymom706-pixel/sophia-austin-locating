@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Perfect Place — Front</title>
+<link rel="stylesheet" href="../../assets/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* vertical card: 2.25 x 3.75in @300dpi incl. bleed */
+  html, body { width: 675px; height: 1125px; overflow: hidden; background: #fbd3e2; }
+  .card { position: relative; width: 675px; height: 1125px; overflow: hidden; background: #fbd3e2;
+          font-family: 'Poppins', sans-serif; }
+
+  .tag { position: absolute; left: 60px; right: 60px; top: 96px; text-align: center; }
+  .tag svg { display: block; margin: 0 auto; }
+  .who { position: absolute; left: 60px; right: 60px; top: 668px; text-align: center; }
+  .who .role { margin-top: 7px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px;
+                letter-spacing: 5px; text-transform: uppercase; color: #a82d12; }
+  .who .name { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 2.4px;
+                text-transform: uppercase; color: #a82d12; }
+  .services { position: absolute; left: 50%; transform: translateX(-50%); top: 764px; }
+
+  .services {
+    
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13.5px; letter-spacing: 1.8px;
+    text-transform: uppercase; white-space: nowrap;
+    color: #fff6ef; background: #e8532e; padding: 8px 18px 9px; border-radius: 999px;
+    box-shadow: 0 5px 0 #741e0b;
+  }
+  /* broker mark: navy logo on a cream plate. largest type is the 92px tagline; 420px gives a 50px cap — 1.84x */
+  .brokermark {
+    position: absolute; left: 50%; transform: translateX(-50%); bottom: 44px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    background: #fff6ef; border-radius: 18px; padding: 14px 28px 11px;
+    box-shadow: 0 0 0 3px #a82d12, 0 6px 0 #741e0b;
+  }
+  .brokermark img { width: 420px; height: auto; display: block; }
+  .brokermark .line {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.9px;
+    color: #a82d12; white-space: nowrap;
+  }</style>
+</head>
+<body>
+  <div class="card">
+    <!-- one big chunky tagline, as on the pin -->
+    <!-- three small stars in the blush, clear of the tagline -->
+    <svg class="sparkles" width="675" height="1125" viewBox="0 0 675 1125"
+         xmlns="http://www.w3.org/2000/svg" style="position:absolute; inset:0;">
+      <g fill="#e8532e">
+        <path transform="translate(40,44) scale(0.85)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(596,52) scale(0.65)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+        <path transform="translate(44,876) scale(0.6)" d="M20 1 C21.6 12 28 18.4 39 20 C28 21.6 21.6 28 20 39 C18.4 28 12 21.6 1 20 C12 18.4 18.4 12 20 1 Z"/>
+      </g>
+    </svg>
+
+    <div class="tag">
+      <svg width="555" height="560" viewBox="0 0 555 560" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="Alfa Slab One" font-size="92" text-anchor="middle" fill="#e8532e">
+          <text x="277" y="86">I know</text>
+          <text x="277" y="196">a girl</text>
+          <text x="277" y="306">who finds</text>
+          <text x="277" y="416">apartments</text>
+          <text x="277" y="526">in Austin!</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="who"><div class="name">Sophia Sky Reddehase</div><div class="role">Austin Apartment Locator</div></div>
+    <div class="services">Relocation &nbsp;&#183;&nbsp; Second Chance &nbsp;&#183;&nbsp; First-Time Renters &nbsp;&#183;&nbsp; Luxury</div>
+
+    <div class="brokermark">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <span class="line">TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC</span>
+    </div>
+  </div>
+</body>
+</html>
