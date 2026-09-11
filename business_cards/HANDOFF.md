@@ -17,8 +17,8 @@ Checked against the TREC License Holder Search on 2026-09-11.
 | Broker contact | bryan.bjerke@spiritre.com · (214) 396-3888 · 1701 N Collins Blvd Ste 231, Richardson TX 75080 |
 | Phone | (512) 676-1215 |
 | Email | sophia.reddehase@spiritre.com |
-| Profile | sparkapt.com/sophia-reddehase |
-| Intake form | https://sparkapt.com/inquiry/sophia-reddehase859 |
+| Profile / intake form | https://sparkapt.com/inquiry/sophia-reddehase859 (printed and in every QR) |
+| Dead link, never print | sparkapt.com/sophia-reddehase returns 404. It was on every back until 2026-09-11 |
 | Market | Austin & surrounding areas |
 | Services | Relocation · second chance (eviction / broken lease) · first-time renters · luxury |
 | Offer | Free to renters; the property pays the locator fee |
@@ -48,6 +48,8 @@ together, which is how the wrong name got in. Go by TREC, not the website.
 | `business_cards/flyers/{1..16}_*/` | 32 flyer faces as HTML |
 | `business_cards/print_ready_flyers/` | 32 flyer PNGs, 1725×1725 |
 | `business_cards/pdf/` | 3 review PDFs for the broker |
+| `business_cards/pdf/print/` | 32 print-ready PDFs, one per design, front and back at full bleed size |
+| `business_cards/export_tool/build_print_pdfs.py` | Builds the 32 print PDFs from the PNGs |
 | `website/index.html` | One-page site, self-contained (logo embedded as base64) |
 | `business_cards/flyer_tool/gen_flyers.py` | Generates all 32 flyer faces |
 | `business_cards/export_tool/render_faces.py` | Renders all 64 faces to PNG with desktop Chrome |
@@ -63,6 +65,10 @@ together, which is how the wrong name got in. Go by TREC, not the website.
 | Vertical card | 675 × 1125 | 2.0 × 3.5 in | 37.5 px |
 | Square card | 825 × 825 | 2.5 × 2.5 in | 37.5 px |
 | Square flyer | 1725 × 1725 | 5.5 × 5.5 in | 37.5 px, 110 px corner radius |
+
+Safe zone: all small type sits at least 1/16 in inside the trim, which is 56 px
+or more from the file edge. Cards that needed moving carry a
+`<style id="print-safe">` block just before `</head>` holding the nudges.
 
 ## The Spirit logo
 
@@ -109,7 +115,10 @@ copying over the committed PNGs. It needs Playwright and desktop Chrome.
 A website has a **stricter** requirement than print. 22 TAC §531.20 wants the
 IABS notice and the TREC Consumer Protection Notice linked on the homepage.
 Both are in `website/index.html`, but **the IABS link is still a placeholder**
-pointing at TREC's blank form.
+pointing at TREC's current blank form (IABS 1-2; the old 1-0 link was dead).
+The site mentions specials, so its footer carries the required disclaimer:
+"Pricing and availability subject to change daily. All specials and effective
+rents subject to property terms and leasing approval."
 
 ## Open items
 
