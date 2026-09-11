@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Spirit Real Estate Group, LLC — REDRAWN mark.
+  Spirit Real Estate Group — REDRAWN mark.
 
   This is a vector reconstruction traced from a screenshot of the logo, not the
   brokerage's official artwork. It is close but it is not authoritative: the
@@ -25,7 +25,7 @@
   Colours sampled from the supplied image: navy #0E2C5A, flame #FDB714 to #F5871F.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -26 620 184" width="620" height="184"
-     role="img" aria-label="Spirit Real Estate Group, LLC">
+     role="img" aria-label="Spirit Real Estate Group">
   <defs>
     <linearGradient id="flame" x1="0.72" y1="0" x2="0.22" y2="1">
       <stop offset="0" stop-color="#fdb714"/>

@@ -312,7 +312,7 @@ HEAD = '''<!DOCTYPE html>
 '''
 
 BM = '''    <div class="brokermark">
-      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group, LLC">
+      <img src="../../assets/v2/spirit_logo_navy.png" alt="Spirit Real Estate Group">
       <span class="line">{line}</span>
     </div>
 '''
@@ -386,7 +386,7 @@ def build_front(k, d):
       <div class="cta">Call or text (512) 676-1215</div>
     </div>
 
-{BM.format(line='TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP, LLC')}  </div>
+{BM.format(line='TREC #831516 &nbsp;&#183;&nbsp; SPIRIT REAL ESTATE GROUP')}  </div>
 </body>
 </html>
 '''

@@ -77,7 +77,7 @@ F_COVER = font(74, 'Bold')
 F_COVER_SUB = font(27, 'Regular')
 
 FOOTER = ('Sophia Sky Reddehase  ·  TREC #831516  ·  '
-          'Spirit Real Estate Group, LLC  ·  Broker: Bryan Bjerke')
+          'Spirit Real Estate Group  ·  Broker: Bryan Bjerke')
 
 
 def centred(d, y, text, f, fill):
@@ -159,7 +159,7 @@ if __name__ == '__main__':
          [cover('Business Card Designs', [
              'Sixteen styles, front and back',
              'Sophia Sky Reddehase  ·  TREC #831516',
-             'Spirit Real Estate Group, LLC'])] + card_pages),
+             'Spirit Real Estate Group'])] + card_pages),
         ('Flyers_Sophia_Reddehase.pdf',
          [cover('Flyer Designs', [
              'Sixteen styles, front and back',
@@ -169,7 +169,7 @@ if __name__ == '__main__':
          [cover('Business Cards & Flyers', [
              'Thirty-two designs, front and back',
              'Sophia Sky Reddehase  ·  TREC #831516',
-             'Spirit Real Estate Group, LLC'])] + card_pages + flyer_pages),
+             'Spirit Real Estate Group'])] + card_pages + flyer_pages),
     ]
     for fname, pages in jobs:
         mb = build(os.path.join(OUT, fname), pages)

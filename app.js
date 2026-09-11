@@ -1,7 +1,7 @@
 /**
  * Sophia Sky Reddehase | Austin Luxury Apartment Locating
  * Interactive Application Engine & Spark CRM Integration
- * TREC License #831516 • Spirit Real Estate Group, LLC
+ * TREC License #831516 • Spirit Real Estate Group
  */
 
 document.addEventListener('DOMContentLoaded', () => {

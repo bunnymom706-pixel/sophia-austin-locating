@@ -1,4 +1,4 @@
-# Sophia Sky Reddehase — brand suite handoff
+# Sophia Sky Reddehase: brand suite handoff
 
 Everything built for the apartment-locating business: 16 business card styles,
 16 matching square flyers, review PDFs, and a website. This file is the state
@@ -6,12 +6,15 @@ of play so another session can pick up without re-deriving any of it.
 
 ## Who
 
+Checked against the TREC License Holder Search on 2026-09-11.
+
 | | |
 |---|---|
-| Agent | Sophia Sky Reddehase |
-| License | TREC #831516 |
-| Brokerage | Spirit Real Estate Group, LLC |
-| Broker | Bryan Bjerke (bryan.bjerke@spiritre.com), TREC Lic. 9003398 & 562021 |
+| Agent | Sophia Sky Reddehase (licensed as "Reddehase, Sophia Sky") |
+| License | TREC #831516-SA, active, expires 11/30/2026 |
+| Brokerage, as printed | **Spirit Real Estate Group** (no "LLC") |
+| Sponsoring broker | Bryan Keith Bjerke, TREC #562021-B, individual broker, sponsor date 08/19/2026 |
+| Broker contact | bryan.bjerke@spiritre.com · (214) 396-3888 · 1701 N Collins Blvd Ste 231, Richardson TX 75080 |
 | Phone | (512) 676-1215 |
 | Email | sophia.reddehase@spiritre.com |
 | Profile | sparkapt.com/sophia-reddehase |
@@ -19,6 +22,22 @@ of play so another session can pick up without re-deriving any of it.
 | Market | Austin & surrounding areas |
 | Services | Relocation · second chance (eviction / broken lease) · first-time renters · luxury |
 | Offer | Free to renters; the property pays the locator fee |
+
+### Never print "Spirit Real Estate Group, LLC"
+
+It is a real license, but not Sophia's broker. On TREC:
+
+- **Spirit Real Estate Group, LLC** is broker company #9003398-BB, designated
+  broker Thomas Edward Birdwell (#586207-B).
+- **Bryan Keith Bjerke** is individual broker #562021-B. His registered DBAs
+  include "Spirit Real Estate Group". Sophia's license names him as her
+  sponsoring broker.
+
+Every face, flyer, PDF, and the website said "Spirit Real Estate Group, LLC"
+until 2026-09-11. All of it now reads "Spirit Real Estate Group", and
+`verify_trec.py` fails any file that brings the LLC form back. spiritre.com
+itself says "Spirit Real Estate Group, LLC" and lists both license numbers
+together, which is how the wrong name got in. Go by TREC, not the website.
 
 ## What exists
 
@@ -29,10 +48,12 @@ of play so another session can pick up without re-deriving any of it.
 | `business_cards/flyers/{1..16}_*/` | 32 flyer faces as HTML |
 | `business_cards/print_ready_flyers/` | 32 flyer PNGs, 1725×1725 |
 | `business_cards/pdf/` | 3 review PDFs for the broker |
-| `website/index.html` | One-page site, self-contained |
+| `website/index.html` | One-page site, self-contained (logo embedded as base64) |
 | `business_cards/flyer_tool/gen_flyers.py` | Generates all 32 flyer faces |
-| `business_cards/export_tool/build_pdfs.py` | Builds the 3 review PDFs |
-| `business_cards/export_tool/verify_trec.py` | Broker-name ratio checker |
+| `business_cards/export_tool/render_faces.py` | Renders all 64 faces to PNG with desktop Chrome |
+| `business_cards/export_tool/build_pdfs.py` | Builds the 3 review PDFs from the PNGs |
+| `business_cards/export_tool/verify_trec.py` | Broker name, size ratio and QR checker, cards and flyers |
+| `business_cards/export_tool/export.js` | Older Puppeteer exporter. Covers only card styles 1 to 13; use `render_faces.py` |
 
 ### Print geometry
 
@@ -43,47 +64,73 @@ of play so another session can pick up without re-deriving any of it.
 | Square card | 825 × 825 | 2.5 × 2.5 in | 37.5 px |
 | Square flyer | 1725 × 1725 | 5.5 × 5.5 in | 37.5 px, 110 px corner radius |
 
+## The Spirit logo
+
+**The logo is now the official artwork**, from Spirit's
+`Spirit_logo_BlueTransparent_2.png` (1020 × 420). The originals are kept as
+`assets/v2/spirit_logo_official_blue.png` and `spirit_logo_official_white.png`.
+
+Every one of the 64 faces loads **`assets/v2/spirit_logo_navy.png`**, not the SVG.
+That file is the official artwork placed on the old tracing's canvas shape
+(1665 × 494, the same 3.37:1 ratio), with the "SPIRIT" cap height matched. So
+no face's layout moved. Only the mark itself changed.
+
+`assets/v2/spirit_logo.svg` and `spirit_logo_cream.png` are the old hand
+tracing. No face uses them. Do not bring them back. For a dark background use
+`spirit_logo_official_white.png`.
+
 ## TREC compliance
 
 22 TAC §535.155(a)(2): the broker's name must be **at least half the size** of
 the largest agent contact information on the piece. Contact information counts
 name, phone, email, website and scan code.
 
-The load-bearing constant: in `assets/v2/spirit_logo.svg`, the **"SPIRIT" cap
-height is 0.1194 × the logo's rendered width**. All sizing derives from that.
+The load-bearing constant: in `assets/v2/spirit_logo_navy.png`, the **"SPIRIT"
+cap height is 0.1153 × the logo's rendered width**. It is measured on the
+flat-topped T (192 px on the 1665 px canvas). All logo sizing derives from it.
 
-Verified across all 64 faces. Cards and flyers both pass with margin; the
-tightest is 0.56× against a 0.50× floor. Re-run after any type change:
+The earlier constant, 0.1194, overstated the cap by 3.5%, and the checker let
+ratios through up to 2.05×. Together those hid one real failure. The Warped
+Checks card back had its broker name at 0.49× the 92 px agent name. Its logo
+is now 410 px wide, which gives 0.51×. That face is the tightest in the suite.
+Everything else has more room.
+
+Re-run after any type or logo change:
 
 ```
-python3 business_cards/export_tool/build_pdfs.py   # also re-exports review PDFs
+python business_cards/export_tool/verify_trec.py
+python business_cards/export_tool/render_faces.py business_cards <out dir> business_cards
+python business_cards/export_tool/build_pdfs.py
 ```
+
+`render_faces.py` writes to a separate out dir so you can compare before
+copying over the committed PNGs. It needs Playwright and desktop Chrome.
 
 A website has a **stricter** requirement than print. 22 TAC §531.20 wants the
 IABS notice and the TREC Consumer Protection Notice linked on the homepage.
 Both are in `website/index.html`, but **the IABS link is still a placeholder**
-pointing at TREC's blank form. It must be swapped for Spirit's completed IABS
-PDF (the one carrying Bryan's name and license numbers) before the site is used.
+pointing at TREC's blank form.
 
 ## Open items
 
-1. **Spirit logo is a redrawing, not the official asset.** `assets/v2/spirit_logo.svg`
-   was traced from a screenshot over three passes; the wordmark is Montserrat
-   standing in for the original's geometric sans. This container's network
-   reaches only `raw.githubusercontent.com` and `s3.amazonaws.com` — 18 hosts
-   were tested, including every Google Images CDN — so the real file could not
-   be downloaded. **Every one of the 64 faces references the same path**, so
-   dropping the official artwork in at `business_cards/assets/v2/` updates the
-   whole suite in one move.
-2. **Spirit's completed IABS PDF** for the website footer (see above).
-3. **Confirm the licensed brokerage name** is "Spirit Real Estate Group, LLC"
-   and that "Sky" is registered with TREC if the license reads "Sophia Reddehase".
+1. **Spirit's completed IABS PDF** for the website footer. It should read
+   Bryan Keith Bjerke dba Spirit Real Estate Group, #562021, as the broker
+   and designated broker, and Sophia Sky Reddehase, #831516, as the sales
+   agent. A file named `IABSSophia.pdf` exists on Sophia's computer, but it
+   is the old **One Place Locators** form (broker #9014999). **Never use it.**
+2. **Broker approval.** See below.
+3. The root-level v1 pages (`index.html`, `pinterest_modern_business_cards.html`,
+   `all_business_cards_showcase.html`, `app.js`, `styles.css`) had the brokerage
+   name corrected but were not otherwise reviewed.
 
 ## Broker approval status
 
-Sent 2026-09-10, both returned "Page not found" — artifact links are private
-until sharing is switched on. Bryan replied: *"Please send me pdf's or images."*
+Sent 2026-09-10. Both links returned "Page not found", because artifact links
+are private until sharing is switched on. Bryan replied: *"Please send me pdf's
+or images."*
 
-Re-sent 2026-09-11 as direct PDF download links off this public repo (verified
-HTTP 200, no sign-in). **Awaiting his approval.** He has not approved any design
-yet, so nothing should go to print.
+Re-sent 2026-09-11 as direct PDF download links off this repo. **The PDFs he
+received show the old traced logo and "Spirit Real Estate Group, LLC".** The
+PDFs in `business_cards/pdf/` have been rebuilt with the official logo and the
+corrected name. He needs to look at the rebuilt set. **He has not approved any
+design, so nothing goes to print.**
