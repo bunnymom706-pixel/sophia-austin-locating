@@ -4,3 +4,7 @@
 business_cards/export_tool/node_modules/
 business_cards/export_tool/smoke_test.png
 business_cards/export_tool/smoke.js
+
+# python bytecode from the export scripts
+__pycache__/
+*.pyc
