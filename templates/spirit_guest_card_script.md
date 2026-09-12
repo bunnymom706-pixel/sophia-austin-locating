@@ -2,7 +2,7 @@ SPIRIT MASTER GUEST CARD v2 - new spiritre.com account - paste and fill
 
 Send these from Sophia.reddehase@spiritre.com (webmail: https://spiritre.com:2096/). Personal Gmail is a backup only. Log the card in clientmgr.us the same day. If you also register through Spark, put "sent via Spark [DATE]" in your notes so you never chase a property for a card that already landed.
 
-ENTITY NAME, ONE VERSION ONLY: "Spirit Real Estate Group, LLC" is how the broker writes it. Use that in the header and signature. "Spirit Real Estate Group" alone is fine in the subject line.
+ENTITY NAME, ONE VERSION ONLY: "Spirit Real Estate Group" (no "LLC"). Use that exact form in the header and signature. "Spirit Real Estate Group, LLC" is a separate, unrelated brokerage (TREC #9003398-BB) and must never appear on anything with Sophia's name on it.
 
 =====================================================
 1. NEW REGISTRATION - use for every first-time card on a property
@@ -18,7 +18,7 @@ Registering a client with your community. Please place the following prospect un
 LOCATOR OF RECORD
 Sophia Reddehase
 Texas Licensed Real Estate Agent and Apartment Locator, TREC #831516
-Spirit Real Estate Group, LLC
+Spirit Real Estate Group
 (512) 676-1215 | Sophia.reddehase@spiritre.com
 
 CLIENT
@@ -40,13 +40,13 @@ PLEASE CONFIRM IN WRITING
 4. How the special is applied, up front or spread across the term, and the last day it is honored.
 5. Shortest lease term offered on those units.
 6. Your locator commission as a percentage of one month's rent, send and escort.
-7. That Sophia Reddehase, TREC #831516, Spirit Real Estate Group, LLC is the referring locator on this client's guest card and application.
+7. That Sophia Reddehase, TREC #831516, Spirit Real Estate Group is the referring locator on this client's guest card and application.
 
 Thank you for taking care of our mutual client.
 
 Sophia Reddehase
 Licensed Real Estate Agent and Apartment Locator, TREC #831516
-Brokered by Spirit Real Estate Group, LLC
+Brokered by Spirit Real Estate Group
 (512) 676-1215 | Sophia.reddehase@spiritre.com
 
 Pricing and availability subject to change daily. All specials and effective rents subject to property terms and leasing approval.
@@ -62,16 +62,16 @@ Hello [PROPERTY] leasing team,
 
 A quick records update, not a new registration. The guest card you received on [DATE] for [CLIENT NAME] is still active and unchanged. Two details on my side have changed:
 
-Brokerage: Spirit Real Estate Group, LLC (was One Place Locators)
+Brokerage: Spirit Real Estate Group (was One Place Locators)
 Locator email: Sophia.reddehase@spiritre.com
 
-Please update the referring agent on that card to read Sophia Reddehase, TREC #831516, Spirit Real Estate Group, LLC, (512) 676-1215, and reply once it is corrected so both files match before lease execution.
+Please update the referring agent on that card to read Sophia Reddehase, TREC #831516, Spirit Real Estate Group, (512) 676-1215, and reply once it is corrected so both files match before lease execution.
 
 Thank you,
 
 Sophia Reddehase
 Licensed Real Estate Agent and Apartment Locator, TREC #831516
-Brokered by Spirit Real Estate Group, LLC
+Brokered by Spirit Real Estate Group
 (512) 676-1215 | Sophia.reddehase@spiritre.com
 
 =====================================================
@@ -86,14 +86,14 @@ Hello [PROPERTY] team,
 Following up on the guest card for [CLIENT NAME] sent [DATE]. My client is deciding between communities this week and I cannot present yours without your numbers.
 
 Two things, and I can work with a short answer:
-1. Confirmation that Sophia Reddehase, TREC #831516, Spirit Real Estate Group, LLC is the locator of record on their file.
+1. Confirmation that Sophia Reddehase, TREC #831516, Spirit Real Estate Group is the locator of record on their file.
 2. Current availability in a [BEDS/BATHS] for a [WINDOW] move-in, base rent plus mandatory monthly fees, with any special applied.
 
 Thank you,
 
 Sophia Reddehase
 Licensed Real Estate Agent and Apartment Locator, TREC #831516
-Brokered by Spirit Real Estate Group, LLC
+Brokered by Spirit Real Estate Group
 (512) 676-1215 | Sophia.reddehase@spiritre.com
 
 =====================================================
@@ -107,7 +107,7 @@ Hello,
 
 I am putting this in writing regarding [CLIENT NAME], who has a paid application on file with your community. I referred [CLIENT FIRST NAME] to [PROPERTY] and I am the locator of record on this file.
 
-Please confirm today that Sophia Reddehase, TREC #831516, Spirit Real Estate Group, LLC is noted as the referring locator on the guest card and application, and confirm your locator commission as a percentage of one month's rent.
+Please confirm today that Sophia Reddehase, TREC #831516, Spirit Real Estate Group is noted as the referring locator on the guest card and application, and confirm your locator commission as a percentage of one month's rent.
 
 My guest card predates the application. If your system does not reflect that, please correct it and reply confirming the correction. I have the full written record of the referral and will forward it on request.
 
@@ -117,14 +117,14 @@ Thank you,
 
 Sophia Reddehase
 Licensed Real Estate Agent and Apartment Locator, TREC #831516
-Brokered by Spirit Real Estate Group, LLC
+Brokered by Spirit Real Estate Group
 (512) 676-1215 | Sophia.reddehase@spiritre.com
 cc: bryan.bjerke@spiritre.com (add only if the second request is ignored)
 
 =====================================================
 BEFORE YOU HIT SEND, EVERY TIME
 - From address reads Sophia.reddehase@spiritre.com
-- Entity reads "Spirit Real Estate Group, LLC" in header and signature
+- Entity reads "Spirit Real Estate Group", no "LLC", in header and signature
 - Client name, phone, email, beds, budget, move-in all filled, no brackets left
 - Card logged in clientmgr.us with property, date, and send/escort percentage
 - Client told to write "Sophia Reddehase / Spirit Real Estate Group" on any paper or online guest card they fill out themselves
