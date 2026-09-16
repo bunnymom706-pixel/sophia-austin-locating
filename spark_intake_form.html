@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spark Client Intake Form | Sophia Reddehase</title>
+<meta name="description" content="Spark apartment locating client intake form. Capture every field Spark needs, copy a clean summary, and submit the Spark inquiry in one pass.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-primary:#07090d; --bg-surface:#0e1118; --bg-card:rgba(17,21,30,.85);
+  --border-subtle:rgba(255,255,255,.08); --border-medium:rgba(255,255,255,.16);
+  --border-gold:rgba(212,175,55,.38);
+  --gold-primary:#d4af37; --gold-light:#f5e2a3; --gold-glow:rgba(212,175,55,.25);
+  --accent-rose:#ff3366; --accent-emerald:#10b981;
+  --text-main:#f8fafc; --text-muted:#94a3b8; --text-dim:#64748b;
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Syne',sans-serif;
+  --radius-sm:8px; --radius-md:16px; --radius-lg:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg-primary); color:var(--text-main); font-family:var(--font-sans);
+  font-size:15px; line-height:1.6; padding:0 0 120px;
+  background-image:radial-gradient(circle at 15% 0%,rgba(212,175,55,.08),transparent 45%),
+                   radial-gradient(circle at 85% 20%,rgba(255,51,102,.06),transparent 40%);
+  background-attachment:fixed;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.masthead{padding:48px 0 28px;text-align:center;border-bottom:1px solid var(--border-subtle);margin-bottom:34px}
+.eyebrow{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.32em;font-size:11px;color:var(--gold-primary)}
+h1{font-family:var(--font-serif);font-size:clamp(34px,6vw,54px);font-weight:700;line-height:1.05;margin:14px 0 10px}
+h1 em{font-style:italic;color:var(--gold-light)}
+.sub{color:var(--text-muted);max-width:620px;margin:0 auto;font-size:14px}
+.trec{margin-top:16px;font-size:11.5px;color:var(--text-dim);letter-spacing:.02em}
+.trec a{color:var(--gold-primary);text-decoration:none}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0 8px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 20px;
+  font-size:13px;font-weight:600;letter-spacing:.02em;cursor:pointer;border:1px solid var(--border-medium);
+  background:rgba(255,255,255,.04);color:var(--text-main);font-family:var(--font-sans);
+  transition:all .25s ease;text-decoration:none;
+}
+.btn:hover{border-color:var(--border-gold);background:rgba(212,175,55,.1);transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,var(--gold-primary),var(--gold-light));color:#0b0d12;border-color:transparent;box-shadow:0 0 28px var(--gold-glow)}
+.btn-primary:hover{color:#0b0d12;filter:brightness(1.07)}
+.btn-danger:hover{border-color:rgba(255,51,102,.5);background:rgba(255,51,102,.1)}
+
+section.card{
+  background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);
+  padding:26px 24px;margin-bottom:20px;backdrop-filter:blur(12px);
+}
+section.card > h2{
+  font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:.22em;
+  color:var(--gold-primary);margin-bottom:4px;
+}
+.hint{color:var(--text-dim);font-size:12.5px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid .full{grid-column:1/-1}
+@media(max-width:680px){.grid{grid-template-columns:1fr}}
+
+label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+input,select,textarea{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-sm);padding:11px 13px;color:var(--text-main);
+  font-family:var(--font-sans);font-size:14.5px;transition:border-color .2s,box-shadow .2s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--border-gold);box-shadow:0 0 0 3px rgba(212,175,55,.12)}
+textarea{min-height:88px;resize:vertical}
+select option{background:var(--bg-surface);color:var(--text-main)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{
+  display:inline-block;padding:8px 14px;border-radius:999px;border:1px solid var(--border-subtle);
+  background:rgba(255,255,255,.03);font-size:13px;cursor:pointer;transition:all .2s ease;user-select:none;
+}
+.chip input:checked + span{border-color:var(--gold-primary);background:rgba(212,175,55,.16);color:var(--gold-light);font-weight:600}
+.chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(212,175,55,.2)}
+
+.flagbox{border:1px solid rgba(255,51,102,.28);background:rgba(255,51,102,.05)}
+.flagbox > h2{color:var(--accent-rose)}
+
+.out{
+  background:#05070a;border:1px solid var(--border-subtle);border-radius:var(--radius-md);
+  padding:18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+  white-space:pre-wrap;color:#cbd5e1;max-height:460px;overflow:auto;
+}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tab{padding:8px 16px;border-radius:999px;border:1px solid var(--border-subtle);background:rgba(255,255,255,.03);font-size:12.5px;cursor:pointer;font-weight:600;color:var(--text-muted)}
+.tab.active{border-color:var(--gold-primary);background:rgba(212,175,55,.14);color:var(--gold-light)}
+
+.status{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  background:var(--accent-emerald);color:#04150e;font-weight:700;font-size:13px;padding:11px 22px;border-radius:999px;transition:all .3s ease;z-index:50}
+.status.show{opacity:1;transform:translate(-50%,0)}
+.saveline{text-align:center;color:var(--text-dim);font-size:11.5px;margin-top:10px}
+
+.sticky{position:sticky;bottom:0;background:linear-gradient(to top,var(--bg-primary) 62%,transparent);padding:18px 0 14px;margin-top:-6px;z-index:20}
+
+@media print{
+  body{background:#fff;color:#000;padding:0}
+  .bar,.sticky,.tabs,.status,.btn{display:none!important}
+  section.card{background:#fff;border:1px solid #ccc;page-break-inside:avoid}
+  h1,section.card > h2{color:#000}
+  input,select,textarea{background:#fff;color:#000;border:1px solid #999}
+  label,.hint,.sub{color:#333}
+  .out{background:#fff;color:#000;border:1px solid #999;max-height:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <div class="eyebrow">Spark Apartment Locating</div>
+  <h1>Client <em>Intake Form</em></h1>
+  <p class="sub">Every field Spark asks for, in the order you ask it on the phone. Fill it, copy the clean summary, drop it into your Spark inquiry and your guest cards. Autosaves in this browser.</p>
+  <p class="trec">Sophia Reddehase &bull; Licensed Texas Real Estate Agent &amp; Apartment Locator &bull; TREC #831516 &bull; Brokered by Spirit Real Estate Group &bull; (512) 676-1215 &bull; <a href="mailto:Sophia.reddehase@spiritre.com">Sophia.reddehase@spiritre.com</a></p>
+  <div class="bar">
+    <a class="btn btn-primary" href="https://sparkapt.com/inquiry/sophia-reddehase859" target="_blank" rel="noopener noreferrer">Open Spark Inquiry &rarr;</a>
+    <button class="btn" type="button" onclick="window.print()">Print / Save PDF</button>
+    <button class="btn btn-danger" type="button" id="clearBtn">Clear Form</button>
+  </div>
+</header>
+
+<form id="intake" autocomplete="off">
+
+<section class="card">
+  <h2>1. Contact</h2>
+  <p class="hint">Get the phone and email right the first time. Everything downstream keys off these.</p>
+  <div class="grid">
+    <div><label for="name">Full name</label><input id="name" name="name" placeholder="First and last"></div>
+    <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="(512) 555-0134"></div>
+    <div><label for="email">Email</label><input id="email" name="email" type="email" placeholder="client@email.com"></div>
+    <div><label for="pref">Best way to reach them</label>
+      <select id="pref" name="pref"><option value="">Select</option><option>Text</option><option>Call</option><option>Email</option><option>Instagram DM</option></select></div>
+    <div><label for="source">How they found you</label>
+      <select id="source" name="source"><option value="">Select</option><option>Facebook Marketplace</option><option>Instagram</option><option>Referral</option><option>Website</option><option>Spark</option><option>Repeat client</option><option>Other</option></select></div>
+    <div><label for="intakeDate">Intake date</label><input id="intakeDate" name="intakeDate" type="date"></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>2. Timing &amp; Household</h2>
+  <p class="hint">Move-in window drives everything. Anyone 18+ on the lease has to screen.</p>
+  <div class="grid">
+    <div><label for="moveIn">Target move-in date</label><input id="moveIn" name="moveIn" type="date"></div>
+    <div><label for="flex">Date flexibility</label>
+      <select id="flex" name="flex"><option value="">Select</option><option>Hard date, cannot move</option><option>Within 1 week</option><option>Within 2 to 4 weeks</option><option>Wide open</option></select></div>
+    <div><label for="urgency">Urgency</label>
+      <select id="urgency" name="urgency"><option value="">Select</option><option>Ready to tour now</option><option>Touring in 1 to 2 weeks</option><option>Just starting, 30+ days out</option><option>Browsing only</option></select></div>
+    <div><label for="leaseTerm">Lease term wanted</label>
+      <select id="leaseTerm" name="leaseTerm"><option value="">Select</option><option>12 months</option><option>13 to 15 months</option><option>6 to 9 months</option><option>Shortest available</option><option>Flexible, best price wins</option></select></div>
+    <div><label for="occupants">Occupants (total)</label><input id="occupants" name="occupants" type="number" min="1" placeholder="2"></div>
+    <div><label for="leaseholders">Leaseholders 18+ (all must screen)</label><input id="leaseholders" name="leaseholders" type="number" min="1" placeholder="2"></div>
+    <div class="full"><label for="currentSit">Current situation</label>
+      <input id="currentSit" name="currentSit" placeholder="Lease ends 10/31 in Round Rock / relocating from Denver / first apartment / breaking lease"></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>3. Budget &amp; Unit</h2>
+  <p class="hint">Quote the all-in monthly number, not base rent. Mandatory fees add $75 to $250 a month.</p>
+  <div class="grid">
+    <div><label for="budgetMax">Max monthly, all in</label><input id="budgetMax" name="budgetMax" placeholder="$2,200"></div>
+    <div><label for="budgetIdeal">Ideal monthly</label><input id="budgetIdeal" name="budgetIdeal" placeholder="$1,900"></div>
+    <div><label for="moveInCash">Cash ready for move-in costs</label><input id="moveInCash" name="moveInCash" placeholder="$800 app + admin + deposit"></div>
+    <div><label for="beds">Beds</label>
+      <select id="beds" name="beds"><option value="">Select</option><option>Studio</option><option>1 bed</option><option>2 bed</option><option>3 bed</option><option>4 bed</option><option>Studio or 1 bed</option><option>1 or 2 bed</option></select></div>
+    <div><label for="baths">Baths</label>
+      <select id="baths" name="baths"><option value="">Select</option><option>1</option><option>1.5</option><option>2</option><option>2+</option></select></div>
+    <div><label for="sqft">Minimum square footage</label><input id="sqft" name="sqft" placeholder="750"></div>
+    <div class="full"><label>Areas / submarkets</label>
+      <div class="chips" id="areaChips">
+        <label class="chip"><input type="checkbox" name="areas" value="Downtown"><span>Downtown</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="South Congress"><span>South Congress</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="South Lamar"><span>South Lamar</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="East Austin"><span>East Austin</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Mueller"><span>Mueller</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="North Austin"><span>North Austin</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Domain / Arboretum"><span>Domain / Arboretum</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Round Rock"><span>Round Rock</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Cedar Park / Leander"><span>Cedar Park / Leander</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Pflugerville"><span>Pflugerville</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Southwest / Circle C"><span>SW / Circle C</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Kyle / Buda"><span>Kyle / Buda</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="San Marcos"><span>San Marcos</span></label>
+        <label class="chip"><input type="checkbox" name="areas" value="Open to suggestions"><span>Open to suggestions</span></label>
+      </div>
+    </div>
+    <div class="full"><label for="commute">Commute anchor (work, school, family)</label>
+      <input id="commute" name="commute" placeholder="Apple campus, 25 min max drive"></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>4. Must-Haves &amp; Deal Breakers</h2>
+  <p class="hint">Three hard requirements max. Everything else is a nice-to-have, and saying so out loud keeps the search honest.</p>
+  <div class="grid">
+    <div class="full"><label>Amenities</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="amenities" value="In-unit washer/dryer"><span>W/D in unit</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="W/D connections ok"><span>W/D connections ok</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Attached/covered garage"><span>Garage</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Reserved parking"><span>Reserved parking</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Gated"><span>Gated</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Pool"><span>Pool</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Gym"><span>Gym</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Ground floor"><span>Ground floor</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Top floor / no upstairs neighbor"><span>Top floor</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Balcony/patio"><span>Balcony</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Yard"><span>Yard</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Renovated interior"><span>Renovated</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Walkable to bars/food"><span>Walkable</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Quiet community"><span>Quiet</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Work from home space"><span>WFH space</span></label>
+        <label class="chip"><input type="checkbox" name="amenities" value="Furnished"><span>Furnished</span></label>
+      </div>
+    </div>
+    <div class="full"><label for="mustHaves">Top 3 hard requirements</label>
+      <textarea id="mustHaves" name="mustHaves" placeholder="1. W/D in unit&#10;2. Under 25 min to downtown&#10;3. Takes a 70 lb dog"></textarea></div>
+    <div class="full"><label for="dealBreakers">Deal breakers</label>
+      <textarea id="dealBreakers" name="dealBreakers" placeholder="No third floor walk-up, no shared laundry, nothing east of 183"></textarea></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>5. Pets &amp; Vehicles</h2>
+  <div class="grid">
+    <div><label for="pets">Pets</label>
+      <select id="pets" name="pets"><option value="">Select</option><option>None</option><option>1 dog</option><option>2 dogs</option><option>1 cat</option><option>2 cats</option><option>Dog and cat</option><option>Other</option></select></div>
+    <div><label for="petDetails">Breed / weight / ESA paperwork</label><input id="petDetails" name="petDetails" placeholder="Pit mix, 68 lb, ESA letter on file"></div>
+    <div><label for="vehicles">Vehicles</label><input id="vehicles" name="vehicles" type="number" min="0" placeholder="2"></div>
+    <div><label for="parkingNeeds">Parking needs</label><input id="parkingNeeds" name="parkingNeeds" placeholder="Truck, needs oversized space; EV charger preferred"></div>
+  </div>
+</section>
+
+<section class="card flagbox">
+  <h2>6. Screening Reality Check</h2>
+  <p class="hint">Ask it here so no property finds it first. Anything flagged goes in the guest card file notes before a tour is booked.</p>
+  <div class="grid">
+    <div><label for="income">Gross monthly income (household)</label><input id="income" name="income" placeholder="$7,200"></div>
+    <div><label for="incomeMult">Income multiple required</label>
+      <select id="incomeMult" name="incomeMult"><option value="">Select</option><option>3x confirmed</option><option>2.5x</option><option>Tight, needs 2x or co-signer property</option><option>Unverified</option></select></div>
+    <div><label for="incomeType">Income type</label>
+      <select id="incomeType" name="incomeType"><option value="">Select</option><option>W2 salaried</option><option>W2 hourly</option><option>1099 / self-employed</option><option>Offer letter, not started</option><option>Student / co-signer</option><option>Retired / fixed income</option><option>Mixed</option></select></div>
+    <div><label for="credit">Credit range</label>
+      <select id="credit" name="credit"><option value="">Select</option><option>720+</option><option>660 to 719</option><option>600 to 659</option><option>550 to 599</option><option>Under 550</option><option>No credit history</option><option>Unknown</option></select></div>
+    <div><label for="brokenLease">Broken lease / eviction</label>
+      <select id="brokenLease" name="brokenLease"><option value="">Select</option><option>None</option><option>Broken lease, paid in full</option><option>Broken lease, balance owed</option><option>Eviction filed, dismissed</option><option>Eviction on record</option></select></div>
+    <div><label for="criminal">Background</label>
+      <select id="criminal" name="criminal"><option value="">Select</option><option>Clean</option><option>Misdemeanor, older than 7 years</option><option>Misdemeanor, recent</option><option>Felony, older than 7 years</option><option>Felony, recent</option><option>Prefers not to say</option></select></div>
+    <div><label for="voucher">Voucher / housing assistance</label>
+      <select id="voucher" name="voucher"><option value="">Select</option><option>No</option><option>Housing Choice Voucher</option><option>Other program</option></select></div>
+    <div><label for="idStatus">ID / documentation</label>
+      <select id="idStatus" name="idStatus"><option value="">Select</option><option>US ID or driver license</option><option>Passport and visa</option><option>Passport only</option><option>ITIN, no SSN</option></select></div>
+    <div class="full"><label for="screenNotes">File notes for the guest card</label>
+      <textarea id="screenNotes" name="screenNotes" placeholder="Two plain sentences the screener will find anyway. Delete if the file is clean."></textarea></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>7. Search Status &amp; Next Step</h2>
+  <p class="hint">Registration protects the commission. Log where they have already been before you send a single property.</p>
+  <div class="grid">
+    <div class="full"><label for="alreadyToured">Properties already toured or applied to (not yours to register)</label>
+      <textarea id="alreadyToured" name="alreadyToured" placeholder="Toured The Catherine 9/12, applied nowhere"></textarea></div>
+    <div><label for="otherLocator">Working with another locator?</label>
+      <select id="otherLocator" name="otherLocator"><option value="">Select</option><option>No, exclusive with me</option><option>Yes, splitting the search</option><option>Unknown</option></select></div>
+    <div><label for="tourDay">Tour day / time blocked</label><input id="tourDay" name="tourDay" placeholder="Saturday 9/20, 11am to 2pm"></div>
+    <div><label for="sparkStatus">Spark inquiry submitted?</label>
+      <select id="sparkStatus" name="sparkStatus"><option value="">Select</option><option>Yes, submitted</option><option>Not yet</option><option>Client submitted it themselves</option></select></div>
+    <div><label for="nextStep">Next step and owner</label><input id="nextStep" name="nextStep" placeholder="Send 5 matches by tonight, Sophia"></div>
+    <div class="full"><label for="notes">Anything else</label>
+      <textarea id="notes" name="notes" placeholder="Context, personality, what actually matters to them"></textarea></div>
+  </div>
+</section>
+
+</form>
+
+<section class="card">
+  <h2>Output</h2>
+  <p class="hint">Full file for your records and your guest card, or the short version to paste into Spark.</p>
+  <div class="tabs">
+    <button type="button" class="tab active" data-view="full">Full intake</button>
+    <button type="button" class="tab" data-view="spark">Spark short form</button>
+    <button type="button" class="tab" data-view="card">Guest card block</button>
+  </div>
+  <div class="out" id="out">Start filling the form and the summary builds itself.</div>
+  <div class="bar" style="margin-bottom:0">
+    <button class="btn btn-primary" type="button" id="copyBtn">Copy This View</button>
+    <button class="btn" type="button" id="emailBtn">Email It To Myself</button>
+    <a class="btn" href="https://sparkapt.com/inquiry/sophia-reddehase859" target="_blank" rel="noopener noreferrer">Open Spark Inquiry &rarr;</a>
+  </div>
+  <p class="saveline" id="saveline">Autosaves to this browser only. Nothing is sent anywhere.</p>
+</section>
+
+<p class="trec" style="text-align:center;max-width:720px;margin:24px auto 0">
+  Pricing, availability, and specials subject to change daily and to property terms and leasing approval. Sophia Reddehase, TREC #831516, brokered by Spirit Real Estate Group.
+  <a href="https://www.trec.texas.gov/forms/consumer-protection-notice" target="_blank" rel="noopener noreferrer">Consumer Protection Notice</a> &bull;
+  <a href="https://www.trec.texas.gov/forms/information-about-brokerage-services" target="_blank" rel="noopener noreferrer">Information About Brokerage Services</a>
+</p>
+
+</div>
+
+<div class="status" id="status">Copied</div>
+
+<script>
+(function(){
+  var KEY = 'spark_intake_v1';
+  var form = document.getElementById('intake');
+  var out  = document.getElementById('out');
+  var view = 'full';
+
+  function el(id){ return document.getElementById(id); }
+  function v(id){ var n = el(id); return n && n.value ? n.value.trim() : ''; }
+  function multi(name){
+    return Array.prototype.slice.call(form.querySelectorAll('input[name="'+name+'"]:checked'))
+      .map(function(n){ return n.value; }).join(', ');
+  }
+  function fmtDate(s){
+    if(!s) return '';
+    var p = s.split('-');
+    return p.length === 3 ? p[1]+'/'+p[2]+'/'+p[0] : s;
+  }
+  function line(label, val){ return val ? label+': '+val+'\n' : ''; }
+  function block(title, body){ return body ? '\n'+title+'\n'+body : ''; }
+
+  function budget(){
+    var mx = v('budgetMax'), id = v('budgetIdeal');
+    if(mx && id) return id+' ideal, '+mx+' max (all in)';
+    return mx ? mx+' max (all in)' : (id ? id+' ideal' : '');
+  }
+  function unit(){
+    var b = v('beds'), ba = v('baths'), sq = v('sqft');
+    var s = [b, ba ? ba+' bath' : '', sq ? sq+'+ sqft' : ''].filter(Boolean).join(' / ');
+    return s;
+  }
+  function petLine(){
+    var p = v('pets'), d = v('petDetails');
+    return p && d ? p+' ('+d+')' : (p || d);
+  }
+
+  function buildFull(){
+    var t = '';
+    t += 'CLIENT INTAKE - '+(v('name') || '[NAME]')+'\n';
+    t += 'Taken '+(fmtDate(v('intakeDate')) || fmtDate(new Date().toISOString().slice(0,10)))+' by Sophia Reddehase, TREC #831516, Spirit Real Estate Group\n';
+    t += '\nCONTACT\n';
+    t += line('Name', v('name')) + line('Phone', v('phone')) + line('Email', v('email'));
+    t += line('Best contact', v('pref')) + line('Source', v('source'));
+
+    t += block('TIMING & HOUSEHOLD',
+      line('Move-in', fmtDate(v('moveIn'))) + line('Flexibility', v('flex')) + line('Urgency', v('urgency')) +
+      line('Lease term', v('leaseTerm')) + line('Occupants', v('occupants')) + line('Leaseholders 18+', v('leaseholders')) +
+      line('Current situation', v('currentSit')));
+
+    t += block('BUDGET & UNIT',
+      line('Budget', budget()) + line('Move-in cash ready', v('moveInCash')) + line('Unit', unit()) +
+      line('Areas', multi('areas')) + line('Commute anchor', v('commute')));
+
+    t += block('MUST-HAVES & DEAL BREAKERS',
+      line('Amenities', multi('amenities')) +
+      (v('mustHaves') ? 'Hard requirements:\n'+v('mustHaves')+'\n' : '') +
+      line('Deal breakers', v('dealBreakers')));
+
+    t += block('PETS & VEHICLES',
+      line('Pets', petLine()) + line('Vehicles', v('vehicles')) + line('Parking', v('parkingNeeds')));
+
+    t += block('SCREENING',
+      line('Gross monthly income', v('income')) + line('Income multiple', v('incomeMult')) + line('Income type', v('incomeType')) +
+      line('Credit', v('credit')) + line('Broken lease / eviction', v('brokenLease')) + line('Background', v('criminal')) +
+      line('Voucher', v('voucher')) + line('ID / docs', v('idStatus')) +
+      (v('screenNotes') ? 'File notes: '+v('screenNotes')+'\n' : ''));
+
+    t += block('SEARCH STATUS',
+      line('Already toured / applied', v('alreadyToured')) + line('Other locator', v('otherLocator')) +
+      line('Tour window', v('tourDay')) + line('Spark inquiry', v('sparkStatus')) + line('Next step', v('nextStep')) +
+      line('Notes', v('notes')));
+
+    return t.trim();
+  }
+
+  function buildSpark(){
+    var t = '';
+    t += line('Name', v('name')) + line('Phone', v('phone')) + line('Email', v('email'));
+    t += line('Move-in', fmtDate(v('moveIn'))) + line('Budget', budget()) + line('Size', unit());
+    t += line('Areas', multi('areas')) + line('Occupants', v('occupants')) + line('Pets', petLine());
+    t += line('Lease term', v('leaseTerm')) + line('Must-haves', (v('mustHaves') || multi('amenities')).replace(/\n/g,'; '));
+    t += line('Credit', v('credit')) + line('Income', v('income'));
+    var flags = [];
+    if(v('brokenLease') && v('brokenLease') !== 'None') flags.push(v('brokenLease'));
+    if(v('criminal') && v('criminal') !== 'Clean') flags.push(v('criminal'));
+    if(v('voucher') && v('voucher') !== 'No') flags.push(v('voucher'));
+    if(v('idStatus') && v('idStatus') !== 'US ID or driver license') flags.push(v('idStatus'));
+    t += line('Screening flags', flags.join('; '));
+    return t.trim() || 'Fill in contact, timing and budget and the Spark short form appears here.';
+  }
+
+  function buildCard(){
+    var t = '';
+    t += 'CLIENT\n';
+    t += (v('name') || '[FULL NAME]')+'\n'+(v('phone') || '[PHONE]')+'\n'+(v('email') || '[EMAIL]')+'\n';
+    t += 'Looking for: '+(unit() || '[BEDS/BATHS]')+', around '+(v('budgetMax') || '[BUDGET]')+'\n';
+    t += 'Move-in: '+(fmtDate(v('moveIn')) || '[WINDOW]')+(v('flex') ? ' ('+v('flex')+')' : '')+'\n';
+    t += 'Lease term: '+(v('leaseTerm') || '[TERM]')+'\n';
+    t += 'Must-haves: '+((v('mustHaves') || multi('amenities') || '[HARD REQUIREMENTS]').replace(/\n/g,'; '))+'\n';
+    var notes = [];
+    if(v('incomeMult')) notes.push('Income '+v('incomeMult'));
+    if(v('credit')) notes.push('credit '+v('credit'));
+    if(v('brokenLease') && v('brokenLease') !== 'None') notes.push(v('brokenLease').toLowerCase());
+    if(v('criminal') && v('criminal') !== 'Clean') notes.push(v('criminal').toLowerCase());
+    if(v('voucher') && v('voucher') !== 'No') notes.push(v('voucher'));
+    if(v('idStatus') && v('idStatus') !== 'US ID or driver license') notes.push(v('idStatus').toLowerCase());
+    if(petLine() && v('pets') !== 'None') notes.push('pets: '+petLine());
+    if(v('screenNotes')) notes.push(v('screenNotes'));
+    if(notes.length) t += '\nFILE NOTES\n'+notes.join('. ')+'.\n';
+    return t.trim();
+  }
+
+  function render(){
+    out.textContent = view === 'spark' ? buildSpark() : (view === 'card' ? buildCard() : buildFull());
+  }
+
+  function save(){
+    var data = {};
+    Array.prototype.slice.call(form.elements).forEach(function(n){
+      if(!n.name) return;
+      if(n.type === 'checkbox'){
+        data[n.name] = data[n.name] || [];
+        if(n.checked) data[n.name].push(n.value);
+      } else { data[n.name] = n.value; }
+    });
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){}
+  }
+
+  function load(){
+    var raw;
+    try { raw = localStorage.getItem(KEY); } catch(e){ return; }
+    if(!raw) return;
+    var data;
+    try { data = JSON.parse(raw); } catch(e){ return; }
+    Array.prototype.slice.call(form.elements).forEach(function(n){
+      if(!n.name || !(n.name in data)) return;
+      if(n.type === 'checkbox'){ n.checked = (data[n.name] || []).indexOf(n.value) > -1; }
+      else { n.value = data[n.name] || ''; }
+    });
+  }
+
+  function toast(msg){
+    var s = document.getElementById('status');
+    s.textContent = msg; s.classList.add('show');
+    setTimeout(function(){ s.classList.remove('show'); }, 1600);
+  }
+
+  form.addEventListener('input', function(){ save(); render(); });
+  form.addEventListener('change', function(){ save(); render(); });
+
+  Array.prototype.slice.call(document.querySelectorAll('.tab')).forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      view = tab.dataset.view;
+      render();
+    });
+  });
+
+  el('copyBtn').addEventListener('click', function(){
+    var text = out.textContent;
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); toast('Copied'); } catch(e){ toast('Select and copy manually'); }
+      document.body.removeChild(ta);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ toast('Copied'); }, fallback);
+    } else { fallback(); }
+  });
+
+  el('emailBtn').addEventListener('click', function(){
+    var subject = 'Client Intake: '+(v('name') || 'New Lead')+(v('moveIn') ? ' | Move-in '+fmtDate(v('moveIn')) : '');
+    window.location.href = 'mailto:Sophia.reddehase@spiritre.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(out.textContent);
+  });
+
+  el('clearBtn').addEventListener('click', function(){
+    if(!confirm('Clear every field on this form?')) return;
+    form.reset();
+    try { localStorage.removeItem(KEY); } catch(e){}
+    el('intakeDate').value = new Date().toISOString().slice(0,10);
+    render();
+    toast('Form cleared');
+  });
+
+  load();
+  if(!el('intakeDate').value) el('intakeDate').value = new Date().toISOString().slice(0,10);
+  render();
+})();
+</script>
+</body>
+</html>
